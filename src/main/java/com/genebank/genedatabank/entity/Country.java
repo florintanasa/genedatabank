@@ -19,7 +19,12 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "COUNTRY")
+@Table(name = "COUNTRY", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_COUNTRY_UNQ_ALPHA3", columnNames = {"ALPHA3"}),
+        @UniqueConstraint(name = "IDX_COUNTRY_UNQ_CODE", columnNames = {"CODE"}),
+        @UniqueConstraint(name = "IDX_COUNTRY_UNQ_NAME", columnNames = {"NAME"}),
+        @UniqueConstraint(name = "IDX_COUNTRY_UNQ_ALPHA2", columnNames = {"ALPHA2"})
+})
 @Entity
 public class Country {
     @JmixGeneratedValue
