@@ -50,6 +50,8 @@
                 <column property="code"/>
                 <column property="name"/>
                 <column property="mnemonic"/>
+                <column property="id_zonesiruta.zonename"/>
+                <column property="id_zonesiruta.zonenumber"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
