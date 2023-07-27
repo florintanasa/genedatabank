@@ -7,6 +7,8 @@
         <item view="Zonesiruta.list" title="msg://com.genebank.genedatabank.view.zonesiruta/zonesirutaListView.title"/>
         <item view="Countysiruta.list"
               title="msg://com.genebank.genedatabank.view.countysiruta/countysirutaListView.title"/>
+        <item view="Localitysiruta.list"
+              title="msg://com.genebank.genedatabank.view.localitysiruta/localitysirutaListView.title"/>
     </menu>
 
 </menu-config>
