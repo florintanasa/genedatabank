@@ -3,6 +3,7 @@
 
     <menu id="application" title="msg://com.genebank.genedatabank/menu.application.title" opened="true">
         <item view="User.list" title="msg://com.genebank.genedatabank.view.user/UserListView.title"/>
+        <item view="Country.list" title="msg://com.genebank.genedatabank.view.country/countryListView.title"/>
     </menu>
 
 </menu-config>
