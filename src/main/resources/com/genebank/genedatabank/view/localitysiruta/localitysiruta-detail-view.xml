@@ -18,7 +18,8 @@
         <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
     </actions>
-    <layout>
+    <layout expand="mapContainer" spacing="true">
+        <vbox id="mapContainer" width="100%"/>
         <formLayout id="form" dataContainer="localitysirutaDc">
             <textField id="sirutaField" property="siruta"/>
             <textField id="nameField" property="name"/>
