@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="genedatabank">
+        <createTable tableName="COUNTYSIRUTA">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_COUNTYSIRUTA"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="${offsetDateTime.type}"/>
+            <column name="SIRUTA" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODE" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="MNEMONIC" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_ZONESIRUTA_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="genedatabank">
+        <createTable tableName="ZONESIRUTA">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ZONESIRUTA"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="${offsetDateTime.type}"/>
+            <column name="SIRUTA" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ZONENAME" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ZONENUMBER" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_COUNTYSIRUTA_UNQ_CODE" tableName="COUNTYSIRUTA" unique="true">
+            <column name="CODE"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="4" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_COUNTYSIRUTA_UNQ_MNEMONIC" tableName="COUNTYSIRUTA" unique="true">
+            <column name="MNEMONIC"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="5" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_COUNTYSIRUTA_UNQ_NAME" tableName="COUNTYSIRUTA" unique="true">
+            <column name="NAME"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="6" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_COUNTYSIRUTA_UNQ_SIRUTA" tableName="COUNTYSIRUTA" unique="true">
+            <column name="SIRUTA"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="7" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_ZONESIRUTA_UNQ_SIRUTA" tableName="ZONESIRUTA" unique="true">
+            <column name="SIRUTA"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="8" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_ZONESIRUTA_UNQ_ZONENAME" tableName="ZONESIRUTA" unique="true">
+            <column name="ZONENAME"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="9" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_ZONESIRUTA_UNQ_ZONENUMBER" tableName="ZONESIRUTA" unique="true">
+            <column name="ZONENUMBER"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="10" author="genedatabank">
+        <addForeignKeyConstraint baseColumnNames="ID_ZONESIRUTA_ID" baseTableName="COUNTYSIRUTA"
+                                 constraintName="FK_COUNTYSIRUTA_ON_ID_ZONESIRUTA" referencedColumnNames="ID"
+                                 referencedTableName="ZONESIRUTA"/>
+    </changeSet>
+</databaseChangeLog>
