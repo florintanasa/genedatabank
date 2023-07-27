@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://localitysirutaListView.title"
+      focusComponent="localitysirutasDataGrid">
+    <data readOnly="true">
+        <collection id="localitysirutasDc"
+                    class="com.genebank.genedatabank.entity.Localitysiruta">
+            <fetchPlan extends="_base">
+                <property name="id_countysiruta" fetchPlan="_base">
+                    <property name="id_zonesiruta" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="localitysirutasDl">
+                <query>
+                    <![CDATA[select e from Localitysiruta e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="localitysirutasDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="localitysirutasDataGrid.create"/>
+            <button id="editBtn" action="localitysirutasDataGrid.edit"/>
+            <button id="removeBtn" action="localitysirutasDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="localitysirutasDl"/>
+        </hbox>
+        <dataGrid id="localitysirutasDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="localitysirutasDc">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="siruta"/>
+                <column property="name"/>
+                <column property="postcode"/>
+                <column property="sirutasup"/>
+                <column property="id_countysiruta"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
