@@ -68,6 +68,7 @@
       "ace-builds": "1.18.0",
       "construct-style-sheets-polyfill": "3.1.0",
       "date-fns": "2.29.3",
+      "leaflet": "1.8.0",
       "lit": "2.6.1"
     },
     "devDependencies": {
@@ -86,7 +87,7 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "3e6ecced448cce6240dac5976113a0d7f604337c7bc0b089a77da613ff04d89a"
+    "hash": "bc0ea1e67fef342ac1c6ebebabf92b3c6258a093b835fd6a96ccff0032f0e3fc"
   },
   "dependencies": {
     "@polymer/polymer": "3.5.1",
@@ -167,6 +168,7 @@
     "ace-builds": "1.18.0",
     "construct-style-sheets-polyfill": "3.1.0",
     "date-fns": "2.29.3",
+    "leaflet": "1.8.0",
     "lit": "2.6.1"
   },
   "devDependencies": {
