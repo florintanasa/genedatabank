@@ -1,5 +1,5 @@
 # GeneDataBank
-GeneDataBank is a genetic plant database.
+GeneDataBank is a genetic plant database (Work is at beginning).
   
 For this project I used:  
 OS - Debian GNU/LINUX
