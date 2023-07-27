@@ -10,6 +10,7 @@ import com.vaadin.flow.router.Route;
 import io.jmix.flowui.view.*;
 import software.xdev.vaadin.maps.leaflet.flow.LMap;
 import software.xdev.vaadin.maps.leaflet.flow.data.LCenter;
+import software.xdev.vaadin.maps.leaflet.flow.data.LTileLayer;
 
 @Route(value = "localitysirutas/:id", layout = MainView.class)
 @ViewController("Localitysiruta.detail")
@@ -28,13 +29,19 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     @Subscribe
     protected void onInit(InitEvent event) {
         initMap();
-     //   addMapToContainer();
+        addMapToContainer();
     }
 
     private void initMap() {
         map = new LMap();
         map.setZoom(ZOOM_LEVEL);
         map.setCenter(new LCenter(DEFAULT_LATITUDE, DEFAULT_LONGITUDE));
+        map.setTileLayer(LTileLayer.DEFAULT_OPENSTREETMAP_TILE);
+        map.setSizeFull();
+    }
+
+    private void addMapToContainer() {
+        mapContainer.add(map);
     }
 
 }
