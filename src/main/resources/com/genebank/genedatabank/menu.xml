@@ -4,6 +4,9 @@
     <menu id="application" title="msg://com.genebank.genedatabank/menu.application.title" opened="true">
         <item view="User.list" title="msg://com.genebank.genedatabank.view.user/UserListView.title"/>
         <item view="Country.list" title="msg://com.genebank.genedatabank.view.country/countryListView.title"/>
+        <item view="Zonesiruta.list" title="msg://com.genebank.genedatabank.view.zonesiruta/zonesirutaListView.title"/>
+        <item view="Countysiruta.list"
+              title="msg://com.genebank.genedatabank.view.countysiruta/countysirutaListView.title"/>
     </menu>
 
 </menu-config>
