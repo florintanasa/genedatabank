@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://countysirutaDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="countysirutaDc"
+                  class="com.genebank.genedatabank.entity.Countysiruta">
+            <fetchPlan extends="_base">
+                <property name="id_zonesiruta" fetchPlan="_instance_name">
+                    <property name="zonename"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="countysirutaDc">
+            <textField id="sirutaField" property="siruta"/>
+            <textField id="codeField" property="code"/>
+            <textField id="nameField" property="name"/>
+            <textField id="mnemonicField" property="mnemonic"/>
+            <entityPicker id="id_zonesirutaField" property="id_zonesiruta">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
