@@ -30,13 +30,13 @@
                        dataLoader="countriesDl">
             <properties include=".*"/>
         </genericFilter>
-        <hbox id="buttonsPanel">
+        <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="countriesDataGrid.create"/>
             <button id="editBtn" action="countriesDataGrid.edit"/>
             <button id="removeBtn" action="countriesDataGrid.remove"/>
             <button id="excelExportBtn" action="countriesDataGrid.excelExport"/>
-            <button id="josonExportBtn" action="countriesDataGrid.jsonExport"/>
-            <simplePagination id="pagination"/>
+            <button id="jsonExportBtn" action="countriesDataGrid.jsonExport"/>
+            <simplePagination id="pagination" dataLoader="countriesDl"/>
         </hbox>
         <dataGrid id="countriesDataGrid"
                   width="100%"
