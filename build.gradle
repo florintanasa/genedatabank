@@ -48,6 +48,7 @@ dependencies {
     implementation 'org.postgresql:postgresql'
 
     implementation 'com.xdev-software:vaadin-maps-leaflet-flow:3.0.0'
+    implementation 'io.jmix.gridexport:jmix-gridexport-flowui-starter'
 }
 
 test {
