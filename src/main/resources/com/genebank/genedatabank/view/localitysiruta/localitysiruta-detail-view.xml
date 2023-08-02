@@ -31,6 +31,9 @@
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
             </entityPicker>
+            <textField id="latitudeField" property="latitude"/>
+            <textField id="longitudeField" property="longitude"/>
+            <textField id="altitudeField" property="altitude"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>

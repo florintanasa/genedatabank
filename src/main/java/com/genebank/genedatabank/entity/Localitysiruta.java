@@ -5,6 +5,7 @@ import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.core.metamodel.annotation.PropertyDatatype;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedBy;
@@ -75,6 +76,41 @@ public class Localitysiruta {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Countysiruta id_countysiruta;
+
+    @PropertyDatatype("geocoordinate")
+    @Column(name = "LATITUDE")
+    private Double latitude;
+
+    @PropertyDatatype("geocoordinate")
+    @Column(name = "LONGITUDE")
+    private Double longitude;
+
+    @Column(name = "ALTITUDE")
+    private Integer altitude;
+
+    public Integer getAltitude() {
+        return altitude;
+    }
+
+    public void setAltitude(Integer altitude) {
+        this.altitude = altitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
 
     public Countysiruta getId_countysiruta() {
         return id_countysiruta;
