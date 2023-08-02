@@ -1,5 +1,5 @@
 # GeneDataBank
-GeneDataBank is a genetic plant database (Work is at beginning).
+GeneDataBank is a genetic plant database (Work is in progress).
   
 For this project I used:  
 OS - [Debian GNU/LINUX](https://www.debian.org/)  
@@ -10,4 +10,4 @@ For the map I used leaflet maps, XDEV SOFTWARE working on this at [GITHUB](https
 I used version 3.0.0 because with 3.0.1 I have strange errors :(
   
 ![Screenshoot](./img/Jmix_with_map.png)   
-* OS is Debian GNU/LINUX with KDE and Apple Ventura theme
+* OS is GNU/LINUX with KDE Plasma and Apple Ventura theme
