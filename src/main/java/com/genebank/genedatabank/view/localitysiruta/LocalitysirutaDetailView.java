@@ -10,6 +10,7 @@ import com.vaadin.flow.router.Route;
 import io.jmix.flowui.view.*;
 import software.xdev.vaadin.maps.leaflet.flow.LMap;
 import software.xdev.vaadin.maps.leaflet.flow.data.LCenter;
+import software.xdev.vaadin.maps.leaflet.flow.data.LMarker;
 import software.xdev.vaadin.maps.leaflet.flow.data.LTileLayer;
 
 @Route(value = "localitysirutas/:id", layout = MainView.class)
@@ -24,12 +25,13 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     private  static final double DEFAULT_LONGITUDE = 24.456255;
     private static final int ZOOM_LEVEL =7;
 
-    private LMap map = new LMap();
+    private LMap map;
 
     @Subscribe
     protected void onInit(InitEvent event) {
         initMap();
         addMapToContainer();
+        drawCenterMarkers();
     }
 
     private void initMap() {
@@ -42,6 +44,12 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
 
     private void addMapToContainer() {
         mapContainer.add(map);
+    }
+
+    private void drawCenterMarkers() {
+        LMarker markerCenter = new LMarker(DEFAULT_LATITUDE, DEFAULT_LONGITUDE);
+        markerCenter.setPopup("Punctul de centrare");
+        map.addLComponents(markerCenter);
     }
 
 }
