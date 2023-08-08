@@ -31,7 +31,19 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     protected void onInit(InitEvent event) {
         initMap();
         addMapToContainer();
-        drawCenterMarkers();
+        //drawCenterMarkers();
+    }
+
+    @Subscribe
+    protected void onBeforeShow(BeforeShowEvent event) {
+        Localitysiruta localitysiruta = getEditedEntity();
+
+        if (localitysiruta.getLatitude() != null && localitysiruta.getLongitude() != null) {
+            LMarker localityMarker = new LMarker(localitysiruta.getLatitude(), localitysiruta.getLongitude());
+            localityMarker.setPopup(localitysiruta.getName());
+            map.addLComponents(localityMarker);
+        }
+        else drawCenterMarkers();
     }
 
     private void initMap() {
