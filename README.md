@@ -9,5 +9,5 @@ Jmix 2.0 from [JMIX](https://www.jmix.io//)
 For the map I used leaflet maps, XDEV SOFTWARE working on this at [GITHUB](https://github.com/xdev-software/vaadin-maps-leaflet-flow)   
 I used version 3.0.0 because with 3.0.1 I have strange errors :(
   
-![Screenshoot](./img/Jmix_with_map_center_marker.png)   
+![Screenshoot](./img/Jmix_with_map_locality_marker.png)   
 * OS is GNU/LINUX
