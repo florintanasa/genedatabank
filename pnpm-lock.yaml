@@ -5,6 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@flowingcode/google-map':
+    specifier: 3.2.4
+    version: 3.2.4
+  '@googlemaps/markerclusterer':
+    specifier: 2.0.8
+    version: 2.0.8
   '@polymer/polymer':
     specifier: 3.5.1
     version: 3.5.1
@@ -192,33 +198,15 @@ dependencies:
   '@vaadin/upload':
     specifier: 24.0.8
     version: 24.0.8
-  '@vaadin/vaadin-board':
-    specifier: 23.3.0
-    version: 23.3.0
-  '@vaadin/vaadin-charts':
-    specifier: 23.3.0
-    version: 23.3.0
-  '@vaadin/vaadin-cookie-consent':
-    specifier: 23.3.0
-    version: 23.3.0
-  '@vaadin/vaadin-crud':
-    specifier: 23.3.0
-    version: 23.3.0
   '@vaadin/vaadin-development-mode-detector':
     specifier: 2.0.6
     version: 2.0.6
-  '@vaadin/vaadin-grid-pro':
-    specifier: 23.3.0
-    version: 23.3.0
   '@vaadin/vaadin-lumo-styles':
     specifier: 24.0.8
     version: 24.0.8
   '@vaadin/vaadin-material-styles':
     specifier: 24.0.8
     version: 24.0.8
-  '@vaadin/vaadin-rich-text-editor':
-    specifier: 23.3.0
-    version: 23.3.0
   '@vaadin/vaadin-themable-mixin':
     specifier: 24.0.8
     version: 24.0.8
@@ -1680,6 +1668,30 @@ packages:
     dev: true
     optional: true
 
+  /@flowingcode/google-apis@3.0.1:
+    resolution: {integrity: sha512-OKgMmT/M+bbdZJ6weCTulc9srQKMorXOmmjLTyBYkGib5QVolnFDaJC+ukyrz2t7bBEDOY03we1fLbWlvkKnXg==}
+    dependencies:
+      '@polymer/iron-jsonp-library': 3.0.1
+      '@polymer/polymer': 3.5.1
+    dev: false
+
+  /@flowingcode/google-map@3.2.4:
+    resolution: {integrity: sha512-BX2lgHQ37xheEPtaoc8f3zkBhN1aYxezOkxTABRPMXfMq9vf6GtA9E5mUqXFpArRnECsClJ0HlgYzqPXFxrDWQ==}
+    dependencies:
+      '@flowingcode/google-apis': 3.0.1
+      '@googlemaps/markerclusterer': 2.0.8
+      '@polymer/iron-resizable-behavior': 3.0.1
+      '@polymer/iron-selector': 3.0.1
+      '@polymer/polymer': 3.5.1
+    dev: false
+
+  /@googlemaps/markerclusterer@2.0.8:
+    resolution: {integrity: sha512-l/Z3nxTE55iaWDB8NL/HpFdYht2x0khPaJI9pD7KDbfHeZaZyG8yT6xi2cZ0Lb2VvgKFb3OtNKRMpAuS4xm2rg==}
+    dependencies:
+      fast-deep-equal: 3.1.3
+      supercluster: 7.1.5
+    dev: false
+
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
     engines: {node: '>=6.0.0'}
@@ -1785,6 +1797,24 @@ packages:
 
   /@petamoriken/float16@3.8.1:
     resolution: {integrity: sha512-oj3dU9kuMy8AqrreIboVh3KCJGSQO5T+dJ8JQFl369961jTWvPLP1GIlLy0FVoWehXLoI9BXygu/yzuNiIHBlg==}
+    dev: false
+
+  /@polymer/iron-jsonp-library@3.0.1:
+    resolution: {integrity: sha512-JpIommURLt9DCqcaJaxsUiDWEaVWV2zoq12oJAMO65Do9Sl9TAv556bI7I4mLJcE40otPZ4wYap4kFViORMiKA==}
+    dependencies:
+      '@polymer/polymer': 3.5.1
+    dev: false
+
+  /@polymer/iron-resizable-behavior@3.0.1:
+    resolution: {integrity: sha512-FyHxRxFspVoRaeZSWpT3y0C9awomb4tXXolIJcZ7RvXhMP632V5lez+ch5G5SwK0LpnAPkg35eB0LPMFv+YMMQ==}
+    dependencies:
+      '@polymer/polymer': 3.5.1
+    dev: false
+
+  /@polymer/iron-selector@3.0.1:
+    resolution: {integrity: sha512-sBVk2uas6prW0glUe2xEJJYlvxmYzM40Au9OKbfDK2Qekou/fLKcBRyIYI39kuI8zWRaip8f3CI8qXcUHnKb1A==}
+    dependencies:
+      '@polymer/polymer': 3.5.1
     dev: false
 
   /@polymer/polymer@3.5.1:
@@ -2887,38 +2917,8 @@ packages:
       lit: 2.6.1
     dev: false
 
-  /@vaadin/vaadin-board@23.3.0:
-    resolution: {integrity: sha512-4yC35Vxcy7HvvIQ0sqwIFUfTkcgiU5EuxROje+Q11AjMB8syAN6L8cNWS4jvjG4k4BA2CotrVo/AWmKf2cwOHg==}
-    dependencies:
-      '@vaadin/board': 23.3.0
-    dev: false
-
-  /@vaadin/vaadin-charts@23.3.0:
-    resolution: {integrity: sha512-A6wZfta5wNEJsLr6lm5dpLH1AabI8tOy0RR33JGJ98VzZ3ZXk7OlSv7QF01ghdgs/qv3ru0ucptlcs0uJR80LQ==}
-    dependencies:
-      '@vaadin/charts': 23.3.0
-    dev: false
-
-  /@vaadin/vaadin-cookie-consent@23.3.0:
-    resolution: {integrity: sha512-hclgLPHF2yJfsoJdRtA1PC+UkpIj4C/2JRrpO6B83fehWfpqd1lAnDAPDRTLjQq/WxHyRWlGXx9ICBOT6XIOKQ==}
-    dependencies:
-      '@vaadin/cookie-consent': 23.3.0
-    dev: false
-
-  /@vaadin/vaadin-crud@23.3.0:
-    resolution: {integrity: sha512-X7XwqxSdxLG6y5i/IzZ+fgUzn9HapnrnTGMr0OP9uNV3L2foIoWBe/PZmXqg1gpNHn41MzKyIHgk8hW99Mw7Dg==}
-    dependencies:
-      '@vaadin/crud': 23.3.0
-    dev: false
-
   /@vaadin/vaadin-development-mode-detector@2.0.6:
     resolution: {integrity: sha512-N6a5nLT/ytEUlpPo+nvdCKIGoyNjPsj3rzPGvGYK8x9Ceg76OTe1xI/GtN71mRW9e2HUScR0kCNOkl1Z63YDjw==}
-    dev: false
-
-  /@vaadin/vaadin-grid-pro@23.3.0:
-    resolution: {integrity: sha512-NjRS/JfeXjT8uh+/iZ3qdJkchdiysUgBsmsOusMZSG+jWuwLeZjsD9aqqoyB0JwKffooBwVJ5+RHFuK25AU+AQ==}
-    dependencies:
-      '@vaadin/grid-pro': 23.3.0
     dev: false
 
   /@vaadin/vaadin-lumo-styles@24.0.8:
@@ -2934,12 +2934,6 @@ packages:
     dependencies:
       '@polymer/polymer': 3.5.1
       '@vaadin/vaadin-themable-mixin': 24.0.8
-    dev: false
-
-  /@vaadin/vaadin-rich-text-editor@23.3.0:
-    resolution: {integrity: sha512-JEjM8TmZiKAFH9zKuyTL7eKhtuzrUdTuqn6BgvBz0GNeKnpmVsD2dxO8yetmXqQscRAYBJw6q0JTjmcqv22AWw==}
-    dependencies:
-      '@vaadin/rich-text-editor': 23.3.0
     dev: false
 
   /@vaadin/vaadin-themable-mixin@24.0.8:
@@ -3466,7 +3460,6 @@ packages:
 
   /fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
-    dev: true
 
   /fast-glob@3.3.1:
     resolution: {integrity: sha512-kNFPyjhh5cKjrUltxs+wFx+ZkbRaxxmZ+X0ZU31SOsxCEtP9VPgtq2teZw1DebupL5GmDaNQ6yKMMVcM41iqDg==}
@@ -3934,6 +3927,10 @@ packages:
     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /kdbush@3.0.0:
+    resolution: {integrity: sha512-hRkd6/XW4HTsA9vjVpY9tuXJYLSlelnkTmVFu4M9/7MIYQtFcHpbugAU7UbOfjOiVSVYl2fqgBuJ32JUmRo5Ew==}
+    dev: false
 
   /leaflet@1.8.0:
     resolution: {integrity: sha512-gwhMjFCQiYs3x/Sf+d49f10ERXaEFCPr+nVTryhAW8DWbMGqJqt9G4XuIaHmFW08zYvhgdzqXGr8AlW8v8dQkA==}
@@ -4550,6 +4547,12 @@ packages:
     dependencies:
       is-regexp: 3.1.0
     dev: true
+
+  /supercluster@7.1.5:
+    resolution: {integrity: sha512-EulshI3pGUM66o6ZdH3ReiFcvHpM3vAigyK+vcxdjpJyEbIIrtbmBdY23mGgnI24uXiGFvrGq9Gkum/8U7vJWg==}
+    dependencies:
+      kdbush: 3.0.0
+    dev: false
 
   /supports-color@2.0.0:
     resolution: {integrity: sha512-KKNVtd6pCYgPIKU4cp2733HWYCpplQhddZLBUryaAHou723x+FRzQ5Df824Fj+IyyuiQTRoub4SnIFfIcrp70g==}

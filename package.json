@@ -3,6 +3,8 @@
   "license": "UNLICENSED",
   "vaadin": {
     "dependencies": {
+      "@flowingcode/google-map": "3.2.4",
+      "@googlemaps/markerclusterer": "2.0.8",
       "@polymer/polymer": "3.5.1",
       "@vaadin/accordion": "24.0.8",
       "@vaadin/app-layout": "24.0.8",
@@ -87,9 +89,11 @@
       "workbox-core": "6.5.4",
       "workbox-precaching": "6.5.4"
     },
-    "hash": "bc0ea1e67fef342ac1c6ebebabf92b3c6258a093b835fd6a96ccff0032f0e3fc"
+    "hash": "dc2ba23e64f0f6a5c90ef640ff7ad46994adfe3dcadb22ea0ae6d48291955ae4"
   },
   "dependencies": {
+    "@flowingcode/google-map": "3.2.4",
+    "@googlemaps/markerclusterer": "2.0.8",
     "@polymer/polymer": "3.5.1",
     "@vaadin/accordion": "24.0.8",
     "@vaadin/app-layout": "24.0.8",
@@ -152,15 +156,9 @@
     "@vaadin/time-picker": "24.0.8",
     "@vaadin/tooltip": "24.0.8",
     "@vaadin/upload": "24.0.8",
-    "@vaadin/vaadin-board": "23.3.0",
-    "@vaadin/vaadin-charts": "23.3.0",
-    "@vaadin/vaadin-cookie-consent": "23.3.0",
-    "@vaadin/vaadin-crud": "23.3.0",
     "@vaadin/vaadin-development-mode-detector": "2.0.6",
-    "@vaadin/vaadin-grid-pro": "23.3.0",
     "@vaadin/vaadin-lumo-styles": "24.0.8",
     "@vaadin/vaadin-material-styles": "24.0.8",
-    "@vaadin/vaadin-rich-text-editor": "23.3.0",
     "@vaadin/vaadin-themable-mixin": "24.0.8",
     "@vaadin/vaadin-usage-statistics": "2.1.2",
     "@vaadin/vertical-layout": "24.0.8",
