@@ -49,6 +49,7 @@ dependencies {
 
     implementation 'com.xdev-software:vaadin-maps-leaflet-flow:3.0.0'
     implementation 'io.jmix.gridexport:jmix-gridexport-flowui-starter'
+    implementation 'com.flowingcode.vaadin.addons:google-maps:1.8.3'
 }
 
 test {
