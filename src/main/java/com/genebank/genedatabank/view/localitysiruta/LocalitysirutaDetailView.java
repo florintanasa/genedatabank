@@ -89,7 +89,8 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
         Localitysiruta localitysiruta = getEditedEntity();
         if (localitysiruta.getLatitude() != null && localitysiruta.getLongitude() != null) {
             LMarker localityMarker = new LMarker(localitysiruta.getLatitude(), localitysiruta.getLongitude());
-            localityMarker.setPopup(localitysiruta.getName());
+            String locality = localitysiruta.getName();
+            localityMarker.setPopup("<h4>"+locality+"</h4>");
             map.addLComponents(localityMarker);
         }
         else drawCenterMarkers();
@@ -110,7 +111,7 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     private void drawCenterMarkers() {
         String message_1 = messageBundle.getMessage("center");
         LMarker markerCenter = new LMarker(DEFAULT_LATITUDE, DEFAULT_LONGITUDE);
-        markerCenter.setPopup(message_1);
+        markerCenter.setPopup("<h4>"+message_1+"</h4>");
         map.addLComponents(markerCenter);
     }
     private void initGoogleMap() {
@@ -131,7 +132,7 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
         String message_1 = messageBundle.getMessage("center");
         String message_2 = messageBundle.getMessage("move_me");
         GoogleMapMarker centerMarker = gmaps.addMarker(message_1, gmaps.getCenter(), true, Markers.ORANGE_DOT);
-        centerMarker.addInfoWindow("<h2>"+message_2+"</h2>");
+        centerMarker.addInfoWindow(message_2);
         centerMarker.addDragEndEventListener(event ->  {
            getEditedEntity().setLongitude(event.getLongitude());
            getEditedEntity().setLatitude(event.getLatitude());
