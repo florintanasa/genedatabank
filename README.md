@@ -20,8 +20,11 @@ and for Google Maps I used [Google Maps Addon to Vaadin](https://vaadin.com/dire
 > Is need to add your api key, in the class **LocalitysirutaDetailView**, from Google Maps if you wish to have the maps without watermark and with full options, looking at **initGoogleMap()** method  
   
 ```java
-   private void initGoogleMap() {
+public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
+    //...
+    private void initGoogleMap() {
         String apiKey = "";//add your api key from Google Maps
-        
+        //...
     }
+}
 ```
