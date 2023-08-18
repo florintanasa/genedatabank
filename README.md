@@ -17,14 +17,54 @@ and for Google Maps I used [Google Maps Addon to Vaadin](https://vaadin.com/dire
   
 
 > **Warning**  
-> Is need to add your api key, in the class **LocalitysirutaDetailView**, from Google Maps if you wish to have the maps without watermark and with full options, looking at **initGoogleMap()** method  
+> Is need to add your api key, in the class **LocalitysirutaDetailView**, from Google Maps if you wish to have the maps without watermark and with full options. 
   
 ```java
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
     //...
-    private void initGoogleMap() {
-        String apiKey = "";//add your api key from Google Maps
-        //...
-    }
+    String apiKey = "";//add your api key from Google Map
 }
 ```
+
+Do determine the altitude I used the api and service from [Open Topo Data](https://www.opentopodata.org/) and for got the elevation from json response I used [Gson](https://en.wikipedia.org/wiki/Gson) library.
+This is possible if not exist data information for latitude and longitude in the Locality screen and using Google Maps because the marker is draggable.
+  
+```java
+public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
+    //...
+    static int getElevation(Double Latitude, Double Longitude) throws IOException {
+     String strLatitude = String.valueOf(Latitude);
+     String strLongitude = String.valueOf(Longitude);
+
+     URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations=" + strLatitude + "," + strLongitude);
+
+     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+     connection.setRequestMethod("GET");
+     connection.setRequestProperty("Content-Type", "application/json");
+     connection.setRequestProperty("Accept", "application/json");
+
+     try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+         StringBuilder response = new StringBuilder();
+         String responseLine;
+         while ((responseLine = bufferedReader.readLine()) != null) {
+             response.append(responseLine.trim());
+         }
+
+         JsonElement jsonElement = JsonParser.parseString(response.toString());
+         JsonObject jsonObject = jsonElement.getAsJsonObject();
+         JsonArray jsonArray = jsonObject.getAsJsonArray("results");
+
+         JsonObject jsonObject1 = new Gson().fromJson(jsonArray.asList().get(0).toString(), JsonObject.class);
+
+         String elev = String.valueOf(jsonObject1.get("elevation"));
+         double elevation = Double.parseDouble(elev);
+
+         return (int) elevation;
+     }
+ }
+```
+
+The code is easy to be adapted to use Google services for elevation because the URL request have the same form:
+```html
+https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=apiKey
+```  
