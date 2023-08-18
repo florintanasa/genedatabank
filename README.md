@@ -64,7 +64,50 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
  }
 ```
 
-The code is easy to be adapted to use Google services for elevation because the URL request have the same form:
+The code is easy to be adapted to use Google services for elevation because the URL request and the json answer have the same form:  
+  
+Request for Google services  
+
 ```html
 https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=apiKey
 ```  
+Answer for Google services
+```json
+{
+   "results" : 
+   [
+      {
+         "elevation" : 1608.637939453125,
+         "location" : 
+         {
+            "lat" : 39.7391536,
+            "lng" : -104.9847034
+         },
+         "resolution" : 4.771975994110107
+      }
+   ],
+   "status" : "OK"
+}
+```  
+Request for Open Topo Data  services
+```html
+https://api.opentopodata.org/v1/mapzen?locations=39.7391536,-104.9847034
+```
+Answer for Open Topo Data  
+```json
+{
+  "results": [
+    {
+      "dataset": "mapzen", 
+      "elevation": 1609.0, 
+      "location": {
+        "lat": 39.7391536, 
+        "lng": -104.9847034
+      }
+    }
+  ], 
+  "status": "OK"
+}
+```
+  
+
