@@ -50,7 +50,7 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     private  static final double DEFAULT_LONGITUDE = 24.456255;
     private static final int ZOOM_LEVEL = 7;
 
-    String apiKey = "AIzaSyABxr1SaHyDFisYwYIH98dHZRhOLaC3xU4";//add your api key from Google Map
+    String apiKey = "";//add your api key from Google Map
 
     //For GoogleMap addon from  https://github.com/FlowingCode/GoogleMapsAddon
     private GoogleMap gmaps;
