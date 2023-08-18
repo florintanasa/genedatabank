@@ -72,7 +72,7 @@ Request for Google services
 ```html
 https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=apiKey
 ```  
-Answer for Google services
+Answer from Google services
 ```json
 {
    "results" : 
@@ -94,7 +94,7 @@ Request for Open Topo Data  services
 ```html
 https://api.opentopodata.org/v1/mapzen?locations=39.7391536,-104.9847034
 ```
-Answer for Open Topo Data  
+Answer from Open Topo Data services  
 ```json
 {
   "results": [
