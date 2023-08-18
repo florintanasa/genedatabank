@@ -33,35 +33,36 @@ This is possible if not exist data information for latitude and longitude in the
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
     //...
     static int getElevation(Double Latitude, Double Longitude) throws IOException {
-     String strLatitude = String.valueOf(Latitude);
-     String strLongitude = String.valueOf(Longitude);
+        String strLatitude = String.valueOf(Latitude);
+        String strLongitude = String.valueOf(Longitude);
 
-     URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations=" + strLatitude + "," + strLongitude);
+        URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations=" + strLatitude + "," + strLongitude);
 
-     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-     connection.setRequestMethod("GET");
-     connection.setRequestProperty("Content-Type", "application/json");
-     connection.setRequestProperty("Accept", "application/json");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("Accept", "application/json");
 
-     try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
-         StringBuilder response = new StringBuilder();
-         String responseLine;
-         while ((responseLine = bufferedReader.readLine()) != null) {
-             response.append(responseLine.trim());
-         }
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = bufferedReader.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
 
-         JsonElement jsonElement = JsonParser.parseString(response.toString());
-         JsonObject jsonObject = jsonElement.getAsJsonObject();
-         JsonArray jsonArray = jsonObject.getAsJsonArray("results");
+            JsonElement jsonElement = JsonParser.parseString(response.toString());
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            JsonArray jsonArray = jsonObject.getAsJsonArray("results");
 
-         JsonObject jsonObject1 = new Gson().fromJson(jsonArray.asList().get(0).toString(), JsonObject.class);
+            JsonObject jsonObject1 = new Gson().fromJson(jsonArray.asList().get(0).toString(), JsonObject.class);
 
-         String elev = String.valueOf(jsonObject1.get("elevation"));
-         double elevation = Double.parseDouble(elev);
+            String elev = String.valueOf(jsonObject1.get("elevation"));
+            double elevation = Double.parseDouble(elev);
 
-         return (int) elevation;
-     }
- }
+            return (int) elevation;
+        }
+    }
+}
 ```
 
 The code is easy to be adapted to use Google services for elevation because the URL request and the json answer have the same form:  
