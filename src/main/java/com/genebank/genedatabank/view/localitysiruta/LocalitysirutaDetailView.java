@@ -8,6 +8,8 @@ import com.genebank.genedatabank.entity.Localitysiruta;
 
 import com.genebank.genedatabank.view.main.MainView;
 
+import com.google.gson.*;
+
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -16,17 +18,26 @@ import com.vaadin.flow.router.Route;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.checkbox.JmixCheckbox;
 import io.jmix.flowui.view.*;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import software.xdev.vaadin.maps.leaflet.flow.LMap;
 import software.xdev.vaadin.maps.leaflet.flow.data.LCenter;
 import software.xdev.vaadin.maps.leaflet.flow.data.LMarker;
 import software.xdev.vaadin.maps.leaflet.flow.data.LTileLayer;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
 @Route(value = "localitysirutas/:id", layout = MainView.class)
 @ViewController("Localitysiruta.detail")
 @ViewDescriptor("localitysiruta-detail-view.xml")
 @EditedEntityContainer("localitysirutaDc")
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
+    private static final Logger log = org.slf4j.LoggerFactory.getLogger(LocalitysirutaDetailView.class);
     @Autowired
     private MessageBundle messageBundle;
     @Autowired
@@ -38,6 +49,8 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     private static final double DEFAULT_LATITUDE = 46.009628;
     private  static final double DEFAULT_LONGITUDE = 24.456255;
     private static final int ZOOM_LEVEL = 7;
+
+    String apiKey = "AIzaSyABxr1SaHyDFisYwYIH98dHZRhOLaC3xU4";//add your api key from Google Map
 
     //For GoogleMap addon from  https://github.com/FlowingCode/GoogleMapsAddon
     private GoogleMap gmaps;
@@ -115,7 +128,6 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
         map.addLComponents(markerCenter);
     }
     private void initGoogleMap() {
-        String apiKey = "";//add your api key from Google Map
         gmaps = new GoogleMap(apiKey, null, null);
         gmaps.setMapType(GoogleMap.MapType.ROADMAP);
         gmaps.setCenter(new LatLon(DEFAULT_LATITUDE, DEFAULT_LONGITUDE));
@@ -134,8 +146,47 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
         GoogleMapMarker centerMarker = gmaps.addMarker(message_1, gmaps.getCenter(), true, Markers.ORANGE_DOT);
         centerMarker.addInfoWindow(message_2);
         centerMarker.addDragEndEventListener(event ->  {
-           getEditedEntity().setLongitude(event.getLongitude());
            getEditedEntity().setLatitude(event.getLatitude());
-       });
+           getEditedEntity().setLongitude(event.getLongitude());
+            try {
+                getEditedEntity().setAltitude(getElevation(event.getLatitude(), event.getLongitude()));
+            } catch (IOException e) {
+                String error_message = messageBundle.getMessage("error_message");
+                log.error(error_message, e);
+                throw new RuntimeException(error_message,e);
+            }
+        });
+    }
+
+    static int getElevation(Double Latitude, Double Longitude) throws IOException {
+        String strLatitude = String.valueOf(Latitude);
+        String strLongitude = String.valueOf(Longitude);
+
+        URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations="+strLatitude+","+strLongitude);
+
+        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+        connection.setRequestMethod("GET");
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("Accept", "application/json");
+
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine;
+            while ((responseLine = bufferedReader.readLine()) != null){
+                response.append(responseLine.trim());
+            }
+
+            JsonElement jsonElement = JsonParser.parseString(response.toString());
+            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            JsonArray jsonArray = jsonObject.getAsJsonArray("results");
+
+            JsonObject jsonObject1 = new Gson().fromJson(jsonArray.asList().get(0).toString(), JsonObject.class);
+
+            String elev = String.valueOf(jsonObject1.get("elevation"));
+            double elevation = Double.parseDouble(elev);
+
+            return  (int) elevation;
+        }
+
     }
 }
