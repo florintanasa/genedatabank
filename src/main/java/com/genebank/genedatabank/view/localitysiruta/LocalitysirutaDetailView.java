@@ -19,6 +19,7 @@ import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.checkbox.JmixCheckbox;
 import io.jmix.flowui.view.*;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import software.xdev.vaadin.maps.leaflet.flow.LMap;
 import software.xdev.vaadin.maps.leaflet.flow.data.LCenter;
@@ -37,13 +38,15 @@ import java.nio.charset.StandardCharsets;
 @ViewDescriptor("localitysiruta-detail-view.xml")
 @EditedEntityContainer("localitysirutaDc")
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(LocalitysirutaDetailView.class);
+    private static final Logger log = LoggerFactory.getLogger(LocalitysirutaDetailView.class);
     @Autowired
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;
     @ViewComponent
     private JmixCheckbox checkbox;
+    @ViewComponent
+    private JmixCheckbox checkboxElevation;
     @ViewComponent
     private VerticalLayout mapContainer;
     private static final double DEFAULT_LATITUDE = 46.009628;
@@ -72,6 +75,16 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
             remGoogleMapFromContainer();
             addMapToContainer();
             addMapMarker();
+        }
+    }
+    @Subscribe("checkboxElevation")
+    public void onCheckboxElevationClick(final ClickEvent<Checkbox> event) {
+        String message_1 = messageBundle.getMessage("google_elev");
+        String message_2 = messageBundle.getMessage("opensource_elev");
+        if (Boolean.TRUE.equals(event.getSource().getValue())) {
+            notifications.create(message_1).show();
+        } else {
+            notifications.create(message_2).show();
         }
     }
     @Subscribe
@@ -143,50 +156,62 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     private void drawGoogleCenterMarkers() {
         String message_1 = messageBundle.getMessage("center");
         String message_2 = messageBundle.getMessage("move_me");
+
         GoogleMapMarker centerMarker = gmaps.addMarker(message_1, gmaps.getCenter(), true, Markers.ORANGE_DOT);
         centerMarker.addInfoWindow(message_2);
         centerMarker.addDragEndEventListener(event ->  {
            getEditedEntity().setLatitude(event.getLatitude());
            getEditedEntity().setLongitude(event.getLongitude());
-            try {
-                getEditedEntity().setAltitude(getElevation(event.getLatitude(), event.getLongitude()));
-            } catch (IOException e) {
-                String error_message = messageBundle.getMessage("error_message");
-                log.error(error_message, e);
-                throw new RuntimeException(error_message,e);
-            }
+
+           if (checkboxElevation.getValue()) {
+               try {
+                   URL url = new URL("https://maps.googleapis.com/maps/api/elevation/json?locations="+event.getLatitude()+","+event.getLongitude()+"&key="+apiKey);
+                   getEditedEntity().setAltitude(getElevation(url));
+               } catch (IOException e) {
+                   String error_message = messageBundle.getMessage("error_message");
+                   log.error(error_message, e);
+                   throw new RuntimeException(error_message,e);
+               }
+           } else {
+               try {
+                   URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations="+event.getLatitude()+","+event.getLongitude());
+                   getEditedEntity().setAltitude(getElevation(url));
+               } catch (IOException e) {
+                   String error_message = messageBundle.getMessage("error_message");
+                   log.error(error_message, e);
+                   throw new RuntimeException(error_message,e);
+               }
+           }
         });
     }
 
-    static int getElevation(Double Latitude, Double Longitude) throws IOException {
-        String strLatitude = String.valueOf(Latitude);
-        String strLongitude = String.valueOf(Longitude);
-
-        URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations="+strLatitude+","+strLongitude);
-
-        HttpURLConnection connection = (HttpURLConnection)url.openConnection();
+    public int getElevation(URL url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("Accept", "application/json");
 
+        double elevation = 0;
+
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
-            while ((responseLine = bufferedReader.readLine()) != null){
+            while ((responseLine = bufferedReader.readLine()) != null) {
                 response.append(responseLine.trim());
             }
-
-            JsonElement jsonElement = JsonParser.parseString(response.toString());
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            JsonObject jsonObject = new Gson().fromJson(response.toString(), JsonObject.class);
             JsonArray jsonArray = jsonObject.getAsJsonArray("results");
+            String status = jsonObject.get("status").toString();
+            if (!status.equals("\"OK\"")) {
+                String error_message = messageBundle.getMessage("error_message");
+                notifications.create(error_message+" "+status).show();
+            } else {
+                JsonObject jsonObject1 = new Gson().fromJson(jsonArray.asList().get(0).toString(), JsonObject.class);
 
-            JsonObject jsonObject1 = new Gson().fromJson(jsonArray.asList().get(0).toString(), JsonObject.class);
-
-            String elev = String.valueOf(jsonObject1.get("elevation"));
-            double elevation = Double.parseDouble(elev);
-
-            return  (int) elevation;
+                String elev = String.valueOf(jsonObject1.get("elevation"));
+                elevation = Double.parseDouble(elev);
+            }
         }
-
+        return (int) elevation;
     }
 }

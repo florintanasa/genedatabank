@@ -19,9 +19,14 @@
         <action id="closeAction" type="detail_close"/>
     </actions>
     <layout expand="mapContainer" spacing="true">
-        <checkbox label="msg:///checkbox.label"
-                  property="active" value="false"
-                  id="checkbox"/>
+        <hbox id="optCheckBox" colspan="2">
+            <checkbox label="msg:///checkbox.label"
+                      property="active" value="false"
+                      id="checkbox"/>
+            <checkbox id="checkboxElevation"
+                      property="active" value="false"
+                      label="msg://checkbox.label.elevation"/>
+        </hbox>
         <vbox id="mapContainer" width="100%" minHeight="380px"/>
         <formLayout id="form" dataContainer="localitysirutaDc">
             <textField id="sirutaField" property="siruta"/>
