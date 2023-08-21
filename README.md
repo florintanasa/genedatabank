@@ -26,22 +26,19 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
 }
 ```
 
-Do determine the altitude I used the api and service from [Open Topo Data](https://www.opentopodata.org/) and for got the elevation from json response I used [Gson](https://en.wikipedia.org/wiki/Gson) library.
-This is possible if not exist data information for latitude and longitude in the Locality screen and using Google Maps because the marker is draggable.
+Do determine the altitude I used the api and service from [Open Topo Data](https://www.opentopodata.org/) and from [Google elevation api](https://developers.google.com/maps/documentation/elevation/overview). To got the elevation from json response I used [Gson](https://en.wikipedia.org/wiki/Gson) library.
+This is possible if not exist data information for latitude and longitude in the Locality screen when using Google Maps because the marker is draggable.
   
 ```java
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
     //...
-    static int getElevation(Double Latitude, Double Longitude) throws IOException {
-        String strLatitude = String.valueOf(Latitude);
-        String strLongitude = String.valueOf(Longitude);
-
-        URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations=" + strLatitude + "," + strLongitude);
-
+    public int getElevation(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("Accept", "application/json");
+
+        double elevation = 0;
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
             StringBuilder response = new StringBuilder();
@@ -49,18 +46,20 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
             while ((responseLine = bufferedReader.readLine()) != null) {
                 response.append(responseLine.trim());
             }
-
-            JsonElement jsonElement = JsonParser.parseString(response.toString());
-            JsonObject jsonObject = jsonElement.getAsJsonObject();
+            JsonObject jsonObject = new Gson().fromJson(response.toString(), JsonObject.class);
             JsonArray jsonArray = jsonObject.getAsJsonArray("results");
+            String status = jsonObject.get("status").toString();
+            if (!status.equals("\"OK\"")) {
+                String error_message = messageBundle.getMessage("error_message");
+                notifications.create(error_message+" "+status).show();
+            } else {
+                JsonObject jsonObject1 = new Gson().fromJson(jsonArray.asList().get(0).toString(), JsonObject.class);
 
-            JsonObject jsonObject1 = new Gson().fromJson(jsonArray.asList().get(0).toString(), JsonObject.class);
-
-            String elev = String.valueOf(jsonObject1.get("elevation"));
-            double elevation = Double.parseDouble(elev);
-
-            return (int) elevation;
+                String elev = String.valueOf(jsonObject1.get("elevation"));
+                elevation = Double.parseDouble(elev);
+            }
         }
+        return (int) elevation;
     }
 }
 ```
