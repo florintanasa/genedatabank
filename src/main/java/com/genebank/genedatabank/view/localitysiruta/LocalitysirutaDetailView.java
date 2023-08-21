@@ -38,7 +38,6 @@ import java.nio.charset.StandardCharsets;
 @ViewDescriptor("localitysiruta-detail-view.xml")
 @EditedEntityContainer("localitysirutaDc")
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
-    private static final Logger log = LoggerFactory.getLogger(LocalitysirutaDetailView.class);
     @Autowired
     private MessageBundle messageBundle;
     @Autowired
@@ -49,16 +48,19 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     private JmixCheckbox checkboxElevation;
     @ViewComponent
     private VerticalLayout mapContainer;
+
+    // For leaflet with OpenStreetMapMap from https://github.com/xdev-software/vaadin-maps-leaflet-flow
+    private LMap map;
+    //For GoogleMap addon from  https://github.com/FlowingCode/GoogleMapsAddon
+    private GoogleMap gmaps;
+    String apiKey = "";//add your api key from Google Map
+    //I declared some default static variable (constants) for center and zoom the maps
     private static final double DEFAULT_LATITUDE = 46.009628;
     private  static final double DEFAULT_LONGITUDE = 24.456255;
     private static final int ZOOM_LEVEL = 7;
+    //To log some messages
+    private static final Logger log = LoggerFactory.getLogger(LocalitysirutaDetailView.class);
 
-    String apiKey = "";//add your api key from Google Map
-
-    //For GoogleMap addon from  https://github.com/FlowingCode/GoogleMapsAddon
-    private GoogleMap gmaps;
-    // For leaflet with OpenStreetMapMap from https://github.com/xdev-software/vaadin-maps-leaflet-flow
-    private LMap map;
     @Subscribe("checkbox")
     public void onCheckboxClick(final ClickEvent<Checkbox> event) {
         String message_1 = messageBundle.getMessage("google_map");
@@ -102,6 +104,7 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     }
     private void addGoogleMapMarker() {
         Localitysiruta localitysiruta = getEditedEntity();
+
         if (localitysiruta.getLatitude() != null && localitysiruta.getLongitude() != null) {
             GoogleMapMarker localityMarker = gmaps.addMarker(localitysiruta.getName(),
                     new LatLon(localitysiruta.getLatitude(), localitysiruta.getLongitude()),
@@ -113,6 +116,7 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     }
     private void addMapMarker() {
         Localitysiruta localitysiruta = getEditedEntity();
+
         if (localitysiruta.getLatitude() != null && localitysiruta.getLongitude() != null) {
             LMarker localityMarker = new LMarker(localitysiruta.getLatitude(), localitysiruta.getLongitude());
             String locality = localitysiruta.getName();
@@ -165,7 +169,8 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
 
            if (checkboxElevation.getValue()) {
                try {
-                   URL url = new URL("https://maps.googleapis.com/maps/api/elevation/json?locations="+event.getLatitude()+","+event.getLongitude()+"&key="+apiKey);
+                   URL url = new URL("https://maps.googleapis.com/maps/api/elevation/json?locations="+
+                           event.getLatitude()+","+event.getLongitude()+"&key="+apiKey);
                    getEditedEntity().setAltitude(getElevation(url));
                } catch (IOException e) {
                    String error_message = messageBundle.getMessage("error_message");
@@ -174,7 +179,8 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
                }
            } else {
                try {
-                   URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations="+event.getLatitude()+","+event.getLongitude());
+                   URL url = new URL("https://api.opentopodata.org/v1/mapzen?locations="+
+                           event.getLatitude()+","+event.getLongitude());
                    getEditedEntity().setAltitude(getElevation(url));
                } catch (IOException e) {
                    String error_message = messageBundle.getMessage("error_message");
@@ -184,16 +190,17 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
            }
         });
     }
-
     public int getElevation(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("Accept", "application/json");
 
         double elevation = 0;
 
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = bufferedReader.readLine()) != null) {
@@ -201,7 +208,9 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
             }
             JsonObject jsonObject = new Gson().fromJson(response.toString(), JsonObject.class);
             JsonArray jsonArray = jsonObject.getAsJsonArray("results");
+
             String status = jsonObject.get("status").toString();
+
             if (!status.equals("\"OK\"")) {
                 String error_message = messageBundle.getMessage("error_message");
                 notifications.create(error_message+" "+status).show();
