@@ -64,7 +64,7 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
 }
 ```
 
-The code is easy to be adapted to use Google services for elevation because the URL request and the json answer have the same form:  
+The code easy to be adapted to use Google services for elevation because the URL request and the json answer have the same form:  
   
 Request for Google services  
 
