@@ -6,7 +6,8 @@ OS - [Debian GNU/LINUX](https://www.debian.org/)
 Intellij IDEA CE from [JET BRAINS](https://www.jetbrains.com/idea/) with Java 17 from [Amazon Corretto](https://aws.amazon.com/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)  
 Framework Jmix 2.0 from [JMIX](https://www.jmix.io//)  
 
-For the map I used OpenStreetMap, [leaflet addon to Vaadin](https://vaadin.com/directory/component/leafletmap-for-vaadin) , XDEV SOFTWARE working on this at [GITHUB](https://github.com/xdev-software/vaadin-maps-leaflet-flow) and made a great work  
+For the map I used OpenStreetMap, [leaflet addon to Vaadin](https://vaadin.com/directory/component/leafletmap-for-vaadin) , XDEV SOFTWARE working on this at [GITHUB](https://github.com/xdev-software/vaadin-maps-leaflet-flow) 
+and made a great work  
 I used version 3.0.0 because with 3.0.1 not work, I have strange errors :(
   
 ![Screen shoot OpenStreetMap](./img/Jmix_with_OpenStreetMap.png)
@@ -17,7 +18,8 @@ and for Google Maps I used [Google Maps Addon to Vaadin](https://vaadin.com/dire
   
 
 > **Warning**  
-> Is need to add your api key, in the class **LocalitysirutaDetailView**, from Google Maps if you wish to have the maps without watermark and with full options. 
+> Is need to add your api key, in the class **LocalitysirutaDetailView**, 
+> from Google Maps if you wish to have the maps without watermark and with full options. 
   
 ```java
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
@@ -26,21 +28,25 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
 }
 ```
 
-Do determine the altitude I used the api and service from [Open Topo Data](https://www.opentopodata.org/) and from [Google elevation api](https://developers.google.com/maps/documentation/elevation/overview). To got the elevation from json response I used [Gson](https://en.wikipedia.org/wiki/Gson) library.
-This is possible if not exist data information for latitude and longitude in the Locality screen when using Google Maps because the marker is draggable.
+To determine the altitude, I used the api and service from [Open Topo Data](https://www.opentopodata.org/) and from [Google elevation api](https://developers.google.com/maps/documentation/elevation/overview). 
+To got the elevation from json response I used [Gson](https://en.wikipedia.org/wiki/Gson) library.
+This is possible if not exist data information for latitude and longitude in the Locality screen when using Google Maps, 
+because the marker is draggable in this case.
   
 ```java
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
     //...
     public int getElevation(URL url) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
         connection.setRequestMethod("GET");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setRequestProperty("Accept", "application/json");
 
         double elevation = 0;
 
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(connection.getInputStream(), StandardCharsets.UTF_8))) {
             StringBuilder response = new StringBuilder();
             String responseLine;
             while ((responseLine = bufferedReader.readLine()) != null) {
@@ -48,7 +54,9 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
             }
             JsonObject jsonObject = new Gson().fromJson(response.toString(), JsonObject.class);
             JsonArray jsonArray = jsonObject.getAsJsonArray("results");
+
             String status = jsonObject.get("status").toString();
+
             if (!status.equals("\"OK\"")) {
                 String error_message = messageBundle.getMessage("error_message");
                 notifications.create(error_message+" "+status).show();
@@ -64,7 +72,8 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
 }
 ```
 
-The code easy to be adapted to use Google services for elevation because the URL request and the json answer have the same form:  
+The code easy to be adapted to use Google services for elevation because the URL request and the json answer have the 
+same form:  
   
 Request for Google services  
 
