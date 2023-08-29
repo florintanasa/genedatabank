@@ -8,6 +8,7 @@ package com.genebank.genedatabank.entity;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -64,6 +65,7 @@ public class Zonesiruta {
     @NotNull
     private Integer siruta;
 
+    @InstanceName
     @Column(name = "ZONENAME", nullable = false, length = 25)
     @NotNull
     private String zonename;

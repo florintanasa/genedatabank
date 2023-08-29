@@ -8,6 +8,7 @@ package com.genebank.genedatabank.entity;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -57,6 +58,7 @@ public class Curators {
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
 
+    @InstanceName
     @Column(name = "CURATOR_NAME", nullable = false, length = 50)
     @NotNull
     private String curator_name;
