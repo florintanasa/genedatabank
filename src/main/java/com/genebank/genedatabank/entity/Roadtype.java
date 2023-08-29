@@ -8,7 +8,6 @@ package com.genebank.genedatabank.entity;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -21,12 +20,11 @@ import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "COLLSRC", uniqueConstraints = {
-        @UniqueConstraint(name = "IDX_COLLSRC_UNQ_CODESPE", columnNames = {"CODESPE"}),
-        @UniqueConstraint(name = "IDX_COLLSRC_UNQ_NAME", columnNames = {"NAME"})
+@Table(name = "ROADTYPE", uniqueConstraints = {
+        @UniqueConstraint(name = "IDX_ROADTYPE_UNQ_TYPE_ROAD", columnNames = {"TYPE_ROAD"})
 })
 @Entity
-public class Collsrc {
+public class Roadtype {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
@@ -60,41 +58,16 @@ public class Collsrc {
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
 
-    @Column(name = "CODEGEN", nullable = false)
+    @Column(name = "TYPE_ROAD", nullable = false, length = 15)
     @NotNull
-    private Integer codegen;
+    private String type_road;
 
-    @Column(name = "CODESPE", nullable = false)
-    @NotNull
-    private Integer codespe;
-
-    @InstanceName
-    @Column(name = "NAME", nullable = false, length = 50)
-    @NotNull
-    private String name;
-
-    public String getName() {
-        return name;
+    public String getType_road() {
+        return type_road;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getCodespe() {
-        return codespe;
-    }
-
-    public void setCodespe(Integer codespe) {
-        this.codespe = codespe;
-    }
-
-    public Integer getCodegen() {
-        return codegen;
-    }
-
-    public void setCodegen(Integer codegen) {
-        this.codegen = codegen;
+    public void setType_road(String type_road) {
+        this.type_road = type_road;
     }
 
     public OffsetDateTime getDeletedDate() {
