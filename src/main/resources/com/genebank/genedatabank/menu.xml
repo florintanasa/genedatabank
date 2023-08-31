@@ -17,6 +17,8 @@
             <item view="Aegisstat.list" title="msg://com.genebank.genedatabank.view.aegisstat/aegisstatListView.title"/>
             <item view="Acceconf.list" title="msg://com.genebank.genedatabank.view.acceconf/acceconfListView.title"/>
             <item view="Collsrc.list" title="msg://com.genebank.genedatabank.view.collsrc/collsrcListView.title"/>
+            <item view="Culturecateg.list"
+                  title="msg://com.genebank.genedatabank.view.culturecateg/culturecategListView.title"/>
         </menu>
         <menu id="settpreservation"
               description="msg://com.genebank.genedatabank/menu_config.settpreservation.description"
