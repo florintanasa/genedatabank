@@ -20,6 +20,8 @@
             <item view="Culturecateg.list"
                   title="msg://com.genebank.genedatabank.view.culturecateg/culturecategListView.title"/>
             <item view="Curators.list" title="msg://com.genebank.genedatabank.view.curators/curatorsListView.title"/>
+            <item view="Georefmeth.list"
+                  title="msg://com.genebank.genedatabank.view.georefmeth/georefmethListView.title"/>
         </menu>
         <menu id="settpreservation"
               description="msg://com.genebank.genedatabank/menu_config.settpreservation.description"
