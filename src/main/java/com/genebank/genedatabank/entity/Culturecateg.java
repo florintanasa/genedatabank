@@ -30,6 +30,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -86,6 +87,19 @@ public class Culturecateg {
     @Column(name = "NAME", nullable = false, length = 50)
     @NotNull
     private String name;
+    @JoinTable(name = "TAXONOMY_CULTURECATEG_LINK",
+            joinColumns = @JoinColumn(name = "CULTURECATEG_ID"),
+            inverseJoinColumns = @JoinColumn(name = "TAXONOMY_ID"))
+    @ManyToMany
+    private List<Taxonomy> taxonomies;
+
+    public List<Taxonomy> getTaxonomies() {
+        return taxonomies;
+    }
+
+    public void setTaxonomies(List<Taxonomy> taxonomies) {
+        this.taxonomies = taxonomies;
+    }
 
     public String getName() {
         return name;

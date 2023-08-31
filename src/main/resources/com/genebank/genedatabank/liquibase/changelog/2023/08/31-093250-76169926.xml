@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="genedatabank">
+        <createTable tableName="TAXONOMY">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TAXONOMY"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="${offsetDateTime.type}"/>
+            <column name="FAMILY" type="VARCHAR(20)"/>
+            <column name="GENUS" type="VARCHAR(20)"/>
+            <column name="SPECIES" type="VARCHAR(90)"/>
+            <column name="SPAUTHOR" type="VARCHAR(30)"/>
+            <column name="SUBTAXA" type="VARCHAR(55)"/>
+            <column name="SUBAUTHOR" type="VARCHAR(30)"/>
+            <column name="SYN_TAXONO" type="VARCHAR(255)"/>
+            <column name="CROPNUME" type="VARCHAR(110)"/>
+            <column name="CROPNAME" type="VARCHAR(110)"/>
+            <column name="REFFERENCE" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="genedatabank">
+        <createTable tableName="TAXONOMY_CULTURECATEG_LINK">
+            <column name="CULTURECATEG_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TAXONOMY_CULTURECATEG_LINK"/>
+            </column>
+            <column name="TAXONOMY_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_TAXONOMY_CULTURECATEG_LINK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="genedatabank">
+        <addForeignKeyConstraint baseColumnNames="CULTURECATEG_ID" baseTableName="TAXONOMY_CULTURECATEG_LINK"
+                                 constraintName="FK_TAXCUL_ON_CULTURECATEG" referencedColumnNames="ID"
+                                 referencedTableName="CULTURECATEG"/>
+    </changeSet>
+    <changeSet id="4" author="genedatabank">
+        <addForeignKeyConstraint baseColumnNames="TAXONOMY_ID" baseTableName="TAXONOMY_CULTURECATEG_LINK"
+                                 constraintName="FK_TAXCUL_ON_TAXONOMY" referencedColumnNames="ID"
+                                 referencedTableName="TAXONOMY"/>
+    </changeSet>
+</databaseChangeLog>
