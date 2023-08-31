@@ -9,6 +9,7 @@
               title="msg://com.genebank.genedatabank.view.countysiruta/countysirutaListView.title"/>
         <item view="Localitysiruta.list"
               title="msg://com.genebank.genedatabank.view.localitysiruta/localitysirutaListView.title"/>
+        <item view="Acceconf.list" title="msg://com.genebank.genedatabank.view.acceconf/acceconfListView.title"/>
     </menu>
 
 </menu-config>
