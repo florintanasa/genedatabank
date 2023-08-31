@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://aegisstatListView.title"
+      focusComponent="aegisstatsDataGrid">
+    <data readOnly="true">
+        <collection id="aegisstatsDc"
+                    class="com.genebank.genedatabank.entity.Aegisstat">
+            <fetchPlan extends="_base"/>
+            <loader id="aegisstatsDl">
+                <query>
+                    <![CDATA[select e from Aegisstat e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="aegisstatsDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="aegisstatsDataGrid.create"/>
+            <button id="editBtn" action="aegisstatsDataGrid.edit"/>
+            <button id="removeBtn" action="aegisstatsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="aegisstatsDl"/>
+        </hbox>
+        <dataGrid id="aegisstatsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="aegisstatsDc"
+                  selectionMode="MULTI">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="code"/>
+                <column property="name"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
