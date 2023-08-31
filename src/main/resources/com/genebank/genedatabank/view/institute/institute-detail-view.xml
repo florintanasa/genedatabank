@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://instituteDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="instituteDc"
+                  class="com.genebank.genedatabank.entity.Institute">
+            <fetchPlan extends="_base"/>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="instituteDc">
+            <textField id="instcodeField" property="instcode"/>
+            <textField id="acronymField" property="acronym"/>
+            <textField id="full_name_roField" property="full_name_ro"/>
+            <textField id="full_name_enField" property="full_name_en"/>
+            <textField id="addressField" property="address"/>
+            <textField id="urlField" property="url"/>
+            <textField id="alpha3Field" property="alpha3"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
