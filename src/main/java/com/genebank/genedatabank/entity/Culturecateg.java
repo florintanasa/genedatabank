@@ -87,9 +87,10 @@ public class Culturecateg {
     @Column(name = "NAME", nullable = false, length = 50)
     @NotNull
     private String name;
+
     @JoinTable(name = "TAXONOMY_CULTURECATEG_LINK",
-            joinColumns = @JoinColumn(name = "CULTURECATEG_ID"),
-            inverseJoinColumns = @JoinColumn(name = "TAXONOMY_ID"))
+            joinColumns = @JoinColumn(name = "CULTURECATEG_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "TAXONOMY_ID", referencedColumnName = "ID"))
     @ManyToMany
     private List<Taxonomy> taxonomies;
 
