@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://jmix.io/schema/flowui/menu">
 
-    <menu id="application" title="msg://com.genebank.genedatabank/menu.application.title" opened="true">
+    <menu opened="true" id="application" title="msg://com.genebank.genedatabank/menu.application.title">
         <item view="User.list" title="msg://com.genebank.genedatabank.view.user/UserListView.title"/>
         <item view="Country.list" title="msg://com.genebank.genedatabank.view.country/countryListView.title"/>
         <item view="Zonesiruta.list" title="msg://com.genebank.genedatabank.view.zonesiruta/zonesirutaListView.title"/>
@@ -9,7 +9,18 @@
               title="msg://com.genebank.genedatabank.view.countysiruta/countysirutaListView.title"/>
         <item view="Localitysiruta.list"
               title="msg://com.genebank.genedatabank.view.localitysiruta/localitysirutaListView.title"/>
-        <item view="Acceconf.list" title="msg://com.genebank.genedatabank.view.acceconf/acceconfListView.title"/>
     </menu>
-
+    <menu id="settings" description="msg://com.genebank.genedatabank/menu_config.settings.description"
+          title="msg://com.genebank.genedatabank/menu_config.settings.title">
+        <menu id="settehnic" description="msg://com.genebank.genedatabank/menu_config.settehnic.description"
+              title="msg://com.genebank.genedatabank/menu_config.settehnic.title">
+            <item view="Aegisstat.list" title="msg://com.genebank.genedatabank.view.aegisstat/aegisstatListView.title"/>
+            <item view="Acceconf.list" title="msg://com.genebank.genedatabank.view.acceconf/acceconfListView.title"/>
+        </menu>
+        <menu id="settpreservation"
+              description="msg://com.genebank.genedatabank/menu_config.settpreservation.description"
+              title="msg://com.genebank.genedatabank/menu_config.settpreservation.title"/>
+        <menu id="setadmin" description="msg://com.genebank.genedatabank/menu_config.setadmin.description"
+              title="msg://com.genebank.genedatabank/menu_config.setadmin.title"/>
+    </menu>
 </menu-config>
