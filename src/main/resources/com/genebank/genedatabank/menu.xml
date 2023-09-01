@@ -21,6 +21,8 @@
             <item view="Mlsstat.list" title="msg://com.genebank.genedatabank.view.mlsstat/mlsstatListView.title"/>
             <item view="Sampstat.list" title="msg://com.genebank.genedatabank.view.sampstat/sampstatListView.title"/>
             <item view="Scope_.list" title="msg://com.genebank.genedatabank.view.scope/scopeListView.title"/>
+            <item view="TypeDocuments.list"
+                  title="msg://com.genebank.genedatabank.view.typedocuments/typeDocumentsListView.title"/>
         </menu>
         <menu id="settpreservation"
               description="msg://com.genebank.genedatabank/menu_config.settpreservation.description"
