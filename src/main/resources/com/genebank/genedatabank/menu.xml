@@ -18,6 +18,7 @@
                   title="msg://com.genebank.genedatabank.view.georefmeth/georefmethListView.title"/>
             <item view="Historic.list" title="msg://com.genebank.genedatabank.view.historic/historicListView.title"/>
             <item view="Mlsstat.list" title="msg://com.genebank.genedatabank.view.mlsstat/mlsstatListView.title"/>
+            <item view="Sampstat.list" title="msg://com.genebank.genedatabank.view.sampstat/sampstatListView.title"/>
         </menu>
         <menu id="settpreservation"
               description="msg://com.genebank.genedatabank/menu_config.settpreservation.description"
