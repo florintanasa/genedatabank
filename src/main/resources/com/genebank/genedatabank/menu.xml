@@ -32,6 +32,7 @@
             <item view="Localitysiruta.list"
                   title="msg://com.genebank.genedatabank.view.localitysiruta/localitysirutaListView.title"/>
             <item view="Institute.list" title="msg://com.genebank.genedatabank.view.institute/instituteListView.title"/>
+            <item view="Partners.list" title="msg://com.genebank.genedatabank.view.partners/partnersListView.title"/>
         </menu>
     </menu>
 </menu-config>
