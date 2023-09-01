@@ -3,6 +3,7 @@
 
     <menu opened="true" id="application" title="msg://com.genebank.genedatabank/menu.application.title">
         <item view="User.list" title="msg://com.genebank.genedatabank.view.user/UserListView.title"/>
+        <item view="Taxonomy.list" title="msg://com.genebank.genedatabank.view.taxonomy/taxonomyListView.title"/>
     </menu>
     <menu id="settings" description="msg://com.genebank.genedatabank/menu_config.settings.description"
           title="msg://com.genebank.genedatabank/menu_config.settings.title">
