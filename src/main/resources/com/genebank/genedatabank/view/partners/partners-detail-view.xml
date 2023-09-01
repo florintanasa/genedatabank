@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://partnersDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="partnersDc"
+                  class="com.genebank.genedatabank.entity.Partners">
+            <fetchPlan extends="_base">
+                <property name="id_country" fetchPlan="_base"/>
+                <property name="id_locality" fetchPlan="_base">
+                    <property name="id_countysiruta" fetchPlan="_base">
+                        <property name="id_zonesiruta" fetchPlan="_base"/>
+                    </property>
+                </property>
+                <property name="id_roadtype" fetchPlan="_base"/>
+                <property name="id_street" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="partnersDc">
+            <textField id="first_nameField" property="first_name"/>
+            <textField id="family_nameField" property="family_name"/>
+            <textField id="company_nameField" property="company_name"/>
+            <entityPicker id="id_countryField" property="id_country">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_localityField" property="id_locality">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_roadtypeField" property="id_roadtype">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_streetField" property="id_street">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="street_nbField" property="street_nb"/>
+            <textField id="blockField" property="block"/>
+            <textField id="stairField" property="stair"/>
+            <textField id="floorField" property="floor"/>
+            <textField id="apartmentField" property="apartment"/>
+            <textField id="postal_codeField" property="postal_code"/>
+            <textField id="emailField" property="email"/>
+            <textField id="phoneField" property="phone"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

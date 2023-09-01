@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://partnersListView.title"
+      focusComponent="partnersesDataGrid">
+    <data readOnly="true">
+        <collection id="partnersesDc"
+                    class="com.genebank.genedatabank.entity.Partners">
+            <fetchPlan extends="_base">
+                <property name="id_country" fetchPlan="_base"/>
+                <property name="id_locality" fetchPlan="_base">
+                    <property name="id_countysiruta" fetchPlan="_base">
+                        <property name="id_zonesiruta" fetchPlan="_base"/>
+                    </property>
+                </property>
+                <property name="id_roadtype" fetchPlan="_base"/>
+                <property name="id_street" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="partnersesDl">
+                <query>
+                    <![CDATA[select e from Partners e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="partnersesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="partnersesDataGrid.create"/>
+            <button id="editBtn" action="partnersesDataGrid.edit"/>
+            <button id="removeBtn" action="partnersesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="partnersesDl"/>
+        </hbox>
+        <dataGrid id="partnersesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="partnersesDc"
+                  selectionMode="MULTI">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="first_name"/>
+                <column property="family_name"/>
+                <column property="company_name"/>
+                <column property="id_country"/>
+                <column property="id_locality.id_countysiruta.id_zonesiruta.zonename"/>
+                <column property="id_locality.id_countysiruta.name"/>
+                <column property="id_locality"/>
+                <column property="id_locality.siruta"/>
+                <column property="id_roadtype"/>
+                <column property="id_street"/>
+                <column property="street_nb"/>
+                <column property="block"/>
+                <column property="stair"/>
+                <column property="floor"/>
+                <column property="apartment"/>
+                <column property="postal_code"/>
+                <column property="email"/>
+                <column property="phone"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
