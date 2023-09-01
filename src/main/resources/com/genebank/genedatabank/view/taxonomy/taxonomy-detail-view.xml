@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://taxonomyDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="taxonomyDc"
+                  class="com.genebank.genedatabank.entity.Taxonomy">
+            <fetchPlan extends="_base"/>
+            <loader/>
+            <collection id="id_culturecategDc" property="id_culturecateg"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="taxonomyDc">
+            <textField id="familyField" property="family"/>
+            <textField id="genusField" property="genus"/>
+            <textField id="speciesField" property="species"/>
+            <textField id="spauthorField" property="spauthor"/>
+            <textField id="subtaxaField" property="subtaxa"/>
+            <textField id="subauthorField" property="subauthor"/>
+            <textField id="syn_taxonoField" property="syn_taxono"/>
+            <textField id="cropnumeField" property="cropnume"/>
+            <textField id="cropnameField" property="cropname"/>
+            <textField id="refferenceField" property="refference"/>
+        </formLayout>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button action="id_culturecategDataGrid.create"/>
+            <button action="id_culturecategDataGrid.remove"/>
+        </hbox>
+        <dataGrid id="id_culturecategDataGrid" dataContainer="id_culturecategDc" width="100%" minHeight="20em">
+            <actions>
+                <action id="create" type="list_create">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="name"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
