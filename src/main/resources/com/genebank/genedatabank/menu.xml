@@ -23,7 +23,9 @@
         </menu>
         <menu id="settpreservation"
               description="msg://com.genebank.genedatabank/menu_config.settpreservation.description"
-              title="msg://com.genebank.genedatabank/menu_config.settpreservation.title"/>
+              title="msg://com.genebank.genedatabank/menu_config.settpreservation.title">
+            <item view="Storage.list" title="msg://com.genebank.genedatabank.view.storage/storageListView.title"/>
+        </menu>
         <menu id="setadmin" description="msg://com.genebank.genedatabank/menu_config.setadmin.description"
               title="msg://com.genebank.genedatabank/menu_config.setadmin.title">
             <item view="Country.list" title="msg://com.genebank.genedatabank.view.country/countryListView.title"/>
