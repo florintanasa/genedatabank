@@ -46,7 +46,7 @@
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
             </entityPicker>
-            <textField id="accenumbField" property="accenumb"/>
+            <textField id="accenumbField" property="accenumb" visible="false"/>
             <textField id="doiField" property="doi"/>
             <textField id="collnumbField" property="collnumb"/>
             <textField id="collmissidField" property="collmissid"/>
