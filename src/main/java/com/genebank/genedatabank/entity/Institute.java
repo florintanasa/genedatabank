@@ -29,6 +29,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.OffsetDateTime;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -96,6 +97,45 @@ public class Institute {
 
     @Column(name = "ALPHA3", length = 3)
     private String alpha3;
+    @JoinTable(name = "PASAPORT_BREEDING_INSTITUTE_LINK",
+            joinColumns = @JoinColumn(name = "INSTITUTE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
+    @ManyToMany
+    private Set<Pasaport> pasaports_bredcode;
+    @JoinTable(name = "PASAPORT_DUPLICATES_INSTITUTE_LINK",
+            joinColumns = @JoinColumn(name = "INSTITUTE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
+    @ManyToMany
+    private Set<Pasaport> pasaports_duplsite;
+    @JoinTable(name = "PASAPORT_COLLETING_INSTITUTE_LINK",
+            joinColumns = @JoinColumn(name = "INSTITUTE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID"))
+    @ManyToMany
+    private Set<Pasaport> pasaports_collcode;
+
+    public Set<Pasaport> getPasaports_collcode() {
+        return pasaports_collcode;
+    }
+
+    public void setPasaports_collcode(Set<Pasaport> pasaports_collcode) {
+        this.pasaports_collcode = pasaports_collcode;
+    }
+
+    public Set<Pasaport> getPasaports_duplsite() {
+        return pasaports_duplsite;
+    }
+
+    public void setPasaports_duplsite(Set<Pasaport> pasaports_duplsite) {
+        this.pasaports_duplsite = pasaports_duplsite;
+    }
+
+    public Set<Pasaport> getPasaports_bredcode() {
+        return pasaports_bredcode;
+    }
+
+    public void setPasaports_bredcode(Set<Pasaport> pasaports_bredcode) {
+        this.pasaports_bredcode = pasaports_bredcode;
+    }
 
     public String getAlpha3() {
         return alpha3;

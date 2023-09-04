@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://pasaportDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="pasaportDc"
+                  class="com.genebank.genedatabank.entity.Pasaport">
+            <fetchPlan extends="_base">
+                <property name="id_instcode" fetchPlan="_base"/>
+                <property name="id_collcode" fetchPlan="_base"/>
+                <property name="id_taxonomy" fetchPlan="_base"/>
+                <property name="id_country" fetchPlan="_base"/>
+                <property name="id_countysiruta" fetchPlan="_base">
+                    <property name="id_zonesiruta" fetchPlan="_base"/>
+                </property>
+                <property name="id_localitysiruta" fetchPlan="_base"/>
+                <property name="id_georefmeth" fetchPlan="_base"/>
+                <property name="id_bredcode" fetchPlan="_base"/>
+                <property name="id_sampstat" fetchPlan="_base"/>
+                <property name="id_collsrc" fetchPlan="_base"/>
+                <property name="id_donorcode" fetchPlan="_base"/>
+                <property name="id_duplsite" fetchPlan="_base"/>
+                <property name="id_acceconf" fetchPlan="_base"/>
+                <property name="id_mlsstat" fetchPlan="_base"/>
+                <property name="id_aegisstat" fetchPlan="_base"/>
+                <property name="id_historic" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="id_collcodeDc" property="id_collcode"/>
+            <collection id="id_bredcodeDc" property="id_bredcode"/>
+            <collection id="id_duplsiteDc" property="id_duplsite"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="pasaportDc">
+            <entityPicker id="id_instcodeField" property="id_instcode">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="accenumbField" property="accenumb"/>
+            <textField id="doiField" property="doi"/>
+            <textField id="collnumbField" property="collnumb"/>
+            <textField id="collmissidField" property="collmissid"/>
+            <entityPicker id="id_taxonomyField" property="id_taxonomy">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="accnameField" property="accname"/>
+            <textField id="acqdateField" property="acqdate"/>
+            <textField id="origdateField" property="origdate"/>
+            <entityPicker id="id_countryField" property="id_country">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_countysirutaField" property="id_countysiruta">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_localitysirutaField" property="id_localitysiruta">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="latitudeField" property="latitude"/>
+            <textField id="longitudeField" property="longitude"/>
+            <textField id="elevationField" property="elevation"/>
+            <entityPicker id="id_georefmethField" property="id_georefmeth">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="colldateField" property="colldate"/>
+            <entityPicker id="id_sampstatField" property="id_sampstat">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="ancestField" property="ancest"/>
+            <entityPicker id="id_collsrcField" property="id_collsrc">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_donorcodeField" property="id_donorcode">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="donornumbField" property="donornumb"/>
+            <textField id="othernumbField" property="othernumb"/>
+            <textField id="tempnumbField" property="tempnumb"/>
+            <textField id="remarksField" property="remarks"/>
+            <textArea id="commentsField" height="9.5em" property="comments"/>
+            <textField id="acceurlField" property="acceurl"/>
+            <entityPicker id="id_acceconfField" property="id_acceconf">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_mlsstatField" property="id_mlsstat">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_aegisstatField" property="id_aegisstat">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <entityPicker id="id_historicField" property="id_historic">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+        </formLayout>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button action="id_collcodeDataGrid.create"/>
+            <button action="id_collcodeDataGrid.remove"/>
+        </hbox>
+        <dataGrid id="id_collcodeDataGrid" dataContainer="id_collcodeDc" width="100%" minHeight="20em">
+            <actions>
+                <action id="create" type="list_create">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="full_name_ro"/>
+                <column property="instcode"/>
+                <column property="acronym"/>
+                <column property="full_name_en"/>
+                <column property="address"/>
+                <column property="url"/>
+                <column property="alpha3"/>
+            </columns>
+        </dataGrid>
+        <hbox id="buttonsPanel2" classNames="buttons-panel">
+            <button action="id_bredcodeDataGrid.create"/>
+            <button action="id_bredcodeDataGrid.remove"/>
+        </hbox>
+        <dataGrid id="id_bredcodeDataGrid" dataContainer="id_bredcodeDc" width="100%" minHeight="20em">
+            <actions>
+                <action id="create" type="list_create">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="full_name_ro"/>
+                <column property="instcode"/>
+                <column property="acronym"/>
+                <column property="full_name_en"/>
+                <column property="address"/>
+                <column property="url"/>
+                <column property="alpha3"/>
+            </columns>
+        </dataGrid>
+        <hbox id="buttonsPanel1" classNames="buttons-panel">
+            <button action="id_duplsiteDataGrid.create"/>
+            <button action="id_duplsiteDataGrid.remove"/>
+        </hbox>
+        <dataGrid id="id_duplsiteDataGrid" dataContainer="id_duplsiteDc" width="100%" minHeight="20em">
+            <actions>
+                <action id="create" type="list_create">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="full_name_ro"/>
+                <column property="instcode"/>
+                <column property="acronym"/>
+                <column property="full_name_en"/>
+                <column property="address"/>
+                <column property="url"/>
+                <column property="alpha3"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
