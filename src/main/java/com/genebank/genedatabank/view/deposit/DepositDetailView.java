@@ -9,6 +9,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.upload.Receiver;
@@ -19,6 +20,8 @@ import io.jmix.flowui.component.image.JmixImage;
 import io.jmix.flowui.component.upload.FileStorageUploadField;
 import io.jmix.flowui.component.upload.FileUploadField;
 import io.jmix.flowui.component.upload.receiver.FileTemporaryStorageBuffer;
+import io.jmix.flowui.download.DownloadFormat;
+import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.kit.component.upload.event.FileUploadSucceededEvent;
 import io.jmix.flowui.upload.TemporaryStorage;
@@ -53,6 +56,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private TemporaryStorage temporaryStorage;
     @ViewComponent
     private JmixImage imageqrcode;
+    @Autowired
+    private Downloader downloader;
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
@@ -117,6 +122,19 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
                     + ((FileTemporaryStorageBuffer) receiver).getFileData().getFileName()).show();
 
         }
+    }
+
+    @Subscribe("downloadImageqrcodeBtn")
+    public void onDownloadImageQrCodeBtnClick(ClickEvent<Button> event) {
+        FileRef fileRef = getEditedEntity().getQrcode();
+        downloader.download(fileRef);
+        //downloadFromFileStorage();
+    }
+
+    private void downloadFromFileStorage(byte[] content) {
+        //FileRef fileRef = getEditedEntity().getQrcode();
+        //downloader.download(fileRef);
+        //downloader.download(content, getEditedEntity().getQrcode().getFileName(), DownloadFormat.JPG);
     }
 
     @Subscribe("clearImageqrcodeBtn")
