@@ -11,9 +11,16 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.upload.Receiver;
 import com.vaadin.flow.router.Route;
+import io.jmix.core.FileRef;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.component.upload.FileStorageUploadField;
+import io.jmix.flowui.component.upload.FileUploadField;
+import io.jmix.flowui.component.upload.receiver.FileTemporaryStorageBuffer;
 import io.jmix.flowui.kit.component.button.JmixButton;
+import io.jmix.flowui.kit.component.upload.event.FileUploadSucceededEvent;
+import io.jmix.flowui.upload.TemporaryStorage;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -23,6 +30,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 
 /**
@@ -39,7 +47,9 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     @Autowired
     private Notifications notifications;
     @ViewComponent
-    private JmixButton generateqrcodeBtn;
+    private FileStorageUploadField imageqrcodeUpload;
+    @Autowired
+    private TemporaryStorage temporaryStorage;
 
     @Subscribe("generateqrcodeBtn")
     public void onGenerateQrCodeBtnClick(ClickEvent<Button> event) throws IOException, WriterException {
@@ -80,5 +90,23 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         //Notification for user
         String okMessage = messageBundle.getMessage("okMessageQRcode");
         notifications.create("OK", okMessage).show();
+    }
+
+    @Subscribe("imageqrcodeUpload")
+    public void onImageqrcodeUploadFileUploadSucceed(final FileUploadSucceededEvent<FileStorageUploadField> event){
+        Receiver receiver = event.getReceiver();
+        if (receiver instanceof FileTemporaryStorageBuffer) {
+            UUID fileID = ((FileTemporaryStorageBuffer) receiver).getFileData().getFileInfo().getId();
+            File file = temporaryStorage.getFile(fileID);
+
+            if (file != null) {
+                //notifications.create("Fișierul este salvat temporar la " + file.getAbsolutePath()).show();
+            }
+            FileRef fileRef = temporaryStorage.putFileIntoStorage(fileID, event.getFileName());
+            imageqrcodeUpload.setValue(fileRef);
+            notifications.create("Încarcă fișierul: "
+                    + ((FileTemporaryStorageBuffer) receiver).getFileData().getFileName()).show();
+
+        }
     }
 }
