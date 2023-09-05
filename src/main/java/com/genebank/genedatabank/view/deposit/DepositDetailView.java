@@ -109,4 +109,9 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
         }
     }
+
+    @Subscribe("clearImageqrcodeBtn")
+    public void onClearImageQrCodeBtnClick(ClickEvent<Button> event) {
+        getEditedEntity().setQrcode(null);
+    }
 }
