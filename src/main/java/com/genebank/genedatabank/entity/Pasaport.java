@@ -19,6 +19,7 @@ package com.genebank.genedatabank.entity;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.core.metamodel.annotation.PropertyDatatype;
 import jakarta.persistence.*;
@@ -94,6 +95,7 @@ public class Pasaport {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Institute id_instcode;
 
+    @InstanceName
     @Column(name = "ACCENUMB", nullable = false, length = 10)
     @NotNull
     private String accenumb;

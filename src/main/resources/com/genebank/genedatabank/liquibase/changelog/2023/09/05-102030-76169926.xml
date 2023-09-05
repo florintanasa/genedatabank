@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="genedatabank">
+        <createTable tableName="DEPOSIT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_DEPOSIT"/>
+            </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="${offsetDateTime.type}"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="${offsetDateTime.type}"/>
+            <column name="DELETED_BY" type="VARCHAR(255)"/>
+            <column name="DELETED_DATE" type="${offsetDateTime.type}"/>
+            <column name="ID_ACCENUMB_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DEPOSIT_CODE" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ID_STORAGE_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="YEARSTORAGE" type="VARCHAR(8)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="YEARMULTI" type="INT"/>
+            <column name="MULTIPLY" type="INT"/>
+            <column name="YEARGERM" type="INT"/>
+            <column name="PERCENTAGE" type="INT"/>
+            <column name="STOCK" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HUMIDITY" type="DOUBLE"/>
+            <column name="MMB" type="DOUBLE"/>
+            <column name="COMMENTS" type="CLOB"/>
+            <column name="QRCODE" type="VARCHAR(1024)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="genedatabank">
+        <createIndex indexName="IDX_DEPOSIT_ID_STORAGE" tableName="DEPOSIT">
+            <column name="ID_STORAGE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="ID_STORAGE_ID" baseTableName="DEPOSIT"
+                                 constraintName="FK_DEPOSIT_ON_ID_STORAGE" referencedColumnNames="ID"
+                                 referencedTableName="STORAGE"/>
+    </changeSet>
+    <changeSet id="3" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_DEPOSIT_UNQ_DEPOSIT_CODE" tableName="DEPOSIT" unique="true">
+            <column name="DEPOSIT_CODE"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="4" author="genedatabank">
+        <addForeignKeyConstraint baseColumnNames="ID_ACCENUMB_ID" baseTableName="DEPOSIT"
+                                 constraintName="FK_DEPOSIT_ON_ID_ACCENUMB" referencedColumnNames="ID"
+                                 referencedTableName="PASAPORT"/>
+    </changeSet>
+</databaseChangeLog>
