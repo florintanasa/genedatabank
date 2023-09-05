@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://depositDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="depositDc"
+                  class="com.genebank.genedatabank.entity.Deposit">
+            <fetchPlan extends="_base">
+                <property name="id_accenumb" fetchPlan="_base">
+                    <property name="id_instcode" fetchPlan="_base"/>
+                    <property name="id_collcode" fetchPlan="_base"/>
+                    <property name="id_taxonomy" fetchPlan="_base"/>
+                    <property name="id_acceconf" fetchPlan="_base"/>
+                </property>
+                <property name="id_storage" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="depositDc">
+            <entityPicker id="id_accenumbField" property="id_accenumb">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="deposit_codeField" property="deposit_code"/>
+            <entityPicker id="id_storageField" property="id_storage">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="yearstorageField" property="yearstorage"/>
+            <textField id="yearmultiField" property="yearmulti"/>
+            <textField id="multiplyField" property="multiply"/>
+            <textField id="yeargermField" property="yeargerm"/>
+            <textField id="percentageField" property="percentage"/>
+            <textField id="stockField" property="stock"/>
+            <textField id="humidityField" property="humidity"/>
+            <textField id="mmbField" property="mmb"/>
+            <textArea id="commentsField" height="9.5em" property="comments"/>
+            <details summaryText="QR code">
+                <image id="imageqrcode"
+                       height="350px"
+                       width="350px"
+                       property="qrcode"/>
+                <hbox>
+                    <button id="generateqrcodeBtn"
+                            text="msg://generateqrcodeBtn"
+                            title="msg://generateqrcodeBtn.title"/>
+                    <fileStorageUploadField id="imageqrcodeUpload"
+                                            property="qrcode"
+                                            fileStoragePutMode="MANUAL"
+                                            acceptedFileTypes=".png, .jpg, .jpeg"
+                                            uploadText="msg://qrcodeUpload"/>
+                    <button id="downloadImageqrcodeBtn"
+                            text="msg://downloadImageqrcodeBtn"
+                            title="msg://downloadImageqrcodeBtn.title"/>
+                    <button id="clearImageqrcodeBtn"
+                            text="msg://clearImageqrcodeBtn"
+                            title="msg://clearImageqrcodeBtn.title"/>
+                </hbox>
+            </details>
+
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

@@ -5,6 +5,7 @@
         <item view="User.list" title="msg://com.genebank.genedatabank.view.user/UserListView.title"/>
         <item view="Taxonomy.list" title="msg://com.genebank.genedatabank.view.taxonomy/taxonomyListView.title"/>
         <item view="Pasaport.list" title="msg://com.genebank.genedatabank.view.pasaport/pasaportListView.title"/>
+        <item view="Deposit.list" title="msg://com.genebank.genedatabank.view.deposit/depositListView.title"/>
     </menu>
     <menu id="settings" description="msg://com.genebank.genedatabank/menu_config.settings.description"
           title="msg://com.genebank.genedatabank/menu_config.settings.title">

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://depositListView.title"
+      focusComponent="depositsDataGrid">
+    <data readOnly="true">
+        <collection id="depositsDc"
+                    class="com.genebank.genedatabank.entity.Deposit">
+            <fetchPlan extends="_base">
+                <property name="id_accenumb" fetchPlan="_base"/>
+                <property name="id_storage" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="depositsDl">
+                <query>
+                    <![CDATA[select e from Deposit e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="depositsDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="depositsDataGrid.create"/>
+            <button id="editBtn" action="depositsDataGrid.edit"/>
+            <button id="removeBtn" action="depositsDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="depositsDl"/>
+        </hbox>
+        <dataGrid id="depositsDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="depositsDc"
+                  selectionMode="MULTI">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="id_accenumb"/>
+                <column property="deposit_code"/>
+                <column property="id_storage"/>
+                <column property="yearstorage"/>
+                <column property="yearmulti"/>
+                <column property="multiply"/>
+                <column property="yeargerm"/>
+                <column property="percentage"/>
+                <column property="stock"/>
+                <column property="humidity"/>
+                <column property="mmb"/>
+                <column property="comments"/>
+                <column property="qrcode"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
