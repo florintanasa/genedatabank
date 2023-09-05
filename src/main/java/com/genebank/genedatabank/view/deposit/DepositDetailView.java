@@ -15,6 +15,7 @@ import com.vaadin.flow.component.upload.Receiver;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.FileRef;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.component.image.JmixImage;
 import io.jmix.flowui.component.upload.FileStorageUploadField;
 import io.jmix.flowui.component.upload.FileUploadField;
 import io.jmix.flowui.component.upload.receiver.FileTemporaryStorageBuffer;
@@ -50,6 +51,13 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private FileStorageUploadField imageqrcodeUpload;
     @Autowired
     private TemporaryStorage temporaryStorage;
+    @ViewComponent
+    private JmixImage imageqrcode;
+
+    @Subscribe
+    public void onBeforeShow(BeforeShowEvent event) {
+        displayImage();
+    }
 
     @Subscribe("generateqrcodeBtn")
     public void onGenerateQrCodeBtnClick(ClickEvent<Button> event) throws IOException, WriterException {
@@ -104,6 +112,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
             }
             FileRef fileRef = temporaryStorage.putFileIntoStorage(fileID, event.getFileName());
             imageqrcodeUpload.setValue(fileRef);
+            displayImage();
             notifications.create("Încarcă fișierul: "
                     + ((FileTemporaryStorageBuffer) receiver).getFileData().getFileName()).show();
 
@@ -113,5 +122,10 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     @Subscribe("clearImageqrcodeBtn")
     public void onClearImageQrCodeBtnClick(ClickEvent<Button> event) {
         getEditedEntity().setQrcode(null);
+        displayImage();
+    }
+
+    public void displayImage() {
+        imageqrcode.setVisible(getEditedEntity().getQrcode() != null);
     }
 }
