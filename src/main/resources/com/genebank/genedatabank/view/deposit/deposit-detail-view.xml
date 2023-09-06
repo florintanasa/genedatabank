@@ -48,7 +48,7 @@
             <textField id="humidityField" property="humidity"/>
             <textField id="mmbField" property="mmb"/>
             <textArea id="commentsField" height="9.5em" property="comments"/>
-            <details summaryText="QR code">
+            <details summaryText="msg://detailsdeposit.title">
                 <image id="imageqrcode"
                        height="350px"
                        width="350px"
@@ -62,7 +62,9 @@
                                             property="qrcode"
                                             fileStoragePutMode="MANUAL"
                                             acceptedFileTypes=".png, .jpg, .jpeg"
-                                            uploadText="msg://qrcodeUpload"/>
+                                            uploadText="msg://qrcodeUpload">
+                        <tooltip text="msg://imageqrcodeUpload.title"/>
+                    </fileStorageUploadField>
                     <button id="downloadImageqrcodeBtn"
                             text="msg://downloadImageqrcodeBtn"
                             title="msg://downloadImageqrcodeBtn.title"/>
