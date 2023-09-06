@@ -58,10 +58,18 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private JmixImage imageqrcode;
     @Autowired
     private Downloader downloader;
+    @ViewComponent
+    private JmixButton clearImageqrcodeBtn;
+    @ViewComponent
+    private JmixButton downloadImageqrcodeBtn;
+    @ViewComponent
+    private JmixButton generateqrcodeBtn;
+
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         displayImage();
+        updateImageButtons(getEditedEntity().getQrcode() != null);
     }
 
     @Subscribe("generateqrcodeBtn")
@@ -145,5 +153,12 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
     public void displayImage() {
         imageqrcode.setVisible(getEditedEntity().getQrcode() != null);
+    }
+
+    public void updateImageButtons(boolean enable) {
+        downloadImageqrcodeBtn.setVisible(enable);
+        clearImageqrcodeBtn.setVisible(enable);
+        generateqrcodeBtn.setVisible(!enable);
+        imageqrcodeUpload.setVisible(!enable);
     }
 }
