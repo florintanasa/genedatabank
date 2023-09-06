@@ -52,7 +52,8 @@
                 <image id="imageqrcode"
                        height="350px"
                        width="350px"
-                       property="qrcode"/>
+                       property="qrcode"
+                       classNames="qrcode-image"/>
                 <hbox>
                     <button id="generateqrcodeBtn"
                             text="msg://generateqrcodeBtn"
