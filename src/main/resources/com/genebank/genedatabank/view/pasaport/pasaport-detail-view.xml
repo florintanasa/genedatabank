@@ -136,30 +136,28 @@
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
             </entityPicker>
+            <details id="id_collcodeDetails" summaryText="msg://id_collcodeDetails.summaryText">
+                <hbox id="buttonsPanel" classNames="buttons-panel">
+                    <button action="id_collcodeDataGrid.add"/>
+                    <button action="id_collcodeDataGrid.exclude"/>
+                </hbox>
+                <dataGrid id="id_collcodeDataGrid" dataContainer="id_collcodeDc" width="100%" minHeight="20em">
+                    <actions>
+                        <action id="add" type="list_add"/>
+                        <action id="exclude" type="list_exclude"/>
+                    </actions>
+                    <columns>
+                        <column property="full_name_ro"/>
+                        <column property="instcode"/>
+                        <column property="acronym"/>
+                        <column property="full_name_en"/>
+                        <column property="address"/>
+                        <column property="url"/>
+                        <column property="alpha3"/>
+                    </columns>
+                </dataGrid>
+            </details>
         </formLayout>
-        <hbox id="buttonsPanel" classNames="buttons-panel">
-            <button action="id_collcodeDataGrid.create"/>
-            <button action="id_collcodeDataGrid.remove"/>
-        </hbox>
-        <dataGrid id="id_collcodeDataGrid" dataContainer="id_collcodeDc" width="100%" minHeight="20em">
-            <actions>
-                <action id="create" type="list_create">
-                    <properties>
-                        <property name="openMode" value="DIALOG"/>
-                    </properties>
-                </action>
-                <action id="remove" type="list_remove"/>
-            </actions>
-            <columns>
-                <column property="full_name_ro"/>
-                <column property="instcode"/>
-                <column property="acronym"/>
-                <column property="full_name_en"/>
-                <column property="address"/>
-                <column property="url"/>
-                <column property="alpha3"/>
-            </columns>
-        </dataGrid>
         <hbox id="buttonsPanel2" classNames="buttons-panel">
             <button action="id_bredcodeDataGrid.create"/>
             <button action="id_bredcodeDataGrid.remove"/>
