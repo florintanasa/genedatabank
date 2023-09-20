@@ -205,6 +205,12 @@
                     </formLayout>
                 </scroller>
             </accordionPanel>
+            <accordionPanel id="commentsImages" summaryText="msg://commentsImages.summaryText">
+                <tabs id="extendetInformationTabs">
+                    <tab id="descriptionTab" label="msg://descriptionTab.label"/>
+                    <tab id="probeImages" label="msg://probeImages.label"/>
+                </tabs>
+            </accordionPanel>
         </accordion>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
