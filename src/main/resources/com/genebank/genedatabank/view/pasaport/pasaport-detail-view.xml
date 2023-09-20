@@ -211,6 +211,9 @@
                     <tab id="probeImages" label="msg://probeImages.label"/>
                 </tabs>
             </accordionPanel>
+            <accordionPanel id="probeMap" summaryText="msg://probeMap.summaryText">
+                <vbox id="mapContainer"/>
+            </accordionPanel>
         </accordion>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
