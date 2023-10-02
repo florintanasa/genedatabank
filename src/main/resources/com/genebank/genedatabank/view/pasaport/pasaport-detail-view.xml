@@ -212,9 +212,17 @@
                 </tabs>
             </accordionPanel>
             <accordionPanel id="probeMap" summaryText="msg://probeMap.summaryText">
-                <vbox id="mapContainer"/>
+                <hbox id="optCheckBox">
+                    <checkbox id="checkboxMap"
+                              label="msg://checkboxMap.label"
+                              property="active" value="false"/>
+                    <checkbox id="checkboxElevation"
+                              label="msg://checkboxElevation.label"
+                              property="active" value="false"/>
+                </hbox>
             </accordionPanel>
         </accordion>
+        <vbox id="mapContainer" width="100%" minHeight="380px" enabled="false" visible="false"/>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
