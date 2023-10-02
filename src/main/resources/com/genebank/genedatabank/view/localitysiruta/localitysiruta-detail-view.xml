@@ -19,7 +19,7 @@
         <action id="closeAction" type="detail_close"/>
     </actions>
     <layout expand="mapContainer" spacing="true">
-        <hbox id="optCheckBox" colspan="2">
+        <hbox id="optCheckBox">
             <checkbox label="msg:///checkbox.label"
                       property="active" value="false"
                       id="checkbox"/>
