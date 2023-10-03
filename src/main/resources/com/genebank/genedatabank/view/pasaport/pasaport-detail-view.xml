@@ -205,9 +205,7 @@
                 </scroller>
             </accordionPanel>
             <accordionPanel id="commentsImages" summaryText="msg://commentsImages.summaryText" width="100%">
-                <tabs id="extendetInformationTabs" height="100%" width="100%">
-                </tabs>
-                <tabSheet id="tabSheet" width="100%" height="100%">
+                <tabSheet id="extendetInformationTabs" width="100%" height="100%">
                     <tab id="descriptionTab" label="msg://descriptionTab.label">
                         <hbox id="contentTextArea" width="100%" height="100%">
                             <textArea id="commentsField"
