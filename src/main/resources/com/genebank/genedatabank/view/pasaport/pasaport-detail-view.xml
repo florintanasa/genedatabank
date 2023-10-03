@@ -28,6 +28,7 @@
             <loader/>
             <collection id="id_collcodeDc" property="id_collcode"/>
             <collection id="id_bredcodeDc" property="id_bredcode"/>
+            <collection id="probeImagesDc" property="probeImages"/>
             <collection id="id_duplsiteDc" property="id_duplsite"/>
         </instance>
     </data>
@@ -216,9 +217,30 @@
                         </hbox>
                     </tab>
                     <tab id="probeImages" label="msg://probeImages.label">
-                        <hbox>
-
-                        </hbox>
+                        <vbox>
+                            <hbox>
+                                <upload id="upload"
+                                        uploadIcon="UPLOAD"
+                                        acceptedFileTypes=".png, .jpg., .jpeg, .pdf"/>
+                                <button action="probeImagesTable.download"/>
+                                <button action="probeImagesTable.remove"/>
+                            </hbox>
+                            <hbox id="contentHbox" width="100%">
+                                <dataGrid id="probeImagesTable" dataContainer="probeImagesDc">
+                                    <actions>
+                                        <action id="dowload" icon="DOWNLOAD"/>
+                                        <action id="edit" type="list_edit"/>
+                                        <action id="remove" type="list_remove"/>
+                                    </actions>
+                                    <columns>
+                                        <column property="name"/>
+                                    </columns>
+                                </dataGrid>
+                                <hbox id="probeImageWrapperLayout"
+                                      width="100%" height="100%">
+                                </hbox>
+                            </hbox>
+                        </vbox>
                     </tab>
                 </tabSheet>
             </accordionPanel>
