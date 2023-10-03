@@ -39,7 +39,7 @@
         <action id="closeAction" type="detail_close"/>
     </actions>
     <layout>
-        <accordion id="accordionMain">
+        <accordion id="accordionMain" width="100%">
             <accordionPanel id="scrollBoxPanel" summaryText="msg://scrollBoxPanel.summaryText">
                 <scroller id="scrollBox">
                     <formLayout id="form" dataContainer="pasaportDc">
@@ -113,7 +113,6 @@
                         <textField id="othernumbField" property="othernumb"/>
                         <textField id="tempnumbField" property="tempnumb"/>
                         <textField id="remarksField" property="remarks"/>
-                        <textArea id="commentsField" height="9.5em" property="comments"/>
                         <textField id="acceurlField" property="acceurl"/>
                         <entityPicker id="id_acceconfField" property="id_acceconf">
                             <actions>
@@ -205,11 +204,25 @@
                     </formLayout>
                 </scroller>
             </accordionPanel>
-            <accordionPanel id="commentsImages" summaryText="msg://commentsImages.summaryText">
-                <tabs id="extendetInformationTabs">
-                    <tab id="descriptionTab" label="msg://descriptionTab.label"/>
-                    <tab id="probeImages" label="msg://probeImages.label"/>
+            <accordionPanel id="commentsImages" summaryText="msg://commentsImages.summaryText" width="100%">
+                <tabs id="extendetInformationTabs" height="100%" width="100%">
                 </tabs>
+                <tabSheet id="tabSheet" width="100%" height="100%">
+                    <tab id="descriptionTab" label="msg://descriptionTab.label">
+                        <hbox id="contentTextArea" width="100%" height="100%">
+                            <textArea id="commentsField"
+                                      height="100%"
+                                      width="100%"
+                                      dataContainer="pasaportDc"
+                                      property="comments"/>
+                        </hbox>
+                    </tab>
+                    <tab id="probeImages" label="msg://probeImages.label">
+                        <hbox>
+
+                        </hbox>
+                    </tab>
+                </tabSheet>
             </accordionPanel>
             <accordionPanel id="probeMap" summaryText="msg://probeMap.summaryText">
                 <hbox id="optCheckBox">
