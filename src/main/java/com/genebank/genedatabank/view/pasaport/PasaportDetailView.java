@@ -72,7 +72,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreSave(DataContext.PreSaveEvent event) {
-        if (getEditedEntity().getAccenumb() != null) {
+        if (getEditedEntity().getAccenumb() == null) {
             if (getEditedEntity().getId_instcode().getInstcode().equals("ROM007")) {
                 long accNumberSVGB = sequences.createNextValue(Sequence.withName("NrAccenumbSVGB"));
                 getEditedEntity().setAccenumb("SVGB-" + accNumberSVGB);
