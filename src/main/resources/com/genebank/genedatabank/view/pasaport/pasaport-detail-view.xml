@@ -28,7 +28,7 @@
             <loader/>
             <collection id="id_collcodeDc" property="id_collcode"/>
             <collection id="id_bredcodeDc" property="id_bredcode"/>
-            <collection id="probeImagesDc" property="probeImages"/>
+            <collection id="probeImagesDc" />
             <collection id="id_duplsiteDc" property="id_duplsite"/>
         </instance>
     </data>
