@@ -251,6 +251,7 @@
                                 </vbox>
                                 <hbox id="probeImageWrapperLayout"
                                       width="100%" height="100%">
+                                    <image id="imageProbe" dataContainer="probeImagesDc" property="file"/>
                                 </hbox>
                             </hbox>
                         </vbox>
