@@ -30,6 +30,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -219,6 +220,20 @@ public class Pasaport {
     @JoinColumn(name = "ID_HISTORIC_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Historic id_historic;
+
+    @JoinTable(name = "PASAPORT_SYS_FILE_LINK",
+            joinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "SYS_FILE_ID", referencedColumnName = "ID"))
+    @ManyToMany
+    private List<SysFile> probeImages;
+
+    public void setProbeImages(List<SysFile> probeImages) {
+        this.probeImages = probeImages;
+    }
+
+    public List<SysFile> getProbeImages() {
+        return probeImages;
+    }
 
     public Set<Institute> getId_collcode() {
         return id_collcode;

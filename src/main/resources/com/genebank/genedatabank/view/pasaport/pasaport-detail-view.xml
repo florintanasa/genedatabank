@@ -24,12 +24,13 @@
                 <property name="id_mlsstat" fetchPlan="_base"/>
                 <property name="id_aegisstat" fetchPlan="_base"/>
                 <property name="id_historic" fetchPlan="_base"/>
+                <property name="probeImages" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
             <collection id="id_collcodeDc" property="id_collcode"/>
             <collection id="id_bredcodeDc" property="id_bredcode"/>
-            <collection id="probeImagesDc" />
             <collection id="id_duplsiteDc" property="id_duplsite"/>
+            <collection id="probeImagesDc" property="probeImages"/>
         </instance>
     </data>
     <facets>
@@ -144,7 +145,8 @@
                                 <button action="id_collcodeDataGrid.add"/>
                                 <button action="id_collcodeDataGrid.exclude"/>
                             </hbox>
-                            <dataGrid id="id_collcodeDataGrid" dataContainer="id_collcodeDc" width="100%" minHeight="20em">
+                            <dataGrid id="id_collcodeDataGrid" dataContainer="id_collcodeDc" width="100%"
+                                      minHeight="20em">
                                 <actions>
                                     <action id="add" type="list_add"/>
                                     <action id="exclude" type="list_exclude"/>
@@ -165,7 +167,8 @@
                                 <button action="id_bredcodeDataGrid.add"/>
                                 <button action="id_bredcodeDataGrid.exclude"/>
                             </hbox>
-                            <dataGrid id="id_bredcodeDataGrid" dataContainer="id_bredcodeDc" width="100%" minWidth="20em">
+                            <dataGrid id="id_bredcodeDataGrid" dataContainer="id_bredcodeDc" width="100%"
+                                      minWidth="20em">
                                 <actions>
                                     <action id="add" type="list_add"/>
                                     <action id="exclude" type="list_exclude"/>
@@ -186,7 +189,8 @@
                                 <button action="id_duplsiteDataGrid.add"/>
                                 <button action="id_duplsiteDataGrid.exclude"/>
                             </hbox>
-                            <dataGrid id="id_duplsiteDataGrid" dataContainer="id_duplsiteDc" width="100%" minHeight="20em">
+                            <dataGrid id="id_duplsiteDataGrid" dataContainer="id_duplsiteDc" width="100%"
+                                      minHeight="20em">
                                 <actions>
                                     <action id="add" type="list_add"/>
                                     <action id="exclude" type="list_exclude"/>
@@ -217,25 +221,34 @@
                         </hbox>
                     </tab>
                     <tab id="probeImages" label="msg://probeImages.label">
-                        <vbox>
-                            <hbox>
-                                <upload id="upload"
-                                        uploadIcon="UPLOAD"
-                                        acceptedFileTypes=".png, .jpg., .jpeg, .pdf"/>
-                                <button action="probeImagesTable.download"/>
-                                <button action="probeImagesTable.remove"/>
-                            </hbox>
-                            <hbox id="contentHbox" width="100%">
-                                <dataGrid id="probeImagesTable" dataContainer="probeImagesDc">
-                                    <actions>
-                                        <action id="dowload" icon="DOWNLOAD"/>
-                                        <action id="edit" type="list_edit"/>
-                                        <action id="remove" type="list_remove"/>
-                                    </actions>
-                                    <columns>
-                                        <column property="name"/>
-                                    </columns>
-                                </dataGrid>
+                        <vbox id="contentHbox" width="100%" height="100%">
+                            <hbox height="100%" width="100%">
+                                <vbox width="100%" height="100%">
+                                    <hbox id="buttonsPanel4" classNames="buttons-panel">
+                                        <button action="probeImagesDataGrid.add"/>
+                                        <button action="probeImagesDataGrid.exclude"/>
+                                    </hbox>
+                                    <dataGrid id="probeImagesDataGrid" dataContainer="probeImagesDc" width="100%">
+                                        <actions>
+                                            <action id="add" type="list_add"/>
+                                            <action id="exclude" type="list_exclude"/>
+                                        </actions>
+                                        <columns>
+                                            <column property="version"/>
+                                            <column property="createdBy"/>
+                                            <column property="createdDate"/>
+                                            <column property="lastModifiedBy"/>
+                                            <column property="lastModifiedDate"/>
+                                            <column property="deletedBy"/>
+                                            <column property="deletedDate"/>
+                                            <column property="name"/>
+                                            <column property="extension"/>
+                                            <column property="size"/>
+                                            <column property="createDate"/>
+                                            <column property="file"/>
+                                        </columns>
+                                    </dataGrid>
+                                </vbox>
                                 <hbox id="probeImageWrapperLayout"
                                       width="100%" height="100%">
                                 </hbox>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="genedatabank">
+        <createTable tableName="PASAPORT_SYS_FILE_LINK">
+            <column name="PASAPORT_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PASAPORT_SYS_FILE_LINK"/>
+            </column>
+            <column name="SYS_FILE_ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PASAPORT_SYS_FILE_LINK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="genedatabank">
+        <addForeignKeyConstraint baseColumnNames="PASAPORT_ID" baseTableName="PASAPORT_SYS_FILE_LINK"
+                                 constraintName="FK_PASSYSFIL_ON_PASAPORT" referencedColumnNames="ID"
+                                 referencedTableName="PASAPORT"/>
+    </changeSet>
+    <changeSet id="3" author="genedatabank">
+        <addForeignKeyConstraint baseColumnNames="SYS_FILE_ID" baseTableName="PASAPORT_SYS_FILE_LINK"
+                                 constraintName="FK_PASSYSFIL_ON_SYS_FILE" referencedColumnNames="ID"
+                                 referencedTableName="SYS_FILE"/>
+    </changeSet>
+</databaseChangeLog>

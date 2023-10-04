@@ -31,6 +31,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.OffsetDateTime;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -94,6 +95,19 @@ public class SysFile {
     @Lob
     @Column(name = "FILE_", nullable = false)
     private FileRef file;
+    @JoinTable(name = "PASAPORT_SYS_FILE_LINK",
+            joinColumns = @JoinColumn(name = "SYS_FILE_ID"),
+            inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID"))
+    @ManyToMany
+    private Set<Pasaport> pasaports_sysfile;
+
+    public Set<Pasaport> getPasaports_sysfile() {
+        return pasaports_sysfile;
+    }
+
+    public void setPasaports_sysfile(Set<Pasaport> pasaports_sysfile) {
+        this.pasaports_sysfile = pasaports_sysfile;
+    }
 
     public FileRef getFile() {
         return file;
