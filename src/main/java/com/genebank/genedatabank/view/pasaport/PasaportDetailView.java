@@ -72,17 +72,19 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreSave(DataContext.PreSaveEvent event) {
-        if (getEditedEntity().getId_instcode().getInstcode().equals("ROM007")) {
-            Long accNumberSVGB = sequences.createNextValue(Sequence.withName("NrAccenumbSVGB"));
-            getEditedEntity().setAccenumb("SVGB-" + accNumberSVGB);
-        } else if (getEditedEntity().getId_instcode().getInstcode().equals("ROM028")) {
-            Long accNumberSVSCA = sequences.createNextValue(Sequence.withName("NrAccenumbSVCA"));
-            getEditedEntity().setAccenumb("SVSCA-" + accNumberSVSCA);
-        }
-        else {
-            String error_message_accenumber = messageBundle.getMessage("error_message_accenumber");
-            notifications.create("HOPA", error_message_accenumber)
-                    .withDuration(5000).show();
+        if (getEditedEntity().getAccenumb() != null) {
+            if (getEditedEntity().getId_instcode().getInstcode().equals("ROM007")) {
+                long accNumberSVGB = sequences.createNextValue(Sequence.withName("NrAccenumbSVGB"));
+                getEditedEntity().setAccenumb("SVGB-" + accNumberSVGB);
+            } else if (getEditedEntity().getId_instcode().getInstcode().equals("ROM028")) {
+                long accNumberSVSCA = sequences.createNextValue(Sequence.withName("NrAccenumbSVCA"));
+                getEditedEntity().setAccenumb("SVSCA-" + accNumberSVSCA);
+            }
+            else {
+                String error_message_accenumber = messageBundle.getMessage("error_message_accenumber");
+                notifications.create("HOPA", error_message_accenumber)
+                        .withDuration(5000).show();
+            }
         }
     }
 
