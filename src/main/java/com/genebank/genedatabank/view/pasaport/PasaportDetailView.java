@@ -6,6 +6,7 @@ import com.flowingcode.vaadin.addons.googlemaps.LatLon;
 import com.flowingcode.vaadin.addons.googlemaps.Markers;
 import com.genebank.genedatabank.entity.Pasaport;
 
+import com.genebank.genedatabank.entity.SysFile;
 import com.genebank.genedatabank.view.main.MainView;
 
 import com.google.gson.Gson;
@@ -13,12 +14,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.details.Details;
+import com.vaadin.flow.component.grid.ItemClickEvent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.StreamResource;
+import io.jmix.core.FileRef;
+import io.jmix.core.FileStorage;
 import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.checkbox.JmixCheckbox;
+import io.jmix.flowui.component.image.JmixImage;
 import io.jmix.flowui.model.DataContext;
 import io.jmix.flowui.view.*;
 import org.slf4j.Logger;
@@ -52,13 +58,17 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private Notifications notifications;
     @Autowired
     private MessageBundle messageBundle;
+    @Autowired
+    private FileStorage fileStorage;
     @ViewComponent
     private VerticalLayout mapContainer;
     @ViewComponent
     private JmixCheckbox checkboxMap;
     @ViewComponent
     private JmixCheckbox checkboxElevation;
-    
+    @ViewComponent
+    private JmixImage<FileRef> imageProbe;
+
     // For leaflet with OpenStreetMapMap from https://github.com/xdev-software/vaadin-maps-leaflet-flow
     private LMap map;
     private GoogleMap gmaps;
@@ -86,6 +96,11 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
                         .withDuration(5000).show();
             }
         }
+    }
+
+    @Subscribe
+    public void onBeforeShow(final BeforeShowEvent event) {
+        imageProbe.setVisible(false);
     }
 
     @Subscribe("checkboxMap")
@@ -268,5 +283,17 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
             mapContainer.setVisible(false);
             mapContainer.setEnabled(false);
         }
+    }
+
+    @Subscribe("probeImagesDataGrid")
+    public void onProbeImagesDataGridItemClick(final ItemClickEvent<SysFile> event) {
+        FileRef fileRef = event.getItem().getFile();
+        if (fileRef != null) {
+            StreamResource streamResource = new StreamResource(fileRef.getFileName(),
+                    () -> fileStorage.openStream(fileRef));
+            imageProbe.setVisible(true);
+            imageProbe.setSrc(streamResource);
+        }
+        else imageProbe.setVisible(false);
     }
 }
