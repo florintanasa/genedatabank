@@ -95,9 +95,10 @@ public class SysFile {
     @Lob
     @Column(name = "FILE_", nullable = false)
     private FileRef file;
+
     @JoinTable(name = "PASAPORT_SYS_FILE_LINK",
-            joinColumns = @JoinColumn(name = "SYS_FILE_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID"))
+            joinColumns = @JoinColumn(name = "SYS_FILE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private Set<Pasaport> pasaports_sysfile;
 
