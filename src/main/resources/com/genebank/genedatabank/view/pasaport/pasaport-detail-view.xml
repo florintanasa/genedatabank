@@ -234,18 +234,10 @@
                                             <action id="exclude" type="list_exclude"/>
                                         </actions>
                                         <columns>
-                                            <column property="version"/>
-                                            <column property="createdBy"/>
-                                            <column property="createdDate"/>
-                                            <column property="lastModifiedBy"/>
-                                            <column property="lastModifiedDate"/>
-                                            <column property="deletedBy"/>
-                                            <column property="deletedDate"/>
                                             <column property="name"/>
                                             <column property="extension"/>
                                             <column property="size"/>
                                             <column property="createDate"/>
-                                            <column property="file"/>
                                         </columns>
                                     </dataGrid>
                                 </vbox>

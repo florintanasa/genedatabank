@@ -22,7 +22,11 @@
             <textField id="extensionField" property="extension"/>
             <textField id="sizeField" property="size"/>
             <datePicker id="createDateField" property="createDate"/>
-            <fileStorageUploadField id="fileField" property="file"/>
+            <fileStorageUploadField id="fileField"
+                                    property="file"
+                                    clearButtonVisible="true"
+                                    fileNameVisible="false"
+                                    fileStoragePutMode="MANUAL"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
