@@ -227,6 +227,7 @@
                                     <hbox id="buttonsPanel4" classNames="buttons-panel">
                                         <button action="probeImagesDataGrid.add"/>
                                         <button action="probeImagesDataGrid.exclude"/>
+                                        <button id="downloadBtn" icon="DOWNLOAD"/>
                                     </hbox>
                                     <dataGrid id="probeImagesDataGrid" dataContainer="probeImagesDc" width="100%">
                                         <actions>

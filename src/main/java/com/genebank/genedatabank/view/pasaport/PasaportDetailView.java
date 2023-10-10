@@ -24,7 +24,10 @@ import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.checkbox.JmixCheckbox;
+import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.image.JmixImage;
+import io.jmix.flowui.download.Downloader;
+import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.DataContext;
 import io.jmix.flowui.view.*;
 import org.slf4j.Logger;
@@ -53,6 +56,8 @@ import java.nio.charset.StandardCharsets;
 @EditedEntityContainer("pasaportDc")
 public class PasaportDetailView extends StandardDetailView<Pasaport> {
     @Autowired
+    private Downloader downloader;
+    @Autowired
     private Sequences sequences;
     @Autowired
     private Notifications notifications;
@@ -68,7 +73,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private JmixCheckbox checkboxElevation;
     @ViewComponent
     private JmixImage<FileRef> imageProbe;
-
+    @ViewComponent
+    private DataGrid<SysFile> probeImagesDataGrid;
     // For leaflet with OpenStreetMapMap from https://github.com/xdev-software/vaadin-maps-leaflet-flow
     private LMap map;
     private GoogleMap gmaps;
@@ -295,5 +301,11 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
             imageProbe.setSrc(streamResource);
         }
         else imageProbe.setVisible(false);
+    }
+
+    @Subscribe("downloadBtn")
+    public void onDownloadBtnClick(final ClickEvent<JmixButton> event) {
+        FileRef fileRef = probeImagesDataGrid.getItems().getSelectedItem().getFile();
+        downloader.download(fileRef);
     }
 }
