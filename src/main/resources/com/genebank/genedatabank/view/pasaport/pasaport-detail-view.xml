@@ -226,6 +226,7 @@
                                 <vbox width="100%" height="100%">
                                     <hbox id="buttonsPanel4" classNames="buttons-panel">
                                         <button action="probeImagesDataGrid.add"/>
+                                        <button action="probeImagesDataGrid.edit"/>
                                         <button action="probeImagesDataGrid.exclude"/>
                                         <button id="downloadBtn" icon="DOWNLOAD"/>
                                     </hbox>
@@ -233,6 +234,7 @@
                                         <actions>
                                             <action id="add" type="list_add"/>
                                             <action id="exclude" type="list_exclude"/>
+                                            <action id="edit" type="list_edit"/>
                                         </actions>
                                         <columns>
                                             <column property="name"/>

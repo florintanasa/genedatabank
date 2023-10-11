@@ -75,6 +75,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private JmixImage<FileRef> imageProbe;
     @ViewComponent
     private DataGrid<SysFile> probeImagesDataGrid;
+    @ViewComponent
+    private JmixButton downloadBtn;
     // For leaflet with OpenStreetMapMap from https://github.com/xdev-software/vaadin-maps-leaflet-flow
     private LMap map;
     private GoogleMap gmaps;
@@ -107,6 +109,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
         imageProbe.setVisible(false);
+        downloadBtn.setEnabled(false);
     }
 
     @Subscribe("checkboxMap")
@@ -299,8 +302,12 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
                     () -> fileStorage.openStream(fileRef));
             imageProbe.setVisible(true);
             imageProbe.setSrc(streamResource);
+            downloadBtn.setEnabled(true);
         }
-        else imageProbe.setVisible(false);
+        else {
+            imageProbe.setVisible(false);
+            downloadBtn.setEnabled(false);
+        }
     }
 
     @Subscribe("downloadBtn")
