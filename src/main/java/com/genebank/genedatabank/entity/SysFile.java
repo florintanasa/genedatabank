@@ -92,8 +92,7 @@ public class SysFile {
     private Date createDate;
 
     @NotNull
-    @Lob
-    @Column(name = "FILE_", nullable = false)
+    @Column(name = "FILE_", nullable = false, length = 1024)
     private FileRef file;
 
     @JoinTable(name = "PASAPORT_SYS_FILE_LINK",
