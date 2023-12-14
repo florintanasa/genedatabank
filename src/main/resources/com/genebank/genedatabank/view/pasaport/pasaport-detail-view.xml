@@ -222,8 +222,8 @@
                     </tab>
                     <tab id="probeImages" label="msg://probeImages.label">
                         <vbox id="contentHbox" width="100%" height="100%">
-                            <hbox height="100%" width="100%">
-                                <vbox width="100%" height="100%">
+                            <hbox height="100%0%" width="100%">
+                                <vbox width="100%" height="100%" classNames="bordered-panel">
                                     <hbox id="buttonsPanel4" classNames="buttons-panel">
                                         <button action="probeImagesDataGrid.add"/>
                                         <button action="probeImagesDataGrid.edit"/>
@@ -244,10 +244,12 @@
                                         </columns>
                                     </dataGrid>
                                 </vbox>
-                                <hbox id="probeImageWrapperLayout"
+                                <vbox id="probeImageWrapperLayout"
                                       width="100%" height="100%">
-                                    <image id="imageProbe" dataContainer="probeImagesDc" property="file"/>
-                                </hbox>
+                                    <image id="imageProbe" dataContainer="probeImagesDc"
+                                           property="file" maxWidth="85%" maxHeight="85%"
+                                           themeNames="scale-down" text="Preview"/>
+                                </vbox>
                             </hbox>
                         </vbox>
                     </tab>
