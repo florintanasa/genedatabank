@@ -30,23 +30,22 @@
             <textField id="cropnameField" property="cropname"/>
             <textField id="refferenceField" property="refference"/>
         </formLayout>
-        <hbox id="buttonsPanel" classNames="buttons-panel">
-            <button action="id_culturecategDataGrid.create"/>
-            <button action="id_culturecategDataGrid.remove"/>
-        </hbox>
-        <dataGrid id="id_culturecategDataGrid" dataContainer="id_culturecategDc" width="100%" minHeight="20em">
-            <actions>
-                <action id="create" type="list_create">
-                    <properties>
-                        <property name="openMode" value="DIALOG"/>
-                    </properties>
-                </action>
-                <action id="remove" type="list_remove"/>
-            </actions>
-            <columns>
-                <column property="name"/>
-            </columns>
-        </dataGrid>
+        <details id="id_culturecategDetails" summaryText="msg://id_culturecategDetails.summaryText" height="100%"
+                 width="100%">
+            <hbox id="buttonsPanel" classNames="buttons-panel">
+                <button action="id_culturecategDataGrid.add"/>
+                <button action="id_culturecategDataGrid.exclude"/>
+            </hbox>
+            <dataGrid id="id_culturecategDataGrid" dataContainer="id_culturecategDc" width="100%" minHeight="20em">
+                <actions>
+                    <action id="add" type="list_add"/>
+                    <action id="exclude" type="list_exclude"/>
+                </actions>
+                <columns>
+                    <column property="name"/>
+                </columns>
+            </dataGrid>
+        </details>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
