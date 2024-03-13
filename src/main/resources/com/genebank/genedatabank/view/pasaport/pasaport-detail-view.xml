@@ -213,7 +213,7 @@
                 <tabSheet id="extendetInformationTabs" width="100%" height="100%">
                     <tab id="descriptionTab" label="msg://descriptionTab.label">
                         <hbox id="contentTextArea" width="100%" height="100%">
-                            <textArea id="commentsField"
+                            <richTextEditor id="commentsField"
                                       height="100%"
                                       width="100%"
                                       dataContainer="pasaportDc"
