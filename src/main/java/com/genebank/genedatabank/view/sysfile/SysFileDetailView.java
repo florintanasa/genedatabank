@@ -31,7 +31,7 @@ import java.util.UUID;
 public class SysFileDetailView extends StandardDetailView<SysFile> {
     @ViewComponent
     private FileStorageUploadField fileField;
-    @Autowired
+    @ViewComponent
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;

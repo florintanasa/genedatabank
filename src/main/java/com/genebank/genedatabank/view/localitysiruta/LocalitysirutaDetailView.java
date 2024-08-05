@@ -38,7 +38,7 @@ import java.nio.charset.StandardCharsets;
 @ViewDescriptor("localitysiruta-detail-view.xml")
 @EditedEntityContainer("localitysirutaDc")
 public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
-    @Autowired
+    @ViewComponent
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;

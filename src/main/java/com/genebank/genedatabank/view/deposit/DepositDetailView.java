@@ -46,7 +46,7 @@ import java.util.UUID;
 @ViewDescriptor("deposit-detail-view.xml")
 @EditedEntityContainer("depositDc")
 public class DepositDetailView extends StandardDetailView<Deposit> {
-    @Autowired
+    @ViewComponent
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;

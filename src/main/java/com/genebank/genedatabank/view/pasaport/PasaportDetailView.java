@@ -61,7 +61,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private Sequences sequences;
     @Autowired
     private Notifications notifications;
-    @Autowired
+    @ViewComponent
     private MessageBundle messageBundle;
     @Autowired
     private FileStorage fileStorage;
