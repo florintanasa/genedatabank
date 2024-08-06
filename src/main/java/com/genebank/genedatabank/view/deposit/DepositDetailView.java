@@ -86,8 +86,11 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         String dateTimeNow = dateTimeFormat.format(now);
 
         //the date necessary to input in QR code
-        String data = getEditedEntity().getId_accenumb().getAccenumb() + "-" + getEditedEntity().getYearstorage() + "-"
-                + getEditedEntity().getDeposit_code() + "-" + dateTimeNow;
+        String data = getEditedEntity().getId_accenumb().getAccenumb() + "-"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() +"-"
+                + getEditedEntity().getYearstorage() + "-"
+                + getEditedEntity().getDeposit_code() + "-"
+                + dateTimeNow;
 
         //I check if the folder qrCodeImage exist in current users, if not exist I created this directory
         String currentUserHomeDir = System.getProperty("user.home");
@@ -99,7 +102,9 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
         //I set the file name for qrCodeImage
         String fileName = getEditedEntity().getId_accenumb().getAccenumb() + "-"
-                + getEditedEntity().getDeposit_code() + "-" + getEditedEntity().getYearstorage();
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() +"-"
+                + getEditedEntity().getDeposit_code() + "-"
+                + getEditedEntity().getYearstorage();
         String qrCodeImageFile = qrCodeImageFolder + File.separator + fileName + "-" + currentDateToday + ".jpg";
 
         //encode the data in format QR_CODE with width 500 and height 500

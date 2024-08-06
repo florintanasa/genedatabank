@@ -51,6 +51,7 @@
             </actions>
             <columns>
                 <column property="id_accenumb"/>
+                <column property="id_accenumb.id_taxonomy.species" />
                 <column property="deposit_code"/>
                 <column property="id_storage"/>
                 <column property="yearstorage"/>
