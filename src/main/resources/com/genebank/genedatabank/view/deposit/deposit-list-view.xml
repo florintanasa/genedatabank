@@ -37,6 +37,7 @@
             <button id="createBtn" action="depositsDataGrid.create"/>
             <button id="editBtn" action="depositsDataGrid.edit"/>
             <button id="removeBtn" action="depositsDataGrid.remove"/>
+            <button id="printBtn" action="depositsDataGrid.reportPrint" />
             <simplePagination id="pagination" dataLoader="depositsDl"/>
         </hbox>
         <dataGrid id="depositsDataGrid"
@@ -48,6 +49,7 @@
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
                 <action id="remove" type="list_remove"/>
+                <action id="reportPrint" type="report_runListEntityReport" text="Print" />
             </actions>
             <columns>
                 <column property="id_accenumb"/>
