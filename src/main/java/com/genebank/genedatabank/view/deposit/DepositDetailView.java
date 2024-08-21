@@ -14,6 +14,7 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.upload.Receiver;
 import com.vaadin.flow.router.Route;
+import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.image.JmixImage;
@@ -64,12 +65,20 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private JmixButton downloadImageqrcodeBtn;
     @ViewComponent
     private JmixButton generateqrcodeBtn;
+    @Autowired
+    private DataManager dataManager;
 
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         displayImage();
         updateImageButtons(getEditedEntity().getQrcode() != null);
+        // If Deposit code is null load the last code inserted, to know what was the last
+        if (getEditedEntity().getDeposit_code() == null) {
+            getEditedEntity().setDeposit_code(dataManager
+                    .loadValue("select d.deposit_code from Deposit d order by d.createdDate desc",
+                            String.class).one());
+        }
     }
 
     @Subscribe("generateqrcodeBtn")
