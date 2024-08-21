@@ -2,6 +2,7 @@ package com.genebank.genedatabank.view.deposit;
 
 import com.genebank.genedatabank.entity.Deposit;
 
+import com.genebank.genedatabank.entity.Storage;
 import com.genebank.genedatabank.view.main.MainView;
 
 import com.google.zxing.BarcodeFormat;
@@ -9,6 +10,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
@@ -21,6 +23,7 @@ import io.jmix.flowui.component.image.JmixImage;
 import io.jmix.flowui.component.upload.FileStorageUploadField;
 import io.jmix.flowui.component.upload.FileUploadField;
 import io.jmix.flowui.component.upload.receiver.FileTemporaryStorageBuffer;
+import io.jmix.flowui.component.valuepicker.EntityPicker;
 import io.jmix.flowui.download.DownloadFormat;
 import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.component.button.JmixButton;
@@ -47,6 +50,7 @@ import java.util.UUID;
 @ViewDescriptor("deposit-detail-view.xml")
 @EditedEntityContainer("depositDc")
 public class DepositDetailView extends StandardDetailView<Deposit> {
+
     @ViewComponent
     private MessageBundle messageBundle;
     @Autowired
@@ -74,10 +78,27 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         displayImage();
         updateImageButtons(getEditedEntity().getQrcode() != null);
         // If Deposit code is null load the last code inserted, to know what was the last
+        //if (getEditedEntity().getDeposit_code() == null) {
+        //    getEditedEntity().setDeposit_code(dataManager
+        //            .loadValue("select d.deposit_code from Deposit d order by d.createdDate desc",
+        //                    String.class).one());
+        //}
+    }
+    @Subscribe("id_storageField")
+    public void onId_storageFieldComponentValueChange(final AbstractField.ComponentValueChangeEvent<EntityPicker<Storage>, Storage> event) {
+        // If Deposit code is null load the last code inserted for specific Storage
         if (getEditedEntity().getDeposit_code() == null) {
-            getEditedEntity().setDeposit_code(dataManager
-                    .loadValue("select d.deposit_code from Deposit d order by d.createdDate desc",
-                            String.class).one());
+            String lastCode = dataManager
+                    .loadValue("select d.deposit_code from Deposit d where d.id_storage=:id_storageFields order by d.createdDate desc",
+                            String.class).parameter("id_storageFields",
+                            getEditedEntity().getId_storage())
+                    .one();
+
+            if ((lastCode != null) && !lastCode.isEmpty()) {
+                getEditedEntity().setDeposit_code(lastCode);
+            }
+            else getEditedEntity().setDeposit_code("NA");
+
         }
     }
 
