@@ -18,6 +18,7 @@ import com.vaadin.flow.component.upload.Receiver;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
+import io.jmix.core.entity.KeyValueEntity;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.image.JmixImage;
 import io.jmix.flowui.component.upload.FileStorageUploadField;
@@ -38,6 +39,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -88,17 +90,22 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     public void onId_storageFieldComponentValueChange(final AbstractField.ComponentValueChangeEvent<EntityPicker<Storage>, Storage> event) {
         // If Deposit code is null load the last code inserted for specific Storage
         if (getEditedEntity().getDeposit_code() == null) {
-            String lastCode = dataManager
-                    .loadValue("select d.deposit_code from Deposit d where d.id_storage=:id_storageFields order by d.createdDate desc",
-                            String.class).parameter("id_storageFields",
-                            getEditedEntity().getId_storage())
-                    .one();
+            /* Next lines work for scalar only
+               String lastCode = dataManager
+                       .loadValue("select d.deposit_code from Deposit d where d.id_storage=:id_storageFields order by d.createdDate desc",
+                               String.class).parameter("id_storageFields",getEditedEntity().getId_storage())
+                       .one();
+             */
+            List<KeyValueEntity> lastCodes = dataManager
+                    .loadValues("select d.deposit_code from Deposit d where d.id_storage=:id_storage_id order by d.createdDate desc")
+                    .parameter("id_storage_id", getEditedEntity().getId_storage())
+                    .maxResults(1)
+                    .list();
 
-            if ((lastCode != null) && !lastCode.isEmpty()) {
-                getEditedEntity().setDeposit_code(lastCode);
+            if (!lastCodes.isEmpty()) {
+                getEditedEntity().setDeposit_code(lastCodes.toString());
             }
             else getEditedEntity().setDeposit_code("NA");
-
         }
     }
 
