@@ -79,13 +79,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     public void onBeforeShow(BeforeShowEvent event) {
         displayImage();
         updateImageButtons(getEditedEntity().getQrcode() != null);
-        // If Deposit code is null load the last code inserted, to know what was the last
-        //if (getEditedEntity().getDeposit_code() == null) {
-        //    getEditedEntity().setDeposit_code(dataManager
-        //            .loadValue("select d.deposit_code from Deposit d order by d.createdDate desc",
-        //                    String.class).one());
-        //}
     }
+
     @Subscribe("id_storageField")
     public void onId_storageFieldComponentValueChange(final AbstractField.ComponentValueChangeEvent<EntityPicker<Storage>, Storage> event) {
         // If Deposit code is null load the last code inserted for specific Storage
@@ -96,14 +91,16 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
                                String.class).parameter("id_storageFields",getEditedEntity().getId_storage())
                        .one();
              */
-            List<KeyValueEntity> lastCodes = dataManager
+            List<KeyValueEntity> lastCode = dataManager
                     .loadValues("select d.deposit_code from Deposit d where d.id_storage=:id_storage_id order by d.createdDate desc")
                     .parameter("id_storage_id", getEditedEntity().getId_storage())
+                    .store("main")
+                    .properties("deposit_code")
                     .maxResults(1)
                     .list();
 
-            if (!lastCodes.isEmpty()) {
-                getEditedEntity().setDeposit_code(lastCodes.toString());
+            if (!lastCode.isEmpty()) {
+                getEditedEntity().setDeposit_code(lastCode.get(0).getValue("deposit_code"));
             }
             else getEditedEntity().setDeposit_code("NA");
         }
@@ -124,7 +121,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
         //the date necessary to input in QR code
         String data = getEditedEntity().getId_accenumb().getAccenumb() + "-"
-                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() +"-"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "-"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "-"
                 + getEditedEntity().getYearstorage() + "-"
                 + getEditedEntity().getDeposit_code() + "-"
                 + dateTimeNow;
@@ -139,7 +137,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
         //I set the file name for qrCodeImage
         String fileName = getEditedEntity().getId_accenumb().getAccenumb() + "-"
-                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() +"-"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "-"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "-"
                 + getEditedEntity().getDeposit_code() + "-"
                 + getEditedEntity().getYearstorage();
         String qrCodeImageFile = qrCodeImageFolder + File.separator + fileName + "-" + currentDateToday + ".jpg";
