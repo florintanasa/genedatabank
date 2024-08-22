@@ -121,10 +121,10 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
         //the date necessary to input in QR code
         String data = getEditedEntity().getId_accenumb().getAccenumb() + "-"
+                + getEditedEntity().getDeposit_code() + "-"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "-"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "-"
                 + getEditedEntity().getYearstorage() + "-"
-                + getEditedEntity().getDeposit_code() + "-"
                 + dateTimeNow;
 
         //I check if the folder qrCodeImage exist in current users, if not exist I created this directory
@@ -137,9 +137,9 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
         //I set the file name for qrCodeImage
         String fileName = getEditedEntity().getId_accenumb().getAccenumb() + "-"
+                + getEditedEntity().getDeposit_code() + "-"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "-"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "-"
-                + getEditedEntity().getDeposit_code() + "-"
                 + getEditedEntity().getYearstorage();
         String qrCodeImageFile = qrCodeImageFolder + File.separator + fileName + "-" + currentDateToday + ".jpg";
 
