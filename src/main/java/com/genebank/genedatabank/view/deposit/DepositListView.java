@@ -1,17 +1,12 @@
 package com.genebank.genedatabank.view.deposit;
-
 import com.genebank.genedatabank.entity.Deposit;
-
 import com.genebank.genedatabank.view.main.MainView;
-
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.StreamRegistration;
 import com.vaadin.flow.server.StreamResource;
-import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.core.FileStorage;
 import io.jmix.flowui.UiComponents;
@@ -19,17 +14,10 @@ import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.view.*;
-import io.jmix.reports.ReportImportExport;
-import io.jmix.reports.entity.Report;
-import io.jmix.reports.entity.ReportOutputType;
 import io.jmix.reports.runner.ReportRunner;
 import io.jmix.reports.yarg.reporting.ReportOutputDocument;
-import io.jmix.reportsflowui.runner.UiReportRunContext;
-import io.jmix.reportsflowui.runner.UiReportRunner;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.vaadin.flow.component.html.IFrame;
 
-import java.io.ByteArrayInputStream;
 
 
 /**
@@ -44,8 +32,6 @@ import java.io.ByteArrayInputStream;
 public class DepositListView extends StandardListView<Deposit> {
     @ViewComponent
     private DataGrid<Deposit> depositsDataGrid;
-    @ViewComponent
-    private JmixButton printBtn75x35;
     @Autowired
     private UiComponents uiComponents;
     @Autowired
@@ -53,20 +39,7 @@ public class DepositListView extends StandardListView<Deposit> {
     @Autowired
     private ReportRunner reportRunner;
     @Autowired
-    private DataManager dataManager;
-    @Autowired
     private Downloader downloader;
-    @Autowired
-    private UiReportRunner uiReportRunner;
-    @Autowired
-    private ReportImportExport  reportImportExport;
-
-    private Report getReportByCode(String code){
-        return dataManager.load(Report.class)
-                .query("select r from report_Report r where r.code = :code1")
-                .parameter("code1", code)
-                .one();
-    }
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -103,18 +76,12 @@ public class DepositListView extends StandardListView<Deposit> {
 
     @Subscribe("printBtn75x35")
     public void onPrintBtn75x35(ClickEvent<JmixButton> event) {
-        ReportOutputDocument label = reportRunner.byReportCode("Label_750_350_V1")
+        ReportOutputDocument label = reportRunner.byReportCode("Labels")
                 .addParam("entity", depositsDataGrid.getSelectedItems().iterator().next())
-                .withTemplateCode("750_350_V1")
-                .withOutputType(ReportOutputType.PDF)
-          //      .withOutputNamePattern("Label")
+                .withTemplateCode("750x350_V1")
+                //.withOutputType(ReportOutputType.PDF)
                 .run();
-        //ByteArrayInputStream documentBytes = new ByteArrayInputStream(label.getContent());
-        downloader.download(label.getContent(), "Label");
-        //byte[] content = label.getContent();
-
-        //Report report = getReportByCode("Label_750_350_V1");
-        //uiReportRunner.runAndShow(new UiReportRunContext(report));
+        downloader.download(label.getContent(), label.getDocumentName());
 
     }
 
