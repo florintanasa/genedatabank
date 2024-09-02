@@ -38,6 +38,7 @@
             <button id="editBtn" action="depositsDataGrid.edit"/>
             <button id="removeBtn" action="depositsDataGrid.remove"/>
             <button id="printBtn" action="depositsDataGrid.reportPrint" />
+            <button id="printBtn75x35" text="Print 75x35" title="Printare eticheta 75x35mm" icon="PRINT"/>
             <simplePagination id="pagination" dataLoader="depositsDl"/>
         </hbox>
         <dataGrid id="depositsDataGrid"
