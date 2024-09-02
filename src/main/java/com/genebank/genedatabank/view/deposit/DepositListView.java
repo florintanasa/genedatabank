@@ -1,4 +1,5 @@
 package com.genebank.genedatabank.view.deposit;
+
 import com.genebank.genedatabank.entity.Deposit;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
