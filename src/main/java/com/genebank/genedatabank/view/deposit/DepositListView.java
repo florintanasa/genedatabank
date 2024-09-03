@@ -15,6 +15,7 @@ import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.view.*;
+import io.jmix.reports.entity.ReportOutputType;
 import io.jmix.reports.runner.ReportRunner;
 import io.jmix.reports.yarg.reporting.ReportOutputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,18 @@ public class DepositListView extends StandardListView<Deposit> {
         ReportOutputDocument label = reportRunner.byReportCode("Labels")
                 .addParam("entity", depositsDataGrid.getSelectedItems().iterator().next())
                 .withTemplateCode("750x350_V1")
-                //.withOutputType(ReportOutputType.PDF)
+                .withOutputType(ReportOutputType.PDF)
+                .run();
+        downloader.download(label.getContent(), label.getDocumentName());
+
+    }
+
+    @Subscribe("printBtn76x50")
+    public void onPrintBtn76x50(ClickEvent<JmixButton> event) {
+        ReportOutputDocument label = reportRunner.byReportCode("Labels")
+                .addParam("entity", depositsDataGrid.getSelectedItems().iterator().next())
+                .withTemplateCode("762x508_V5")
+                .withOutputType(ReportOutputType.PDF)
                 .run();
         downloader.download(label.getContent(), label.getDocumentName());
 
