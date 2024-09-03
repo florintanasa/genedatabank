@@ -1,5 +1,5 @@
 plugins {
-    id 'io.jmix' version '2.3.2'
+    id 'io.jmix' version '2.3.3'
     id 'java'
     id 'war'
 }
@@ -8,11 +8,11 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'com.vaadin'
 
 jmix {
-    bomVersion = '2.3.2'
+    bomVersion = '2.3.3'
 }
 
 group = 'com.genebank'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 repositories {
     mavenCentral()
