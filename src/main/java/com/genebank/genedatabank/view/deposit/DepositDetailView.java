@@ -122,8 +122,20 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         //the date necessary to be added in QR code
         String data = getEditedEntity().getId_accenumb().getAccenumb() + "|"
                 + getEditedEntity().getDeposit_code() + "|"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getFamily() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "|"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpauthor() + "|"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa() + "|"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSubauthor() + "|"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSyn_taxono() + "|"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getCropnume() + "|"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getCropname() + "|"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getId_culturecateg().iterator().next().getName() + "|"
+                + getEditedEntity().getId_accenumb().getId_country().getName() + "|"
+                + getEditedEntity().getId_accenumb().getId_countysiruta().getName() + "|"
+                + getEditedEntity().getId_accenumb().getId_localitysiruta().getName() + "|"
+                + getEditedEntity().getId_accenumb().getId_donorcode().getInstcode() + "|"
                 + getEditedEntity().getYearstorage() + "|"
                 + dateTimeNow;
 
