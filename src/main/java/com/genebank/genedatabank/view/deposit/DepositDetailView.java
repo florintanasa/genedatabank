@@ -119,6 +119,19 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         LocalDateTime now = LocalDateTime.now();
         String dateTimeNow = dateTimeFormat.format(now);
 
+        String County;
+        String Locality;
+
+        if (getEditedEntity().getId_accenumb().getId_countysiruta() == null ) {
+            County = "NA";
+        }
+        else County = getEditedEntity().getId_accenumb().getId_countysiruta().getName();
+
+        if (getEditedEntity().getId_accenumb().getId_localitysiruta() == null ) {
+            Locality = "NA";
+        }
+        else Locality = getEditedEntity().getId_accenumb().getId_localitysiruta().getName();
+
         //the date necessary to be added in QR code
         String data = getEditedEntity().getId_accenumb().getAccenumb() + "|"
                 + getEditedEntity().getDeposit_code() + "|"
@@ -134,8 +147,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 //                + getEditedEntity().getId_accenumb().getId_taxonomy().getId_culturecateg().iterator().next().getName() + "|"
                 + getEditedEntity().getId_accenumb().getAccname() + "|"
                 + getEditedEntity().getId_accenumb().getId_country().getName() + "|"
-                + getEditedEntity().getId_accenumb().getId_countysiruta().getName() + "|"
-                + getEditedEntity().getId_accenumb().getId_localitysiruta().getName() + "|"
+                + County + "|"
+                + Locality + "|"
 //                + getEditedEntity().getId_accenumb().getId_donorcode().getInstcode() + "|"
 //                + getEditedEntity().getYearstorage() + "|"
                 + getEditedEntity().getId_accenumb().getId_sampstat().getCodespe() + "|"
