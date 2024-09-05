@@ -1,0 +1,31 @@
+[Unit]
+Description=GeneDataBank java server application
+# depend by network and postgres
+Wants=network-online.target postgresql.service
+# start after network  and postgres service start
+After=network-online.target postgresql.service
+
+[Service]
+# run as user genedatabank (need to exist before)
+User=genedatabank
+# from group genedatabank (need to exist before)
+Group=genedatabank
+# restart always
+Restart=always
+# activation state
+Type=simple
+# working directory for user (in this case the home is /opt/genedatabank)
+WorkingDirectory=/opt/genedatabank/
+# execute command to start the application
+ExecStart=/usr/lib/jvm/java-17-openjdk-amd64/bin/java \
+    -jar /opt/genedatabank/genedatabank.jar \
+    --server.port=8090
+# send stdout to syslog
+StandardOutput=syslog
+# send stderr to syslog
+StandardError=syslog
+# identifier for syslog
+SyslogIdentifier=genedatabank
+
+[Install]
+WantedBy=multi-user.target
