@@ -47,13 +47,13 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns>
-                <column property="instcode"/>
-                <column property="acronym"/>
-                <column property="full_name_ro"/>
-                <column property="full_name_en"/>
-                <column property="address"/>
-                <column property="url"/>
-                <column property="alpha3"/>
+                <column property="instcode" resizable="true"/>
+                <column property="acronym" resizable="true"/>
+                <column property="full_name_ro" resizable="true"/>
+                <column property="full_name_en" resizable="true"/>
+                <column property="address" resizable="true"/>
+                <column property="url" resizable="true"/>
+                <column property="alpha3" resizable="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

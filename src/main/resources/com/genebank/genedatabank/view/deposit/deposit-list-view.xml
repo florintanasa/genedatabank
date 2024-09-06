@@ -54,19 +54,19 @@
                 <action id="reportPrint" type="report_runListEntityReport" text="Print" />
             </actions>
             <columns>
-                <column property="id_accenumb"/>
-                <column property="id_accenumb.id_taxonomy.species" />
-                <column property="deposit_code"/>
-                <column property="id_storage"/>
-                <column property="yearstorage"/>
-                <column property="yearmulti"/>
-                <column property="multiply"/>
-                <column property="yeargerm"/>
-                <column property="percentage"/>
-                <column property="stock"/>
-                <column property="humidity"/>
-                <column property="mmb"/>
-                <column property="comments"/>
+                <column property="id_accenumb" resizable="true"/>
+                <column property="id_accenumb.id_taxonomy.species" resizable="true"/>
+                <column property="deposit_code" resizable="true"/>
+                <column property="id_storage" resizable="true"/>
+                <column property="yearstorage" resizable="true"/>
+                <column property="yearmulti" resizable="true"/>
+                <column property="multiply" resizable="true"/>
+                <column property="yeargerm" resizable="true"/>
+                <column property="percentage" resizable="true"/>
+                <column property="stock" resizable="true"/>
+                <column property="humidity" resizable="true"/>
+                <column property="mmb" resizable="true"/>
+                <column property="comments" resizable="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

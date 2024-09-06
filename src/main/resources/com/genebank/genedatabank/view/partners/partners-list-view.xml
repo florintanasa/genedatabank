@@ -56,24 +56,24 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns>
-                <column property="first_name"/>
-                <column property="family_name"/>
-                <column property="company_name"/>
-                <column property="id_country"/>
-                <column property="id_locality.id_countysiruta.id_zonesiruta.zonename"/>
-                <column property="id_locality.id_countysiruta.name"/>
-                <column property="id_locality"/>
-                <column property="id_locality.siruta"/>
-                <column property="id_roadtype"/>
-                <column property="id_street"/>
-                <column property="street_nb"/>
-                <column property="block"/>
-                <column property="stair"/>
-                <column property="floor"/>
-                <column property="apartment"/>
-                <column property="postal_code"/>
-                <column property="email"/>
-                <column property="phone"/>
+                <column property="first_name" resizable="true"/>
+                <column property="family_name" resizable="true"/>
+                <column property="company_name" resizable="true"/>
+                <column property="id_country" resizable="true"/>
+                <column property="id_locality.id_countysiruta.id_zonesiruta.zonename" resizable="true"/>
+                <column property="id_locality.id_countysiruta.name" resizable="true"/>
+                <column property="id_locality" resizable="true"/>
+                <column property="id_locality.siruta" resizable="true"/>
+                <column property="id_roadtype" resizable="true"/>
+                <column property="id_street" resizable="true"/>
+                <column property="street_nb" resizable="true"/>
+                <column property="block" resizable="true"/>
+                <column property="stair" resizable="true"/>
+                <column property="floor" resizable="true"/>
+                <column property="apartment" resizable="true"/>
+                <column property="postal_code" resizable="true"/>
+                <column property="email" resizable="true"/>
+                <column property="phone" resizable="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

@@ -47,10 +47,10 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns>
-                <column property="curator_name"/>
-                <column property="date_start"/>
-                <column property="date_stop"/>
-                <column property="active"/>
+                <column property="curator_name" resizable="true"/>
+                <column property="date_start" resizable="true"/>
+                <column property="date_stop" resizable="true"/>
+                <column property="active" resizable="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
