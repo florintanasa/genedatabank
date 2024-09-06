@@ -16,6 +16,22 @@
             </fetchPlan>
             <loader/>
         </instance>
+        <collection id="pasaportsDc" class="com.genebank.genedatabank.entity.Pasaport">
+            <loader id="pasaportsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Pasaport e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="storagesDc" class="com.genebank.genedatabank.entity.Storage">
+            <loader id="storagesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Storage e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -26,21 +42,24 @@
     </actions>
     <layout>
         <formLayout id="form" dataContainer="depositDc">
-            <entityPicker id="id_accenumbField" property="id_accenumb">
+            <entityComboBox id="pasaportsComboBox" itemsContainer="pasaportsDc" dataContainer="depositDc"
+                            property="id_accenumb">
                 <actions>
-                    <action id="entityLookup" type="entity_lookup"/>
-                    <action id="open" type="entity_open" />
                     <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
                 </actions>
-            </entityPicker>
+            </entityComboBox>
             <textField id="id_taxonomy_genusField" property="id_accenumb.id_taxonomy.genus" readOnly="true"/>
             <textField id="id_taxonomy_speciesField" property="id_accenumb.id_taxonomy.species" readOnly="true"/>
-            <entityPicker id="id_storageField" property="id_storage">
+            <entityComboBox id="id_storageField" itemsContainer="storagesDc" dataContainer="depositDc"
+                            property="id_storage">
                 <actions>
-                    <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
                 </actions>
-            </entityPicker>
+            </entityComboBox>
             <textField id="deposit_codeField" property="deposit_code"/>
             <textField id="yearstorageField" property="yearstorage"/>
             <textField id="yearmultiField" property="yearmulti"/>
