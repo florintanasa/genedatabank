@@ -20,7 +20,9 @@ import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.core.entity.KeyValueEntity;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.component.combobox.EntityComboBox;
 import io.jmix.flowui.component.image.JmixImage;
+import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.component.upload.FileStorageUploadField;
 import io.jmix.flowui.component.upload.FileUploadField;
 import io.jmix.flowui.component.upload.receiver.FileTemporaryStorageBuffer;
@@ -73,6 +75,10 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private JmixButton generateqrcodeBtn;
     @Autowired
     private DataManager dataManager;
+    @ViewComponent
+    private EntityComboBox<Storage> id_storageField;
+    @ViewComponent
+    private TypedTextField<String> deposit_codeField;
 
 
     @Subscribe
@@ -83,6 +89,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
     @Subscribe("id_storageField")
     public void onId_storageFieldComponentValueChange(final AbstractField.ComponentValueChangeEvent<EntityPicker<Storage>, Storage> event) {
+        // clear the field for Code Deposit
+        deposit_codeField.clear();
         // If Deposit code is null load the last code inserted for specific Storage
         if (getEditedEntity().getDeposit_code() == null) {
             /* Next lines work for scalar only
