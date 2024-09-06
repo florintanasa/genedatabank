@@ -32,6 +32,106 @@
             <collection id="id_duplsiteDc" property="id_duplsite"/>
             <collection id="probeImagesDc" property="probeImages"/>
         </instance>
+        <collection id="countysirutasDc" class="com.genebank.genedatabank.entity.Countysiruta">
+            <loader id="countysirutasDl" readOnly="true">
+                <query>
+                    <![CDATA[select c from Countysiruta c]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="localitysirutasDc" class="com.genebank.genedatabank.entity.Localitysiruta">
+            <loader id="localitysirutasDl" readOnly="true">
+                <query>
+                    <![CDATA[select l from Localitysiruta l
+                    where l.id_countysiruta = :container_countysirutasDc
+                    and l.siruta > 1000
+                    and l.sirutasup > 1000
+                    order by l.name asc]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="countriesDc" class="com.genebank.genedatabank.entity.Country">
+            <loader id="countriesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Country e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="georefmethsDc" class="com.genebank.genedatabank.entity.Georefmeth">
+            <loader id="georefmethsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Georefmeth e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="sampstatsDc" class="com.genebank.genedatabank.entity.Sampstat">
+            <loader id="sampstatsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Sampstat e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="collsrcsDc" class="com.genebank.genedatabank.entity.Collsrc">
+            <loader id="collsrcsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Collsrc e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="institutesDc" class="com.genebank.genedatabank.entity.Institute">
+            <loader id="institutesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Institute e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="acceconfsDc" class="com.genebank.genedatabank.entity.Acceconf">
+            <loader id="acceconfsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Acceconf e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="mlsstatsDc" class="com.genebank.genedatabank.entity.Mlsstat">
+            <loader id="mlsstatsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Mlsstat e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="aegisstatsDc" class="com.genebank.genedatabank.entity.Aegisstat">
+            <loader id="aegisstatsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Aegisstat e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="historicsDc" class="com.genebank.genedatabank.entity.Historic">
+            <loader id="historicsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Historic e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="taxonomiesDc" class="com.genebank.genedatabank.entity.Taxonomy">
+            <loader id="taxonomiesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Taxonomy e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -45,101 +145,127 @@
             <accordionPanel id="scrollBoxPanel" summaryText="msg://scrollBoxPanel.summaryText">
                 <scroller id="scrollBox">
                     <formLayout id="form" dataContainer="pasaportDc">
-                        <entityPicker id="id_instcodeField" property="id_instcode">
+                        <entityComboBox id="institutesComboBox_1" itemsContainer="institutesDc"
+                                        dataContainer="pasaportDc" property="id_instcode">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
+                        </entityComboBox>
                         <textField id="accenumbField" property="accenumb" visible="false"/>
                         <textField id="doiField" property="doi"/>
                         <textField id="collnumbField" property="collnumb"/>
                         <textField id="collmissidField" property="collmissid"/>
-                        <entityPicker id="id_taxonomyField" property="id_taxonomy">
+                        <entityComboBox id="taxonomiesComboBox" itemsContainer="taxonomiesDc" dataContainer="pasaportDc"
+                                        property="id_taxonomy">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
+                        </entityComboBox>
                         <textField id="accnameField" property="accname"/>
                         <textField id="acqdateField" property="acqdate"/>
                         <textField id="origdateField" property="origdate"/>
-                        <entityPicker id="id_countryField" property="id_country">
+                        <entityComboBox id="countriesComboBox" itemsContainer="countriesDc" dataContainer="pasaportDc"
+                                        property="id_country">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
-                        <entityPicker id="id_countysirutaField" property="id_countysiruta">
+                        </entityComboBox>
+                        <entityComboBox id="countysirutasComboBox" itemsContainer="countysirutasDc"
+                                        dataContainer="pasaportDc" property="id_countysiruta">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
-                        <entityPicker id="id_localitysirutaField" property="id_localitysiruta">
+                        </entityComboBox>
+                        <entityComboBox id="localitysirutasComboBox" itemsContainer="localitysirutasDc"
+                                        dataContainer="pasaportDc" property="id_localitysiruta">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
+                        </entityComboBox>
                         <textField id="latitudeField" property="latitude"/>
                         <textField id="longitudeField" property="longitude"/>
                         <textField id="elevationField" property="elevation"/>
-                        <entityPicker id="id_georefmethField" property="id_georefmeth">
+                        <entityComboBox id="georefmethsComboBox" itemsContainer="georefmethsDc"
+                                        dataContainer="pasaportDc" property="id_georefmeth">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
+                        </entityComboBox>
                         <textField id="colldateField" property="colldate"/>
-                        <entityPicker id="id_sampstatField" property="id_sampstat">
+                        <entityComboBox id="sampstatsComboBox" itemsContainer="sampstatsDc" dataContainer="pasaportDc"
+                                        property="id_sampstat">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
+                        </entityComboBox>
                         <textField id="ancestField" property="ancest"/>
-                        <entityPicker id="id_collsrcField" property="id_collsrc">
+                        <entityComboBox id="collsrcsComboBox" itemsContainer="collsrcsDc" dataContainer="pasaportDc"
+                                        property="id_collsrc">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
-                        <entityPicker id="id_donorcodeField" property="id_donorcode">
+                        </entityComboBox>
+                        <entityComboBox id="institutesComboBox" itemsContainer="institutesDc" dataContainer="pasaportDc"
+                                        property="id_donorcode">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
+                        </entityComboBox>
                         <textField id="donornumbField" property="donornumb"/>
                         <textField id="othernumbField" property="othernumb"/>
                         <textField id="tempnumbField" property="tempnumb"/>
                         <textField id="remarksField" property="remarks"/>
                         <textField id="acceurlField" property="acceurl"/>
-                        <entityPicker id="id_acceconfField" property="id_acceconf">
+                        <entityComboBox id="acceconfsComboBox" itemsContainer="acceconfsDc" dataContainer="pasaportDc"
+                                        property="id_acceconf">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
-                        <entityPicker id="id_mlsstatField" property="id_mlsstat">
+                        </entityComboBox>
+                        <entityComboBox id="mlsstatsComboBox" itemsContainer="mlsstatsDc" dataContainer="pasaportDc"
+                                        property="id_mlsstat">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
-                        <entityPicker id="id_aegisstatField" property="id_aegisstat">
+                        </entityComboBox>
+                        <entityComboBox id="aegisstatsComboBox" itemsContainer="aegisstatsDc" dataContainer="pasaportDc"
+                                        property="id_aegisstat">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
-                        <entityPicker id="id_historicField" property="id_historic">
+                        </entityComboBox>
+                        <entityComboBox id="historicsComboBox" itemsContainer="historicsDc" dataContainer="pasaportDc"
+                                        property="id_historic">
                             <actions>
-                                <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
                             </actions>
-                        </entityPicker>
+                        </entityComboBox>
                         <details id="id_collcodeDetails" summaryText="msg://id_collcodeDetails.summaryText">
                             <hbox id="buttonsPanel" classNames="buttons-panel">
                                 <button action="id_collcodeDataGrid.add"/>
