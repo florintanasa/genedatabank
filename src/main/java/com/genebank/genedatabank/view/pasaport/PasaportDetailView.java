@@ -4,6 +4,8 @@ import com.flowingcode.vaadin.addons.googlemaps.GoogleMap;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMapMarker;
 import com.flowingcode.vaadin.addons.googlemaps.LatLon;
 import com.flowingcode.vaadin.addons.googlemaps.Markers;
+import com.genebank.genedatabank.entity.Countysiruta;
+import com.genebank.genedatabank.entity.Localitysiruta;
 import com.genebank.genedatabank.entity.Pasaport;
 
 import com.genebank.genedatabank.entity.SysFile;
@@ -12,6 +14,7 @@ import com.genebank.genedatabank.view.main.MainView;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.grid.ItemClickEvent;
@@ -24,6 +27,7 @@ import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.checkbox.JmixCheckbox;
+import io.jmix.flowui.component.combobox.EntityComboBox;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.image.JmixImage;
 import io.jmix.flowui.download.Downloader;
@@ -77,6 +81,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private DataGrid<SysFile> probeImagesDataGrid;
     @ViewComponent
     private JmixButton downloadBtn;
+    @ViewComponent
+    private EntityComboBox<Localitysiruta> localitysirutasComboBox;
     // For leaflet with OpenStreetMapMap from https://github.com/xdev-software/vaadin-maps-leaflet-flow
     private LMap map;
     private GoogleMap gmaps;
@@ -314,5 +320,10 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     public void onDownloadBtnClick(final ClickEvent<JmixButton> event) {
         FileRef fileRef = probeImagesDataGrid.getItems().getSelectedItem().getFile();
         downloader.download(fileRef);
+    }
+
+    @Subscribe("countysirutasComboBox")
+    public void onCountysirutasComboBoxComponentValueChange(final AbstractField.ComponentValueChangeEvent<EntityComboBox<Countysiruta>, Countysiruta> event) {
+        localitysirutasComboBox.clear();
     }
 }
