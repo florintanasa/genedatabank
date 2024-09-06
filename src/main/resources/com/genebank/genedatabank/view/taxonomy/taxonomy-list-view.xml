@@ -40,23 +40,23 @@
                   width="100%"
                   minHeight="20em"
                   dataContainer="taxonomiesDc"
-                  selectionMode="MULTI">
+                  selectionMode="MULTI" multiSort="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns>
-                <column property="family"/>
-                <column property="genus"/>
-                <column property="species"/>
-                <column property="spauthor"/>
-                <column property="subtaxa"/>
-                <column property="subauthor"/>
-                <column property="syn_taxono"/>
-                <column property="cropnume"/>
-                <column property="cropname"/>
-                <column property="refference"/>
+                <column property="family" resizable="true"/>
+                <column property="genus" resizable="true" filterable="true"/>
+                <column property="species" resizable="true" filterable="true"/>
+                <column property="spauthor" resizable="true"/>
+                <column property="subtaxa" resizable="true" filterable="true"/>
+                <column property="subauthor" resizable="true"/>
+                <column property="syn_taxono" resizable="true"/>
+                <column property="cropnume" resizable="true" filterable="true"/>
+                <column property="cropname" resizable="true"/>
+                <column property="refference" resizable="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
