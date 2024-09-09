@@ -52,6 +52,7 @@
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="pasaportsDataGrid.create"/>
             <button id="editBtn" action="pasaportsDataGrid.edit"/>
+            <button id="copyeditBtn" action="pasaportsDataGrid.copyEdit"/>
             <button id="removeBtn" action="pasaportsDataGrid.remove"/>
             <simplePagination id="pagination" dataLoader="pasaportsDl"/>
         </hbox>
@@ -63,6 +64,7 @@
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
+                <action id="copyEdit" icon="EDIT" text="msg://copyedit" type="list_itemTracking"/>
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns>
