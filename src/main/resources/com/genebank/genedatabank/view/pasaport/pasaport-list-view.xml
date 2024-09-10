@@ -69,22 +69,22 @@
             </actions>
             <columns>
                 <column property="id_instcode" resizable="true"/>
-                <column property="accenumb" resizable="true" filterable="true"/>
-                <column property="doi" resizable="true"/>
+                <column property="accenumb" resizable="true" filterable="true" autoWidth="true"/>
+                <column property="doi" resizable="true" autoWidth="true"/>
                 <column property="collnumb" resizable="true"/>
                 <column property="collmissid" resizable="true"/>
                 <column property="id_taxonomy" resizable="true"/>
                 <column property="accname" resizable="true"/>
-                <column property="acqdate" resizable="true"/>
-                <column property="origdate" resizable="true"/>
+                <column property="acqdate" resizable="true" autoWidth="true"/>
+                <column property="origdate" resizable="true" autoWidth="true"/>
                 <column property="id_country" resizable="true"/>
                 <column property="id_countysiruta" resizable="true"/>
                 <column property="id_localitysiruta" resizable="true"/>
-                <column property="latitude" resizable="true"/>
-                <column property="longitude" resizable="true"/>
+                <column property="latitude" resizable="true" autoWidth="true"/>
+                <column property="longitude" resizable="true" autoWidth="true"/>
                 <column property="elevation" resizable="true"/>
                 <column property="id_georefmeth" resizable="true"/>
-                <column property="colldate" resizable="true"/>
+                <column property="colldate" resizable="true" autoWidth="true"/>
                 <column property="id_sampstat" resizable="true"/>
                 <column property="ancest" resizable="true"/>
                 <column property="id_collsrc" resizable="true"/>
@@ -95,10 +95,10 @@
                 <column property="remarks" resizable="true"/>
                 <column property="comments" resizable="true"/>
                 <column property="acceurl" resizable="true"/>
-                <column property="id_acceconf" resizable="true"/>
-                <column property="id_mlsstat" resizable="true"/>
-                <column property="id_aegisstat" resizable="true"/>
-                <column property="id_historic" resizable="true"/>
+                <column property="id_acceconf" resizable="true" autoWidth="true"/>
+                <column property="id_mlsstat" resizable="true" autoWidth="true"/>
+                <column property="id_aegisstat" resizable="true" autoWidth="true"/>
+                <column property="id_historic" resizable="true" autoWidth="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
