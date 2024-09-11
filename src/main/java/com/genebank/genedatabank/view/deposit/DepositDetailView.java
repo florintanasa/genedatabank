@@ -115,11 +115,24 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
             if (!lastCode.isEmpty()) {
                 //getEditedEntity().setDeposit_code(lastCode.get(0).getValue("deposit_code"));
+                // CR1A01a1
+                // CR1 - is the refrigerator chamber number 1
+                // A - is the cabinet from CR1 (can be A,B,C,D)
+                // 01 - is the row number or the rack from the cabinet A
+                // a - is the column number from the cabinet A (can be a,b,c,d,f,g,h,i,j)
+                // So finally CR1A01a is the label for the box from CR1
+                // 1 - represent the number for envelope from the box CR1A01a
+                // Get the last code deposit for storage selected, example CR1A01a1
                 LastDepositCode = lastCode.get(0).getValue("deposit_code");
+                // Calculate the length for last code deposit, example for CR1A01a1 is 8
                 int lengthDepositCode = LastDepositCode.length();
+                // Got the recipient number from the box, example for CR1A01a1 is 1
                 int lastRecipient = Integer.parseInt(LastDepositCode.substring(7, lengthDepositCode));
+                // Add 1 to the last recipient number, example for CR1A01a1 the result is 2
                 int newRecipient = lastRecipient + 1;
+                // Concatenate the new deposit code from the box CR1A01a and the new recipient number what is 2
                 NewDepositCode = LastDepositCode.substring(0, 7) + newRecipient;
+                // Complete the field Deposit code with the new deposit code, example CR1A01a2
                 getEditedEntity().setDeposit_code(NewDepositCode);
             }
             else getEditedEntity().setDeposit_code("NA");
