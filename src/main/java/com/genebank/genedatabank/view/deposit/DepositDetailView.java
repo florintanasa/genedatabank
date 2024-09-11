@@ -31,6 +31,7 @@ import io.jmix.flowui.download.DownloadFormat;
 import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.kit.component.upload.event.FileUploadSucceededEvent;
+import io.jmix.flowui.model.DataContext;
 import io.jmix.flowui.upload.TemporaryStorage;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,9 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -114,21 +117,52 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         }
     }
 
+    Map<String, String> getQrCodeImageFileMap() {
+        //I got the current date and time
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime currentDate = LocalDate.now().atStartOfDay();
+        String currentDateToday = dateFormat.format(currentDate);
+
+        String currentUserHomeDir = System.getProperty("user.home");
+        String qrCodeImageFolder = currentUserHomeDir + File.separator + "qrCodeImage";
+
+        //I set the file name for qrCodeImage
+        String fileName = getEditedEntity().getId_accenumb().getAccenumb() + "-"
+                + getEditedEntity().getDeposit_code() + "-"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "-"
+                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "-"
+                + getEditedEntity().getYearstorage();
+
+        String qrCodeImageFile = qrCodeImageFolder + File.separator + fileName + "-" + currentDateToday + ".jpg";
+
+        Map<String, String> qrCodeImageFiles = new HashMap<>();
+
+        qrCodeImageFiles.put("folder", qrCodeImageFolder);
+        qrCodeImageFiles.put("fileName", fileName);
+        qrCodeImageFiles.put("fileWithPath", qrCodeImageFile);
+
+        return qrCodeImageFiles;
+
+    }
+
     @Subscribe("generateqrcodeBtn")
     public void onGenerateQrCodeBtnClick(ClickEvent<Button> event) throws IOException, WriterException {
       generateQrCode();
     }
     public void generateQrCode() throws WriterException, IOException {
         //I got the current date and time
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDateTime currentDate = LocalDate.now().atStartOfDay();
-        String currentDateToday = dateFormat.format(currentDate);
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String dateTimeNow = dateTimeFormat.format(now);
 
+        String Country;
         String County;
         String Locality;
+
+        if (getEditedEntity().getId_accenumb().getId_country() == null) {
+            Country = "NA";
+        }
+        else Country = getEditedEntity().getId_accenumb().getId_country().getName();
 
         if (getEditedEntity().getId_accenumb().getId_countysiruta() == null ) {
             County = "NA";
@@ -143,46 +177,26 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         //the date necessary to be added in QR code
         String data = getEditedEntity().getId_accenumb().getAccenumb() + "|"
                 + getEditedEntity().getDeposit_code() + "|"
-//                + getEditedEntity().getId_accenumb().getId_taxonomy().getFamily() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "|"
-//                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpauthor() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa() + "|"
-//                + getEditedEntity().getId_accenumb().getId_taxonomy().getSubauthor() + "|"
-//                + getEditedEntity().getId_accenumb().getId_taxonomy().getSyn_taxono() + "|"
-//                + getEditedEntity().getId_accenumb().getId_taxonomy().getCropnume() + "|"
-//                + getEditedEntity().getId_accenumb().getId_taxonomy().getCropname() + "|"
-//                + getEditedEntity().getId_accenumb().getId_taxonomy().getId_culturecateg().iterator().next().getName() + "|"
                 + getEditedEntity().getId_accenumb().getAccname() + "|"
-                + getEditedEntity().getId_accenumb().getId_country().getName() + "|"
+                + Country + "|"
                 + County + "|"
                 + Locality + "|"
-//                + getEditedEntity().getId_accenumb().getId_donorcode().getInstcode() + "|"
-//                + getEditedEntity().getYearstorage() + "|"
                 + getEditedEntity().getId_accenumb().getId_sampstat().getCodespe() + "|"
                 + dateTimeNow;
 
-        //I check if the folder qrCodeImage exist in current users, if not exist I created this directory
-        String currentUserHomeDir = System.getProperty("user.home");
-        String qrCodeImageFolder = currentUserHomeDir + File.separator + "qrCodeImage";
-        File theDir = new File(qrCodeImageFolder);
+        File theDir = new File(getQrCodeImageFileMap().get("folder"));
         if (!theDir.exists()) {
             theDir.mkdirs();
         }
-
-        //I set the file name for qrCodeImage
-        String fileName = getEditedEntity().getId_accenumb().getAccenumb() + "-"
-                + getEditedEntity().getDeposit_code() + "-"
-                + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "-"
-                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "-"
-                + getEditedEntity().getYearstorage();
-        String qrCodeImageFile = qrCodeImageFolder + File.separator + fileName + "-" + currentDateToday + ".jpg";
 
         //encode the data in format QR_CODE with width 500 and height 500
         BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500);
 
         //Write the matrix in the path
-        MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(qrCodeImageFile));
+        MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(getQrCodeImageFileMap().get("fileWithPath")));
 
         //Notification for user
         String okMessage = messageBundle.getMessage("okMessageQRcode");
@@ -236,5 +250,14 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         clearImageqrcodeBtn.setVisible(enable);
         generateqrcodeBtn.setVisible(!enable);
         imageqrcodeUpload.setVisible(!enable);
+    }
+
+    // Delete file created with Qr code after was saved
+    @Subscribe(target = Target.DATA_CONTEXT)
+    public void onPostSave(final DataContext.PostSaveEvent event) {
+        File file = new File(getQrCodeImageFileMap().get("fileWithPath"));
+        if (file.exists()) {
+            file.delete();
+        }
     }
 }
