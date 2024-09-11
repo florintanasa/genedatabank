@@ -92,6 +92,9 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
     @Subscribe("id_storageField")
     public void onId_storageFieldComponentValueChange(final AbstractField.ComponentValueChangeEvent<EntityPicker<Storage>, Storage> event) {
+        // Define variable
+        String LastDepositCode;
+        String NewDepositCode;
         // clear the field for Code Deposit
         deposit_codeField.clear();
         // If Deposit code is null load the last code inserted for specific Storage
@@ -111,7 +114,13 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
                     .list();
 
             if (!lastCode.isEmpty()) {
-                getEditedEntity().setDeposit_code(lastCode.get(0).getValue("deposit_code"));
+                //getEditedEntity().setDeposit_code(lastCode.get(0).getValue("deposit_code"));
+                LastDepositCode = lastCode.get(0).getValue("deposit_code");
+                int lengthDepositCode = LastDepositCode.length();
+                int lastRecipient = Integer.parseInt(LastDepositCode.substring(7, lengthDepositCode));
+                int newRecipient = lastRecipient + 1;
+                NewDepositCode = LastDepositCode.substring(0, 7) + newRecipient;
+                getEditedEntity().setDeposit_code(NewDepositCode);
             }
             else getEditedEntity().setDeposit_code("NA");
         }
