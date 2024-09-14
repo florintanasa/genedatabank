@@ -48,6 +48,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 
 /**
@@ -83,6 +84,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private JmixButton downloadBtn;
     @ViewComponent
     private EntityComboBox<Localitysiruta> localitysirutasComboBox;
+    @ViewComponent
+    private JmixCheckbox checkboxTemp;
     // For leaflet with OpenStreetMapMap from https://github.com/xdev-software/vaadin-maps-leaflet-flow
     private LMap map;
     private GoogleMap gmaps;
@@ -96,7 +99,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreSave(DataContext.PreSaveEvent event) {
-        if (getEditedEntity().getAccenumb() == null) {
+        // For non-temporally number
+        if (getEditedEntity().getAccenumb() == null && !checkboxTemp.getValue()) {
             if (getEditedEntity().getId_instcode().getInstcode().equals("ROM007")) {
                 long accNumberSVGB = sequences.createNextValue(Sequence.withName("NrAccenumbSVGB"));
                 getEditedEntity().setAccenumb("SVGB-" + accNumberSVGB);
@@ -110,12 +114,36 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
                         .withDuration(5000).show();
             }
         }
+        // For temporally number
+        else if (getEditedEntity().getAccenumb() == null && checkboxTemp.getValue()) {
+            if (getEditedEntity().getId_instcode().getInstcode().equals("ROM007")) {
+                long accNumberSVGB = sequences.createNextValue(Sequence.withName("NrAccenumbTempSVGB"));
+                getEditedEntity().setAccenumb("TSVGB-" + accNumberSVGB);
+                getEditedEntity().setTempnumb("TSVGB-" + accNumberSVGB);
+            } else if (getEditedEntity().getId_instcode().getInstcode().equals("ROM028")) {
+                long accNumberSVSCA = sequences.createNextValue(Sequence.withName("NrAccenumbTempSVCA"));
+                getEditedEntity().setAccenumb("TSVSCA-" + accNumberSVSCA);
+                getEditedEntity().setTempnumb("TSVSCA-" + accNumberSVSCA);
+            }
+            else {
+                String error_message_accenumber = messageBundle.getMessage("error_message_accenumber");
+                notifications.create("HOPA", error_message_accenumber)
+                        .withDuration(5000).show();
+            }
+        }
     }
 
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
         imageProbe.setVisible(false);
         downloadBtn.setEnabled(false);
+        if (!Objects.equals(getEditedEntity().getAccenumb(), getEditedEntity().getTempnumb())) {
+            checkboxTemp.setEnabled(false);
+        } else if (Objects.equals(getEditedEntity().getAccenumb(), getEditedEntity().getTempnumb())
+                && getEditedEntity().getAccenumb() != null) {
+            checkboxTemp.setEnabled(true);
+            checkboxTemp.setValue(true);
+        }
     }
 
     @Subscribe("checkboxMap")
@@ -326,4 +354,22 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     public void onCountysirutasComboBoxComponentValueChange(final AbstractField.ComponentValueChangeEvent<EntityComboBox<Countysiruta>, Countysiruta> event) {
         localitysirutasComboBox.clear();
     }
+
+    // Check if Temporal checkBox was unchecked
+    // if is unchecked set Accenumb to null and then Accenumb is definitely
+    // if is checked back, because the user plays with component I copy the temporal number
+    // because checkBox is active only when Accenumb and Tempnumb is not null and have same values
+    // so the probe have a temporal number
+    @Subscribe("checkboxTemp")
+    public void onCheckboxTempComponentValueChange(final AbstractField.ComponentValueChangeEvent<JmixCheckbox, ?> event) {
+        if (!checkboxTemp.getValue()) {
+            // then when we save, the onPreSave give non-temporally number
+            getEditedEntity().setAccenumb(null);
+            checkboxTemp.setValue(false);
+        }
+        // put back the temporary number, someone plays with the checkBox, because this component is enabled only
+        // when we have Accenumb and Tempnumb with the same value, because is a temporally number
+        else getEditedEntity().setAccenumb(getEditedEntity().getTempnumb());
+    }
+
 }
