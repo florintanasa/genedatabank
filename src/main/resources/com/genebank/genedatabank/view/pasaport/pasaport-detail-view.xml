@@ -153,7 +153,9 @@
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
                         </entityComboBox>
-                        <textField id="accenumbField" property="accenumb" visible="false"/>
+                        <checkbox id="checkboxTemp" label="msg://checkboxTemp.label" value="false"/>
+                        <textField id="tempnumbField" property="tempnumb" readOnly="true"/>
+                        <textField id="accenumbField" property="accenumb" readOnly="true" visible="true"/>
                         <textField id="doiField" property="doi"/>
                         <textField id="collnumbField" property="collnumb"/>
                         <textField id="collmissidField" property="collmissid"/>
@@ -231,7 +233,6 @@
                         </entityComboBox>
                         <textField id="donornumbField" property="donornumb"/>
                         <textField id="othernumbField" property="othernumb"/>
-                        <textField id="tempnumbField" property="tempnumb"/>
                         <textField id="remarksField" property="remarks"/>
                         <textField id="acceurlField" property="acceurl"/>
                         <entityComboBox id="acceconfsComboBox" itemsContainer="acceconfsDc" dataContainer="pasaportDc"
