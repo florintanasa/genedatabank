@@ -5,9 +5,19 @@
     <data>
         <instance id="userDc"
                   class="com.genebank.genedatabank.entity.User">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="id_institute" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
+        <collection id="institutesDc" class="com.genebank.genedatabank.entity.Institute">
+            <loader id="institutesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Institute e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
     </data>
     <actions>
         <action id="saveAction" type="detail_saveClose"/>
@@ -30,6 +40,14 @@
             <textField id="firstNameField" property="firstName"/>
             <textField id="lastNameField" property="lastName"/>
             <textField id="emailField" property="email"/>
+            <entityComboBox id="institutesComboBox" itemsContainer="institutesDc" dataContainer="userDc"
+                            property="id_institute">
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
             <comboBox id="timeZoneField" property="timeZoneId"/>
             <checkbox id="activeField" property="active"/>
         </formLayout>

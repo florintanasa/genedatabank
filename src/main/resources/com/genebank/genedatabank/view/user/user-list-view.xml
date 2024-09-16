@@ -59,6 +59,7 @@
                 <column property="firstName" resizable="true"/>
                 <column property="lastName" resizable="true"/>
                 <column property="email" resizable="true"/>
+                <column property="id_institute" resizable="true"/>
                 <column property="timeZoneId" resizable="true"/>
                 <column property="active" resizable="true"/>
             </columns>
