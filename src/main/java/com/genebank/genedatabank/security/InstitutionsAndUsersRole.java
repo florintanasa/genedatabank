@@ -1,7 +1,6 @@
 package com.genebank.genedatabank.security;
 
 import com.genebank.genedatabank.entity.Deposit;
-import com.genebank.genedatabank.entity.Institute;
 import com.genebank.genedatabank.entity.Pasaport;
 import com.genebank.genedatabank.entity.User;
 import io.jmix.security.role.annotation.JpqlRowLevelPolicy;
