@@ -5,7 +5,9 @@
     <data readOnly="true">
         <collection id="usersDc"
                     class="com.genebank.genedatabank.entity.User">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="id_institute" fetchPlan="_base"/>
+            </fetchPlan>
             <loader id="usersDl">
                 <query>
                     <![CDATA[select e from User e order by e.username]]>
