@@ -4,11 +4,8 @@ import com.flowingcode.vaadin.addons.googlemaps.GoogleMap;
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMapMarker;
 import com.flowingcode.vaadin.addons.googlemaps.LatLon;
 import com.flowingcode.vaadin.addons.googlemaps.Markers;
-import com.genebank.genedatabank.entity.Countysiruta;
-import com.genebank.genedatabank.entity.Localitysiruta;
-import com.genebank.genedatabank.entity.Pasaport;
+import com.genebank.genedatabank.entity.*;
 
-import com.genebank.genedatabank.entity.SysFile;
 import com.genebank.genedatabank.view.main.MainView;
 
 import com.google.gson.Gson;
@@ -23,6 +20,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 import io.jmix.core.FileRef;
 import io.jmix.core.FileStorage;
+import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
 import io.jmix.flowui.Notifications;
@@ -96,6 +94,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private static final int ZOOM_LEVEL = 7;
     //To log some messages
     private static final Logger log = LoggerFactory.getLogger(PasaportDetailView.class);
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreSave(DataContext.PreSaveEvent event) {
@@ -370,6 +370,16 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         // put back the temporary number, someone plays with the checkBox, because this component is enabled only
         // when we have Accenumb and Tempnumb with the same value, because is a temporally number
         else getEditedEntity().setAccenumb(getEditedEntity().getTempnumb());
+    }
+
+    @Subscribe
+    public void onValidation(final ValidationEvent event) {
+        final User user = (User) currentAuthentication.getUser();
+        if (!Objects.equals(getEditedEntity().getId_instcode(), user.getId_institute())) {
+            String can_not_insert_for_over_institute = messageBundle.getMessage("can_not_insert_for_over_institute");
+            event.getErrors().add(messageBundle.getMessage("can_not_insert_for_over_institute"));
+            notifications.create("HOPA", can_not_insert_for_over_institute).withDuration(5000).show();
+        }
     }
 
 }
