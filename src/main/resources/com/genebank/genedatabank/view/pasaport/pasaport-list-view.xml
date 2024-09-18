@@ -74,12 +74,12 @@
                 <column property="collnumb" resizable="true"/>
                 <column property="collmissid" resizable="true"/>
                 <column property="id_taxonomy" resizable="true"/>
-                <column property="accname" resizable="true"/>
+                <column property="accname" resizable="true" autoWidth="true"/>
                 <column property="acqdate" resizable="true" autoWidth="true"/>
                 <column property="origdate" resizable="true" autoWidth="true"/>
                 <column property="id_country" resizable="true"/>
-                <column property="id_countysiruta" resizable="true"/>
-                <column property="id_localitysiruta" resizable="true"/>
+                <column property="id_countysiruta" resizable="true" autoWidth="true"/>
+                <column property="id_localitysiruta" resizable="true" autoWidth="true"/>
                 <column property="latitude" resizable="true" autoWidth="true"/>
                 <column property="longitude" resizable="true" autoWidth="true"/>
                 <column property="elevation" resizable="true"/>
