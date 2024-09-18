@@ -13,9 +13,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.grid.ItemClickEvent;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 import io.jmix.core.FileRef;
@@ -24,10 +27,13 @@ import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.checkbox.JmixCheckbox;
 import io.jmix.flowui.component.combobox.EntityComboBox;
+import io.jmix.flowui.component.details.JmixDetails;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.image.JmixImage;
+import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.DataContext;
@@ -96,6 +102,77 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private static final Logger log = LoggerFactory.getLogger(PasaportDetailView.class);
     @Autowired
     private CurrentAuthentication currentAuthentication;
+    @Autowired
+    private UiComponents uiComponents;
+    @ViewComponent
+    private TypedTextField<String> doiField;
+    @ViewComponent
+    private EntityComboBox<Institute> institutesComboBox_1;
+    @ViewComponent
+    private TypedTextField<String> tempnumbField;
+    @ViewComponent
+    private TypedTextField<String> accenumbField;
+    @ViewComponent
+    private TypedTextField<String> collnumbField;
+    @ViewComponent
+    private TypedTextField<String> collmissidField;
+    @ViewComponent
+    private EntityComboBox<Taxonomy> taxonomiesComboBox;
+    @ViewComponent
+    private TypedTextField<String> accnameField;
+    @ViewComponent
+    private TypedTextField<String> acqdateField;
+    @ViewComponent
+    private TypedTextField<String> origdateField;
+    @ViewComponent
+    private EntityComboBox<Country> countriesComboBox;
+    @ViewComponent
+    private EntityComboBox<Countysiruta> countysirutasComboBox;
+    @ViewComponent
+    private TypedTextField<Double> latitudeField;
+    @ViewComponent
+    private TypedTextField<Double> longitudeField;
+    @ViewComponent
+    private TypedTextField<Integer> elevationField;
+    @ViewComponent
+    private EntityComboBox<Georefmeth> georefmethsComboBox;
+    @ViewComponent
+    private EntityComboBox<Sampstat> sampstatsComboBox;
+    @ViewComponent
+    private TypedTextField<String> colldateField;
+    @ViewComponent
+    private TypedTextField<String> ancestField;
+    @ViewComponent
+    private EntityComboBox<Institute> institutesComboBox;
+    @ViewComponent
+    private TypedTextField<String> donornumbField;
+    @ViewComponent
+    private TypedTextField<String> othernumbField;
+    @ViewComponent
+    private TypedTextField<String> remarksField;
+    @ViewComponent
+    private TypedTextField<String> acceurlField;
+    @ViewComponent
+    private EntityComboBox<Acceconf> acceconfsComboBox;
+    @ViewComponent
+    private EntityComboBox<Mlsstat> mlsstatsComboBox;
+    @ViewComponent
+    private EntityComboBox<Aegisstat> aegisstatsComboBox;
+    @ViewComponent
+    private EntityComboBox<Historic> historicsComboBox;
+    @ViewComponent
+    private JmixDetails id_collcodeDetails;
+    @ViewComponent
+    private JmixDetails id_bredcodeDetails;
+    @ViewComponent
+    private JmixDetails id_duplsiteDetails;
+    @ViewComponent
+    private EntityComboBox<Collsrc> collsrcsComboBox;
+
+    @Subscribe
+    public void onInit(final InitEvent event) {
+        initManualTooltip();
+    }
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreSave(DataContext.PreSaveEvent event) {
@@ -380,6 +457,156 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
             event.getErrors().add(messageBundle.getMessage("can_not_insert_for_over_institute"));
             notifications.create("HOPA", can_not_insert_for_over_institute).withDuration(5000).show();
         }
+    }
+
+    // Create Tool Tips for input fields
+    protected void initManualTooltip() {
+        JmixButton helperButtonDoiField = createHelperButton();
+        JmixButton helperButtonInstitutesComboBox_1 = createHelperButton();
+        JmixButton helperButtonTempNumbField = createHelperButton();
+        JmixButton helperButtonAccenumbField = createHelperButton();
+        JmixButton helperButtonCollnumbField = createHelperButton();
+        JmixButton helperButtonCollmissidField = createHelperButton();
+        JmixButton helperButtonTaxonomiesComboBox = createHelperButton();
+        JmixButton helperButtonAccnameField = createHelperButton();
+        JmixButton helperButtonAcqdateField = createHelperButton();
+        JmixButton helperButtonOrigdateField= createHelperButton();
+        JmixButton helperButtonCountriesComboBox = createHelperButton();
+        JmixButton helperButtonCountysirutasComboBox = createHelperButton();
+        JmixButton helperButtonLocalitysirutasComboBox = createHelperButton();
+        JmixButton helperButtonLatitudeField = createHelperButton();
+        JmixButton helperButtonLongitudeField = createHelperButton();
+        JmixButton helperButtonElevationField = createHelperButton();
+        JmixButton helperButtonGeorefmethsComboBox = createHelperButton();
+        JmixButton helperButtonColldateField  = createHelperButton();
+        JmixButton helperButtonSampstatsComboBox = createHelperButton();
+        JmixButton helperButtonAncestField = createHelperButton();
+        JmixButton helperButtonCollsrcsComboBox = createHelperButton();
+        JmixButton helperButtonInstitutesComboBox = createHelperButton();
+        JmixButton helperButtonDonornumbField  = createHelperButton();
+        JmixButton helperButtonOthernumbField = createHelperButton();
+        JmixButton helperButtonRemarksField = createHelperButton();
+        JmixButton helperButtonAcceurlField = createHelperButton();
+        JmixButton helperButtonAcceconfsComboBox = createHelperButton();
+        JmixButton helperButtonMlsstatsComboBox = createHelperButton();
+        JmixButton helperButtonAegisstatsComboBox = createHelperButton();
+        JmixButton helperButtonHistoricsComboBox  = createHelperButton();
+        JmixButton helperButtonId_collcodeDetails = createHelperButton();
+        JmixButton helperButtonId_bredcodeDetails = createHelperButton();
+        JmixButton helperButtonId_duplsiteDetails = createHelperButton();
+
+        Tooltip tooltipDoiField = doiField.getTooltip();
+        Tooltip tooltipInstitutesComboBox_1 = institutesComboBox_1.getTooltip();
+        Tooltip tooltipTempNumbField = tempnumbField.getTooltip();
+        Tooltip tooltipAccenumbField = accenumbField.getTooltip();
+        Tooltip tooltipCollnumbField = collnumbField.getTooltip();
+        Tooltip tooltipCollmissidField = collmissidField.getTooltip();
+        Tooltip tooltipTaxonomiesComboBox = taxonomiesComboBox.getTooltip();
+        Tooltip tooltipAccnameField = accnameField.getTooltip();
+        Tooltip tooltipAcqdateField = acqdateField.getTooltip();
+        Tooltip tooltipOrigdateField = origdateField.getTooltip();
+        Tooltip tooltipCountriesComboBox = countriesComboBox.getTooltip();
+        Tooltip tooltipCountysirutasComboBox = countysirutasComboBox.getTooltip();
+        Tooltip tooltipLocalitysirutasComboBox = localitysirutasComboBox.getTooltip();
+        Tooltip tooltipLatitudeField = latitudeField.getTooltip();
+        Tooltip tooltipLongitudeField = longitudeField.getTooltip();
+        Tooltip tooltipElevationField = elevationField.getTooltip();
+        Tooltip tooltipGeorefmethsComboBox = georefmethsComboBox.getTooltip();
+        Tooltip tooltipColldateField = colldateField.getTooltip();
+        Tooltip tooltipSampstatsComboBox = sampstatsComboBox.getTooltip();
+        Tooltip tooltipAncestField = ancestField.getTooltip();
+        Tooltip tooltipCollsrcsComboBox = collsrcsComboBox.getTooltip();
+        Tooltip tooltipInstitutesComboBox = institutesComboBox.getTooltip();
+        Tooltip tooltipDonornumbField = donornumbField.getTooltip();
+        Tooltip tooltipOthernumbField = othernumbField.getTooltip();
+        Tooltip tooltipRemarksField = remarksField.getTooltip();
+        Tooltip tooltipAcceurlField = acceurlField.getTooltip();
+        Tooltip tooltipAcceconfsComboBox = acceconfsComboBox.getTooltip();
+        Tooltip tooltipMlsstatsComboBox = mlsstatsComboBox.getTooltip();
+        Tooltip tooltipAegisstatsComboBox = aegisstatsComboBox.getTooltip();
+        Tooltip tooltipHistoricsComboBox = historicsComboBox.getTooltip();
+        Tooltip tooltipId_collcodeDetails = id_collcodeDetails.getTooltip();
+        Tooltip tooltipId_bredcodeDetails = id_bredcodeDetails.getTooltip();
+        Tooltip tooltipId_duplsiteDetails = id_duplsiteDetails.getTooltip();
+
+
+        helperButtonDoiField.addClickListener(e -> tooltipDoiField.setOpened(!tooltipDoiField.isOpened()));
+        helperButtonInstitutesComboBox_1.addClickListener(e -> tooltipInstitutesComboBox_1.setOpened(!tooltipInstitutesComboBox_1.isOpened()));
+        helperButtonTempNumbField.addClickListener(e -> tooltipTempNumbField.setOpened(!tooltipTempNumbField.isOpened()));
+        helperButtonAccenumbField.addClickListener(e -> tooltipAccenumbField.setOpened(!tooltipAccenumbField.isOpened()));
+        helperButtonCollnumbField.addClickListener(e -> tooltipCollnumbField.setOpened(!tooltipCollnumbField.isOpened()));
+        helperButtonCollmissidField.addClickListener(e -> tooltipCollmissidField.setOpened(!tooltipCollmissidField.isOpened()));
+        helperButtonTaxonomiesComboBox.addClickListener(e -> tooltipTaxonomiesComboBox.setOpened(!tooltipTaxonomiesComboBox.isOpened()));
+        helperButtonAccnameField.addClickListener(e -> tooltipAccnameField.setOpened(!tooltipAccnameField.isOpened()));
+        helperButtonAcqdateField.addClickListener(e -> tooltipAcqdateField.setOpened(!tooltipAcqdateField.isOpened()));
+        helperButtonOrigdateField.addClickListener(e -> tooltipOrigdateField.setOpened(!tooltipOrigdateField.isOpened()));
+        helperButtonCountriesComboBox.addClickListener(e -> tooltipCountriesComboBox.setOpened(!tooltipCountriesComboBox.isOpened()));
+        helperButtonCountysirutasComboBox.addClickListener(e -> tooltipCountysirutasComboBox.setOpened(!tooltipCountysirutasComboBox.isOpened()));
+        helperButtonLocalitysirutasComboBox.addClickListener(e -> tooltipLocalitysirutasComboBox.setOpened(!tooltipLocalitysirutasComboBox.isOpened()));
+        helperButtonLatitudeField.addClickListener(e -> tooltipLatitudeField.setOpened(!tooltipLatitudeField.isOpened()));
+        helperButtonLongitudeField.addClickListener(e -> tooltipLongitudeField.setOpened(!tooltipLongitudeField.isOpened()));
+        helperButtonElevationField.addClickListener(e -> tooltipElevationField.setOpened(!tooltipElevationField.isOpened()));
+        helperButtonGeorefmethsComboBox.addClickListener(e -> tooltipGeorefmethsComboBox.setOpened(!tooltipGeorefmethsComboBox.isOpened()));
+        helperButtonColldateField.addClickListener(e -> tooltipColldateField.setOpened(!tooltipColldateField.isOpened()));
+        helperButtonSampstatsComboBox.addClickListener(e -> tooltipSampstatsComboBox.setOpened(!tooltipSampstatsComboBox.isOpened()));
+        helperButtonAncestField.addClickListener(e -> tooltipAncestField.setOpened(!tooltipAncestField.isOpened()));
+        helperButtonCollsrcsComboBox.addClickListener(e -> tooltipCollsrcsComboBox.setOpened(!tooltipCollsrcsComboBox.isOpened()));
+        helperButtonInstitutesComboBox.addClickListener(e -> tooltipInstitutesComboBox.setOpened(!tooltipInstitutesComboBox.isOpened()));
+        helperButtonDonornumbField.addClickListener(e -> tooltipDonornumbField.setOpened(!tooltipDonornumbField.isOpened()));
+        helperButtonOthernumbField.addClickListener(e -> tooltipOthernumbField.setOpened(!tooltipOthernumbField.isOpened()));
+        helperButtonRemarksField.addClickListener(e -> tooltipRemarksField.setOpened(!tooltipRemarksField.isOpened()));
+        helperButtonAcceurlField.addClickListener(e -> tooltipAcceurlField.setOpened(!tooltipAcceurlField.isOpened()));
+        helperButtonAcceconfsComboBox.addClickListener(e -> tooltipAcceconfsComboBox.setOpened(!tooltipAcceconfsComboBox.isOpened()));
+        helperButtonMlsstatsComboBox.addClickListener(e -> tooltipMlsstatsComboBox.setOpened(!tooltipMlsstatsComboBox.isOpened()));
+        helperButtonAegisstatsComboBox.addClickListener(e -> tooltipAegisstatsComboBox.setOpened(!tooltipAegisstatsComboBox.isOpened()));
+        helperButtonHistoricsComboBox.addClickListener(e -> tooltipHistoricsComboBox.setOpened(!tooltipHistoricsComboBox.isOpened()));
+        helperButtonId_collcodeDetails.addClickListener(e -> tooltipId_collcodeDetails.setOpened(!tooltipId_collcodeDetails.isOpened()));
+        helperButtonId_bredcodeDetails.addClickListener(e -> tooltipId_bredcodeDetails.setOpened(!tooltipId_bredcodeDetails.isOpened()));
+        helperButtonId_duplsiteDetails.addClickListener(e -> tooltipId_duplsiteDetails.setOpened(!tooltipId_duplsiteDetails.isOpened()));
+
+
+        doiField.setSuffixComponent(helperButtonDoiField);
+        institutesComboBox_1.setPrefixComponent(helperButtonInstitutesComboBox_1);
+        tempnumbField.setSuffixComponent(helperButtonTempNumbField);
+        accenumbField.setSuffixComponent(helperButtonAccenumbField);
+        collnumbField.setSuffixComponent(helperButtonCollnumbField);
+        collmissidField.setSuffixComponent(helperButtonCollmissidField);
+        taxonomiesComboBox.setPrefixComponent(helperButtonTaxonomiesComboBox);
+        accnameField.setSuffixComponent(helperButtonAccnameField);
+        acqdateField.setSuffixComponent(helperButtonAcqdateField);
+        origdateField.setSuffixComponent(helperButtonOrigdateField);
+        countriesComboBox.setPrefixComponent(helperButtonCountriesComboBox);
+        countysirutasComboBox.setPrefixComponent(helperButtonCountysirutasComboBox);
+        localitysirutasComboBox.setPrefixComponent(helperButtonLocalitysirutasComboBox);
+        latitudeField.setSuffixComponent(helperButtonLatitudeField);
+        longitudeField.setSuffixComponent(helperButtonLongitudeField);
+        elevationField.setSuffixComponent(helperButtonElevationField);
+        georefmethsComboBox.setPrefixComponent(helperButtonGeorefmethsComboBox);
+        colldateField.setSuffixComponent(helperButtonColldateField);
+        sampstatsComboBox.setPrefixComponent(helperButtonSampstatsComboBox);
+        ancestField.setSuffixComponent(helperButtonAncestField);
+        collsrcsComboBox.setPrefixComponent(helperButtonCollsrcsComboBox);
+        institutesComboBox.setPrefixComponent(helperButtonInstitutesComboBox);
+        donornumbField.setSuffixComponent(helperButtonDonornumbField);
+        othernumbField.setSuffixComponent(helperButtonOthernumbField);
+        remarksField.setSuffixComponent(helperButtonRemarksField);
+        acceurlField.setSuffixComponent(helperButtonAcceurlField);
+        acceconfsComboBox.setPrefixComponent(helperButtonAcceconfsComboBox);
+        mlsstatsComboBox.setPrefixComponent(helperButtonMlsstatsComboBox);
+        aegisstatsComboBox.setPrefixComponent(helperButtonAegisstatsComboBox);
+        historicsComboBox.setPrefixComponent(helperButtonHistoricsComboBox);
+        id_collcodeDetails.addComponentAsFirst(helperButtonId_collcodeDetails);
+        id_bredcodeDetails.addComponentAsFirst(helperButtonId_bredcodeDetails);
+        id_duplsiteDetails.addComponentAsFirst(helperButtonId_duplsiteDetails);
+
+    }
+
+    protected JmixButton createHelperButton() {
+        JmixButton helperButton = uiComponents.create(JmixButton.class);
+        helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
+        helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
+
+        return helperButton;
     }
 
 }

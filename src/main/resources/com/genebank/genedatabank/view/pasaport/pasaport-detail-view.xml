@@ -152,13 +152,25 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg://tooltip.text"
+                                     manual="true"/>
                         </entityComboBox>
                         <checkbox id="checkboxTemp" label="msg://checkboxTemp.label" value="false"/>
-                        <textField id="tempnumbField" property="tempnumb" readOnly="true"/>
-                        <textField id="accenumbField" property="accenumb" readOnly="true" visible="true"/>
-                        <textField id="doiField" property="doi"/>
-                        <textField id="collnumbField" property="collnumb"/>
-                        <textField id="collmissidField" property="collmissid"/>
+                        <textField id="tempnumbField" property="tempnumb" readOnly="true">
+                            <tooltip text="msg:///tooltip.tempnumbField" manual="true"/>
+                        </textField>
+                        <textField id="accenumbField" property="accenumb" readOnly="true" visible="true">
+                            <tooltip text="msg:///tooltip.accenumbField" manual="true"/>
+                        </textField>
+                        <textField id="doiField" property="doi">
+                            <tooltip text="msg:///tooltip.doiField" manual="true"/>
+                        </textField>
+                        <textField id="collnumbField" property="collnumb">
+                            <tooltip text="msg:///tooltip.collnumbField" manual="true"/>
+                        </textField>
+                        <textField id="collmissidField" property="collmissid">
+                            <tooltip text="msg:///tooltip.collmissidField" manual="true"/>
+                        </textField>
                         <entityComboBox id="taxonomiesComboBox" itemsContainer="taxonomiesDc" dataContainer="pasaportDc"
                                         property="id_taxonomy">
                             <actions>
@@ -166,10 +178,17 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.taxonomiesComboBox" manual="true"/>
                         </entityComboBox>
-                        <textField id="accnameField" property="accname"/>
-                        <textField id="acqdateField" property="acqdate"/>
-                        <textField id="origdateField" property="origdate"/>
+                        <textField id="accnameField" property="accname">
+                            <tooltip text="msg:///tooltip.accnameField" manual="true"/>
+                        </textField>
+                        <textField id="acqdateField" property="acqdate">
+                            <tooltip text="msg:///tooltip.acqdateField" manual="true"/>
+                        </textField>
+                        <textField id="origdateField" property="origdate">
+                            <tooltip text="msg:///tooltip.origdateField" manual="true"/>
+                        </textField>
                         <entityComboBox id="countriesComboBox" itemsContainer="countriesDc" dataContainer="pasaportDc"
                                         property="id_country">
                             <actions>
@@ -177,6 +196,7 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.countriesComboBox" manual="true"/>
                         </entityComboBox>
                         <entityComboBox id="countysirutasComboBox" itemsContainer="countysirutasDc"
                                         dataContainer="pasaportDc" property="id_countysiruta">
@@ -185,6 +205,7 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.countysirutasComboBox" manual="true"/>
                         </entityComboBox>
                         <entityComboBox id="localitysirutasComboBox" itemsContainer="localitysirutasDc"
                                         dataContainer="pasaportDc" property="id_localitysiruta">
@@ -193,10 +214,17 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.localitysirutasComboBox" manual="true"/>
                         </entityComboBox>
-                        <textField id="latitudeField" property="latitude"/>
-                        <textField id="longitudeField" property="longitude"/>
-                        <textField id="elevationField" property="elevation"/>
+                        <textField id="latitudeField" property="latitude">
+                            <tooltip text="msg:///tooltip.latitudeField" manual="true"/>
+                        </textField>
+                        <textField id="longitudeField" property="longitude">
+                            <tooltip text="msg:///tooltip.longitudeField" manual="true"/>
+                        </textField>
+                        <textField id="elevationField" property="elevation">
+                            <tooltip text="msg:///tooltip.elevationField" manual="true"/>
+                        </textField>
                         <entityComboBox id="georefmethsComboBox" itemsContainer="georefmethsDc"
                                         dataContainer="pasaportDc" property="id_georefmeth">
                             <actions>
@@ -204,8 +232,11 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.georefmethsComboBox" manual="true"/>
                         </entityComboBox>
-                        <textField id="colldateField" property="colldate"/>
+                        <textField id="colldateField" property="colldate">
+                            <tooltip text="msg://tooltip.colldateField" manual="true"/>
+                        </textField>
                         <entityComboBox id="sampstatsComboBox" itemsContainer="sampstatsDc" dataContainer="pasaportDc"
                                         property="id_sampstat">
                             <actions>
@@ -213,8 +244,11 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.sampstatComboBox" manual="true"/>
                         </entityComboBox>
-                        <textField id="ancestField" property="ancest"/>
+                        <textField id="ancestField" property="ancest">
+                            <tooltip text="msg:///tooltip.ancesField" manual="true"/>
+                        </textField>
                         <entityComboBox id="collsrcsComboBox" itemsContainer="collsrcsDc" dataContainer="pasaportDc"
                                         property="id_collsrc">
                             <actions>
@@ -222,6 +256,7 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.collsrcsComboBox" manual="true"/>
                         </entityComboBox>
                         <entityComboBox id="institutesComboBox" itemsContainer="institutesDc" dataContainer="pasaportDc"
                                         property="id_donorcode">
@@ -230,11 +265,20 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.institutesComboBox" manual="true"/>
                         </entityComboBox>
-                        <textField id="donornumbField" property="donornumb"/>
-                        <textField id="othernumbField" property="othernumb"/>
-                        <textField id="remarksField" property="remarks"/>
-                        <textField id="acceurlField" property="acceurl"/>
+                        <textField id="donornumbField" property="donornumb">
+                            <tooltip text="msg:///tooltip.donornumbField" manual="true"/>
+                        </textField>
+                        <textField id="othernumbField" property="othernumb">
+                            <tooltip text="msg:///tooltip.othernumbField" manual="true"/>
+                        </textField>
+                        <textField id="remarksField" property="remarks">
+                            <tooltip text="msg:///tooltip.remarksField" manual="true"/>
+                        </textField>
+                        <textField id="acceurlField" property="acceurl">
+                            <tooltip text="msg:///tooltip.acceurlField" manual="true"/>
+                        </textField>
                         <entityComboBox id="acceconfsComboBox" itemsContainer="acceconfsDc" dataContainer="pasaportDc"
                                         property="id_acceconf">
                             <actions>
@@ -242,6 +286,7 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.acceconfComboBox" manual="true"/>
                         </entityComboBox>
                         <entityComboBox id="mlsstatsComboBox" itemsContainer="mlsstatsDc" dataContainer="pasaportDc"
                                         property="id_mlsstat">
@@ -250,6 +295,7 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.mlsstatsComboBox" manual="true"/>
                         </entityComboBox>
                         <entityComboBox id="aegisstatsComboBox" itemsContainer="aegisstatsDc" dataContainer="pasaportDc"
                                         property="id_aegisstat">
@@ -258,6 +304,7 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.aegisstatsComboBox" manual="true"/>
                         </entityComboBox>
                         <entityComboBox id="historicsComboBox" itemsContainer="historicsDc" dataContainer="pasaportDc"
                                         property="id_historic">
@@ -266,6 +313,7 @@
                                 <action id="entityLookup" type="entity_lookup"/>
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
+                            <tooltip text="msg:///tooltip.historicsComboBox" manual="true"/>
                         </entityComboBox>
                         <details id="id_collcodeDetails" summaryText="msg://id_collcodeDetails.summaryText">
                             <hbox id="buttonsPanel" classNames="buttons-panel">
@@ -288,6 +336,7 @@
                                     <column property="alpha3"/>
                                 </columns>
                             </dataGrid>
+                            <tooltip text="msg:///tooltip.id_collcodeDetails" manual="true" position="TOP_START"/>
                         </details>
                         <details id="id_bredcodeDetails" summaryText="msg://id_bredcodeDetails.summaryText">
                             <hbox id="buttonsPanel2" classNames="buttons-panel">
@@ -310,6 +359,7 @@
                                     <column property="alpha3"/>
                                 </columns>
                             </dataGrid>
+                            <tooltip text="msg:///tooltip.id_bredcodeDetails" manual="true" position="TOP_START"/>
                         </details>
                         <details id="id_duplsiteDetails" summaryText="msg://id_duplsiteDetails.summaryText">
                             <hbox id="buttonsPanel1" classNames="buttons-panel">
@@ -332,6 +382,7 @@
                                     <column property="alpha3"/>
                                 </columns>
                             </dataGrid>
+                            <tooltip text="msg:///tooltip.id_duplsiteDetails" manual="true" position="TOP_START"/>
                         </details>
                     </formLayout>
                 </scroller>
