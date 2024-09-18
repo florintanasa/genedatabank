@@ -1,5 +1,6 @@
 package com.genebank.genedatabank.security;
 
+import com.genebank.genedatabank.entity.Deposit;
 import com.genebank.genedatabank.entity.Pasaport;
 import io.jmix.security.role.annotation.JpqlRowLevelPolicy;
 import io.jmix.security.role.annotation.RowLevelRole;
@@ -10,4 +11,7 @@ public interface PasaportConfidentialRole {
 
     @JpqlRowLevelPolicy(entityClass = Pasaport.class, where = "{E}.id_acceconf.code = 0")
     void pasaport();
+
+    @JpqlRowLevelPolicy(entityClass = Deposit.class, where = "{E}.id_accenumb.id_acceconf.code = 0")
+    void deposit();
 }
