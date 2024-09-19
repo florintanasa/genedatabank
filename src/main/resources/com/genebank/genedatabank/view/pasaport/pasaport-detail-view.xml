@@ -156,20 +156,17 @@
                                      manual="true"/>
                         </entityComboBox>
                         <checkbox id="checkboxTemp" label="msg://checkboxTemp.label" value="false"/>
-                        <textField id="tempnumbField" property="tempnumb" readOnly="true">
-                            <tooltip text="msg:///tooltip.tempnumbField" manual="true"/>
-                        </textField>
                         <textField id="accenumbField" property="accenumb" readOnly="true" visible="true">
                             <tooltip text="msg:///tooltip.accenumbField" manual="true"/>
+                        </textField>
+                        <textField id="tempnumbField" property="tempnumb" readOnly="true">
+                            <tooltip text="msg:///tooltip.tempnumbField" manual="true"/>
                         </textField>
                         <textField id="doiField" property="doi">
                             <tooltip text="msg:///tooltip.doiField" manual="true"/>
                         </textField>
                         <textField id="collnumbField" property="collnumb">
                             <tooltip text="msg:///tooltip.collnumbField" manual="true"/>
-                        </textField>
-                        <textField id="collmissidField" property="collmissid">
-                            <tooltip text="msg:///tooltip.collmissidField" manual="true"/>
                         </textField>
                         <entityComboBox id="taxonomiesComboBox" itemsContainer="taxonomiesDc" dataContainer="pasaportDc"
                                         property="id_taxonomy">
@@ -180,14 +177,17 @@
                             </actions>
                             <tooltip text="msg:///tooltip.taxonomiesComboBox" manual="true"/>
                         </entityComboBox>
+                        <textField id="collmissidField" property="collmissid">
+                            <tooltip text="msg:///tooltip.collmissidField" manual="true"/>
+                        </textField>
                         <textField id="accnameField" property="accname">
                             <tooltip text="msg:///tooltip.accnameField" manual="true"/>
                         </textField>
-                        <textField id="acqdateField" property="acqdate">
-                            <tooltip text="msg:///tooltip.acqdateField" manual="true"/>
-                        </textField>
                         <textField id="origdateField" property="origdate">
                             <tooltip text="msg:///tooltip.origdateField" manual="true"/>
+                        </textField>
+                        <textField id="acqdateField" property="acqdate">
+                            <tooltip text="msg:///tooltip.acqdateField" manual="true"/>
                         </textField>
                         <entityComboBox id="countriesComboBox" itemsContainer="countriesDc" dataContainer="pasaportDc"
                                         property="id_country">
@@ -198,15 +198,6 @@
                             </actions>
                             <tooltip text="msg:///tooltip.countriesComboBox" manual="true"/>
                         </entityComboBox>
-                        <entityComboBox id="countysirutasComboBox" itemsContainer="countysirutasDc"
-                                        dataContainer="pasaportDc" property="id_countysiruta">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.countysirutasComboBox" manual="true"/>
-                        </entityComboBox>
                         <entityComboBox id="localitysirutasComboBox" itemsContainer="localitysirutasDc"
                                         dataContainer="pasaportDc" property="id_localitysiruta">
                             <actions>
@@ -215,6 +206,15 @@
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
                             <tooltip text="msg:///tooltip.localitysirutasComboBox" manual="true"/>
+                        </entityComboBox>
+                        <entityComboBox id="countysirutasComboBox" itemsContainer="countysirutasDc"
+                                        dataContainer="pasaportDc" property="id_countysiruta">
+                            <actions>
+                                <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
+                            </actions>
+                            <tooltip text="msg:///tooltip.countysirutasComboBox" manual="true"/>
                         </entityComboBox>
                         <textField id="latitudeField" property="latitude">
                             <tooltip text="msg:///tooltip.latitudeField" manual="true"/>
@@ -258,6 +258,9 @@
                             </actions>
                             <tooltip text="msg:///tooltip.collsrcsComboBox" manual="true"/>
                         </entityComboBox>
+                        <textField id="donornumbField" property="donornumb">
+                            <tooltip text="msg:///tooltip.donornumbField" manual="true"/>
+                        </textField>
                         <entityComboBox id="institutesComboBox" itemsContainer="institutesDc" dataContainer="pasaportDc"
                                         property="id_donorcode">
                             <actions>
@@ -267,9 +270,6 @@
                             </actions>
                             <tooltip text="msg:///tooltip.institutesComboBox" manual="true"/>
                         </entityComboBox>
-                        <textField id="donornumbField" property="donornumb">
-                            <tooltip text="msg:///tooltip.donornumbField" manual="true"/>
-                        </textField>
                         <textField id="othernumbField" property="othernumb">
                             <tooltip text="msg:///tooltip.othernumbField" manual="true"/>
                         </textField>
