@@ -198,15 +198,6 @@
                             </actions>
                             <tooltip text="msg:///tooltip.countriesComboBox" manual="true"/>
                         </entityComboBox>
-                        <entityComboBox id="localitysirutasComboBox" itemsContainer="localitysirutasDc"
-                                        dataContainer="pasaportDc" property="id_localitysiruta">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.localitysirutasComboBox" manual="true"/>
-                        </entityComboBox>
                         <entityComboBox id="countysirutasComboBox" itemsContainer="countysirutasDc"
                                         dataContainer="pasaportDc" property="id_countysiruta">
                             <actions>
@@ -215,6 +206,15 @@
                                 <action id="entityOpen" type="entity_open"/>
                             </actions>
                             <tooltip text="msg:///tooltip.countysirutasComboBox" manual="true"/>
+                        </entityComboBox>
+                        <entityComboBox id="localitysirutasComboBox" itemsContainer="localitysirutasDc"
+                                        dataContainer="pasaportDc" property="id_localitysiruta">
+                            <actions>
+                                <action id="entityClear" type="entity_clear"/>
+                                <action id="entityLookup" type="entity_lookup"/>
+                                <action id="entityOpen" type="entity_open"/>
+                            </actions>
+                            <tooltip text="msg:///tooltip.localitysirutasComboBox" manual="true"/>
                         </entityComboBox>
                         <textField id="latitudeField" property="latitude">
                             <tooltip text="msg:///tooltip.latitudeField" manual="true"/>
