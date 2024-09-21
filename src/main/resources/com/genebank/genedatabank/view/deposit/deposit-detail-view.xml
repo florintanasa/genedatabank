@@ -79,20 +79,24 @@
                 <hbox>
                     <button id="generateqrcodeBtn"
                             text="msg://generateqrcodeBtn"
+                            icon="QRCODE"
                             title="msg://generateqrcodeBtn.title"/>
                     <fileStorageUploadField id="imageqrcodeUpload"
                                             property="qrcode"
                                             fileStoragePutMode="MANUAL"
                                             acceptedFileTypes=".png, .jpg, .jpeg"
+                                            uploadIcon="UPLOAD"
                                             uploadText="msg://qrcodeUpload">
                         <tooltip text="msg://imageqrcodeUpload.title"/>
                     </fileStorageUploadField>
                     <button id="downloadImageqrcodeBtn"
                             text="msg://downloadImageqrcodeBtn"
-                            title="msg://downloadImageqrcodeBtn.title"/>
+                            title="msg://downloadImageqrcodeBtn.title"
+                            icon="DOWNLOAD"/>
                     <button id="clearImageqrcodeBtn"
                             text="msg://clearImageqrcodeBtn"
-                            title="msg://clearImageqrcodeBtn.title"/>
+                            title="msg://clearImageqrcodeBtn.title"
+                            icon="DEL"/>
                 </hbox>
             </details>
 
