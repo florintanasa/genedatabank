@@ -3,6 +3,7 @@ package com.genebank.genedatabank.view.main;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.dom.ThemeList;
 import com.vaadin.flow.router.Route;
@@ -39,16 +40,24 @@ public class MainView extends StandardMainView {
                 themeList.add(Lumo.DARK);
             }
         });
-        header.addComponentAsFirst(themeChangeButton);
+        header.add(themeChangeButton);
     }
 
     protected JmixButton createThemeButton() {
         JmixButton themeButton = uiComponents.create(JmixButton.class);
-        themeButton.setIcon(VaadinIcon.CIRCLE.create());
-        themeButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
+        themeButton.setIcon(getThemeIcon());
+        themeButton.addThemeVariants(ButtonVariant.LUMO_CONTRAST, ButtonVariant.LUMO_TERTIARY_INLINE);
         String toolTipThemeButton = messageBundle.getMessage("toolTipThemeButtonMessage");
         themeButton.setTooltipText(toolTipThemeButton);
+        themeButton.addClassName("ms-auto");
+        themeButton.addClassName("me-s");
 
         return themeButton;
+    }
+
+    private Icon getThemeIcon() {
+        Icon icon = VaadinIcon.ADJUST.create();
+        icon.getElement().getStyle().set("rotate", "180deg");
+        return icon;
     }
 }
