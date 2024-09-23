@@ -19,16 +19,36 @@
     </actions>
     <layout>
         <formLayout id="form" dataContainer="taxonomyDc">
-            <textField id="familyField" property="family"/>
-            <textField id="genusField" property="genus"/>
-            <textField id="speciesField" property="species"/>
-            <textField id="spauthorField" property="spauthor"/>
-            <textField id="subtaxaField" property="subtaxa"/>
-            <textField id="subauthorField" property="subauthor"/>
-            <textField id="syn_taxonoField" property="syn_taxono"/>
-            <textField id="cropnumeField" property="cropnume"/>
-            <textField id="cropnameField" property="cropname"/>
-            <textField id="refferenceField" property="refference"/>
+            <textField id="familyField" property="family">
+                <tooltip text="msg:///tooltip.familyField" manual="true"/>
+            </textField>
+            <textField id="genusField" property="genus">
+                <tooltip text="msg:///tooltip.genusField" manual="true"/>
+            </textField>
+            <textField id="speciesField" property="species">
+                <tooltip text="msg:///tooltip.speciesField" manual="true"/>
+            </textField>
+            <textField id="spauthorField" property="spauthor">
+                <tooltip text="msg:///tooltip.spauthorField" manual="true"/>
+            </textField>
+            <textField id="subtaxaField" property="subtaxa">
+                <tooltip text="msg:///tooltip.subtaxaField" manual="true"/>
+            </textField>
+            <textField id="subauthorField" property="subauthor">
+                <tooltip text="msg:///tooltip.subauthorField" manual="true"/>
+            </textField>
+            <textField id="syn_taxonoField" property="syn_taxono">
+                <tooltip text="msg:///tooltip.syn_taxonoField" manual="true"/>
+            </textField>
+            <textField id="cropnumeField" property="cropnume">
+                <tooltip text="msg:///tooltip.cropnumeField" manual="true"/>
+            </textField>
+            <textField id="cropnameField" property="cropname">
+                <tooltip text="msg:///tooltip.cropnameField" manual="true"/>
+            </textField>
+            <textField id="refferenceField" property="refference">
+                <tooltip text="msg:///tooltip.refferenceField" manual="true"/>
+            </textField>
         </formLayout>
         <details id="id_culturecategDetails" summaryText="msg://id_culturecategDetails.summaryText" height="100%"
                  width="100%">
@@ -45,6 +65,7 @@
                     <column property="name"/>
                 </columns>
             </dataGrid>
+            <tooltip text="msg:///tooltip.id_culturecategDetails" manual="true" position="TOP_START"/>
         </details>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
