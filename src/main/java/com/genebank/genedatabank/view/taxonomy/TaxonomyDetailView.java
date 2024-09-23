@@ -56,7 +56,7 @@ public class TaxonomyDetailView extends StandardDetailView<Taxonomy> {
     }
 
     // Create Tool Tips for input fields
-    protected void initManualTooltip() {
+    private void initManualTooltip() {
         JmixButton helperButtonFamilyField = createHelperButton();
         JmixButton helperButtonGenusField = createHelperButton();
         JmixButton helperButtonSpeciesField = createHelperButton();
@@ -107,7 +107,7 @@ public class TaxonomyDetailView extends StandardDetailView<Taxonomy> {
     }
 
     // createHelperButton is a component - JmixButton
-    protected JmixButton createHelperButton() {
+    private JmixButton createHelperButton() {
         JmixButton helperButton = uiComponents.create(JmixButton.class);
         helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
         helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
