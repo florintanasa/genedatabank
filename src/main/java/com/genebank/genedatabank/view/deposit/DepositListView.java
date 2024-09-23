@@ -69,7 +69,7 @@ public class DepositListView extends StandardListView<Deposit> {
         });
         //Setting the width of the created column.
         qrcodeColumn.setFlexGrow(0);
-        qrcodeColumn.setWidth("85px");
+        qrcodeColumn.setWidth("100px");
         //Setting the header of the created column
         qrcodeColumn.setHeader("QR");
         //Setting the position of the created column.
