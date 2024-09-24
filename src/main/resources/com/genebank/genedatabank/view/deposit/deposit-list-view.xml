@@ -54,9 +54,10 @@
                 <action id="reportPrint" type="report_runListEntityReport" text="Print" />
             </actions>
             <columns>
-                <column property="id_accenumb" resizable="true"/>
+                <column property="id_accenumb" resizable="true" autoWidth="true" filterable="true"/>
+                <column property="id_accenumb.id_taxonomy.genus" resizable="true"/>
                 <column property="id_accenumb.id_taxonomy.species" resizable="true"/>
-                <column property="deposit_code" resizable="true"/>
+                <column property="deposit_code" resizable="true" autoWidth="true" filterable="true"/>
                 <column property="id_storage" resizable="true"/>
                 <column property="yearstorage" resizable="true"/>
                 <column property="yearmulti" resizable="true"/>
@@ -66,6 +67,8 @@
                 <column property="stock" resizable="true"/>
                 <column property="humidity" resizable="true"/>
                 <column property="mmb" resizable="true"/>
+                <column property="reference" resizable="true"/>
+                <column property="scope" resizable="true"/>
                 <column property="comments" resizable="true"/>
             </columns>
         </dataGrid>

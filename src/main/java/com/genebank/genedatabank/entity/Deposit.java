@@ -128,6 +128,29 @@ public class Deposit {
     @Column(name = "QRCODE", length = 1024)
     private FileRef qrcode;
 
+    @Column(name = "REFERENCE", nullable = false)
+    @NotNull
+    private Boolean reference = false;
+
+    @Column(name = "SCOPE_", length = 1)
+    private String scope;
+
+    public String getScope() {
+        return scope;
+    }
+
+    public void setScope(String scope) {
+        this.scope = scope;
+    }
+
+    public Boolean getReference() {
+        return reference;
+    }
+
+    public void setReference(Boolean reference) {
+        this.reference = reference;
+    }
+
     public void setYeargerm(Integer yeargerm) {
         this.yeargerm = yeargerm;
     }

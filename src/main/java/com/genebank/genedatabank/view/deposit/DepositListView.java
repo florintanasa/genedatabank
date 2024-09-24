@@ -73,7 +73,7 @@ public class DepositListView extends StandardListView<Deposit> {
         //Setting the header of the created column
         qrcodeColumn.setHeader("QR");
         //Setting the position of the created column.
-        depositsDataGrid.setColumnPosition(qrcodeColumn, 12);
+        depositsDataGrid.setColumnPosition(qrcodeColumn, 0);
     }
 
     @Subscribe("printBtn75x35")

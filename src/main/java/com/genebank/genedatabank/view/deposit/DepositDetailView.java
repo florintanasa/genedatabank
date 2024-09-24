@@ -118,6 +118,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private TypedTextField<String> id_taxonomy_genusField;
     @ViewComponent
     private TypedTextField<String> id_taxonomy_speciesField;
+    @ViewComponent
+    private TypedTextField<String> scopeField;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -340,6 +342,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
       JmixButton hlpBtnMmbField = createHelperButton();
       JmixButton hlpBtnCommentsField = createHelperButton();
       JmixButton hlpBtnDetailsQrCode = createHelperButton();
+      JmixButton hlpBtnScopeField = createHelperButton();
 
       Tooltip tooltipPasaportsComboBox = pasaportsComboBox.getTooltip();
       Tooltip tooltipId_taxonomy_genusField = id_taxonomy_genusField.getTooltip();
@@ -356,6 +359,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
       Tooltip tooltipMmbField = mmbField.getTooltip();
       Tooltip tooltipCommentsField = commentsField.getTooltip();
       Tooltip tooltipDetailsQrCode = detailsQrCode.getTooltip();
+      Tooltip tooltipScopeField = scopeField.getTooltip();
 
       hlpBtnPasaportsComboBox.addClickListener(event -> tooltipPasaportsComboBox.setOpened(!tooltipPasaportsComboBox.isOpened()));
       hlpBtnId_taxonomy_genusField.addClickListener(event -> tooltipId_taxonomy_genusField.setOpened(!tooltipId_taxonomy_genusField.isOpened()));
@@ -372,6 +376,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
       hlpBtnMmbField.addClickListener(event -> tooltipMmbField.setOpened(!tooltipMmbField.isOpened()));
       hlpBtnCommentsField.addClickListener(event -> tooltipCommentsField.setOpened(!tooltipCommentsField.isOpened()));
       hlpBtnDetailsQrCode.addClickListener(event -> tooltipDetailsQrCode.setOpened(!tooltipDetailsQrCode.isOpened()));
+      hlpBtnScopeField.addClickListener(event -> tooltipScopeField.setOpened(!tooltipScopeField.isOpened()));
 
       pasaportsComboBox.setPrefixComponent(hlpBtnPasaportsComboBox);
       id_taxonomy_genusField.setSuffixComponent(hlpBtnId_taxonomy_genusField);
@@ -388,6 +393,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
       mmbField.setSuffixComponent(hlpBtnMmbField);
       commentsField.setSuffixComponent(hlpBtnCommentsField);
       detailsQrCode.addComponentAsFirst(hlpBtnDetailsQrCode);
+      scopeField.setSuffixComponent(hlpBtnScopeField);
     }
     
     private JmixButton createHelperButton() {
