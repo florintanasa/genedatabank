@@ -49,9 +49,14 @@
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityOpen" type="entity_open"/>
                 </actions>
+                <tooltip text="msg:///tooltip.passaportsComboBox" manual="true"/>
             </entityComboBox>
-            <textField id="id_taxonomy_genusField" property="id_accenumb.id_taxonomy.genus" readOnly="true"/>
-            <textField id="id_taxonomy_speciesField" property="id_accenumb.id_taxonomy.species" readOnly="true"/>
+            <textField id="id_taxonomy_genusField" property="id_accenumb.id_taxonomy.genus" readOnly="true">
+                <tooltip text="msg:///tooltip.id_taxonomy_genusField" manual="true"/>
+            </textField>
+            <textField id="id_taxonomy_speciesField" property="id_accenumb.id_taxonomy.species" readOnly="true">
+                <tooltip text="msg:///tooltip.id_taxonomy_speciesField" manual="true"/>
+            </textField>
             <entityComboBox id="id_storageField" itemsContainer="storagesDc" dataContainer="depositDc"
                             property="id_storage">
                 <actions>
@@ -59,18 +64,39 @@
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityOpen" type="entity_open"/>
                 </actions>
+                <tooltip text="msg:///tooltip.id_storageField" manual="true"/>
             </entityComboBox>
-            <textField id="deposit_codeField" property="deposit_code"/>
-            <textField id="yearstorageField" property="yearstorage"/>
-            <textField id="yearmultiField" property="yearmulti"/>
-            <textField id="multiplyField" property="multiply"/>
-            <textField id="yeargermField" property="yeargerm"/>
-            <textField id="percentageField" property="percentage"/>
-            <textField id="stockField" property="stock"/>
-            <textField id="humidityField" property="humidity"/>
-            <textField id="mmbField" property="mmb"/>
-            <textArea id="commentsField" height="9.5em" property="comments"/>
-            <details summaryText="msg://detailsdeposit.title">
+            <textField id="deposit_codeField" property="deposit_code">
+                <tooltip text="msg:///tooltip.deposit_codeField" manual="true"/>
+            </textField>
+            <textField id="yearstorageField" property="yearstorage">
+                <tooltip text="msg:///tooltip.yearstorageField" manual="true"/>
+            </textField>
+            <textField id="yearmultiField" property="yearmulti">
+                <tooltip text="msg:///tooltip.yearmultiField" manual="true"/>
+            </textField>
+            <textField id="multiplyField" property="multiply">
+                <tooltip text="msg:///tooltip.multiplyField" manual="true"/>
+            </textField>
+            <textField id="yeargermField" property="yeargerm">
+                <tooltip text="msg:///tooltip.yeargermField" manual="true"/>
+            </textField>
+            <textField id="percentageField" property="percentage">
+                <tooltip text="msg:///tooltip.percentageField" manual="true"/>
+            </textField>
+            <textField id="stockField" property="stock">
+                <tooltip text="msg:///tooltip.stockField" manual="true"/>
+            </textField>
+            <textField id="humidityField" property="humidity">
+                <tooltip text="msg:///tooltip.humidityField" manual="true"/>
+            </textField>
+            <textField id="mmbField" property="mmb">
+                <tooltip text="msg:///tooltip.mmbField" manual="true"/>
+            </textField>
+            <textArea id="commentsField" height="9.5em" property="comments">
+                <tooltip text="msg:///tooltip.commentsField" manual="true"/>
+            </textArea>
+            <details id="detailsQrCode" summaryText="msg://detailsdeposit.title">
                 <image id="imageqrcode"
                        height="350px"
                        width="350px"
@@ -98,6 +124,7 @@
                             title="msg://clearImageqrcodeBtn.title"
                             icon="DEL"/>
                 </hbox>
+                <tooltip text="msg:///tooltip.details" manual="true" position="TOP_START"/>
             </details>
 
         </formLayout>

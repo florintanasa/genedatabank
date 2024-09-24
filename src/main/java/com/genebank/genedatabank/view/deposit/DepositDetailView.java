@@ -2,6 +2,7 @@ package com.genebank.genedatabank.view.deposit;
 
 import com.genebank.genedatabank.entity.Deposit;
 
+import com.genebank.genedatabank.entity.Pasaport;
 import com.genebank.genedatabank.entity.Storage;
 import com.genebank.genedatabank.view.main.MainView;
 
@@ -14,14 +15,21 @@ import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.component.upload.Receiver;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.core.entity.KeyValueEntity;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.combobox.EntityComboBox;
+import io.jmix.flowui.component.details.JmixDetails;
 import io.jmix.flowui.component.image.JmixImage;
+import io.jmix.flowui.component.textarea.JmixTextArea;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.component.upload.FileStorageUploadField;
 import io.jmix.flowui.component.upload.FileUploadField;
@@ -82,7 +90,39 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private EntityComboBox<Storage> id_storageField;
     @ViewComponent
     private TypedTextField<String> deposit_codeField;
+    @Autowired
+    private UiComponents uiComponents;
+    @ViewComponent
+    private EntityComboBox<Pasaport> pasaportsComboBox;
+    @ViewComponent
+    private TypedTextField<String> yearstorageField;
+    @ViewComponent
+    private TypedTextField<Integer> yearmultiField;
+    @ViewComponent
+    private TypedTextField<Integer> multiplyField;
+    @ViewComponent
+    private TypedTextField<Integer> yeargermField;
+    @ViewComponent
+    private TypedTextField<Integer> percentageField;
+    @ViewComponent
+    private TypedTextField<Integer> stockField;
+    @ViewComponent
+    private TypedTextField<Double> humidityField;
+    @ViewComponent
+    private TypedTextField<Double> mmbField;
+    @ViewComponent
+    private JmixTextArea commentsField;
+    @ViewComponent
+    private JmixDetails detailsQrCode;
+    @ViewComponent
+    private TypedTextField<String> id_taxonomy_genusField;
+    @ViewComponent
+    private TypedTextField<String> id_taxonomy_speciesField;
 
+    @Subscribe
+    public void onInit(final InitEvent event) {
+        initManualTooltip();
+    }
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
@@ -281,5 +321,80 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         if (file.exists()) {
             file.delete();
         }
+    }
+
+    // Create Tool Tips for input fields
+    private void initManualTooltip()   {
+      JmixButton hlpBtnPasaportsComboBox = createHelperButton();
+      JmixButton hlpBtnId_taxonomy_genusField = createHelperButton();
+      JmixButton hlpBtnId_taxonomy_speciesField = createHelperButton();
+      JmixButton hlpBtnId_storageField = createHelperButton();
+      JmixButton hlpBtnDeposit_codeField = createHelperButton();
+      JmixButton hlpBtnYearstoargeField = createHelperButton();
+      JmixButton hlpBtnYearmultiField = createHelperButton();
+      JmixButton hlpBtnMultiplyField = createHelperButton();
+      JmixButton hlpBtnYeargermField = createHelperButton();
+      JmixButton hlpBtnPercentageField = createHelperButton();
+      JmixButton hlpBtnStockField = createHelperButton();
+      JmixButton hlpBtnHumidityField = createHelperButton();
+      JmixButton hlpBtnMmbField = createHelperButton();
+      JmixButton hlpBtnCommentsField = createHelperButton();
+      JmixButton hlpBtnDetailsQrCode = createHelperButton();
+
+      Tooltip tooltipPasaportsComboBox = pasaportsComboBox.getTooltip();
+      Tooltip tooltipId_taxonomy_genusField = id_taxonomy_genusField.getTooltip();
+      Tooltip tooltipId_taxonomy_speciesField = id_taxonomy_speciesField.getTooltip();
+      Tooltip tooltipId_storageField = id_storageField.getTooltip();
+      Tooltip tooltipDeposit_codeField = deposit_codeField.getTooltip();
+      Tooltip tooltipYearstoargeField = yearstorageField.getTooltip();
+      Tooltip tooltipYearmultiField = yearmultiField.getTooltip();
+      Tooltip tooltipMultiplyField = multiplyField.getTooltip();
+      Tooltip tooltipYeargermField = yeargermField.getTooltip();
+      Tooltip tooltipPercentageField = percentageField.getTooltip();
+      Tooltip tooltipStockField = stockField.getTooltip();
+      Tooltip tooltipHumidityField = humidityField.getTooltip();
+      Tooltip tooltipMmbField = mmbField.getTooltip();
+      Tooltip tooltipCommentsField = commentsField.getTooltip();
+      Tooltip tooltipDetailsQrCode = detailsQrCode.getTooltip();
+
+      hlpBtnPasaportsComboBox.addClickListener(event -> tooltipPasaportsComboBox.setOpened(!tooltipPasaportsComboBox.isOpened()));
+      hlpBtnId_taxonomy_genusField.addClickListener(event -> tooltipId_taxonomy_genusField.setOpened(!tooltipId_taxonomy_genusField.isOpened()));
+      hlpBtnId_taxonomy_speciesField.addClickListener(event -> tooltipId_taxonomy_speciesField.setOpened(!tooltipId_taxonomy_speciesField.isOpened()));
+      hlpBtnId_storageField.addClickListener(event -> tooltipId_storageField.setOpened(!tooltipId_storageField.isOpened()));
+      hlpBtnDeposit_codeField.addClickListener(event -> tooltipDeposit_codeField.setOpened(!tooltipDeposit_codeField.isOpened()));
+      hlpBtnYearstoargeField.addClickListener(event -> tooltipYearstoargeField.setOpened(!tooltipYearstoargeField.isOpened()));
+      hlpBtnYearmultiField.addClickListener(event -> tooltipYearmultiField.setOpened(!tooltipYearmultiField.isOpened()));
+      hlpBtnMultiplyField.addClickListener(event -> tooltipMultiplyField.setOpened(!tooltipMultiplyField.isOpened()));
+      hlpBtnYeargermField.addClickListener(event -> tooltipYeargermField.setOpened(!tooltipYeargermField.isOpened()));
+      hlpBtnPercentageField.addClickListener(event -> tooltipPercentageField.setOpened(!tooltipPercentageField.isOpened()));
+      hlpBtnStockField.addClickListener(event -> tooltipStockField.setOpened(!tooltipStockField.isOpened()));
+      hlpBtnHumidityField.addClickListener(event -> tooltipHumidityField.setOpened(!tooltipHumidityField.isOpened()));
+      hlpBtnMmbField.addClickListener(event -> tooltipMmbField.setOpened(!tooltipMmbField.isOpened()));
+      hlpBtnCommentsField.addClickListener(event -> tooltipCommentsField.setOpened(!tooltipCommentsField.isOpened()));
+      hlpBtnDetailsQrCode.addClickListener(event -> tooltipDetailsQrCode.setOpened(!tooltipDetailsQrCode.isOpened()));
+
+      pasaportsComboBox.setPrefixComponent(hlpBtnPasaportsComboBox);
+      id_taxonomy_genusField.setSuffixComponent(hlpBtnId_taxonomy_genusField);
+      id_taxonomy_speciesField.setSuffixComponent(hlpBtnId_taxonomy_speciesField);
+      id_storageField.setPrefixComponent(hlpBtnId_storageField);
+      deposit_codeField.setSuffixComponent(hlpBtnDeposit_codeField);
+      yearstorageField.setSuffixComponent(hlpBtnYearstoargeField);
+      yearmultiField.setSuffixComponent(hlpBtnYearmultiField);
+      multiplyField.setSuffixComponent(hlpBtnMultiplyField);
+      yeargermField.setSuffixComponent(hlpBtnYeargermField);
+      percentageField.setSuffixComponent(hlpBtnPercentageField);
+      stockField.setSuffixComponent(hlpBtnStockField);
+      humidityField.setSuffixComponent(hlpBtnHumidityField);
+      mmbField.setSuffixComponent(hlpBtnMmbField);
+      commentsField.setSuffixComponent(hlpBtnCommentsField);
+      detailsQrCode.addComponentAsFirst(hlpBtnDetailsQrCode);
+    }
+    
+    private JmixButton createHelperButton() {
+        JmixButton helperButton = uiComponents.create(JmixButton.class);
+        helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
+        helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
+        
+        return helperButton;
     }
 }
