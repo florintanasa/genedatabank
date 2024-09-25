@@ -53,7 +53,7 @@
             </entityComboBox>
             <checkbox id="referenceCheckBox" property="reference"/>
             <textField id="scopeField" property="scope" pattern="[G,R]">
-                <tooltip text="msg:///tooltip.scopeField"/>
+                <tooltip text="msg:///tooltip.scopeField" manual="true"/>
             </textField>
             <textField id="id_taxonomy_genusField" property="id_accenumb.id_taxonomy.genus" readOnly="true">
                 <tooltip text="msg:///tooltip.id_taxonomy_genusField" manual="true"/>
