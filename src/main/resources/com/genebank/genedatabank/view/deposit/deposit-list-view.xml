@@ -67,7 +67,7 @@
                 <column property="stock" resizable="true"/>
                 <column property="humidity" resizable="true"/>
                 <column property="mmb" resizable="true"/>
-                <column property="reference" resizable="true"/>
+                <column property="original" resizable="true"/>
                 <column property="scope" resizable="true"/>
                 <column property="comments" resizable="true"/>
             </columns>

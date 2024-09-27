@@ -51,7 +51,7 @@
                 </actions>
                 <tooltip text="msg:///tooltip.passaportsComboBox" manual="true"/>
             </entityComboBox>
-            <checkbox id="referenceCheckBox" property="reference"/>
+            <checkbox id="originalCheckBox" property="original"/>
             <textField id="scopeField" property="scope" pattern="[G,R]">
                 <tooltip text="msg:///tooltip.scopeField" manual="true"/>
             </textField>
