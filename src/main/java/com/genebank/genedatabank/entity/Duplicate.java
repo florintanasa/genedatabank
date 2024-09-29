@@ -1,5 +1,7 @@
 package com.genebank.genedatabank.entity;
 
+import io.jmix.core.annotation.DeletedBy;
+import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
@@ -10,6 +12,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -20,8 +23,7 @@ import java.util.UUID;
 
 @JmixEntity
 @Table(name = "DUPLICATE", indexes = {
-        @Index(name = "IDX_DUPLICATE_DUPLICATE_INSTITUTE", columnList = "ID_DUPLICATE_INSTITUTE_ID"),
-        @Index(name = "IDX_DUPLICATE_ID_DEPOSIT_CODE", columnList = "ID_DEPOSIT_CODE_ID")
+        @Index(name = "IDX_DUPLICATE_DUPLICATE_INSTITUTE", columnList = "ID_DUPLICATE_INSTITUTE_ID")
 })
 @Entity
 public class Duplicate {
@@ -50,6 +52,14 @@ public class Duplicate {
     @Column(name = "LAST_MODIFIED_DATE")
     private OffsetDateTime lastModifiedDate;
 
+    @DeletedBy
+    @Column(name = "DELETED_BY")
+    private String deletedBy;
+
+    @DeletedDate
+    @Column(name = "DELETED_DATE")
+    private OffsetDateTime deletedDate;
+
     @JoinColumn(name = "ID_DUPLICATE_INSTITUTE_ID", nullable = false)
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -60,18 +70,56 @@ public class Duplicate {
     @Column(name = "DEPOSIT_BOX_NUMB", nullable = false)
     private Integer depositBoxNumb;
 
-    @JoinColumn(name = "ID_DEPOSIT_CODE_ID", nullable = false)
+    @Column(name = "THE_DATE", nullable = false)
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Deposit id_deposit_code;
+    private LocalDate theDate;
 
-    @Column(name = "IS_TEST", nullable = false)
-    @NotNull
-    private Boolean isTest = false;
+    @Column(name = "SEND_DATE")
+    private LocalDate sendDate;
 
-    @Column(name = "IN_CURENT_BOX", nullable = false)
+    @Column(name = "STATUS", nullable = false)
     @NotNull
-    private Boolean inCurentBox = false;
+    private String status;
+
+    public OffsetDateTime getDeletedDate() {
+        return deletedDate;
+    }
+
+    public void setDeletedDate(OffsetDateTime deletedDate) {
+        this.deletedDate = deletedDate;
+    }
+
+    public String getDeletedBy() {
+        return deletedBy;
+    }
+
+    public void setDeletedBy(String deletedBy) {
+        this.deletedBy = deletedBy;
+    }
+
+    public DuplicateStatus getStatus() {
+        return status == null ? null : DuplicateStatus.fromId(status);
+    }
+
+    public void setStatus(DuplicateStatus status) {
+        this.status = status == null ? null : status.getId();
+    }
+
+    public LocalDate getSendDate() {
+        return sendDate;
+    }
+
+    public void setSendDate(LocalDate sendDate) {
+        this.sendDate = sendDate;
+    }
+
+    public LocalDate getTheDate() {
+        return theDate;
+    }
+
+    public void setTheDate(LocalDate theDate) {
+        this.theDate = theDate;
+    }
 
     public void setDepositBoxNumb(Integer depositBoxNumb) {
         this.depositBoxNumb = depositBoxNumb;
@@ -79,30 +127,6 @@ public class Duplicate {
 
     public Integer getDepositBoxNumb() {
         return depositBoxNumb;
-    }
-
-    public Boolean getInCurentBox() {
-        return inCurentBox;
-    }
-
-    public void setInCurentBox(Boolean inCurentBox) {
-        this.inCurentBox = inCurentBox;
-    }
-
-    public Boolean getIsTest() {
-        return isTest;
-    }
-
-    public void setIsTest(Boolean isTest) {
-        this.isTest = isTest;
-    }
-
-    public Deposit getId_deposit_code() {
-        return id_deposit_code;
-    }
-
-    public void setId_deposit_code(Deposit id_deposit_code) {
-        this.id_deposit_code = id_deposit_code;
     }
 
     public Institute getId_duplicate_institute() {
