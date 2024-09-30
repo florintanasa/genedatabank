@@ -1,8 +1,11 @@
 package com.genebank.genedatabank.entity;
 
+import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.entity.annotation.OnDelete;
+import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +17,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -80,6 +84,19 @@ public class Duplicate {
     @Column(name = "STATUS", nullable = false)
     @NotNull
     private String status;
+
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
+    @OneToMany(mappedBy = "duplicate")
+    private List<DuplicateLine> duplicateLines;
+
+    public List<DuplicateLine> getDuplicateLines() {
+        return duplicateLines;
+    }
+
+    public void setDuplicateLines(List<DuplicateLine> duplicateLines) {
+        this.duplicateLines = duplicateLines;
+    }
 
     public OffsetDateTime getDeletedDate() {
         return deletedDate;
