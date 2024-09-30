@@ -4,6 +4,7 @@ import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.core.metamodel.annotation.PropertyDatatype;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.CreatedBy;
@@ -141,6 +142,261 @@ public class DuplicateLine {
 
     @Column(name = "T_CROPNAME", length = 110)
     private String tCropname;
+
+    @Column(name = "P_ACCENAME", length = 45)
+    private String pAccename;
+
+    @Column(name = "P_ACQDATE", length = 8)
+    private String pAcqdate;
+
+    @Column(name = "P_ORIGDATE", length = 8)
+    private String pOrigdate;
+
+    @Column(name = "STATE_NAME", length = 35)
+    private String stateName;
+
+    @Column(name = "COUNTY_NAME", length = 25)
+    private String countyName;
+
+    @Column(name = "LOCALITY_NAME", length = 35)
+    private String localityName;
+
+    @PropertyDatatype("geocoordinate")
+    @Column(name = "P_LATITUDE")
+    private Double pLatitude;
+
+    @PropertyDatatype("geocoordinate")
+    @Column(name = "P_LONGITUDE")
+    private Double pLongitude;
+
+    @Column(name = "P_ELEVATION")
+    private Integer pElevation;
+
+    @Column(name = "G_NAME", length = 50)
+    private String gName;
+
+    @Column(name = "P_COLLDATE", length = 8)
+    private String pColldate;
+
+    @Column(name = "S_NAME")
+    private String sName;
+
+    @Column(name = "P_ANCEST")
+    private String pAncest;
+
+    @Column(name = "C_NAME", length = 50)
+    private String cName;
+
+    @Column(name = "DONOR_INSTCODE", length = 7)
+    private String donorInstcode;
+
+    @Column(name = "P_DONORNUMB", length = 20)
+    private String pDonornumb;
+
+    @Column(name = "P_OTHERNUMB", length = 20)
+    private String pOthernumb;
+
+    @Column(name = "P_TEMPNUMB", length = 9)
+    private String pTempnumb;
+
+    @Column(name = "P_ACCEURL")
+    private String pAcceurl;
+
+    @Column(name = "P_ACCECONF", length = 50)
+    private String pAcceconf;
+
+    @Column(name = "M_NAME", length = 50)
+    private String mName;
+
+    @Column(name = "A_NAME", length = 50)
+    private String aName;
+
+    @Column(name = "H_NAME", length = 50)
+    private String hName;
+
+    public String getGName() {
+        return gName;
+    }
+
+    public void setGName(String gName) {
+        this.gName = gName;
+    }
+
+    public Integer getPElevation() {
+        return pElevation;
+    }
+
+    public void setPElevation(Integer pElevation) {
+        this.pElevation = pElevation;
+    }
+
+    public Double getPLongitude() {
+        return pLongitude;
+    }
+
+    public void setPLongitude(Double pLongitude) {
+        this.pLongitude = pLongitude;
+    }
+
+    public Double getPLatitude() {
+        return pLatitude;
+    }
+
+    public void setPLatitude(Double pLatitude) {
+        this.pLatitude = pLatitude;
+    }
+
+    public String getHName() {
+        return hName;
+    }
+
+    public void setHName(String hName) {
+        this.hName = hName;
+    }
+
+    public String getAName() {
+        return aName;
+    }
+
+    public void setAName(String aName) {
+        this.aName = aName;
+    }
+
+    public String getMName() {
+        return mName;
+    }
+
+    public void setMName(String mName) {
+        this.mName = mName;
+    }
+
+    public String getPAcceconf() {
+        return pAcceconf;
+    }
+
+    public void setPAcceconf(String pAcceconf) {
+        this.pAcceconf = pAcceconf;
+    }
+
+    public String getPAcceurl() {
+        return pAcceurl;
+    }
+
+    public void setPAcceurl(String pAcceurl) {
+        this.pAcceurl = pAcceurl;
+    }
+
+    public String getPTempnumb() {
+        return pTempnumb;
+    }
+
+    public void setPTempnumb(String pTempnumb) {
+        this.pTempnumb = pTempnumb;
+    }
+
+    public String getPOthernumb() {
+        return pOthernumb;
+    }
+
+    public void setPOthernumb(String pOthernumb) {
+        this.pOthernumb = pOthernumb;
+    }
+
+    public String getPDonornumb() {
+        return pDonornumb;
+    }
+
+    public void setPDonornumb(String pDonornumb) {
+        this.pDonornumb = pDonornumb;
+    }
+
+    public String getDonorInstcode() {
+        return donorInstcode;
+    }
+
+    public void setDonorInstcode(String donorInstcode) {
+        this.donorInstcode = donorInstcode;
+    }
+
+    public String getCName() {
+        return cName;
+    }
+
+    public void setCName(String cName) {
+        this.cName = cName;
+    }
+
+    public String getPAncest() {
+        return pAncest;
+    }
+
+    public void setPAncest(String pAncest) {
+        this.pAncest = pAncest;
+    }
+
+    public String getSName() {
+        return sName;
+    }
+
+    public void setSName(String sName) {
+        this.sName = sName;
+    }
+
+    public String getPColldate() {
+        return pColldate;
+    }
+
+    public void setPColldate(String pColldate) {
+        this.pColldate = pColldate;
+    }
+
+    public String getLocalityName() {
+        return localityName;
+    }
+
+    public void setLocalityName(String localityName) {
+        this.localityName = localityName;
+    }
+
+    public String getCountyName() {
+        return countyName;
+    }
+
+    public void setCountyName(String countyName) {
+        this.countyName = countyName;
+    }
+
+    public String getStateName() {
+        return stateName;
+    }
+
+    public void setStateName(String stateName) {
+        this.stateName = stateName;
+    }
+
+    public String getPOrigdate() {
+        return pOrigdate;
+    }
+
+    public void setPOrigdate(String pOrigdate) {
+        this.pOrigdate = pOrigdate;
+    }
+
+    public String getPAcqdate() {
+        return pAcqdate;
+    }
+
+    public void setPAcqdate(String pAcqdate) {
+        this.pAcqdate = pAcqdate;
+    }
+
+    public String getPAccename() {
+        return pAccename;
+    }
+
+    public void setPAccename(String pAccename) {
+        this.pAccename = pAccename;
+    }
 
     public String getTCropname() {
         return tCropname;

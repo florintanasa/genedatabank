@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="genedatabank">
+        <addColumn tableName="DUPLICATE_LINE">
+            <column name="A_NAME" type="VARCHAR(50)"/>
+            <column name="COUNTY_NAME" type="VARCHAR(25)"/>
+            <column name="C_NAME" type="VARCHAR(50)"/>
+            <column name="DONOR_INSTCODE" type="VARCHAR(7)"/>
+            <column name="G_NAME" type="VARCHAR(50)"/>
+            <column name="H_NAME" type="VARCHAR(50)"/>
+            <column name="LOCALITY_NAME" type="VARCHAR(35)"/>
+            <column name="M_NAME" type="VARCHAR(50)"/>
+            <column name="P_ACCECONF" type="VARCHAR(50)"/>
+            <column name="P_ACCENAME" type="VARCHAR(45)"/>
+            <column name="P_ACCEURL" type="VARCHAR(255)"/>
+            <column name="P_ACQDATE" type="VARCHAR(8)"/>
+            <column name="P_ANCEST" type="VARCHAR(255)"/>
+            <column name="P_COLLDATE" type="VARCHAR(8)"/>
+            <column name="P_DONORNUMB" type="VARCHAR(20)"/>
+            <column name="P_ELEVATION" type="INT"/>
+            <column name="P_LATITUDE" type="double precision"/>
+            <column name="P_LONGITUDE" type="double precision"/>
+            <column name="P_ORIGDATE" type="VARCHAR(8)"/>
+            <column name="P_OTHERNUMB" type="VARCHAR(20)"/>
+            <column name="P_TEMPNUMB" type="VARCHAR(9)"/>
+            <column name="STATE_NAME" type="VARCHAR(35)"/>
+            <column name="S_NAME" type="VARCHAR(255)"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
