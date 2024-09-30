@@ -63,13 +63,13 @@ public class DuplicateLine {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Deposit id_deposit;
 
-    @Column(name = "D_DEPOSIT_CODE", nullable = false, length = 10)
-    @NotNull
-    private String dDepositCode;
-
     @Column(name = "QUANTITY", nullable = false)
     @NotNull
     private Integer quantity;
+
+    @Column(name = "D_DEPOSIT_CODE", nullable = false, length = 10)
+    @NotNull
+    private String dDepositCode;
 
     @Column(name = "D_STORAGE", nullable = false)
     @NotNull
