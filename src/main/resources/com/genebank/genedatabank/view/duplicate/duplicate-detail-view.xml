@@ -31,7 +31,7 @@
             <textField id="depositBoxNumbField" property="depositBoxNumb"/>
             <datePicker id="theDateField" property="theDate"/>
             <datePicker id="sendDateField" property="sendDate"/>
-            <select id="statusField" property="status"/>
+            <select id="statusField" property="status" readOnly="true"/>
         </formLayout>
         <h4 text="msg://com.genebank.genedatabank.entity/Duplicate.duplicateLines"/>
         <hbox id="buttonsPanel" classNames="buttons-panel">
