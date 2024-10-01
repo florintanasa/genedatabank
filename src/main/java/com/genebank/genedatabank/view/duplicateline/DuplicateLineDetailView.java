@@ -108,11 +108,17 @@ public class DuplicateLineDetailView extends StandardDetailView<DuplicateLine> {
     private TypedTextField<String> hNameField;
     @ViewComponent
     private TypedTextField<String> tCultCategField;
+    @ViewComponent
+    private TypedTextField<Integer> quantityField;
 
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
+        //set default 500 seeds
+        quantityField.setValue("500");
+        //check if is choose a new deposit code
         id_depositField.addValueChangeListener(valueChangeEvent -> {
             if (valueChangeEvent.getValue() != null) {
+                //declared String variables used in text components
                 String VdYearStorage, YearMulti, Multiply, YearGerm, Percentage, Humidity, Mmb, Doi, CollNumb, CollMissid,
                         Family, Genus, Species, SpAuthor, SubTaxa, SubAuthor, CropNume, CropName, AcqDate, OrigDate,
                 StateName, CountyName, LocalityName, Latitude, Longitude, Elevation, GeoRefName, CollDate, SampStatName,
