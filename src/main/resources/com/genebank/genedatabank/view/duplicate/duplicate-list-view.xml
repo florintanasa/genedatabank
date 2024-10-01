@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://duplicateListView.title"
+      focusComponent="duplicatesDataGrid">
+    <data>
+        <collection id="duplicatesDc"
+                    class="com.genebank.genedatabank.entity.Duplicate">
+            <fetchPlan extends="_base">
+                <property name="id_duplicate_institute" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="duplicatesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Duplicate e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="duplicatesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="duplicatesDataGrid.create"/>
+            <button id="editBtn" action="duplicatesDataGrid.edit"/>
+            <button id="excelExportBtn" action="duplicatesDataGrid.excelExport"/>
+            <button id="jsonExportBtn" action="duplicatesDataGrid.jsonExport"/>
+            <button id="refreshBtn" action="duplicatesDataGrid.refresh"/>
+            <button id="removeBtn" action="duplicatesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="duplicatesDl"/>
+        </hbox>
+        <dataGrid id="duplicatesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="duplicatesDc"
+                  columnReorderingAllowed="true"
+                  selectionMode="MULTI">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="excelExport" type="grdexp_excelExport"/>
+                <action id="jsonExport" type="grdexp_jsonExport"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="id_duplicate_institute"/>
+                <column property="depositBoxNumb"/>
+                <column property="theDate"/>
+                <column property="sendDate"/>
+                <column property="status"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>

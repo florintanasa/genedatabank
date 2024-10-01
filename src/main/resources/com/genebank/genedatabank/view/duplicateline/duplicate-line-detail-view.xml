@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://duplicateLineDetailView.title"
+      focusComponent="form">
+    <data>
+        <collection id="depositsDc" class="com.genebank.genedatabank.entity.Deposit">
+            <loader id="depositsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Deposit e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <instance id="duplicateLineDc"
+                  class="com.genebank.genedatabank.entity.DuplicateLine">
+            <fetchPlan extends="_base">
+                <property name="id_deposit" fetchPlan="_base">
+                    <property name="id_accenumb" fetchPlan="_base"/>
+                    <property name="id_storage" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="duplicateLineDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="duplicateLineDc">
+            <entityComboBox id="id_depositField" property="id_deposit" itemsContainer="depositsDc">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
+            <textField id="quantityField" property="quantity"/>
+            <textField id="dDepositCodeField" property="dDepositCode" enabled="false"/>
+            <textField id="dStorageField" property="dStorage" enabled="false"/>
+            <textField id="dYearstorageField" property="dYearstorage" enabled="false"/>
+            <textField id="dYearmultiField" property="dYearmulti" enabled="false"/>
+            <textField id="dMultiplyField" property="dMultiply" enabled="false"/>
+            <textField id="dYeargermField" property="dYeargerm" enabled="false"/>
+            <textField id="dPercentageField" property="dPercentage" enabled="false"/>
+            <textField id="dStockField" property="dStock" enabled="false"/>
+            <textField id="dHumidityField" property="dHumidity" enabled="false"/>
+            <textField id="dMmbField" property="dMmb" enabled="false"/>
+            <checkbox id="dOriginalField" property="dOriginal" enabled="false"/>
+            <textField id="pAccenumbField" property="pAccenumb" enabled="false"/>
+            <textField id="pDoiField" property="pDoi" enabled="false"/>
+            <textField id="pCollnumbField" property="pCollnumb" enabled="false"/>
+            <textField id="pCollmissidField" property="pCollmissid" enabled="false"/>
+            <textField id="tFammilyField" property="tFammily" enabled="false"/>
+            <textField id="tGenusField" property="tGenus" enabled="false"/>
+            <textField id="tSpeciesField" property="tSpecies" enabled="false"/>
+            <textField id="tSpauthorField" property="tSpauthor" enabled="false"/>
+            <textField id="tSubtaxaField" property="tSubtaxa" enabled="false"/>
+            <textField id="tSubauthorField" property="tSubauthor" enabled="false"/>
+            <textField id="tCropnumeField" property="tCropnume" enabled="false"/>
+            <textField id="tCropnameField" property="tCropname" enabled="false"/>
+            <textField id="pAccenameField" property="pAccename" enabled="false"/>
+            <textField id="pAcqdateField" property="pAcqdate" enabled="false"/>
+            <textField id="pOrigdateField" property="pOrigdate" enabled="false"/>
+            <textField id="stateNameField" property="stateName" enabled="false"/>
+            <textField id="countyNameField" property="countyName" enabled="false"/>
+            <textField id="localityNameField" property="localityName" enabled="false"/>
+            <textField id="pLatitudeField" property="pLatitude" enabled="false"/>
+            <textField id="pLongitudeField" property="pLongitude" enabled="false"/>
+            <textField id="pElevationField" property="pElevation" enabled="false"/>
+            <textField id="gNameField" property="gName" enabled="false"/>
+            <textField id="pColldateField" property="pColldate" enabled="false"/>
+            <textField id="sNameField" property="sName" enabled="false"/>
+            <textField id="pAncestField" property="pAncest" enabled="false"/>
+            <textField id="cNameField" property="cName" enabled="false"/>
+            <textField id="donorInstcodeField" property="donorInstcode" enabled="false"/>
+            <textField id="pDonornumbField" property="pDonornumb" enabled="false"/>
+            <textField id="pOthernumbField" property="pOthernumb" enabled="false"/>
+            <textField id="pTempnumbField" property="pTempnumb" enabled="false"/>
+            <textField id="pAcceurlField" property="pAcceurl" enabled="false"/>
+            <textField id="pAcceconfField" property="pAcceconf" enabled="false"/>
+            <textField id="mNameField" property="mName" enabled="false"/>
+            <textField id="aNameField" property="aName" enabled="false"/>
+            <textField id="hNameField" property="hName" enabled="false"/>
+            <textField id="tCultCategField" property="tCultCateg" enabled="false"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

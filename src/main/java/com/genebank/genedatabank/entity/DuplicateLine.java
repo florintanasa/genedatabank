@@ -214,6 +214,17 @@ public class DuplicateLine {
     @Column(name = "H_NAME", length = 50)
     private String hName;
 
+    @Column(name = "T_CULT_CATEG")
+    private String tCultCateg;
+
+    public String getTCultCateg() {
+        return tCultCateg;
+    }
+
+    public void setTCultCateg(String tCultCateg) {
+        this.tCultCateg = tCultCateg;
+    }
+
     public String getGName() {
         return gName;
     }

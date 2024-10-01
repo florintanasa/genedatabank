@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://duplicateDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="duplicateDc"
+                  class="com.genebank.genedatabank.entity.Duplicate">
+            <fetchPlan extends="_base">
+                <property name="id_duplicate_institute" fetchPlan="_instance_name"/>
+                <property name="duplicateLines" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="duplicateDl"/>
+            <collection id="duplicateLinesDc" property="duplicateLines"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="duplicateDc">
+            <entityPicker id="id_duplicate_instituteField" property="id_duplicate_institute">
+                <actions>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityClear" type="entity_clear"/>
+                </actions>
+            </entityPicker>
+            <textField id="depositBoxNumbField" property="depositBoxNumb"/>
+            <datePicker id="theDateField" property="theDate"/>
+            <datePicker id="sendDateField" property="sendDate"/>
+            <select id="statusField" property="status"/>
+        </formLayout>
+        <h4 text="msg://com.genebank.genedatabank.entity/Duplicate.duplicateLines"/>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button action="duplicateLinesDataGrid.create"/>
+            <button action="duplicateLinesDataGrid.edit"/>
+            <button action="duplicateLinesDataGrid.remove"/>
+        </hbox>
+        <dataGrid id="duplicateLinesDataGrid" dataContainer="duplicateLinesDc" width="100%" minHeight="20em">
+            <actions>
+                <action id="create" type="list_create">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="edit" type="list_edit">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns>
+                <column property="quantity" resizable="true"/>
+                <column property="dDepositCode" resizable="true"/>
+                <column property="dStorage" resizable="true"/>
+                <column property="dYearstorage" resizable="true"/>
+                <column property="dYearmulti" resizable="true"/>
+                <column property="dMultiply" resizable="true"/>
+                <column property="dYeargerm" resizable="true"/>
+                <column property="dPercentage" resizable="true"/>
+                <column property="dStock" resizable="true"/>
+                <column property="dHumidity" resizable="true"/>
+                <column property="dMmb" resizable="true"/>
+                <column property="dOriginal" resizable="true"/>
+                <column property="pAccenumb" resizable="true"/>
+                <column property="pDoi" resizable="true"/>
+                <column property="pCollnumb" resizable="true"/>
+                <column property="pCollmissid" resizable="true"/>
+                <column property="tFammily" resizable="true"/>
+                <column property="tGenus" resizable="true"/>
+                <column property="tSpecies" resizable="true"/>
+                <column property="tSpauthor" resizable="true"/>
+                <column property="tSubtaxa" resizable="true"/>
+                <column property="tSubauthor" resizable="true"/>
+                <column property="tCropnume" resizable="true"/>
+                <column property="tCropname" resizable="true"/>
+                <column property="pAccename" resizable="true"/>
+                <column property="pAcqdate" resizable="true"/>
+                <column property="pOrigdate" resizable="true"/>
+                <column property="stateName" resizable="true"/>
+                <column property="countyName" resizable="true"/>
+                <column property="localityName" resizable="true"/>
+                <column property="pLatitude" resizable="true"/>
+                <column property="pLongitude" resizable="true"/>
+                <column property="pElevation" resizable="true"/>
+                <column property="gName" resizable="true"/>
+                <column property="pColldate" resizable="true"/>
+                <column property="sName" resizable="true"/>
+                <column property="pAncest" resizable="true"/>
+                <column property="cName" resizable="true"/>
+                <column property="donorInstcode" resizable="true"/>
+                <column property="pDonornumb" resizable="true"/>
+                <column property="pOthernumb" resizable="true"/>
+                <column property="pTempnumb" resizable="true"/>
+                <column property="pAcceurl" resizable="true"/>
+                <column property="pAcceconf" resizable="true"/>
+                <column property="mName" resizable="true"/>
+                <column property="aName" resizable="true"/>
+                <column property="hName" resizable="true"/>
+                <column property="tCultCateg" resizable="true"/>
+            </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
