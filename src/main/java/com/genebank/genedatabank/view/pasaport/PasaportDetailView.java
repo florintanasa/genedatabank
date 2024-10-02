@@ -449,6 +449,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         else getEditedEntity().setAccenumb(getEditedEntity().getTempnumb());
     }
 
+    // check what user try to save, if is not from the same institute him can't save
     @Subscribe
     public void onValidation(final ValidationEvent event) {
         final User user = (User) currentAuthentication.getUser();
