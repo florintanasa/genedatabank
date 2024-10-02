@@ -57,6 +57,8 @@
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button action="duplicateLinesDataGrid.create"/>
             <button action="duplicateLinesDataGrid.edit"/>
+            <button id="excelExportBtn" action="duplicateLinesDataGrid.excelExport"/>
+            <button id="jsonExportBtn" action="duplicateLinesDataGrid.jsonExport"/>
             <button action="duplicateLinesDataGrid.remove"/>
         </hbox>
         <dataGrid id="duplicateLinesDataGrid" dataContainer="duplicateLinesDc" width="100%" minHeight="20em">
@@ -72,56 +74,58 @@
                     </properties>
                 </action>
                 <action id="remove" type="list_remove"/>
+                <action id="excelExport" type="grdexp_excelExport"/>
+                <action id="jsonExport" type="grdexp_jsonExport"/>
             </actions>
             <columns>
-                <column property="quantity" resizable="true"/>
-                <column property="dDepositCode" resizable="true"/>
-                <column property="dStorage" resizable="true"/>
-                <column property="dYearstorage" resizable="true"/>
-                <column property="dYearmulti" resizable="true"/>
-                <column property="dMultiply" resizable="true"/>
-                <column property="dYeargerm" resizable="true"/>
-                <column property="dPercentage" resizable="true"/>
-                <column property="dStock" resizable="true"/>
-                <column property="dHumidity" resizable="true"/>
-                <column property="dMmb" resizable="true"/>
-                <column property="dOriginal" resizable="true"/>
-                <column property="pAccenumb" resizable="true"/>
-                <column property="pDoi" resizable="true"/>
-                <column property="pCollnumb" resizable="true"/>
-                <column property="pCollmissid" resizable="true"/>
-                <column property="tFammily" resizable="true"/>
-                <column property="tGenus" resizable="true"/>
-                <column property="tSpecies" resizable="true"/>
-                <column property="tSpauthor" resizable="true"/>
-                <column property="tSubtaxa" resizable="true"/>
-                <column property="tSubauthor" resizable="true"/>
-                <column property="tCropnume" resizable="true"/>
-                <column property="tCropname" resizable="true"/>
-                <column property="pAccename" resizable="true"/>
-                <column property="pAcqdate" resizable="true"/>
-                <column property="pOrigdate" resizable="true"/>
-                <column property="stateName" resizable="true"/>
-                <column property="countyName" resizable="true"/>
-                <column property="localityName" resizable="true"/>
-                <column property="pLatitude" resizable="true"/>
-                <column property="pLongitude" resizable="true"/>
-                <column property="pElevation" resizable="true"/>
-                <column property="gName" resizable="true"/>
-                <column property="pColldate" resizable="true"/>
-                <column property="sName" resizable="true"/>
-                <column property="pAncest" resizable="true"/>
-                <column property="cName" resizable="true"/>
-                <column property="donorInstcode" resizable="true"/>
-                <column property="pDonornumb" resizable="true"/>
-                <column property="pOthernumb" resizable="true"/>
-                <column property="pTempnumb" resizable="true"/>
-                <column property="pAcceurl" resizable="true"/>
-                <column property="pAcceconf" resizable="true"/>
-                <column property="mName" resizable="true"/>
-                <column property="aName" resizable="true"/>
-                <column property="hName" resizable="true"/>
-                <column property="tCultCateg" resizable="true"/>
+                <column property="quantity" resizable="true" autoWidth="true"/>
+                <column property="dDepositCode" resizable="true" autoWidth="true"/>
+                <column property="dStorage" resizable="true" autoWidth="true"/>
+                <column property="dYearstorage" resizable="true" autoWidth="true"/>
+                <column property="dYearmulti" resizable="true" autoWidth="true"/>
+                <column property="dMultiply" resizable="true" autoWidth="true"/>
+                <column property="dYeargerm" resizable="true" autoWidth="true"/>
+                <column property="dPercentage" resizable="true" autoWidth="true"/>
+                <column property="dStock" resizable="true" autoWidth="true"/>
+                <column property="dHumidity" resizable="true" autoWidth="true"/>
+                <column property="dMmb" resizable="true" autoWidth="true"/>
+                <column property="dOriginal" resizable="true" autoWidth="true"/>
+                <column property="pAccenumb" resizable="true" autoWidth="true"/>
+                <column property="pDoi" resizable="true" autoWidth="true"/>
+                <column property="pCollnumb" resizable="true" autoWidth="true"/>
+                <column property="pCollmissid" resizable="true" autoWidth="true"/>
+                <column property="tFammily" resizable="true" autoWidth="true"/>
+                <column property="tGenus" resizable="true" autoWidth="true"/>
+                <column property="tSpecies" resizable="true" autoWidth="true"/>
+                <column property="tSpauthor" resizable="true" autoWidth="true"/>
+                <column property="tSubtaxa" resizable="true" autoWidth="true"/>
+                <column property="tSubauthor" resizable="true" autoWidth="true"/>
+                <column property="tCropnume" resizable="true" autoWidth="true"/>
+                <column property="tCropname" resizable="true" autoWidth="true"/>
+                <column property="pAccename" resizable="true" autoWidth="true"/>
+                <column property="pAcqdate" resizable="true" autoWidth="true"/>
+                <column property="pOrigdate" resizable="true" autoWidth="true"/>
+                <column property="stateName" resizable="true" autoWidth="true"/>
+                <column property="countyName" resizable="true" autoWidth="true"/>
+                <column property="localityName" resizable="true" autoWidth="true"/>
+                <column property="pLatitude" resizable="true" autoWidth="true"/>
+                <column property="pLongitude" resizable="true" autoWidth="true"/>
+                <column property="pElevation" resizable="true" autoWidth="true"/>
+                <column property="gName" resizable="true" autoWidth="true"/>
+                <column property="pColldate" resizable="true" autoWidth="true"/>
+                <column property="sName" resizable="true" autoWidth="true"/>
+                <column property="pAncest" resizable="true" autoWidth="true"/>
+                <column property="cName" resizable="true" autoWidth="true"/>
+                <column property="donorInstcode" resizable="true" autoWidth="true"/>
+                <column property="pDonornumb" resizable="true" autoWidth="true"/>
+                <column property="pOthernumb" resizable="true" autoWidth="true"/>
+                <column property="pTempnumb" resizable="true" autoWidth="true"/>
+                <column property="pAcceurl" resizable="true" autoWidth="true"/>
+                <column property="pAcceconf" resizable="true" autoWidth="true"/>
+                <column property="mName" resizable="true" autoWidth="true"/>
+                <column property="aName" resizable="true" autoWidth="true"/>
+                <column property="hName" resizable="true" autoWidth="true"/>
+                <column property="tCultCateg" resizable="true" autoWidth="true"/>
             </columns>
         </dataGrid>
         <hbox id="detailActions">
