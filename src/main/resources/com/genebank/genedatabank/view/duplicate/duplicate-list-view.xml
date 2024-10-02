@@ -39,6 +39,9 @@
             <button id="jsonExportBtn" action="duplicatesDataGrid.jsonExport"/>
             <button id="refreshBtn" action="duplicatesDataGrid.refresh"/>
             <button id="removeBtn" action="duplicatesDataGrid.remove"/>
+            <button id="markAsConfirmedBtn" action="duplicatesDataGrid.markAsConfirmed"/>
+            <button id="markAsInDeliveryBtn" action="duplicatesDataGrid.markAsInDelivery"/>
+            <button id="markAsDeliveryBtn" action="duplicatesDataGrid.markAsDelivered"/>
             <simplePagination id="pagination" dataLoader="duplicatesDl"/>
         </hbox>
         <dataGrid id="duplicatesDataGrid"
@@ -54,6 +57,9 @@
                 <action id="jsonExport" type="grdexp_jsonExport"/>
                 <action id="refresh" type="list_refresh"/>
                 <action id="remove" type="list_remove"/>
+                <action id="markAsConfirmed" type="list_itemTracking" text="msg://markAsConfirmed" icon="CHECK"/>
+                <action id="markAsInDelivery" type="list_itemTracking" text="msg://markAsInDelivery" icon="TRUCK"/>
+                <action id="markAsDelivered" type="list_itemTracking" text="msg://markAsDelivered" icon="CHECK_CIRCLE_O"/>
             </actions>
             <columns resizable="true">
                 <column property="id_send_institute" autoWidth="true"/>
