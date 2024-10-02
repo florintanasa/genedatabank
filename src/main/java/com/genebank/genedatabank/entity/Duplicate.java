@@ -27,7 +27,8 @@ import java.util.UUID;
 
 @JmixEntity
 @Table(name = "DUPLICATE", indexes = {
-        @Index(name = "IDX_DUPLICATE_DUPLICATE_INSTITUTE", columnList = "ID_DUPLICATE_INSTITUTE_ID")
+        @Index(name = "IDX_DUPLICATE_DUPLICATE_INSTITUTE", columnList = "ID_DUPLICATE_INSTITUTE_ID"),
+        @Index(name = "IDX_DUPLICATE_ID_SEND_INSTITUTE", columnList = "ID_SEND_INSTITUTE_ID")
 })
 @Entity
 public class Duplicate {
@@ -64,6 +65,11 @@ public class Duplicate {
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
 
+    @JoinColumn(name = "ID_SEND_INSTITUTE_ID", nullable = false)
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private Institute id_send_institute;
+
     @JoinColumn(name = "ID_DUPLICATE_INSTITUTE_ID", nullable = false)
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -89,6 +95,14 @@ public class Duplicate {
     @Composition
     @OneToMany(mappedBy = "duplicate")
     private List<DuplicateLine> duplicateLines;
+
+    public Institute getId_send_institute() {
+        return id_send_institute;
+    }
+
+    public void setId_send_institute(Institute id_send_institute) {
+        this.id_send_institute = id_send_institute;
+    }
 
     public List<DuplicateLine> getDuplicateLines() {
         return duplicateLines;

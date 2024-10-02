@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="genedatabank">
+        <addColumn tableName="DUPLICATE">
+            <column name="ID_SEND_INSTITUTE_ID" type="UUID"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="ID_SEND_INSTITUTE_ID" tableName="DUPLICATE"/>
+    </changeSet>
+    <changeSet id="2" author="genedatabank">
+        <createIndex indexName="IDX_DUPLICATE_ID_SEND_INSTITUTE" tableName="DUPLICATE">
+            <column name="ID_SEND_INSTITUTE_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="ID_SEND_INSTITUTE_ID" baseTableName="DUPLICATE"
+                                 constraintName="FK_DUPLICATE_ON_ID_SEND_INSTITUTE" referencedColumnNames="ID"
+                                 referencedTableName="INSTITUTE"/>
+    </changeSet>
+</databaseChangeLog>
