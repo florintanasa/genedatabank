@@ -13,8 +13,8 @@ import io.jmix.securityflowui.role.annotation.ViewPolicy;
 public interface MasterRole {
     String CODE = "master";
 
-    @MenuPolicy(menuIds = {"Taxonomy.list", "Pasaport.list", "Deposit.list", "SysFile.list", "Aegisstat.list", "Collsrc.list", "Historic.list", "Georefmeth.list", "Acceconf.list", "Mlsstat.list", "Sampstat.list", "Culturecateg.list", "Curators.list", "Scope_.list", "TypeDocuments.list", "Storage.list", "Country.list", "Zonesiruta.list", "Countysiruta.list", "Localitysiruta.list", "Roadtype.list", "Street.list", "Partners.list", "Institute.list"})
-    @ViewPolicy(viewIds = {"Taxonomy.list", "Pasaport.list", "Deposit.list", "SysFile.list", "Aegisstat.list", "Collsrc.list", "Historic.list", "Georefmeth.list", "Acceconf.list", "Mlsstat.list", "Sampstat.list", "Culturecateg.list", "Curators.list", "Scope_.list", "TypeDocuments.list", "Storage.list", "Country.list", "Zonesiruta.list", "Countysiruta.list", "Localitysiruta.list", "Roadtype.list", "Street.list", "Partners.list", "Institute.list", "Taxonomy.detail", "Zonesiruta.detail", "TypeDocuments.detail", "SysFile.detail", "Street.detail", "Storage.detail", "Scope_.detail", "Sampstat.detail", "Roadtype.detail", "Pasaport.detail", "Partners.detail", "Mlsstat.detail", "Localitysiruta.detail", "Institute.detail", "Historic.detail", "Georefmeth.detail", "Deposit.detail", "Curators.detail", "Culturecateg.detail", "Countysiruta.detail", "Country.detail", "Collsrc.detail", "Aegisstat.detail", "Acceconf.detail", "inputDialog"})
+    @MenuPolicy(menuIds = {"Taxonomy.list", "Pasaport.list", "Deposit.list", "SysFile.list", "Aegisstat.list", "Collsrc.list", "Historic.list", "Georefmeth.list", "Acceconf.list", "Mlsstat.list", "Sampstat.list", "Culturecateg.list", "Curators.list", "Scope_.list", "TypeDocuments.list", "Storage.list", "Country.list", "Zonesiruta.list", "Countysiruta.list", "Localitysiruta.list", "Roadtype.list", "Street.list", "Partners.list", "Institute.list", "Duplicate.list"})
+    @ViewPolicy(viewIds = {"Taxonomy.list", "Pasaport.list", "Deposit.list", "SysFile.list", "Aegisstat.list", "Collsrc.list", "Historic.list", "Georefmeth.list", "Acceconf.list", "Mlsstat.list", "Sampstat.list", "Culturecateg.list", "Curators.list", "Scope_.list", "TypeDocuments.list", "Storage.list", "Country.list", "Zonesiruta.list", "Countysiruta.list", "Localitysiruta.list", "Roadtype.list", "Street.list", "Partners.list", "Institute.list", "Taxonomy.detail", "Zonesiruta.detail", "TypeDocuments.detail", "SysFile.detail", "Street.detail", "Storage.detail", "Scope_.detail", "Sampstat.detail", "Roadtype.detail", "Pasaport.detail", "Partners.detail", "Mlsstat.detail", "Localitysiruta.detail", "Institute.detail", "Historic.detail", "Georefmeth.detail", "Deposit.detail", "Curators.detail", "Culturecateg.detail", "Countysiruta.detail", "Country.detail", "Collsrc.detail", "Aegisstat.detail", "Acceconf.detail", "inputDialog", "Duplicate.list", "Duplicate.detail", "DuplicateLine.detail"})
     void screens();
 
     @EntityAttributePolicy(entityClass = Acceconf.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
@@ -116,4 +116,12 @@ public interface MasterRole {
     @EntityAttributePolicy(entityClass = Zonesiruta.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     @EntityPolicy(entityClass = Zonesiruta.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.UPDATE, EntityPolicyAction.CREATE})
     void zonesiruta();
+
+    @EntityAttributePolicy(entityClass = Duplicate.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
+    @EntityPolicy(entityClass = Duplicate.class, actions = {EntityPolicyAction.CREATE, EntityPolicyAction.UPDATE, EntityPolicyAction.READ})
+    void duplicate();
+
+    @EntityAttributePolicy(entityClass = DuplicateLine.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
+    @EntityPolicy(entityClass = DuplicateLine.class, actions = {EntityPolicyAction.CREATE, EntityPolicyAction.READ, EntityPolicyAction.UPDATE})
+    void duplicateLine();
 }
