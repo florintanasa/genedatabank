@@ -139,8 +139,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         String NewDepositCode;
         // clear the field for Code Deposit
         deposit_codeField.clear();
-        // If Deposit code is null load the last code inserted for specific Storage
-        if (getEditedEntity().getDeposit_code() == null) {
+        // If Deposit code is null and is for long or medium time load the last code inserted for specific Storage
+        if (getEditedEntity().getDeposit_code() == null && (getEditedEntity().getId_storage().getCodespe() == 12 || getEditedEntity().getId_storage().getCodespe() == 13)) {
             /* Next lines work for scalar only
                String lastCode = dataManager
                        .loadValue("select d.deposit_code from Deposit d where d.id_storage=:id_storageFields order by d.createdDate desc",
