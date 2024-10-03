@@ -1,0 +1,2 @@
+Institute code,Deposit box number,Collection name,Accession number,Full scientific name,Country of collection or source,Number of seeds,Regeneration year,Other accession designations,Accession name,Accession URL,Accession Doi,Is test accession,Deposit to existing box
+${instCode},${depositBox},${collName},${acceNumber},${fullTaxonomy},${country},${qtySeeds},${yearReg},${otherAcce},${acceName},${acceURL},${acceDoi},${isTest},${depositInBox}
