@@ -1,3 +1,8 @@
+/**
+ * @author : Florin Tanasă
+ * @since : 29.08.2023
+ **/
+
 package com.genebank.genedatabank.view.duplicateline;
 
 import com.genebank.genedatabank.entity.Deposit;

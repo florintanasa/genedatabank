@@ -1,20 +1,35 @@
+/**
+ * @author : Florin Tanasă
+ * @since : 29.09.2029
+ **/
+
 package com.genebank.genedatabank.view.duplicate;
 
 import com.genebank.genedatabank.entity.Duplicate;
 import com.genebank.genedatabank.entity.DuplicateStatus;
+import com.genebank.genedatabank.entity.User;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.Html;
+import com.vaadin.flow.component.grid.ItemClickEvent;
 import com.vaadin.flow.router.Route;
+import io.jmix.core.DataManager;
 import io.jmix.core.TimeSource;
+import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Dialogs;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.action.DialogAction;
+import io.jmix.flowui.action.list.EditAction;
+import io.jmix.flowui.action.list.ItemTrackingAction;
+import io.jmix.flowui.action.list.ReadAction;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
+import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.CollectionLoader;
-import io.jmix.flowui.model.DataContext;
+import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Objects;
 
 
 @Route(value = "duplicates", layout = MainView.class)
@@ -26,11 +41,9 @@ public class DuplicateListView extends StandardListView<Duplicate> {
 
     @ViewComponent
     private DataGrid<Duplicate> duplicatesDataGrid;
-    @ViewComponent
-    private DataContext dataContext;
     @Autowired
     private Notifications notifications;
-    @Autowired
+    @ViewComponent
     private MessageBundle messageBundle;
     @ViewComponent
     private CollectionLoader<Duplicate> duplicatesDl;
@@ -38,6 +51,68 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     private Dialogs dialogs;
     @Autowired
     private TimeSource timeSource;
+    @Autowired
+    private DataManager dataManager;
+    @ViewComponent
+    private JmixButton editBtn;
+    @ViewComponent("duplicatesDataGrid.read")
+    private ReadAction<Duplicate> duplicatesDataGridRead;
+    @ViewComponent("duplicatesDataGrid.edit")
+    private EditAction<Duplicate> duplicatesDataGridEdit;
+    @ViewComponent("duplicatesDataGrid.markAsConfirmed")
+    private ItemTrackingAction<Duplicate> duplicatesDataGridMarkAsConfirmed;
+    @ViewComponent("duplicatesDataGrid.markAsInDelivery")
+    private ItemTrackingAction<Duplicate> duplicatesDataGridMarkAsInDelivery;
+    @ViewComponent("duplicatesDataGrid.markAsDelivered")
+    private ItemTrackingAction<Duplicate> duplicatesDataGridMarkAsDelivered;
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
+
+
+    @Subscribe(id = "duplicatesDc", target = Target.DATA_CONTAINER)
+    public void onDuplicatesDcItemChange(final InstanceContainer.ItemChangeEvent<Duplicate> event) {
+        actionsDuplicatesDataGrid();
+    }
+
+    @Subscribe("duplicatesDataGrid")
+    public void onDuplicatesDataGridItemClick(final ItemClickEvent<Duplicate> event) {
+        actionsDuplicatesDataGrid();
+    }
+
+    private void actionsDuplicatesDataGrid() {
+        final User user = (User) currentAuthentication.getUser();
+        if (!Objects.equals(user.getUsername(), "admin") ) {
+            if (duplicatesDataGrid.getSingleSelectedItem() == null) {
+                duplicatesDataGridMarkAsConfirmed.setEnabled(false);
+                duplicatesDataGridMarkAsInDelivery.setEnabled(false);
+                duplicatesDataGridMarkAsDelivered.setEnabled(false);
+            } else if (duplicatesDataGrid.getSingleSelectedItem().getStatus().equals(DuplicateStatus.PREPARED)) {
+                editBtn.setEnabled(true);
+                editBtn.setAction(duplicatesDataGridEdit);// is necessary because the button remain for Read action when I am back
+                duplicatesDataGridMarkAsConfirmed.setEnabled(true);
+                duplicatesDataGridMarkAsInDelivery.setEnabled(false);
+                duplicatesDataGridMarkAsDelivered.setEnabled(false);
+            } else if (duplicatesDataGrid.getSingleSelectedItem().getStatus().equals(DuplicateStatus.CONFIRMED)) {
+                editBtn.setAction(duplicatesDataGridRead);
+                duplicatesDataGridEdit.setEnabled(false);
+                duplicatesDataGridMarkAsConfirmed.setEnabled(false);
+                duplicatesDataGridMarkAsInDelivery.setEnabled(true);
+                duplicatesDataGridMarkAsDelivered.setEnabled(false);
+            } else if (duplicatesDataGrid.getSingleSelectedItem().getStatus().equals(DuplicateStatus.IN_DELIVERY)) {
+                editBtn.setAction(duplicatesDataGridRead);
+                duplicatesDataGridEdit.setEnabled(false);
+                duplicatesDataGridMarkAsConfirmed.setEnabled(false);
+                duplicatesDataGridMarkAsInDelivery.setEnabled(false);
+                duplicatesDataGridMarkAsDelivered.setEnabled(true);
+            } else if (duplicatesDataGrid.getSingleSelectedItem().getStatus().equals(DuplicateStatus.DELIVERED)) {
+                editBtn.setAction(duplicatesDataGridRead);
+                duplicatesDataGridEdit.setEnabled(false);
+                duplicatesDataGridMarkAsConfirmed.setEnabled(false);
+                duplicatesDataGridMarkAsInDelivery.setEnabled(false);
+                duplicatesDataGridMarkAsDelivered.setEnabled(false);
+            }
+        }
+    }
 
     @Subscribe("duplicatesDataGrid.markAsConfirmed")
     public void onDuplicatesDataGridMarkAsConfirmed(final ActionPerformedEvent event) {
@@ -82,7 +157,8 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         Duplicate duplicateToMarkAsConfirmed = duplicatesDataGrid.getSingleSelectedItem();
         if (duplicateToMarkAsConfirmed != null) {
             duplicateToMarkAsConfirmed.setStatus(DuplicateStatus.CONFIRMED);
-            dataContext.save();
+            //dataContext.save();
+            dataManager.save(duplicateToMarkAsConfirmed);
             notifications.create(messageBundle.getMessage("duplicate.confirmed")).show();
             duplicatesDl.load();
         }
@@ -93,7 +169,8 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         if (duplicateToMarkAsInDelivery != null) {
             duplicateToMarkAsInDelivery.setStatus(DuplicateStatus.IN_DELIVERY);
             duplicateToMarkAsInDelivery.setSendDate(timeSource.now().toLocalDate());
-            dataContext.save();
+            //dataContext.save();
+            dataManager.save(duplicateToMarkAsInDelivery);
             notifications.create(messageBundle.getMessage("duplicate.inDelivery")).show();
             duplicatesDl.load();
         }
@@ -102,8 +179,9 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     private void markCurrentDuplicateAsConfirmedDelivery() {
         Duplicate duplicateToMarkAsConfirmedDelivery = duplicatesDataGrid.getSingleSelectedItem();
         if (duplicateToMarkAsConfirmedDelivery != null) {
-            duplicateToMarkAsConfirmedDelivery.setStatus(DuplicateStatus.CONFIRMED);
-            dataContext.save();
+            duplicateToMarkAsConfirmedDelivery.setStatus(DuplicateStatus.DELIVERED);
+            //dataContext.save();
+            dataManager.save(duplicateToMarkAsConfirmedDelivery);
             notifications.create(messageBundle.getMessage("duplicate.delivery")).show();
             duplicatesDl.load();
         }

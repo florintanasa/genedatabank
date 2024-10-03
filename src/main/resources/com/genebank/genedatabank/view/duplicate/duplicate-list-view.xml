@@ -49,7 +49,7 @@
                   minHeight="20em"
                   dataContainer="duplicatesDc"
                   columnReorderingAllowed="true"
-                  selectionMode="MULTI">
+                  selectionMode="SINGLE">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
@@ -60,6 +60,7 @@
                 <action id="markAsConfirmed" type="list_itemTracking" text="msg://markAsConfirmed" icon="CHECK"/>
                 <action id="markAsInDelivery" type="list_itemTracking" text="msg://markAsInDelivery" icon="TRUCK"/>
                 <action id="markAsDelivered" type="list_itemTracking" text="msg://markAsDelivered" icon="CHECK_CIRCLE_O"/>
+                <action id="read" type="list_read"/>
             </actions>
             <columns resizable="true">
                 <column property="id_send_institute" autoWidth="true"/>
