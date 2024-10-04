@@ -9,6 +9,7 @@ import com.genebank.genedatabank.entity.Duplicate;
 import com.genebank.genedatabank.entity.DuplicateStatus;
 import com.genebank.genedatabank.entity.User;
 import com.genebank.genedatabank.view.main.MainView;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.grid.ItemClickEvent;
 import com.vaadin.flow.router.Route;
@@ -22,11 +23,16 @@ import io.jmix.flowui.action.list.EditAction;
 import io.jmix.flowui.action.list.ItemTrackingAction;
 import io.jmix.flowui.action.list.ReadAction;
 import io.jmix.flowui.component.grid.DataGrid;
+import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.CollectionLoader;
 import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
+import io.jmix.reports.entity.Report;
+import io.jmix.reports.entity.ReportOutputType;
+import io.jmix.reports.runner.ReportRunner;
+import io.jmix.reports.yarg.reporting.ReportOutputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
@@ -67,6 +73,10 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     private ItemTrackingAction<Duplicate> duplicatesDataGridMarkAsDelivered;
     @Autowired
     private CurrentAuthentication currentAuthentication;
+    @Autowired
+    private ReportRunner reportRunner;
+    @Autowired
+    private Downloader downloader;
 
 
     @Subscribe(id = "duplicatesDc", target = Target.DATA_CONTAINER)
@@ -77,6 +87,13 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     @Subscribe("duplicatesDataGrid")
     public void onDuplicatesDataGridItemClick(final ItemClickEvent<Duplicate> event) {
         actionsDuplicatesDataGrid();
+        if (duplicatesDataGrid.getSingleSelectedItem() == null) {
+            excelExportSvalBtn.setEnabled(false);
+        } else if (!duplicatesDataGrid.getSingleSelectedItem().getId_duplicate_institute().getInstcode().equals("NOR051")) {
+            excelExportSvalBtn.setEnabled(false);
+        } else if (duplicatesDataGrid.getSingleSelectedItem().getId_duplicate_institute().getInstcode().equals("NOR051")) {
+            excelExportSvalBtn.setEnabled(true);
+        }
     }
 
     private void actionsDuplicatesDataGrid() {
@@ -186,4 +203,20 @@ public class DuplicateListView extends StandardListView<Duplicate> {
             duplicatesDl.load();
         }
     }
+
+    @ViewComponent
+    private JmixButton excelExportSvalBtn;
+
+    @Subscribe(id = "excelExportSvalBtn", subject = "clickListener")
+    public void onExcelExportSvalBtnClick(final ClickEvent<JmixButton> event) {
+        ReportOutputDocument svalbard = reportRunner.byReportCode("RepSval")
+                .addParam("duplicate", duplicatesDataGrid.getSelectedItems().iterator().next())
+                .withTemplateCode("Sval_V1")
+                .withOutputType(ReportOutputType.XLSX)
+                .run();
+        downloader.download(svalbard.getContent(), svalbard.getDocumentName());
+    }
+
+    
+    
 }

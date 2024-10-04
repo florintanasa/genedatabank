@@ -36,6 +36,7 @@
             <button id="createBtn" action="duplicatesDataGrid.create"/>
             <button id="editBtn" action="duplicatesDataGrid.edit"/>
             <button id="excelExportBtn" action="duplicatesDataGrid.excelExport"/>
+            <button id="excelExportSvalBtn" text="msg://excelExportSval" icon="vaadin:file-table"/>
             <button id="jsonExportBtn" action="duplicatesDataGrid.jsonExport"/>
             <button id="refreshBtn" action="duplicatesDataGrid.refresh"/>
             <button id="removeBtn" action="duplicatesDataGrid.remove"/>
