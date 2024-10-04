@@ -29,7 +29,6 @@ import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.CollectionLoader;
 import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
-import io.jmix.reports.entity.Report;
 import io.jmix.reports.entity.ReportOutputType;
 import io.jmix.reports.runner.ReportRunner;
 import io.jmix.reports.yarg.reporting.ReportOutputDocument;
