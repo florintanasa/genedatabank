@@ -28,7 +28,7 @@
             </fetchPlan>
             <loader id="pasaportsDl">
                 <query>
-                    <![CDATA[select e from Pasaport e]]>
+                    <![CDATA[select e from Pasaport e order by e.createdDate]]>
                 </query>
             </loader>
         </collection>
