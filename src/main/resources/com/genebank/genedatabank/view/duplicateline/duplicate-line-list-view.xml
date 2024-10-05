@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://duplicateLineListView.title"
+      focusComponent="duplicateLinesDataGrid">
+    <data>
+        <collection id="duplicateLinesDc"
+                    class="com.genebank.genedatabank.entity.DuplicateLine">
+            <fetchPlan extends="_base">
+                <property name="duplicate" fetchPlan="_base">
+                    <property name="id_send_institute" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="duplicateLinesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from DuplicateLine e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="duplicateLinesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="duplicateLinesDataGrid.create"/>
+            <button id="editBtn" action="duplicateLinesDataGrid.edit"/>
+            <button id="excelExportBtn" action="duplicateLinesDataGrid.excelExport"/>
+            <button id="jsonExportBtn" action="duplicateLinesDataGrid.jsonExport"/>
+            <button id="refreshBtn" action="duplicateLinesDataGrid.refresh"/>
+            <button id="removeBtn" action="duplicateLinesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="duplicateLinesDl"/>
+        </hbox>
+        <dataGrid id="duplicateLinesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="duplicateLinesDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="excelExport" type="grdexp_excelExport"/>
+                <action id="jsonExport" type="grdexp_jsonExport"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="duplicate"/>
+                <column property="quantity"/>
+                <column property="dDepositCode"/>
+                <column property="dStorage"/>
+                <column property="dYearstorage"/>
+                <column property="dYearmulti"/>
+                <column property="dMultiply"/>
+                <column property="dYeargerm"/>
+                <column property="dPercentage"/>
+                <column property="dStock"/>
+                <column property="dHumidity"/>
+                <column property="dMmb"/>
+                <column property="dOriginal"/>
+                <column property="pAccenumb"/>
+                <column property="pDoi"/>
+                <column property="pCollnumb"/>
+                <column property="pCollmissid"/>
+                <column property="tFammily"/>
+                <column property="tGenus"/>
+                <column property="tSpecies"/>
+                <column property="tSpauthor"/>
+                <column property="tSubtaxa"/>
+                <column property="tSubauthor"/>
+                <column property="tCropnume"/>
+                <column property="tCropname"/>
+                <column property="pAccename"/>
+                <column property="pAcqdate"/>
+                <column property="pOrigdate"/>
+                <column property="stateName"/>
+                <column property="countyName"/>
+                <column property="localityName"/>
+                <column property="pLatitude"/>
+                <column property="pLongitude"/>
+                <column property="pElevation"/>
+                <column property="gName"/>
+                <column property="pColldate"/>
+                <column property="sName"/>
+                <column property="pAncest"/>
+                <column property="cName"/>
+                <column property="donorInstcode"/>
+                <column property="pDonornumb"/>
+                <column property="pOthernumb"/>
+                <column property="pTempnumb"/>
+                <column property="pAcceurl"/>
+                <column property="pAcceconf"/>
+                <column property="mName"/>
+                <column property="aName"/>
+                <column property="hName"/>
+                <column property="tCultCateg"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
