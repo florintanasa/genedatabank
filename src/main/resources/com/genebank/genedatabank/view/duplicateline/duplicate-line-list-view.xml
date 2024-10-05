@@ -55,6 +55,7 @@
                 <action id="jsonExport" type="grdexp_jsonExport"/>
                 <action id="refresh" type="list_refresh"/>
                 <action id="remove" type="list_remove"/>
+                <action id="read" type="list_read"/>
             </actions>
             <columns resizable="true">
                 <column property="duplicate"/>
