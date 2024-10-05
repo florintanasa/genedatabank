@@ -58,7 +58,12 @@
                 <action id="read" type="list_read"/>
             </actions>
             <columns resizable="true">
-                <column property="duplicate"/>
+                <column property="duplicate.id_send_institute.full_name_ro" header="msg://column.header"/>
+                <column property="duplicate.id_duplicate_institute"/>
+                <column property="duplicate.depositBoxNumb"/>
+                <column property="duplicate.theDate"/>
+                <column property="duplicate.sendDate"/>
+                <column property="duplicate.status"/>
                 <column property="quantity"/>
                 <column property="dDepositCode"/>
                 <column property="dStorage"/>
