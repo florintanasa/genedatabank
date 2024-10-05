@@ -5,17 +5,21 @@
 
 package com.genebank.genedatabank.view.duplicate;
 
-import com.genebank.genedatabank.entity.Duplicate;
-import com.genebank.genedatabank.entity.DuplicateStatus;
-import com.genebank.genedatabank.entity.Institute;
-import com.genebank.genedatabank.entity.User;
+import com.genebank.genedatabank.entity.*;
 import com.genebank.genedatabank.view.main.MainView;
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.combobox.EntityComboBox;
+import io.jmix.flowui.component.grid.DataGrid;
+import io.jmix.flowui.download.Downloader;
+import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.view.*;
+import io.jmix.reports.entity.ReportOutputType;
+import io.jmix.reports.runner.ReportRunner;
+import io.jmix.reports.yarg.reporting.ReportOutputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
@@ -37,6 +41,12 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;
+    @Autowired
+    private ReportRunner reportRunner;
+    @ViewComponent
+    private DataGrid<DuplicateLine> duplicateLinesDataGrid;
+    @Autowired
+    private Downloader downloader;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<Duplicate> event) {
@@ -57,6 +67,16 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
             event.getErrors().add(messageBundle.getMessage("can_not_insert_for_over_institute"));
             notifications.create("HOPA", can_not_insert_for_over_institute).withDuration(5000).show();
         }
+    }
+
+    @Subscribe(id = "printBtn75x35", subject = "clickListener")
+    public void onPrintBtn75x35Click(final ClickEvent<JmixButton> event) {
+        ReportOutputDocument label = reportRunner.byReportCode("LabSval")
+                .addParam("duplicateline",duplicateLinesDataGrid.getSelectedItems().iterator().next())
+                .withTemplateCode("LabSval_V1")
+                .withOutputType(ReportOutputType.PDF)
+                .run();
+        downloader.download(label.getContent(), label.getDocumentName());
     }
 
     
