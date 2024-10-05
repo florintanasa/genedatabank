@@ -60,6 +60,7 @@
             <button id="excelExportBtn" action="duplicateLinesDataGrid.excelExport"/>
             <button id="jsonExportBtn" action="duplicateLinesDataGrid.jsonExport"/>
             <button action="duplicateLinesDataGrid.remove"/>
+            <button id="printBtn75x35" text="Print 75x35" title="Printare eticheta 75x35mm" icon="PRINT"/>
         </hbox>
         <dataGrid id="duplicateLinesDataGrid" dataContainer="duplicateLinesDc" width="100%" minHeight="20em">
             <actions>
