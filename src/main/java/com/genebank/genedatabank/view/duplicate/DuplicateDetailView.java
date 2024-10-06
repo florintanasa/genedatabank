@@ -47,6 +47,8 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
     private DataGrid<DuplicateLine> duplicateLinesDataGrid;
     @Autowired
     private Downloader downloader;
+    @ViewComponent
+    private JmixButton printBtn75x35;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<Duplicate> event) {
@@ -57,6 +59,22 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
         //focus to Duplicate Institute field for choose
         id_duplicate_instituteComboBox.focus();
     }
+
+    @Subscribe
+    public void onBeforeShow(final BeforeShowEvent event) {
+        // disable Print button for label
+        printBtn75x35.setEnabled(false);
+        // check if one item is selected to validate print button
+        duplicateLinesDataGrid.addItemClickListener(ClickEvent -> {
+          if (duplicateLinesDataGrid.getSelectedItems().isEmpty()) {
+              printBtn75x35.setEnabled(false);
+          } else if (duplicateLinesDataGrid.getSelectedItems().size() == 1) {
+              printBtn75x35.setEnabled(true);
+          }
+        });
+    }
+    
+    
 
     // check what user try to save, if is not from the same institute him can't save
     @Subscribe
