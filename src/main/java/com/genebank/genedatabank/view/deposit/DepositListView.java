@@ -42,6 +42,12 @@ public class DepositListView extends StandardListView<Deposit> {
     private ReportRunner reportRunner;
     @Autowired
     private Downloader downloader;
+    @ViewComponent
+    private JmixButton printBtn;
+    @ViewComponent
+    private JmixButton printBtn75x35;
+    @ViewComponent
+    private JmixButton printBtn76x50;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -75,6 +81,32 @@ public class DepositListView extends StandardListView<Deposit> {
         //Setting the position of the created column.
         depositsDataGrid.setColumnPosition(qrcodeColumn, 0);
     }
+
+    @Subscribe
+    public void onBeforeShow(final BeforeShowEvent event) {
+        // disable print buttons for labels because is nothing selected
+        printBtn.setEnabled(false);
+        printBtn75x35.setEnabled(false);
+        printBtn76x50.setEnabled(false);
+        // disable print buttons for labels if selected more than one item or none item is selected
+        depositsDataGrid.addSelectionListener(SelectionEvent -> {
+            if (depositsDataGrid.getSelectedItems().isEmpty()) {
+                printBtn.setEnabled(false);
+                printBtn75x35.setEnabled(false);
+                printBtn76x50.setEnabled(false);
+            } else if (depositsDataGrid.getSelectedItems().size() == 1) {
+                printBtn.setEnabled(true);
+                printBtn75x35.setEnabled(true);
+                printBtn76x50.setEnabled(true);
+            } else if (depositsDataGrid.getSelectedItems().size() >= 2) {
+                printBtn.setEnabled(false);
+                printBtn75x35.setEnabled(false);
+                printBtn76x50.setEnabled(false);
+            }
+        });
+    }
+    
+    
 
     @Subscribe("printBtn75x35")
     public void onPrintBtn75x35(ClickEvent<JmixButton> event) {
