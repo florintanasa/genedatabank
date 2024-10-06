@@ -46,7 +46,7 @@
                   width="100%"
                   minHeight="20em"
                   dataContainer="depositsDc"
-                  selectionMode="MULTI">
+                  selectionMode="MULTI" multiSort="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
