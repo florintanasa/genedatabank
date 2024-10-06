@@ -1,6 +1,7 @@
 package com.genebank.genedatabank.view.deposit;
 
 import com.genebank.genedatabank.entity.Deposit;
+import com.genebank.genedatabank.security.OnlyViewRole;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.grid.Grid;
@@ -10,6 +11,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 import io.jmix.core.FileRef;
 import io.jmix.core.FileStorage;
+import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.download.Downloader;
@@ -19,7 +21,10 @@ import io.jmix.reports.entity.ReportOutputType;
 import io.jmix.reports.runner.ReportRunner;
 import io.jmix.reports.yarg.reporting.ReportOutputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.stream.Collectors;
 
 
 /**
@@ -48,6 +53,8 @@ public class DepositListView extends StandardListView<Deposit> {
     private JmixButton printBtn75x35;
     @ViewComponent
     private JmixButton printBtn76x50;
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -84,17 +91,19 @@ public class DepositListView extends StandardListView<Deposit> {
 
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
+        Authentication authentication = currentAuthentication.getAuthentication();
         // disable print buttons for labels because is nothing selected
         printBtn.setEnabled(false);
         printBtn75x35.setEnabled(false);
         printBtn76x50.setEnabled(false);
         // disable print buttons for labels if selected more than one item or none item is selected
+        // or user have "only-view" role code
         depositsDataGrid.addSelectionListener(SelectionEvent -> {
             if (depositsDataGrid.getSelectedItems().isEmpty()) {
                 printBtn.setEnabled(false);
                 printBtn75x35.setEnabled(false);
                 printBtn76x50.setEnabled(false);
-            } else if (depositsDataGrid.getSelectedItems().size() == 1) {
+            } else if (depositsDataGrid.getSelectedItems().size() == 1 && !getRoleNames(authentication).contains(OnlyViewRole.CODE)) {
                 printBtn.setEnabled(true);
                 printBtn75x35.setEnabled(true);
                 printBtn76x50.setEnabled(true);
@@ -106,7 +115,11 @@ public class DepositListView extends StandardListView<Deposit> {
         });
     }
     
-    
+    private String getRoleNames(Authentication authentication) {
+        return authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining());
+    }
 
     @Subscribe("printBtn75x35")
     public void onPrintBtn75x35(ClickEvent<JmixButton> event) {
