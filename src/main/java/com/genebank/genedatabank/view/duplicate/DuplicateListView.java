@@ -77,6 +77,14 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     @Autowired
     private Downloader downloader;
 
+    @Subscribe
+    public void onInit(final InitEvent event) {
+        //invalidate button for Svalbard
+        excelExportSvalBtn.setEnabled(false);
+    }
+    
+    
+
 
     @Subscribe(id = "duplicatesDc", target = Target.DATA_CONTAINER)
     public void onDuplicatesDcItemChange(final InstanceContainer.ItemChangeEvent<Duplicate> event) {
@@ -102,6 +110,8 @@ public class DuplicateListView extends StandardListView<Duplicate> {
                 duplicatesDataGridMarkAsConfirmed.setEnabled(false);
                 duplicatesDataGridMarkAsInDelivery.setEnabled(false);
                 duplicatesDataGridMarkAsDelivered.setEnabled(false);
+                editBtn.setEnabled(false);
+                excelExportSvalBtn.setEnabled(false);
             } else if (duplicatesDataGrid.getSingleSelectedItem().getStatus().equals(DuplicateStatus.PREPARED)) {
                 editBtn.setEnabled(true);
                 editBtn.setAction(duplicatesDataGridEdit);// is necessary because the button remain for Read action when I am back
@@ -173,7 +183,6 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         Duplicate duplicateToMarkAsConfirmed = duplicatesDataGrid.getSingleSelectedItem();
         if (duplicateToMarkAsConfirmed != null) {
             duplicateToMarkAsConfirmed.setStatus(DuplicateStatus.CONFIRMED);
-            //dataContext.save();
             dataManager.save(duplicateToMarkAsConfirmed);
             notifications.create(messageBundle.getMessage("duplicate.confirmed")).show();
             duplicatesDl.load();
@@ -185,7 +194,6 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         if (duplicateToMarkAsInDelivery != null) {
             duplicateToMarkAsInDelivery.setStatus(DuplicateStatus.IN_DELIVERY);
             duplicateToMarkAsInDelivery.setSendDate(timeSource.now().toLocalDate());
-            //dataContext.save();
             dataManager.save(duplicateToMarkAsInDelivery);
             notifications.create(messageBundle.getMessage("duplicate.inDelivery")).show();
             duplicatesDl.load();
@@ -196,7 +204,6 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         Duplicate duplicateToMarkAsConfirmedDelivery = duplicatesDataGrid.getSingleSelectedItem();
         if (duplicateToMarkAsConfirmedDelivery != null) {
             duplicateToMarkAsConfirmedDelivery.setStatus(DuplicateStatus.DELIVERED);
-            //dataContext.save();
             dataManager.save(duplicateToMarkAsConfirmedDelivery);
             notifications.create(messageBundle.getMessage("duplicate.delivery")).show();
             duplicatesDl.load();
@@ -215,7 +222,4 @@ public class DuplicateListView extends StandardListView<Duplicate> {
                 .run();
         downloader.download(svalbard.getContent(), svalbard.getDocumentName());
     }
-
-    
-    
 }
