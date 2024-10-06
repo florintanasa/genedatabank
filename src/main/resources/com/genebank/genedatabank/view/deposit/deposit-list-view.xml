@@ -12,7 +12,7 @@
             </fetchPlan>
             <loader id="depositsDl">
                 <query>
-                    <![CDATA[select e from Deposit e]]>
+                    <![CDATA[select e from Deposit e order by e.id_accenumb.createdDate, e.id_storage.codespe]]>
                 </query>
             </loader>
         </collection>
