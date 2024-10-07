@@ -97,7 +97,7 @@ public class DepositListView extends StandardListView<Deposit> {
         printBtn75x35.setEnabled(false);
         printBtn76x50.setEnabled(false);
         // disable print buttons for labels if selected more than one item or none item is selected
-        // or user have "only-view" role code
+        // or for the user what have "only-view" role code
         depositsDataGrid.addSelectionListener(SelectionEvent -> {
             if (depositsDataGrid.getSelectedItems().isEmpty()) {
                 printBtn.setEnabled(false);
