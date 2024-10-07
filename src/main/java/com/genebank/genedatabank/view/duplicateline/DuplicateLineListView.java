@@ -12,8 +12,6 @@ import com.vaadin.flow.router.Route;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.action.list.CreateAction;
 import io.jmix.flowui.action.list.EditAction;
-import io.jmix.flowui.action.list.ReadAction;
-import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,10 +26,6 @@ import java.util.Objects;
 public class DuplicateLineListView extends StandardListView<DuplicateLine> {
     @ViewComponent("duplicateLinesDataGrid.create")
     private CreateAction<DuplicateLine> duplicateLinesDataGridCreate;
-    @ViewComponent
-    private JmixButton editBtn;
-    @ViewComponent("duplicateLinesDataGrid.read")
-    private ReadAction<DuplicateLine> duplicateLinesDataGridRead;
     @ViewComponent("duplicateLinesDataGrid.edit")
     private EditAction<DuplicateLine> duplicateLinesDataGridEdit;
     @Autowired
