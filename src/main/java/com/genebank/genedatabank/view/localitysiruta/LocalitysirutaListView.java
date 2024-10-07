@@ -1,3 +1,8 @@
+/**
+ * @author : Florin Tanasă
+ * @since : 27.07.2024
+ **/
+
 package com.genebank.genedatabank.view.localitysiruta;
 
 import com.genebank.genedatabank.entity.Localitysiruta;

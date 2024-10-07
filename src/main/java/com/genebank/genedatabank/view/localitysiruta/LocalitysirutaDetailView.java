@@ -1,3 +1,8 @@
+/**
+ * @author : Florin Tanasă
+ * @since : 27.07.2023
+ **/
+
 package com.genebank.genedatabank.view.localitysiruta;
 
 import com.flowingcode.vaadin.addons.googlemaps.GoogleMap;
