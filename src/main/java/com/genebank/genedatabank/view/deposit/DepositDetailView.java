@@ -4,6 +4,7 @@ import com.genebank.genedatabank.entity.Deposit;
 
 import com.genebank.genedatabank.entity.Pasaport;
 import com.genebank.genedatabank.entity.Storage;
+import com.genebank.genedatabank.security.OnlyViewRole;
 import com.genebank.genedatabank.view.main.MainView;
 
 import com.google.zxing.BarcodeFormat;
@@ -24,6 +25,7 @@ import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.core.entity.KeyValueEntity;
+import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.combobox.EntityComboBox;
@@ -43,6 +45,8 @@ import io.jmix.flowui.model.DataContext;
 import io.jmix.flowui.upload.TemporaryStorage;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,6 +58,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 /**
@@ -120,6 +125,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private TypedTextField<String> id_taxonomy_speciesField;
     @ViewComponent
     private TypedTextField<String> scopeField;
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -128,8 +135,25 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
+        // create object for got authentication roles
+        Authentication authentication = currentAuthentication.getAuthentication();
+        // display AR code image
         displayImage();
+        // update buttons state
         updateImageButtons(getEditedEntity().getQrcode() != null);
+        // check if the user is part from "only-view" role code
+        // if yes disable buttons for clear and download the QR code image
+        if (getRolesNames(authentication).contains(OnlyViewRole.CODE)) {
+            clearImageqrcodeBtn.setEnabled(false);
+            downloadImageqrcodeBtn.setEnabled(false);
+        }
+    }
+
+    // create method to got roles code names for current authenticate user
+    private String getRolesNames(Authentication authentication) {
+        return authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining());
     }
 
     @Subscribe("id_storageField")
@@ -140,7 +164,9 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         // clear the field for Code Deposit
         deposit_codeField.clear();
         // If Deposit code is null and is for long or medium time load the last code inserted for specific Storage
-        if (getEditedEntity().getDeposit_code() == null && (getEditedEntity().getId_storage().getCodespe() == 12 || getEditedEntity().getId_storage().getCodespe() == 13)) {
+        if (getEditedEntity().getDeposit_code() == null
+                && (getEditedEntity().getId_storage().getCodespe() == 12
+                || getEditedEntity().getId_storage().getCodespe() == 13)) {
             /* Next lines work for scalar only
                String lastCode = dataManager
                        .loadValue("select d.deposit_code from Deposit d where d.id_storage=:id_storageFields order by d.createdDate desc",
@@ -209,6 +235,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
     }
 
+    // method for generate the QR code image
     @Subscribe("generateqrcodeBtn")
     public void onGenerateQrCodeBtnClick(ClickEvent<Button> event) throws IOException, WriterException {
       generateQrCode();
@@ -267,6 +294,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         notifications.create("OK", okMessage).show();
     }
 
+    // method to upload the QR image to database when the button is clicked
     @Subscribe("imageqrcodeUpload")
     public void onImageqrcodeUploadFileUploadSucceed(final FileUploadSucceededEvent<FileStorageUploadField> event){
         Receiver receiver = event.getReceiver();
@@ -286,6 +314,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         }
     }
 
+    // method to download the QR code image from database
     @Subscribe("downloadImageqrcodeBtn")
     public void onDownloadImageQrCodeBtnClick(ClickEvent<Button> event) {
         FileRef fileRef = getEditedEntity().getQrcode();
@@ -299,16 +328,19 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         //downloader.download(content, getEditedEntity().getQrcode().getFileName(), DownloadFormat.JPG);
     }
 
+    // method to delete/clear the QR code image from database
     @Subscribe("clearImageqrcodeBtn")
     public void onClearImageQrCodeBtnClick(ClickEvent<Button> event) {
         getEditedEntity().setQrcode(null);
         displayImage();
     }
 
+    // method to display the QR code image
     public void displayImage() {
         imageqrcode.setVisible(getEditedEntity().getQrcode() != null);
     }
 
+    // method for update the state of buttons
     public void updateImageButtons(boolean enable) {
         downloadImageqrcodeBtn.setVisible(enable);
         clearImageqrcodeBtn.setVisible(enable);
@@ -395,7 +427,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
       detailsQrCode.addComponentAsFirst(hlpBtnDetailsQrCode);
       scopeField.setSuffixComponent(hlpBtnScopeField);
     }
-    
+
+    // method for create a button for tips
     private JmixButton createHelperButton() {
         JmixButton helperButton = uiComponents.create(JmixButton.class);
         helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
