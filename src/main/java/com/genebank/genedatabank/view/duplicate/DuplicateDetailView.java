@@ -6,6 +6,7 @@
 package com.genebank.genedatabank.view.duplicate;
 
 import com.genebank.genedatabank.entity.*;
+import com.genebank.genedatabank.security.OnlyViewRole;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.router.Route;
@@ -21,8 +22,11 @@ import io.jmix.reports.entity.ReportOutputType;
 import io.jmix.reports.runner.ReportRunner;
 import io.jmix.reports.yarg.reporting.ReportOutputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Route(value = "duplicates/:id", layout = MainView.class)
 @ViewController("Duplicate.detail")
@@ -37,7 +41,7 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
     private EntityComboBox<Institute> id_send_instituteComboBox;
     @Autowired
     private CurrentAuthentication currentAuthentication;
-    @Autowired
+    @ViewComponent
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;
@@ -62,19 +66,25 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
 
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
+        Authentication authentication = currentAuthentication.getAuthentication();
         // disable Print button for label
         printBtn75x35.setEnabled(false);
-        // check if one item is selected to validate print button
+        // check if one item is selected to validate print button and the user is not part from "only-view: role code
         duplicateLinesDataGrid.addItemClickListener(ClickEvent -> {
           if (duplicateLinesDataGrid.getSelectedItems().isEmpty()) {
               printBtn75x35.setEnabled(false);
-          } else if (duplicateLinesDataGrid.getSelectedItems().size() == 1) {
+          } else if (duplicateLinesDataGrid.getSelectedItems().size() == 1
+                  && !getRolesNames(authentication).contains(OnlyViewRole.CODE)) {
               printBtn75x35.setEnabled(true);
           }
         });
     }
-    
-    
+
+    private String getRolesNames(Authentication authentication) {
+        return authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining());
+    }
 
     // check what user try to save, if is not from the same institute him can't save
     @Subscribe
