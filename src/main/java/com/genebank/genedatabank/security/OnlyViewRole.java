@@ -1,3 +1,8 @@
+/**
+* @author : Florin Tanasă
+* @since : 06.10.2024
+**/
+
 package com.genebank.genedatabank.security;
 
 import com.genebank.genedatabank.entity.*;
