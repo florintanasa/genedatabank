@@ -15,6 +15,7 @@ import com.google.zxing.common.BitMatrix;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -26,6 +27,7 @@ import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.core.entity.KeyValueEntity;
 import io.jmix.core.security.CurrentAuthentication;
+import io.jmix.flowui.Dialogs;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.combobox.EntityComboBox;
@@ -127,6 +129,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private TypedTextField<String> scopeField;
     @Autowired
     private CurrentAuthentication currentAuthentication;
+    @Autowired
+    private Dialogs dialogs;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -246,34 +250,55 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
     // method to generate the QR code image
     public void generateQrCode() throws WriterException, IOException {
-        //I got the current date and time
-        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        String dateTimeNow = dateTimeFormat.format(now);
-
-        // some variables because exist possibility to some fields to be null
-        String Country;
-        String County;
-        String Locality;
-
-        if (getEditedEntity().getId_accenumb().getId_country() == null) {
-            Country = "NA";
-        }
-        else Country = getEditedEntity().getId_accenumb().getId_country().getName();
-
-        if (getEditedEntity().getId_accenumb().getId_countysiruta() == null ) {
-            County = "NA";
-        }
-        else County = getEditedEntity().getId_accenumb().getId_countysiruta().getName();
-
-        if (getEditedEntity().getId_accenumb().getId_localitysiruta() == null ) {
-            Locality = "NA";
-        }
-        else Locality = getEditedEntity().getId_accenumb().getId_localitysiruta().getName();
-
         // the date necessary to be added in QR code
-        // attention if some is null we cant generate the QR code image
-        String data = getEditedEntity().getId_accenumb().getAccenumb() + "|"
+        // attention if next fields is null or have only free space we cant generate the QR code image
+        if (getEditedEntity().getId_accenumb() == null
+                || getEditedEntity().getId_accenumb().getId_taxonomy() == null
+                || getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() == null
+                || getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() == null
+                || getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa() == null
+                || getEditedEntity().getId_accenumb().getAccname() == null
+                || getEditedEntity().getId_accenumb().getId_sampstat() == null) {
+            Html htmlMessage = new Html(messageBundle.getMessage("htmlMessageNullDataQrCode"));
+            dialogs.createMessageDialog()
+                    .withHeader("Info")
+                    .withContent(htmlMessage)
+                    .open();
+        } else if (getEditedEntity().getId_accenumb().getId_taxonomy().getGenus().isBlank()
+                || getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies().isBlank()
+                || getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa().isBlank()
+                || getEditedEntity().getId_accenumb().getAccname().trim().isBlank()) {
+            Html htmlMessage = new Html(messageBundle.getMessage("htmlMessageBlankDataQrCode"));
+            dialogs.createMessageDialog()
+                    .withHeader("Info")
+                    .withContent(htmlMessage)
+                    .open();
+        }
+        else {
+            // some variables because exist possibility to some fields to be null
+            String Country;
+            String County;
+            String Locality;
+
+            // for next fields we accept to be null or blank
+            // but in this case we complete with NA (Not Allocated)
+            if (getEditedEntity().getId_accenumb().getId_country() == null) {
+                Country = "NA";
+            } else Country = getEditedEntity().getId_accenumb().getId_country().getName();
+            if (getEditedEntity().getId_accenumb().getId_countysiruta() == null ) {
+                County = "NA";
+            } else  County = getEditedEntity().getId_accenumb().getId_countysiruta().getName();
+            if (getEditedEntity().getId_accenumb().getId_localitysiruta() == null ) {
+                Locality = "NA";
+            } else Locality = getEditedEntity().getId_accenumb().getId_localitysiruta().getName();
+
+            // I got the current date and time
+            DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            String dateTimeNow = dateTimeFormat.format(now);
+
+            // construct data necessary to be encode in QR code
+            String data = getEditedEntity().getId_accenumb().getAccenumb() + "|"
                 + getEditedEntity().getDeposit_code() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "|"
@@ -285,20 +310,22 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
                 + getEditedEntity().getId_accenumb().getId_sampstat().getCodespe() + "|"
                 + dateTimeNow;
 
-        File theDir = new File(getQrCodeImageFileMap().get("folder"));
-        if (!theDir.exists()) {
-            theDir.mkdirs();
+            // create directory if not exist
+            File theDir = new File(getQrCodeImageFileMap().get("folder"));
+            if (!theDir.exists()) {
+                theDir.mkdirs();
+            }
+
+            //encode the data in format QR_CODE with width 500 and height 500
+            BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500);
+
+            //Write the matrix in the path
+            MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(getQrCodeImageFileMap().get("fileWithPath")));
+
+            //Notification for user with success messages
+            String okMessage = messageBundle.getMessage("okMessageQRcode");
+            notifications.create("OK", okMessage).show();
         }
-
-        //encode the data in format QR_CODE with width 500 and height 500
-        BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500);
-
-        //Write the matrix in the path
-        MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(getQrCodeImageFileMap().get("fileWithPath")));
-
-        //Notification for user
-        String okMessage = messageBundle.getMessage("okMessageQRcode");
-        notifications.create("OK", okMessage).show();
     }
 
     // method to upload the QR image to database when the button is clicked
@@ -438,10 +465,14 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
     // method for create a button for tips
     private JmixButton createHelperButton() {
+        // create object
         JmixButton helperButton = uiComponents.create(JmixButton.class);
+        // set the icon for button
         helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
+        // set the theme for button
         helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
-        
+
+        // return object
         return helperButton;
     }
 }
