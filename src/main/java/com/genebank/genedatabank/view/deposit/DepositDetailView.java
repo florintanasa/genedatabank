@@ -156,9 +156,10 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
                 .collect(Collectors.joining());
     }
 
+    // method when we change the value in storage type ComboBox
     @Subscribe("id_storageField")
     public void onId_storageFieldComponentValueChange(final AbstractField.ComponentValueChangeEvent<EntityPicker<Storage>, Storage> event) {
-        // Define variable
+        // Define some variables
         String LastDepositCode;
         String NewDepositCode;
         // clear the field for Code Deposit
@@ -207,6 +208,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         }
     }
 
+    // maps (association) keys to values
     Map<String, String> getQrCodeImageFileMap() {
         //I got the current date and time
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -235,17 +237,21 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
 
     }
 
-    // method for generate the QR code image
+    // method for click button to generate the QR code image
     @Subscribe("generateqrcodeBtn")
     public void onGenerateQrCodeBtnClick(ClickEvent<Button> event) throws IOException, WriterException {
-      generateQrCode();
+        // call the method
+        generateQrCode();
     }
+
+    // method to generate the QR code image
     public void generateQrCode() throws WriterException, IOException {
         //I got the current date and time
         DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         String dateTimeNow = dateTimeFormat.format(now);
 
+        // some variables because exist possibility to some fields to be null
         String Country;
         String County;
         String Locality;
@@ -265,7 +271,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         }
         else Locality = getEditedEntity().getId_accenumb().getId_localitysiruta().getName();
 
-        //the date necessary to be added in QR code
+        // the date necessary to be added in QR code
+        // attention if some is null we cant generate the QR code image
         String data = getEditedEntity().getId_accenumb().getAccenumb() + "|"
                 + getEditedEntity().getDeposit_code() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "|"
@@ -314,7 +321,7 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         }
     }
 
-    // method to download the QR code image from database
+    // method for click button to download the QR code image from database
     @Subscribe("downloadImageqrcodeBtn")
     public void onDownloadImageQrCodeBtnClick(ClickEvent<Button> event) {
         FileRef fileRef = getEditedEntity().getQrcode();
@@ -322,13 +329,14 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         //downloadFromFileStorage();
     }
 
+    // method to download the QR code image from database - used first
     private void downloadFromFileStorage(byte[] content) {
         //FileRef fileRef = getEditedEntity().getQrcode();
         //downloader.download(fileRef);
         //downloader.download(content, getEditedEntity().getQrcode().getFileName(), DownloadFormat.JPG);
     }
 
-    // method to delete/clear the QR code image from database
+    // method for click button to delete/clear the QR code image from database
     @Subscribe("clearImageqrcodeBtn")
     public void onClearImageQrCodeBtnClick(ClickEvent<Button> event) {
         getEditedEntity().setQrcode(null);
