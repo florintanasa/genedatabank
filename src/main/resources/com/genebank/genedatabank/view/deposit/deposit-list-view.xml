@@ -58,6 +58,7 @@
                 <column property="id_accenumb.id_taxonomy.genus" resizable="true" autoWidth="true"/>
                 <column property="id_accenumb.id_taxonomy.species" resizable="true" autoWidth="true"/>
                 <column property="deposit_code" resizable="true" autoWidth="true" filterable="true"/>
+                <column property="old_deposit_code" resizable="true" autoWidth="true" filterable="true"/>
                 <column property="id_storage" resizable="true" autoWidth="true"/>
                 <column property="yearstorage" resizable="true" autoWidth="true"/>
                 <column property="yearmulti" resizable="true" autoWidth="true"/>

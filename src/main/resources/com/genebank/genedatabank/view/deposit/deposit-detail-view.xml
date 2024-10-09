@@ -73,6 +73,7 @@
             <textField id="deposit_codeField" property="deposit_code">
                 <tooltip text="msg:///tooltip.deposit_codeField" manual="true"/>
             </textField>
+            <textField id="old_deposit_codeField" property="old_deposit_code"> </textField>
             <textField id="yearstorageField" property="yearstorage">
                 <tooltip text="msg:///tooltip.yearstorageField" manual="true"/>
             </textField>

@@ -90,6 +90,9 @@ public class Deposit {
     @NotNull
     private String deposit_code;
 
+    @Column(name = "OLD_DEPOSIT_CODE", length = 10)
+    private String old_deposit_code;
+
     @JoinColumn(name = "ID_STORAGE_ID", nullable = false)
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -134,6 +137,14 @@ public class Deposit {
 
     @Column(name = "SCOPE_", length = 1)
     private String scope;
+
+    public String getOld_deposit_code() {
+        return old_deposit_code;
+    }
+
+    public void setOld_deposit_code(String old_deposit_code) {
+        this.old_deposit_code = old_deposit_code;
+    }
 
     public String getScope() {
         return scope;
