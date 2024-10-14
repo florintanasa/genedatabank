@@ -11,8 +11,10 @@ import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.router.Route;
 import io.jmix.flowui.component.checkbox.JmixCheckbox;
 import io.jmix.flowui.component.combobox.EntityComboBox;
+import io.jmix.flowui.component.formatter.NumberFormatter;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.view.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Route(value = "duplicateLines/:id", layout = MainView.class)
 @ViewController("DuplicateLine.detail")
@@ -115,6 +117,8 @@ public class DuplicateLineDetailView extends StandardDetailView<DuplicateLine> {
     private TypedTextField<String> tCultCategField;
     @ViewComponent
     private TypedTextField<Integer> quantityField;
+    @Autowired
+    private NumberFormatter numberFormatter;
 
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
@@ -140,34 +144,34 @@ public class DuplicateLineDetailView extends StandardDetailView<DuplicateLine> {
 
                 if (id_depositField.getValue().getYearmulti() == null) {
                     YearMulti = "";
-                } else YearMulti = id_depositField.getValue().getYearmulti().toString();
+                } else YearMulti = numberFormatter.apply(id_depositField.getValue().getYearmulti());
                 dYearmultiField.setValue(YearMulti);
 
                 if (id_depositField.getValue().getMultiply() == null) {
                     Multiply = "";
-                } else Multiply = id_depositField.getValue().getMultiply().toString();
+                } else Multiply = numberFormatter.apply(id_depositField.getValue().getMultiply());
                 dMultiplyField.setValue(Multiply);
 
                 if (id_depositField.getValue().getYeargerm() == null) {
                     YearGerm = "";
-                } else YearGerm = id_depositField.getValue().getYeargerm().toString();
+                } else YearGerm = numberFormatter.apply(id_depositField.getValue().getYeargerm());
                 dYeargermField.setValue(YearGerm);
 
                 if (id_depositField.getValue().getPercentage() == null) {
                     Percentage = "";
-                } else Percentage = id_depositField.getValue().getPercentage().toString();
+                } else Percentage = numberFormatter.apply(id_depositField.getValue().getPercentage());
                 dPercentageField.setValue(Percentage);
 
                 dStockField.setValue(id_depositField.getValue().getStock().toString());
 
                 if (id_depositField.getValue().getHumidity() == null) {
                     Humidity = "";
-                } else Humidity = id_depositField.getValue().getHumidity().toString();
+                } else Humidity = numberFormatter.apply(id_depositField.getValue().getHumidity());
                 dHumidityField.setValue(Humidity);
 
                 if (id_depositField.getValue().getMmb() == null) {
                     Mmb = "";
-                } else Mmb = id_depositField.getValue().getMmb().toString();
+                } else Mmb = numberFormatter.apply(id_depositField.getValue().getMmb());
                 dMmbField.setValue(Mmb);
 
                 dOriginalField.setValue(id_depositField.getValue().getOriginal());
@@ -257,17 +261,17 @@ public class DuplicateLineDetailView extends StandardDetailView<DuplicateLine> {
 
                 if (id_depositField.getValue().getId_accenumb().getLatitude() == null) {
                     Latitude = "";
-                } else Latitude = id_depositField.getValue().getId_accenumb().getLatitude().toString();
+                } else Latitude = numberFormatter.apply(id_depositField.getValue().getId_accenumb().getLatitude());
                 pLatitudeField.setValue(Latitude);
 
                 if (id_depositField.getValue().getId_accenumb().getLongitude() == null) {
                     Longitude = "";
-                } else Longitude = id_depositField.getValue().getId_accenumb().getLongitude().toString();
+                } else Longitude = numberFormatter.apply(id_depositField.getValue().getId_accenumb().getLongitude());
                 pLongitudeField.setValue(Longitude);
 
                 if (id_depositField.getValue().getId_accenumb().getElevation() == null) {
                     Elevation = "";
-                } else Elevation = id_depositField.getValue().getId_accenumb().getElevation().toString();
+                } else Elevation = numberFormatter.apply(id_depositField.getValue().getId_accenumb().getElevation());
                 pElevationField.setValue(Elevation);
 
                 if (id_depositField.getValue().getId_accenumb().getId_georefmeth() == null) {
@@ -339,8 +343,6 @@ public class DuplicateLineDetailView extends StandardDetailView<DuplicateLine> {
                     CultCateg = "";
                 } else CultCateg = id_depositField.getValue().getId_accenumb().getId_taxonomy().getId_culturecateg().iterator().next().getCode();
                 tCultCategField.setValue(CultCateg);
-
-
             }
         });
     }
