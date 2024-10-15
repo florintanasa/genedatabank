@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://viabNewSeedsListView.title"
+      focusComponent="viabNewSeedsesDataGrid">
+    <data>
+        <collection id="viabNewSeedsesDc"
+                    class="com.genebank.genedatabank.entity.ViabNewSeeds">
+            <fetchPlan extends="_base">
+                <property name="id_accenumb" fetchPlan="_base">
+                    <property name="id_instcode" fetchPlan="_base"/>
+                    <property name="id_collcode" fetchPlan="_base"/>
+                    <property name="id_taxonomy" fetchPlan="_base"/>
+                    <property name="id_country" fetchPlan="_base"/>
+                    <property name="id_countysiruta" fetchPlan="_base"/>
+                    <property name="id_localitysiruta" fetchPlan="_base"/>
+                    <property name="id_bredcode" fetchPlan="_base"/>
+                    <property name="id_sampstat" fetchPlan="_base"/>
+                    <property name="id_collsrc" fetchPlan="_base"/>
+                    <property name="id_donorcode" fetchPlan="_base"/>
+                    <property name="id_acceconf" fetchPlan="_base"/>
+                    <property name="id_mlsstat" fetchPlan="_base"/>
+                    <property name="id_aegisstat" fetchPlan="_base"/>
+                    <property name="id_historic" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="viabNewSeedsesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ViabNewSeeds e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="viabNewSeedsesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="viabNewSeedsesDataGrid.create"/>
+            <button id="editBtn" action="viabNewSeedsesDataGrid.edit"/>
+            <button id="excelExportBtn" action="viabNewSeedsesDataGrid.excelExport"/>
+            <button id="jsonExportBtn" action="viabNewSeedsesDataGrid.jsonExport"/>
+            <button id="refreshBtn" action="viabNewSeedsesDataGrid.refresh"/>
+            <button id="removeBtn" action="viabNewSeedsesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="viabNewSeedsesDl"/>
+        </hbox>
+        <dataGrid id="viabNewSeedsesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="viabNewSeedsesDc"
+                  columnReorderingAllowed="true"
+                  selectionMode="MULTI">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="excelExport" type="grdexp_excelExport"/>
+                <action id="jsonExport" type="grdexp_jsonExport"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="id_accenumb"/>
+                <column property="status"/>
+                <column property="yearTest"/>
+                <column property="viabPercent"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
