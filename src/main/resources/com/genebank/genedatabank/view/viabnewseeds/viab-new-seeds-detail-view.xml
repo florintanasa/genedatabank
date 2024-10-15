@@ -24,6 +24,7 @@
                 </property>
                 <property name="viabnewseedsLines" fetchPlan="_base"/>
             </fetchPlan>
+            <collection id="viabNewSeedsLinesDc" property="viabnewseedsLines"/>
             <loader id="viabNewSeedsDl"/>
         </instance>
     </data>
@@ -46,6 +47,40 @@
             <textField id="yearTestField" property="yearTest"/>
             <textField id="viabPercentField" property="viabPercent"/>
         </formLayout>
+        <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viabnewseedsLines"/>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button action="viabNewsSeedsLine.create" />
+            <button action="viabNewsSeedsLine.edit"/>
+            <button action="viabNewsSeedsLine.remove"/>
+            <button action="viabNewsSeedsLine.excelExport"/>
+            <button action="viabNewsSeedsLine.jsonExport"/>
+        </hbox>
+        <dataGrid id="viabNewsSeedsLine" dataContainer="viabNewSeedsLinesDc" width="100%" minHeight="20em">
+            <actions>
+                <action id="create" type="list_create">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="edit" type="list_edit">
+                    <properties>
+                        <property name="openMode" value="DIALOG"/>
+                    </properties>
+                </action>
+                <action id="remove" type="list_remove"/>
+                <action id="excelExport" type="grdexp_excelExport"/>
+                <action id="jsonExport" type="grdexp_jsonExport"/>
+            </actions>
+            <columns>
+                <column property="seedsNum" resizable="true" autoWidth="true"/>
+                <column property="germStartDate" resizable="true" autoWidth="true"/>
+                <column property="germTime" resizable="true" autoWidth="true"/>
+                <column property="germEvalDate" resizable="true" autoWidth="true"/>
+                <column property="viableSeeds" resizable="true" autoWidth="true"/>
+                <column property="germFaculty" resizable="true" autoWidth="true"/>
+                <column property="comments" resizable="true" autoWidth="true"/>
+            </columns>
+        </dataGrid>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>

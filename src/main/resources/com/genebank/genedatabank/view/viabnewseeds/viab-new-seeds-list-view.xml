@@ -72,9 +72,9 @@
             </actions>
             <columns resizable="true">
                 <column property="id_accenumb"/>
-                <column property="status"/>
                 <column property="yearTest"/>
                 <column property="viabPercent"/>
+                <column property="status"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
