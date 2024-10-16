@@ -26,7 +26,7 @@
             </fetchPlan>
             <loader id="viabNewSeedsesDl" readOnly="true">
                 <query>
-                    <![CDATA[select e from ViabNewSeeds e]]>
+                    <![CDATA[select e from ViabNewSeeds e order by e.id_accenumb.createdDate]]>
                 </query>
             </loader>
         </collection>
