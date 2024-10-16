@@ -56,6 +56,12 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
 
     @Subscribe
     public void onInit(final InitEvent event) {
+        viabNewsSeedsLineDataGrid.getItems().addItemSetChangeListener(itemSetChangeEvent -> {
+            calMedViabPercent();
+        });
+        viabNewsSeedsLineDataGrid.getItems().addStateChangeListener(stateChangeEvent -> {
+            calMedViabPercent();
+        });
             // I see work when the detail screen is loaded
             // the method calMedViabPercent() work
             // an the values is put on field and is saved
@@ -88,5 +94,5 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
         //getEditedEntity().setViabPercent((int)(Math.round(total)));
         viabPercentField.setValue(Objects.requireNonNull(numberFormatter.apply((int) (Math.round(total)))));
     }
-    
+
 }
