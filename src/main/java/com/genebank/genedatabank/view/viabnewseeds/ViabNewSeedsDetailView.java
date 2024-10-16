@@ -1,14 +1,21 @@
 package com.genebank.genedatabank.view.viabnewseeds;
 
 import com.genebank.genedatabank.entity.ViabNewSeeds;
+import com.genebank.genedatabank.entity.ViabNewSeedsLine;
 import com.genebank.genedatabank.entity.ViabilityStatus;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
+import io.jmix.flowui.component.formatter.NumberFormatter;
+import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.select.JmixSelect;
 import io.jmix.flowui.component.textfield.TypedTextField;
+import io.jmix.flowui.model.CollectionPropertyContainer;
+import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Objects;
 
 
 /**
@@ -28,6 +35,12 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
     private TypedTextField<Integer> viabPercentField;
     @ViewComponent
     private TypedTextField<Integer> yearTestField;
+    @ViewComponent
+    private DataGrid<ViabNewSeedsLine> viabNewsSeedsLineDataGrid;
+    @ViewComponent
+    private CollectionPropertyContainer<ViabNewSeedsLine> viabNewSeedsLinesDc;
+    @Autowired
+    private NumberFormatter numberFormatter;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeeds> event) {
@@ -42,6 +55,22 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
     }
 
     @Subscribe
+    public void onInit(final InitEvent event) {
+            // I see work when the detail screen is loaded
+            // the method calMedViabPercent() work
+            // an the values is put on field and is saved
+            viabNewsSeedsLineDataGrid.addAttachListener(attachEvent -> {
+                calMedViabPercent();
+            });
+            // when some value of one item is changed call method to calculate medium percent for viability
+            // the method calMedViabPercent() work
+            // an the values is put on field and is NOT saved ?
+            viabNewsSeedsLineDataGrid.getItems().addValueChangeListener(valueChangeEvent -> {
+                    calMedViabPercent();
+            });
+}
+
+    @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
         // set read only field status
         statusField.setReadOnly(true);
@@ -50,6 +79,14 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
         // set read only Year test field
         yearTestField.setReadOnly(true);
     }
-    
+
+    private void calMedViabPercent() {
+        double total = 0;
+        for (ViabNewSeedsLine line : viabNewSeedsLinesDc.getItems()){
+         total += (double) line.getGermFaculty() /viabNewSeedsLinesDc.getItems().size();
+        }
+        //getEditedEntity().setViabPercent((int)(Math.round(total)));
+        viabPercentField.setValue(Objects.requireNonNull(numberFormatter.apply((int) (Math.round(total)))));
+    }
     
 }

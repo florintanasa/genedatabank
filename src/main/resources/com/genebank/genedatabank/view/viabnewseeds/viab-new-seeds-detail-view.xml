@@ -24,7 +24,8 @@
                 </property>
                 <property name="viabnewseedsLines" fetchPlan="_base"/>
             </fetchPlan>
-            <collection id="viabNewSeedsLinesDc" property="viabnewseedsLines"/>
+            <collection id="viabNewSeedsLinesDc" property="viabnewseedsLines">
+            </collection>
             <loader id="viabNewSeedsDl"/>
         </instance>
     </data>
@@ -49,13 +50,13 @@
         </formLayout>
         <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viabnewseedsLines"/>
         <hbox id="buttonsPanel" classNames="buttons-panel">
-            <button action="viabNewsSeedsLine.create" />
-            <button action="viabNewsSeedsLine.edit"/>
-            <button action="viabNewsSeedsLine.remove"/>
-            <button action="viabNewsSeedsLine.excelExport"/>
-            <button action="viabNewsSeedsLine.jsonExport"/>
+            <button action="viabNewsSeedsLineDataGrid.create" />
+            <button action="viabNewsSeedsLineDataGrid.edit"/>
+            <button action="viabNewsSeedsLineDataGrid.remove"/>
+            <button action="viabNewsSeedsLineDataGrid.excelExport"/>
+            <button action="viabNewsSeedsLineDataGrid.jsonExport"/>
         </hbox>
-        <dataGrid id="viabNewsSeedsLine" dataContainer="viabNewSeedsLinesDc" width="100%" minHeight="20em">
+        <dataGrid id="viabNewsSeedsLineDataGrid" dataContainer="viabNewSeedsLinesDc" width="100%" minHeight="20em">
             <actions>
                 <action id="create" type="list_create">
                     <properties>
