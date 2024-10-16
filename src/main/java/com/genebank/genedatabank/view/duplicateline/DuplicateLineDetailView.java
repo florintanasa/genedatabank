@@ -121,12 +121,15 @@ public class DuplicateLineDetailView extends StandardDetailView<DuplicateLine> {
     private NumberFormatter numberFormatter;
 
     @Subscribe
+    public void onInitEntity(final InitEntityEvent<DuplicateLine> event) {
+        //set default 500 seeds
+        event.getEntity().setQuantity(500);
+    }
+    
+    
+
+    @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
-        //check if is null quantity field
-        if (quantityField.getValue().isEmpty()) {
-            //set default 500 seeds
-            quantityField.setValue("500");
-        }
         //check if is choose a new deposit code
         id_depositField.addValueChangeListener(valueChangeEvent -> {
             if (valueChangeEvent.getValue() != null) {
