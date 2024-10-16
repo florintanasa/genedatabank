@@ -5,9 +5,12 @@
 
 package com.genebank.genedatabank.entity;
 
+import io.jmix.core.DeletePolicy;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.entity.annotation.OnDelete;
+import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -68,6 +71,8 @@ public class ViabNewSeeds {
     @NotNull
     private String status;
 
+    @OnDelete(DeletePolicy.CASCADE)
+    @Composition
     @OneToMany(mappedBy = "viabNewSeeds")
     private List<ViabNewSeedsLine> viabnewseedsLines;
 
