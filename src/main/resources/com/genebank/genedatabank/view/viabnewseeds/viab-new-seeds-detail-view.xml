@@ -28,6 +28,14 @@
             </collection>
             <loader id="viabNewSeedsDl"/>
         </instance>
+        <collection id="pasaportsDc" class="com.genebank.genedatabank.entity.Pasaport">
+            <loader id="pasaportsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Pasaport e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -38,12 +46,12 @@
     </actions>
     <layout>
         <formLayout id="form" dataContainer="viabNewSeedsDc">
-            <entityPicker id="id_accenumbField" property="id_accenumb">
+            <entityComboBox id="id_accenumbField" property="id_accenumb" itemsContainer="pasaportsDc">
                 <actions>
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
-            </entityPicker>
+            </entityComboBox>
             <select id="statusField" property="status"/>
             <textField id="yearTestField" property="yearTest"/>
             <textField id="viabPercentField" property="viabPercent"/>
