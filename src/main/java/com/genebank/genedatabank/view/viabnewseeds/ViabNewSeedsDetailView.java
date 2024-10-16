@@ -11,7 +11,6 @@ import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.select.JmixSelect;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.model.CollectionPropertyContainer;
-import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,29 +55,27 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
 
     @Subscribe
     public void onInit(final InitEvent event) {
-        viabNewsSeedsLineDataGrid.getItems().addItemSetChangeListener(itemSetChangeEvent -> {
-            calMedViabPercent();
-        });
-        viabNewsSeedsLineDataGrid.getItems().addStateChangeListener(stateChangeEvent -> {
-            calMedViabPercent();
-        });
-            // I see work when the detail screen is loaded
-            // the method calMedViabPercent() work
-            // an the values is put on field and is saved
-            viabNewsSeedsLineDataGrid.addAttachListener(attachEvent -> {
-                calMedViabPercent();
-            });
-            // when some value of one item is changed call method to calculate medium percent for viability
-            // the method calMedViabPercent() work
-            // an the values is put on field and is NOT saved ?
-            viabNewsSeedsLineDataGrid.getItems().addValueChangeListener(valueChangeEvent -> {
-                    calMedViabPercent();
-            });
 }
 
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
-        // set read only field status
+        // when I add new item run event
+        Objects.requireNonNull(viabNewsSeedsLineDataGrid.getItems()).addItemSetChangeListener(itemSetChangeEvent -> {
+            if (viabNewSeedsLinesDc.getItems().isEmpty()) { // check if not exist items in data grid
+                getEditedEntity().setViabPercent(null); // if not exist set null viability percent because 0 is a value possible
+            } else {
+                calMedViabPercent(); // if exist calculate medium viability percent
+            }
+        });
+        // when I change item run event
+        viabNewsSeedsLineDataGrid.getItems().addStateChangeListener(stateChangeEvent -> {
+            if (viabNewSeedsLinesDc.getItems().isEmpty()) { // check if not exist items in data grid
+                getEditedEntity().setViabPercent(null); // if not exist set null viability percent because 0 is a value possible
+            } else {
+                calMedViabPercent(); // if exist calculate medium viability percent
+            }
+        });
+        // set read only field Status
         statusField.setReadOnly(true);
         // set read only Viability percentage field
         viabPercentField.setReadOnly(true);
