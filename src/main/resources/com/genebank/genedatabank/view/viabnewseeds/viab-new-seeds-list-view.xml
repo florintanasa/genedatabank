@@ -54,6 +54,7 @@
             <button id="jsonExportBtn" action="viabNewSeedsesDataGrid.jsonExport"/>
             <button id="refreshBtn" action="viabNewSeedsesDataGrid.refresh"/>
             <button id="removeBtn" action="viabNewSeedsesDataGrid.remove"/>
+            <button id="markAsDoneBtm" action="viabNewSeedsesDataGrid.markAsDone"/>
             <simplePagination id="pagination" dataLoader="viabNewSeedsesDl"/>
         </hbox>
         <dataGrid id="viabNewSeedsesDataGrid"
@@ -61,7 +62,7 @@
                   minHeight="20em"
                   dataContainer="viabNewSeedsesDc"
                   columnReorderingAllowed="true"
-                  selectionMode="MULTI">
+        >
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
@@ -69,6 +70,8 @@
                 <action id="jsonExport" type="grdexp_jsonExport"/>
                 <action id="refresh" type="list_refresh"/>
                 <action id="remove" type="list_remove"/>
+                <action id="markAsDone" type="list_itemTracking" icon="CHECK" text="msg://markAsDone1.text"/>
+                <action id="read" type="list_read"/>
             </actions>
             <columns resizable="true">
                 <column property="id_accenumb"/>
