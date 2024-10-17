@@ -11,6 +11,7 @@ import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDelete;
 import io.jmix.core.metamodel.annotation.Composition;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +26,8 @@ import java.util.UUID;
 
 @JmixEntity
 @Table(name = "VIAB_NEW_SEEDS", indexes = {
-        @Index(name = "IDX_VIAB_NEW_SEEDS_ID_ACCENUMB", columnList = "ID_ACCENUMB_ID")
+        @Index(name = "IDX_VIAB_NEW_SEEDS_ID_ACCENUMB", columnList = "ID_ACCENUMB_ID"),
+        @Index(name = "IDX_VIAB_NEW_SEEDS_UNQ", columnList = "ID_VNS", unique = true)
 })
 @Entity
 public class ViabNewSeeds {
@@ -62,6 +64,11 @@ public class ViabNewSeeds {
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
 
+    @InstanceName
+    @Column(name = "ID_VNS", nullable = false, length = 15)
+    @NotNull
+    private String idVNS;
+
     @JoinColumn(name = "ID_ACCENUMB_ID", nullable = false)
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -82,6 +89,14 @@ public class ViabNewSeeds {
 
     @Column(name = "VIAB_PERCENT")
     private Integer viabPercent;
+
+    public String getIdVNS() {
+        return idVNS;
+    }
+
+    public void setIdVNS(String idVNS) {
+        this.idVNS = idVNS;
+    }
 
     public Integer getViabPercent() {
         return viabPercent;

@@ -38,7 +38,10 @@ import java.util.UUID;
  **/
 
 @JmixEntity
-@Table(name = "INSTITUTE")
+@Table(name = "INSTITUTE", indexes = {
+        @Index(name = "IDX_INSTITUTE_ID_COUNTY", columnList = "ID_COUNTY_ID"),
+        @Index(name = "IDX_INSTITUTE_ID_LOCALITY", columnList = "ID_LOCALITY_ID")
+})
 @Entity
 public class Institute {
     @JmixGeneratedValue
@@ -95,23 +98,103 @@ public class Institute {
     @Column(name = "URL", length = 200)
     private String url;
 
-    @Column(name = "ALPHA3", length = 3)
-    private String alpha3;
+    @JoinColumn(name = "ID_COUNTRY_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Country id_country;
+
+    @JoinColumn(name = "ID_COUNTY_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Country id_county;
+
+    @JoinColumn(name = "ID_LOCALITY_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Localitysiruta id_locality;
+
+    @Column(name = "SERIAL_VNS", length = 15)
+    private String serialVNS;
+
+    @Column(name = "SERIAL_VOS", length = 15)
+    private String serialVOS;
+
+    @Column(name = "SERIAL_ACCENUMB", length = 15)
+    private String serialAccenumb;
+
+    @Column(name = "SERIAL_ACCENUMB_TEMP", length = 15)
+    private String serialAccenumbTemp;
+
     @JoinTable(name = "PASAPORT_BREEDING_INSTITUTE_LINK",
             joinColumns = @JoinColumn(name = "INSTITUTE_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private Set<Pasaport> pasaports_bredcode;
+
     @JoinTable(name = "PASAPORT_DUPLICATES_INSTITUTE_LINK",
             joinColumns = @JoinColumn(name = "INSTITUTE_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private Set<Pasaport> pasaports_duplsite;
+
     @JoinTable(name = "PASAPORT_COLLETING_INSTITUTE_LINK",
-            joinColumns = @JoinColumn(name = "INSTITUTE_ID"),
-            inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID"))
+            joinColumns = @JoinColumn(name = "INSTITUTE_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private Set<Pasaport> pasaports_collcode;
+
+    public String getSerialAccenumbTemp() {
+        return serialAccenumbTemp;
+    }
+
+    public void setSerialAccenumbTemp(String serialAccenumbTemp) {
+        this.serialAccenumbTemp = serialAccenumbTemp;
+    }
+
+    public String getSerialAccenumb() {
+        return serialAccenumb;
+    }
+
+    public void setSerialAccenumb(String serialAccenumb) {
+        this.serialAccenumb = serialAccenumb;
+    }
+
+    public String getSerialVOS() {
+        return serialVOS;
+    }
+
+    public void setSerialVOS(String serialVOS) {
+        this.serialVOS = serialVOS;
+    }
+
+    public String getSerialVNS() {
+        return serialVNS;
+    }
+
+    public void setSerialVNS(String serialVNS) {
+        this.serialVNS = serialVNS;
+    }
+
+    public Localitysiruta getId_locality() {
+        return id_locality;
+    }
+
+    public void setId_locality(Localitysiruta id_locality) {
+        this.id_locality = id_locality;
+    }
+
+    public Country getId_county() {
+        return id_county;
+    }
+
+    public void setId_county(Country id_county) {
+        this.id_county = id_county;
+    }
+
+    public void setId_country(Country alpha3) {
+        this.id_country = alpha3;
+    }
+
+    public Country getId_country() {
+        return id_country;
+    }
 
     public Set<Pasaport> getPasaports_collcode() {
         return pasaports_collcode;
@@ -135,14 +218,6 @@ public class Institute {
 
     public void setPasaports_bredcode(Set<Pasaport> pasaports_bredcode) {
         this.pasaports_bredcode = pasaports_bredcode;
-    }
-
-    public String getAlpha3() {
-        return alpha3;
-    }
-
-    public void setAlpha3(String alpha3) {
-        this.alpha3 = alpha3;
     }
 
     public String getUrl() {

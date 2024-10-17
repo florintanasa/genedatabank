@@ -24,7 +24,7 @@
             <textField id="full_name_enField" property="full_name_en"/>
             <textField id="addressField" property="address"/>
             <textField id="urlField" property="url"/>
-            <textField id="alpha3Field" property="alpha3"/>
+            <textField id="alpha3Field" property="id_country"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>

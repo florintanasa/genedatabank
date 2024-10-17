@@ -53,7 +53,7 @@
                 <column property="full_name_en" resizable="true"/>
                 <column property="address" resizable="true"/>
                 <column property="url" resizable="true"/>
-                <column property="alpha3" resizable="true"/>
+                <column property="id_country" resizable="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

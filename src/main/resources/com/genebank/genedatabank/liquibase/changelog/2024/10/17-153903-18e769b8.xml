@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="genedatabank">
+        <addColumn tableName="INSTITUTE">
+            <column name="ID_COUNTRY_ID" type="UUID"/>
+            <column name="ID_COUNTY_ID" type="UUID"/>
+            <column name="ID_LOCALITY_ID" type="UUID"/>
+            <column name="SERIAL_ACCENUMB" type="VARCHAR(15)"/>
+            <column name="SERIAL_ACCENUMB_TEMP" type="VARCHAR(15)"/>
+            <column name="SERIAL_VNS" type="VARCHAR(15)"/>
+            <column name="SERIAL_VOS" type="VARCHAR(15)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="2" author="genedatabank">
+        <addColumn tableName="VIAB_NEW_SEEDS">
+            <column name="ID_VNS" type="VARCHAR(15)"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="ID_VNS" defaultNullValue="''" tableName="VIAB_NEW_SEEDS"/>
+    </changeSet>
+    <changeSet id="3" author="genedatabank">
+        <createIndex indexName="IDX_INSTITUTE_ID_COUNTY" tableName="INSTITUTE">
+            <column name="ID_COUNTY_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="ID_COUNTY_ID" baseTableName="INSTITUTE"
+                                 constraintName="FK_INSTITUTE_ON_ID_COUNTY" referencedColumnNames="ID"
+                                 referencedTableName="COUNTRY"/>
+    </changeSet>
+    <changeSet id="4" author="genedatabank">
+        <createIndex indexName="IDX_INSTITUTE_ID_LOCALITY" tableName="INSTITUTE">
+            <column name="ID_LOCALITY_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="ID_LOCALITY_ID" baseTableName="INSTITUTE"
+                                 constraintName="FK_INSTITUTE_ON_ID_LOCALITY" referencedColumnNames="ID"
+                                 referencedTableName="LOCALITYSIRUTA"/>
+    </changeSet>
+    <changeSet id="5" author="genedatabank" dbms="postgresql">
+        <createIndex indexName="IDX_VIAB_NEW_SEEDS_UNQ" tableName="VIAB_NEW_SEEDS" unique="true">
+            <column name="ID_VNS"/>
+        </createIndex>
+
+        <modifySql>
+            <append value="where DELETED_DATE is null"/>
+        </modifySql>
+    </changeSet>
+    <changeSet id="6" author="genedatabank">
+        <addForeignKeyConstraint baseColumnNames="ID_COUNTRY_ID" baseTableName="INSTITUTE"
+                                 constraintName="FK_INSTITUTE_ON_ID_COUNTRY" referencedColumnNames="ID"
+                                 referencedTableName="COUNTRY"/>
+    </changeSet>
+    <changeSet id="7" author="genedatabank">
+        <dropColumn columnName="alpha3" tableName="institute"/>
+    </changeSet>
+</databaseChangeLog>

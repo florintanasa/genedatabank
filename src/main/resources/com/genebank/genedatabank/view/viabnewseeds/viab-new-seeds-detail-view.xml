@@ -52,6 +52,7 @@
                     <action id="entityClear" type="entity_clear"/>
                 </actions>
             </entityComboBox>
+            <textField id="idVnsField" property="idVNS" readOnly="true" visible="true"/>
             <select id="statusField" property="status"/>
             <textField id="yearTestField" property="yearTest"/>
             <textField id="viabPercentField" property="viabPercent"/>

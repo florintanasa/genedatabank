@@ -1,16 +1,21 @@
 package com.genebank.genedatabank.view.viabnewseeds;
 
+import com.genebank.genedatabank.entity.User;
 import com.genebank.genedatabank.entity.ViabNewSeeds;
 import com.genebank.genedatabank.entity.ViabNewSeedsLine;
 import com.genebank.genedatabank.entity.ViabilityStatus;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
+import io.jmix.core.security.CurrentAuthentication;
+import io.jmix.data.Sequence;
+import io.jmix.data.Sequences;
 import io.jmix.flowui.component.formatter.NumberFormatter;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.select.JmixSelect;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.model.CollectionPropertyContainer;
+import io.jmix.flowui.model.DataContext;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,6 +45,10 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
     private CollectionPropertyContainer<ViabNewSeedsLine> viabNewSeedsLinesDc;
     @Autowired
     private NumberFormatter numberFormatter;
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
+    @Autowired
+    private Sequences sequences;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeeds> event) {
@@ -91,5 +100,19 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
         //getEditedEntity().setViabPercent((int)(Math.round(total)));
         viabPercentField.setValue(Objects.requireNonNull(numberFormatter.apply((int) (Math.round(total)))));
     }
+
+    // before to save we run sequences to create the nest number for idVNS
+    @Subscribe(target = Target.DATA_CONTEXT)
+    public void onPreSave(final DataContext.PreSaveEvent event) {
+        final User user = (User) currentAuthentication.getUser();
+        if (getEditedEntity().getIdVNS() != null) {
+            if (getEditedEntity().getId_accenumb().getId_instcode().getInstcode().equals(user.getId_institute().getInstcode())) {
+                long idVnsNumber = sequences.createNextValue(Sequence.withName("Nr"+getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()));
+                getEditedEntity().setIdVNS(getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()+idVnsNumber);
+            }
+        }
+    }
+    
+    
 
 }
