@@ -2,10 +2,16 @@ package com.genebank.genedatabank.view.institute;
 
 import com.genebank.genedatabank.entity.Institute;
 
+import com.genebank.genedatabank.entity.User;
 import com.genebank.genedatabank.view.main.MainView;
 
 import com.vaadin.flow.router.Route;
+import io.jmix.core.security.CurrentAuthentication;
+import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.view.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Objects;
 
 
 /**
@@ -17,4 +23,26 @@ import io.jmix.flowui.view.*;
 @ViewDescriptor("institute-detail-view.xml")
 @EditedEntityContainer("instituteDc")
 public class InstituteDetailView extends StandardDetailView<Institute> {
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
+    @ViewComponent
+    private TypedTextField<String> serialAccenumbField;
+    @ViewComponent
+    private TypedTextField<String> serialAccenumbTempField;
+    @ViewComponent
+    private TypedTextField<String> serialVOSField;
+    @ViewComponent
+    private TypedTextField<String> serialVNSField;
+
+    @Subscribe
+    public void onInit(final InitEvent event) {
+        final User user = (User) currentAuthentication.getUser();
+        if (Objects.equals(user.getUsername(), "admin")) {
+            serialAccenumbField.setReadOnly(false);
+            serialAccenumbTempField.setReadOnly(false);
+            serialVOSField.setReadOnly(false);
+            serialVNSField.setReadOnly(false);
+        }
+    }
+    
 }
