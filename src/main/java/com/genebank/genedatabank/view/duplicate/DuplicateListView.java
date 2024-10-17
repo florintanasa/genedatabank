@@ -91,19 +91,19 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     // run event when a item is changed
     @Subscribe(id = "duplicatesDc", target = Target.DATA_CONTAINER)
     public void onDuplicatesDcItemChange(final InstanceContainer.ItemChangeEvent<Duplicate> event) {
-        actionsDuplicatesDataGrid();
+        actionsDuplicatesDataGrid(); // call the method
     }
 
     // run event when click on a item
     @Subscribe("duplicatesDataGrid")
     public void onDuplicatesDataGridItemClick(final ItemClickEvent<Duplicate> event) {
-        actionsDuplicatesDataGrid();
+        actionsDuplicatesDataGrid(); // call the method
         if (duplicatesDataGrid.getSingleSelectedItem() == null) {
             excelExportSvalBtn.setEnabled(false);
         } else if (!duplicatesDataGrid.getSingleSelectedItem().getId_duplicate_institute().getInstcode().equals("NOR051")) {
-            excelExportSvalBtn.setEnabled(false);
+            excelExportSvalBtn.setEnabled(false);// disable button for Svalbard report if selected item is not for Svalbard
         } else if (duplicatesDataGrid.getSingleSelectedItem().getId_duplicate_institute().getInstcode().equals("NOR051")) {
-            excelExportSvalBtn.setEnabled(true);
+            excelExportSvalBtn.setEnabled(true);// enable button for Svalbard report if selected item is for Svalbard
         }
     }
 
@@ -148,6 +148,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     // run event when is clicked button markAsConfirmed
     @Subscribe("duplicatesDataGrid.markAsConfirmed")
     public void onDuplicatesDataGridMarkAsConfirmed(final ActionPerformedEvent event) {
+        // create dialog with header, content and a action when the user press Ok button
         dialogs.createOptionDialog()
                 .withHeader(messageBundle.getMessage("duplicatesDataGrid.markAsConfirmed"))
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsConfirmedMessage")))
@@ -162,6 +163,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     // run event when is clicked button markAsInDelivery
     @Subscribe("duplicatesDataGrid.markAsInDelivery")
     public void onDuplicatesDataGridMarkAsInDelivery(final ActionPerformedEvent event) {
+        // create dialog with header, content and a action when the user press Ok button
         dialogs.createOptionDialog()
                 .withHeader(messageBundle.getMessage("duplicatesDataGrid.markAsInDelivery"))
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsInDeliveryMessage")))
@@ -176,6 +178,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     // run event when is clicked button markAsDelivered
     @Subscribe("duplicatesDataGrid.markAsDelivered")
     public void onDuplicatesDataGridMarkAsDelivered(final ActionPerformedEvent event) {
+        // create dialog with header, content and a action when the user press Ok button
         dialogs.createOptionDialog()
                 .withHeader(messageBundle.getMessage("duplicatesDataGrid.markAsDelivered"))
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsDeliveredMessage")))
@@ -189,35 +192,38 @@ public class DuplicateListView extends StandardListView<Duplicate> {
 
     // method to change the status field to CONFIRMED
     private void markCurrentDuplicateAsConfirmed() {
+        // create entity object with data from selected item
         Duplicate duplicateToMarkAsConfirmed = duplicatesDataGrid.getSingleSelectedItem();
-        if (duplicateToMarkAsConfirmed != null) {
-            duplicateToMarkAsConfirmed.setStatus(DuplicateStatus.CONFIRMED);
-            dataManager.save(duplicateToMarkAsConfirmed);
-            notifications.create(messageBundle.getMessage("duplicate.confirmed")).show();
-            duplicatesDl.load();
+        if (duplicateToMarkAsConfirmed != null) { // check if user was selected something
+            duplicateToMarkAsConfirmed.setStatus(DuplicateStatus.CONFIRMED); // then set the status
+            dataManager.save(duplicateToMarkAsConfirmed); // and then save in database the modification
+            notifications.create(messageBundle.getMessage("duplicate.confirmed")).show(); // alert user
+            duplicatesDl.load(); // finally we load the changes
         }
     }
 
     // method to change the status field to IN_DELIVERY
     private void markCurrentDuplicateAsInDelivery() {
+        // create entity object with data from selected item
         Duplicate duplicateToMarkAsInDelivery = duplicatesDataGrid.getSingleSelectedItem();
-        if (duplicateToMarkAsInDelivery != null) {
-            duplicateToMarkAsInDelivery.setStatus(DuplicateStatus.IN_DELIVERY);
-            duplicateToMarkAsInDelivery.setSendDate(timeSource.now().toLocalDate());
-            dataManager.save(duplicateToMarkAsInDelivery);
-            notifications.create(messageBundle.getMessage("duplicate.inDelivery")).show();
-            duplicatesDl.load();
+        if (duplicateToMarkAsInDelivery != null) { // check if user was selected something
+            duplicateToMarkAsInDelivery.setStatus(DuplicateStatus.IN_DELIVERY); // then set the status
+            duplicateToMarkAsInDelivery.setSendDate(timeSource.now().toLocalDate()); // also set the date when delivery
+            dataManager.save(duplicateToMarkAsInDelivery); // and then save in database the modification
+            notifications.create(messageBundle.getMessage("duplicate.inDelivery")).show(); // alert user
+            duplicatesDl.load(); // finally we load the changes
         }
     }
 
     // method to change the status field to DELIVERED
     private void markCurrentDuplicateAsConfirmedDelivery() {
+        // create entity object with data from selected item
         Duplicate duplicateToMarkAsConfirmedDelivery = duplicatesDataGrid.getSingleSelectedItem();
-        if (duplicateToMarkAsConfirmedDelivery != null) {
-            duplicateToMarkAsConfirmedDelivery.setStatus(DuplicateStatus.DELIVERED);
-            dataManager.save(duplicateToMarkAsConfirmedDelivery);
-            notifications.create(messageBundle.getMessage("duplicate.delivery")).show();
-            duplicatesDl.load();
+        if (duplicateToMarkAsConfirmedDelivery != null) { // check if user was selected something
+            duplicateToMarkAsConfirmedDelivery.setStatus(DuplicateStatus.DELIVERED); // then set the status
+            dataManager.save(duplicateToMarkAsConfirmedDelivery); // and then save in database the modification
+            notifications.create(messageBundle.getMessage("duplicate.delivery")).show(); // alert user
+            duplicatesDl.load(); // finally we load the changes
         }
     }
 
