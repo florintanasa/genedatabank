@@ -11,6 +11,8 @@
               title="msg://com.genebank.genedatabank.view.duplicateline/duplicateLineListView.title"/>
         <item view="ViabNewSeeds.list"
               title="msg://com.genebank.genedatabank.view.viabnewseeds/viabNewSeedsListView.title"/>
+        <item view="ViabNewSeedsLine.list"
+              title="msg://com.genebank.genedatabank.view.viabnewseedsline/viabNewSeedsLineListView.title"/>
         <item view="SysFile.list" title="msg://com.genebank.genedatabank.view.sysfile/sysFileListView.title"/>
     </menu>
     <menu id="settings" description="msg://com.genebank.genedatabank/menu_config.settings.description"
