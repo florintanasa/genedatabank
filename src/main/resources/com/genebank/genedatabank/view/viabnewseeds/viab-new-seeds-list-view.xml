@@ -74,10 +74,11 @@
                 <action id="read" type="list_read"/>
             </actions>
             <columns resizable="true">
-                <column property="id_accenumb"/>
-                <column property="yearTest"/>
-                <column property="viabPercent"/>
-                <column property="status"/>
+                <column property="idVNS" resizable="true" autoWidth="true"/>
+                <column property="id_accenumb" resizable="true" autoWidth="true"/>
+                <column property="yearTest" resizable="true" autoWidth="true"/>
+                <column property="viabPercent" resizable="true" autoWidth="true"/>
+                <column property="status" resizable="true" autoWidth="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
