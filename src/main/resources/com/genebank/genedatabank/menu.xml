@@ -9,9 +9,9 @@
         <item view="Duplicate.list" title="msg://com.genebank.genedatabank.view.duplicate/duplicateListView.title"/>
         <item view="DuplicateLine.list"
               title="msg://com.genebank.genedatabank.view.duplicateline/duplicateLineListView.title"/>
-        <item view="SysFile.list" title="msg://com.genebank.genedatabank.view.sysfile/sysFileListView.title"/>
         <item view="ViabNewSeeds.list"
               title="msg://com.genebank.genedatabank.view.viabnewseeds/viabNewSeedsListView.title"/>
+        <item view="SysFile.list" title="msg://com.genebank.genedatabank.view.sysfile/sysFileListView.title"/>
     </menu>
     <menu id="settings" description="msg://com.genebank.genedatabank/menu_config.settings.description"
           title="msg://com.genebank.genedatabank/menu_config.settings.title">
