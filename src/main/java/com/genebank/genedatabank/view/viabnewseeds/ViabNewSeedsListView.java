@@ -98,6 +98,11 @@ public class ViabNewSeedsListView extends StandardListView<ViabNewSeeds> {
                 viabNewSeedsesDataGridMarkAsDone.setEnabled(false);
                 editBtn.setAction(viabNewSeedsesDataGridRead);
             }
+             if (viabNewSeedsesDataGrid.getSingleSelectedItem() != null
+                     && !Objects.equals(viabNewSeedsesDataGrid.getSingleSelectedItem().getCreatedBy(), user.getUsername())) {
+                viabNewSeedsesDataGridMarkAsDone.setEnabled(false);
+                editBtn.setAction(viabNewSeedsesDataGridRead);
+            }
         }
     }
 
