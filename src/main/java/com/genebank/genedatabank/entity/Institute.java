@@ -40,7 +40,9 @@ import java.util.UUID;
 @JmixEntity
 @Table(name = "INSTITUTE", indexes = {
         @Index(name = "IDX_INSTITUTE_ID_COUNTY", columnList = "ID_COUNTY_ID"),
-        @Index(name = "IDX_INSTITUTE_ID_LOCALITY", columnList = "ID_LOCALITY_ID")
+        @Index(name = "IDX_INSTITUTE_ID_LOCALITY", columnList = "ID_LOCALITY_ID"),
+        @Index(name = "IDX_INSTITUTE_ID_ROAD_TYPE", columnList = "ID_ROAD_TYPE_ID"),
+        @Index(name = "IDX_INSTITUTE_ID_STREET", columnList = "ID_STREET_ID")
 })
 @Entity
 public class Institute {
@@ -110,6 +112,14 @@ public class Institute {
     @ManyToOne(fetch = FetchType.LAZY)
     private Localitysiruta id_locality;
 
+    @JoinColumn(name = "ID_ROAD_TYPE_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Roadtype id_roadType;
+
+    @JoinColumn(name = "ID_STREET_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Street id_street;
+
     @Column(name = "SERIAL_VNS", length = 15)
     private String serialVNS;
 
@@ -139,6 +149,22 @@ public class Institute {
             inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private Set<Pasaport> pasaports_collcode;
+
+    public Street getId_street() {
+        return id_street;
+    }
+
+    public void setId_street(Street id_street) {
+        this.id_street = id_street;
+    }
+
+    public Roadtype getId_roadType() {
+        return id_roadType;
+    }
+
+    public void setId_roadType(Roadtype id_roadType) {
+        this.id_roadType = id_roadType;
+    }
 
     public String getSerialAccenumbTemp() {
         return serialAccenumbTemp;
