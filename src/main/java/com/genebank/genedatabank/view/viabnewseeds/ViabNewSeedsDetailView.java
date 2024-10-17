@@ -10,6 +10,7 @@ import io.jmix.core.TimeSource;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
+import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.formatter.NumberFormatter;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.select.JmixSelect;
@@ -49,6 +50,10 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
     private CurrentAuthentication currentAuthentication;
     @Autowired
     private Sequences sequences;
+    @Autowired
+    private MessageBundle messageBundle;
+    @Autowired
+    private Notifications notifications;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeeds> event) {
@@ -101,14 +106,18 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
         viabPercentField.setValue(Objects.requireNonNull(numberFormatter.apply((int) (Math.round(total)))));
     }
 
-    // before to save we run sequences to create the nest number for idVNS
+    // before to save we run sequences to create the next serial number for idVNS
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreSave(final DataContext.PreSaveEvent event) {
         final User user = (User) currentAuthentication.getUser();
-        if (getEditedEntity().getIdVNS() != null) {
+        if (getEditedEntity().getIdVNS() == null) {
             if (getEditedEntity().getId_accenumb().getId_instcode().getInstcode().equals(user.getId_institute().getInstcode())) {
-                long idVnsNumber = sequences.createNextValue(Sequence.withName("Nr"+getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()));
-                getEditedEntity().setIdVNS(getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()+idVnsNumber);
+                long idVnsNumber = sequences.createNextValue(Sequence.withName("Nr" + getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()));
+                String serialVNS = getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()+ "-" + idVnsNumber;
+                getEditedEntity().setIdVNS(serialVNS);
+            } else {
+                String error_message = messageBundle.getMessage("error_message_serialVNS");
+                notifications.create("HOPA",error_message).withDuration(5000).show();
             }
         }
     }
