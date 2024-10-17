@@ -94,19 +94,13 @@ public class Institute {
     @NotNull
     private String full_name_en;
 
-    @Column(name = "ADDRESS")
-    private String address;
-
-    @Column(name = "URL", length = 200)
-    private String url;
-
     @JoinColumn(name = "ID_COUNTRY_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Country id_country;
 
     @JoinColumn(name = "ID_COUNTY_ID")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Country id_county;
+    private Countysiruta id_county;
 
     @JoinColumn(name = "ID_LOCALITY_ID")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -119,6 +113,12 @@ public class Institute {
     @JoinColumn(name = "ID_STREET_ID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Street id_street;
+
+    @Column(name = "ADDRESS")
+    private String address;
+
+    @Column(name = "URL", length = 200)
+    private String url;
 
     @Column(name = "SERIAL_VNS", length = 15)
     private String serialVNS;
@@ -149,6 +149,14 @@ public class Institute {
             inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private Set<Pasaport> pasaports_collcode;
+
+    public void setId_county(Countysiruta id_county) {
+        this.id_county = id_county;
+    }
+
+    public Countysiruta getId_county() {
+        return id_county;
+    }
 
     public Street getId_street() {
         return id_street;
@@ -204,14 +212,6 @@ public class Institute {
 
     public void setId_locality(Localitysiruta id_locality) {
         this.id_locality = id_locality;
-    }
-
-    public Country getId_county() {
-        return id_county;
-    }
-
-    public void setId_county(Country id_county) {
-        this.id_county = id_county;
     }
 
     public void setId_country(Country alpha3) {
