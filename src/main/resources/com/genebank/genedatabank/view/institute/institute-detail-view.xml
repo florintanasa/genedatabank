@@ -5,9 +5,55 @@
     <data>
         <instance id="instituteDc"
                   class="com.genebank.genedatabank.entity.Institute">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="id_country" fetchPlan="_base"/>
+                <property name="id_county" fetchPlan="_base"/>
+                <property name="id_locality" fetchPlan="_base"/>
+                <property name="id_roadType" fetchPlan="_base"/>
+                <property name="id_street" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
+        <collection id="countriesDc" class="com.genebank.genedatabank.entity.Country">
+            <loader id="countriesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Country e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="countysirutasDc" class="com.genebank.genedatabank.entity.Countysiruta">
+            <loader id="countysirutasDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Countysiruta e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="localitysirutasDc" class="com.genebank.genedatabank.entity.Localitysiruta">
+            <loader id="localitysirutasDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Localitysiruta e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="roadtypesDc" class="com.genebank.genedatabank.entity.Roadtype">
+            <loader id="roadtypesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Roadtype e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="streetsDc" class="com.genebank.genedatabank.entity.Street">
+            <loader id="streetsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Street e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -22,9 +68,82 @@
             <textField id="acronymField" property="acronym"/>
             <textField id="full_name_roField" property="full_name_ro"/>
             <textField id="full_name_enField" property="full_name_en"/>
+            <entityComboBox id="countriesComboBox" dataContainer="instituteDc" property="id_country">
+                <itemsQuery class="com.genebank.genedatabank.entity.Country" escapeValueForLike="true"
+                            searchStringFormat="(?i)%${inputString}%">
+                    <fetchPlan extends="_base"/>
+                    <query>
+                        <![CDATA[select e from Country e where e.name like :searchString escape '\' order by e.name]]>
+                    </query>
+                </itemsQuery>
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
+            <entityComboBox id="countysirutasComboBox" dataContainer="instituteDc" property="id_county">
+                <itemsQuery class="com.genebank.genedatabank.entity.Countysiruta" escapeValueForLike="true"
+                            searchStringFormat="(?i)%${inputString}%">
+                    <fetchPlan extends="_base"/>
+                    <query>
+                        <![CDATA[select e from Countysiruta e where e.name like :searchString escape '\' order by e.name]]>
+                    </query>
+                </itemsQuery>
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
+            <entityComboBox id="localitysirutasComboBox" dataContainer="instituteDc" property="id_locality">
+                <itemsQuery class="com.genebank.genedatabank.entity.Localitysiruta" escapeValueForLike="true"
+                            searchStringFormat="(?i)%${inputString}%">
+                    <fetchPlan extends="_base"/>
+                    <query>
+                        <![CDATA[select e from Localitysiruta e where e.name like :searchString escape '\' order by e.name]]>
+                    </query>
+                </itemsQuery>
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
+            <entityComboBox id="roadtypesComboBox" dataContainer="instituteDc" property="id_roadType">
+                <itemsQuery class="com.genebank.genedatabank.entity.Roadtype" escapeValueForLike="true"
+                            searchStringFormat="(?i)%${inputString}%">
+                    <fetchPlan extends="_base"/>
+                    <query>
+                        <![CDATA[select e from Roadtype e where e.type_road like :searchString escape '\' order by e.type_road]]>
+                    </query>
+                </itemsQuery>
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
+            <entityComboBox id="streetsComboBox" dataContainer="instituteDc" property="id_street">
+                <itemsQuery class="com.genebank.genedatabank.entity.Street" escapeValueForLike="true"
+                            searchStringFormat="(?i)%${inputString}%">
+                    <fetchPlan extends="_base"/>
+                    <query>
+                        <![CDATA[select e from Street e where e.name_street like :searchString escape '\' order by e.name_street]]>
+                    </query>
+                </itemsQuery>
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
             <textField id="addressField" property="address"/>
             <textField id="urlField" property="url"/>
-            <textField id="alpha3Field" property="id_country"/>
+            <textField id="serialAccenumbField" property="serialAccenumb" readOnly="true"/>
+            <textField id="serialAccenumbTempField" property="serialAccenumbTemp" readOnly="true"/>
+            <textField id="serialVOSField" property="serialVOS" readOnly="true"/>
+            <textField id="serialVNSField" property="serialVNS" readOnly="true"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>

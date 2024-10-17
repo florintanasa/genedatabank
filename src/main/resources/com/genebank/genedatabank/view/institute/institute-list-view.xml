@@ -47,13 +47,21 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns>
-                <column property="instcode" resizable="true"/>
-                <column property="acronym" resizable="true"/>
-                <column property="full_name_ro" resizable="true"/>
-                <column property="full_name_en" resizable="true"/>
-                <column property="address" resizable="true"/>
-                <column property="url" resizable="true"/>
-                <column property="id_country" resizable="true"/>
+                <column property="instcode" resizable="true" autoWidth="true"/>
+                <column property="acronym" resizable="true" autoWidth="true"/>
+                <column property="full_name_ro" resizable="true" autoWidth="true"/>
+                <column property="full_name_en" resizable="true" autoWidth="true"/>
+                <column property="id_country" resizable="true" autoWidth="true"/>
+                <column property="id_county" resizable="true" autoWidth="true"/>
+                <column property="id_locality" resizable="true" autoWidth="true"/>
+                <column property="id_roadType" resizable="true" autoWidth="true"/>
+                <column property="id_street" resizable="true" autoWidth="true"/>
+                <column property="address" resizable="true" autoWidth="true"/>
+                <column property="url" resizable="true" autoWidth="true"/>
+                <column property="serialAccenumb" resizable="true" autoWidth="true"/>
+                <column property="serialAccenumbTemp" resizable="true" autoWidth="true"/>
+                <column property="serialVNS" resizable="true" autoWidth="true"/>
+                <column property="serialVOS" resizable="true" autoWidth="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
