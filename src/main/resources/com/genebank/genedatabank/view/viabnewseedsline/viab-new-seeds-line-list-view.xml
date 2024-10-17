@@ -28,7 +28,7 @@
             </fetchPlan>
             <loader id="viabNewSeedsLinesDl" readOnly="true">
                 <query>
-                    <![CDATA[select e from ViabNewSeedsLine e]]>
+                    <![CDATA[select e from ViabNewSeedsLine e order by e.viabNewSeeds.idVNS]]>
                 </query>
             </loader>
         </collection>
@@ -73,14 +73,18 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns resizable="true">
-                <column property="viabNewSeeds"/>
-                <column property="seedsNum"/>
-                <column property="germStartDate"/>
-                <column property="germTime"/>
-                <column property="germEvalDate"/>
-                <column property="viableSeeds"/>
-                <column property="germFaculty"/>
-                <column property="comments"/>
+                <column property="viabNewSeeds.idVNS" resizable="true" autoWidth="true"/>
+                <column property="viabNewSeeds.id_accenumb.accenumb" resizable="true" autoWidth="true"/>
+                <column property="viabNewSeeds.id_accenumb.accname" resizable="true" autoWidth="true"/>
+                <column property="viabNewSeeds.id_accenumb.id_taxonomy.genus" resizable="true" autoWidth="true"/>
+                <column property="viabNewSeeds.id_accenumb.id_taxonomy.species" resizable="true" autoWidth="true"/>
+                <column property="seedsNum" resizable="true" autoWidth="true"/>
+                <column property="germStartDate" resizable="true" autoWidth="true"/>
+                <column property="germTime" resizable="true" autoWidth="true"/>
+                <column property="germEvalDate" resizable="true" autoWidth="true"/>
+                <column property="viableSeeds" resizable="true" autoWidth="true"/>
+                <column property="germFaculty" resizable="true" autoWidth="true"/>
+                <column property="comments" resizable="true" autoWidth="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
