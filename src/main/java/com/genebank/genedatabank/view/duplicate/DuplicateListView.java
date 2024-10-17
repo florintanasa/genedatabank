@@ -52,6 +52,8 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     private MessageBundle messageBundle;
     @ViewComponent
     private CollectionLoader<Duplicate> duplicatesDl;
+    @ViewComponent
+    private JmixButton excelExportSvalBtn;
     @Autowired
     private Dialogs dialogs;
     @Autowired
@@ -86,11 +88,13 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     
 
 
+    // run event when a item is changed
     @Subscribe(id = "duplicatesDc", target = Target.DATA_CONTAINER)
     public void onDuplicatesDcItemChange(final InstanceContainer.ItemChangeEvent<Duplicate> event) {
         actionsDuplicatesDataGrid();
     }
 
+    // run event when click on a item
     @Subscribe("duplicatesDataGrid")
     public void onDuplicatesDataGridItemClick(final ItemClickEvent<Duplicate> event) {
         actionsDuplicatesDataGrid();
@@ -103,6 +107,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         }
     }
 
+    // method to validate/invalidate actions. change action for edit button to read only by state and user
     private void actionsDuplicatesDataGrid() {
         final User user = (User) currentAuthentication.getUser();
         if (!Objects.equals(user.getUsername(), "admin") ) {
@@ -140,6 +145,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         }
     }
 
+    // run event when is clicked button markAsConfirmed
     @Subscribe("duplicatesDataGrid.markAsConfirmed")
     public void onDuplicatesDataGridMarkAsConfirmed(final ActionPerformedEvent event) {
         dialogs.createOptionDialog()
@@ -147,12 +153,13 @@ public class DuplicateListView extends StandardListView<Duplicate> {
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsConfirmedMessage")))
                 .withActions(
                         new DialogAction(DialogAction.Type.OK).withHandler(actionPerformedEvent ->
-                                markCurrentDuplicateAsConfirmed()),
+                                markCurrentDuplicateAsConfirmed()), // if user press ok run the method
                         new DialogAction(DialogAction.Type.CANCEL)
                 )
                 .open();
     }
 
+    // run event when is clicked button markAsInDelivery
     @Subscribe("duplicatesDataGrid.markAsInDelivery")
     public void onDuplicatesDataGridMarkAsInDelivery(final ActionPerformedEvent event) {
         dialogs.createOptionDialog()
@@ -160,12 +167,13 @@ public class DuplicateListView extends StandardListView<Duplicate> {
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsInDeliveryMessage")))
                 .withActions(
                         new DialogAction(DialogAction.Type.OK).withHandler(actionPerformedEvent ->
-                                markCurrentDuplicateAsInDelivery()),
+                                markCurrentDuplicateAsInDelivery()), // if user press ok run the method
                         new DialogAction(DialogAction.Type.CANCEL)
                 )
                 .open();
     }
 
+    // run event when is clicked button markAsDelivered
     @Subscribe("duplicatesDataGrid.markAsDelivered")
     public void onDuplicatesDataGridMarkAsDelivered(final ActionPerformedEvent event) {
         dialogs.createOptionDialog()
@@ -173,12 +181,13 @@ public class DuplicateListView extends StandardListView<Duplicate> {
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsDeliveredMessage")))
                 .withActions(
                         new DialogAction(DialogAction.Type.OK).withHandler(actionPerformedEvent ->
-                                markCurrentDuplicateAsConfirmedDelivery()),
+                                markCurrentDuplicateAsConfirmedDelivery()), // if user press ok run the method
                         new DialogAction(DialogAction.Type.CANCEL)
                 )
                 .open();
     }
 
+    // method to change the status field to CONFIRMED
     private void markCurrentDuplicateAsConfirmed() {
         Duplicate duplicateToMarkAsConfirmed = duplicatesDataGrid.getSingleSelectedItem();
         if (duplicateToMarkAsConfirmed != null) {
@@ -189,6 +198,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         }
     }
 
+    // method to change the status field to IN_DELIVERY
     private void markCurrentDuplicateAsInDelivery() {
         Duplicate duplicateToMarkAsInDelivery = duplicatesDataGrid.getSingleSelectedItem();
         if (duplicateToMarkAsInDelivery != null) {
@@ -200,6 +210,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         }
     }
 
+    // method to change the status field to DELIVERED
     private void markCurrentDuplicateAsConfirmedDelivery() {
         Duplicate duplicateToMarkAsConfirmedDelivery = duplicatesDataGrid.getSingleSelectedItem();
         if (duplicateToMarkAsConfirmedDelivery != null) {
@@ -210,16 +221,16 @@ public class DuplicateListView extends StandardListView<Duplicate> {
         }
     }
 
-    @ViewComponent
-    private JmixButton excelExportSvalBtn;
-
+    // method to get report for Svalbard is run when button excelExportSvalBtn is clicked
     @Subscribe(id = "excelExportSvalBtn", subject = "clickListener")
     public void onExcelExportSvalBtnClick(final ClickEvent<JmixButton> event) {
+        // prepare the report in Excel output format by Report code and Template code
         ReportOutputDocument svalbard = reportRunner.byReportCode("RepSval")
                 .addParam("duplicate", duplicatesDataGrid.getSelectedItems().iterator().next())
                 .withTemplateCode("Sval_V1")
                 .withOutputType(ReportOutputType.XLSX)
                 .run();
+        // download the report in Excel format
         downloader.download(svalbard.getContent(), svalbard.getDocumentName());
     }
 }
