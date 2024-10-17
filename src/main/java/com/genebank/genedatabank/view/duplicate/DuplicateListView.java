@@ -148,7 +148,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     // run event when is clicked button markAsConfirmed
     @Subscribe("duplicatesDataGrid.markAsConfirmed")
     public void onDuplicatesDataGridMarkAsConfirmed(final ActionPerformedEvent event) {
-        // create dialog with header, content and a action when the user press Ok button
+        // create dialog with header, content and an action when the user press Confirmed button
         dialogs.createOptionDialog()
                 .withHeader(messageBundle.getMessage("duplicatesDataGrid.markAsConfirmed"))
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsConfirmedMessage")))
@@ -163,7 +163,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     // run event when is clicked button markAsInDelivery
     @Subscribe("duplicatesDataGrid.markAsInDelivery")
     public void onDuplicatesDataGridMarkAsInDelivery(final ActionPerformedEvent event) {
-        // create dialog with header, content and a action when the user press Ok button
+        // create dialog with header, content and an action when the user press Ok button
         dialogs.createOptionDialog()
                 .withHeader(messageBundle.getMessage("duplicatesDataGrid.markAsInDelivery"))
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsInDeliveryMessage")))
@@ -178,7 +178,7 @@ public class DuplicateListView extends StandardListView<Duplicate> {
     // run event when is clicked button markAsDelivered
     @Subscribe("duplicatesDataGrid.markAsDelivered")
     public void onDuplicatesDataGridMarkAsDelivered(final ActionPerformedEvent event) {
-        // create dialog with header, content and a action when the user press Ok button
+        // create dialog with header, content and an action when the user press Ok button
         dialogs.createOptionDialog()
                 .withHeader(messageBundle.getMessage("duplicatesDataGrid.markAsDelivered"))
                 .withContent(new Html(messageBundle.getMessage("duplicatesDataGrid.markAsDeliveredMessage")))
