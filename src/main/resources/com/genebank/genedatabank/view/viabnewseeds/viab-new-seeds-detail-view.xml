@@ -58,11 +58,11 @@
         </formLayout>
         <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viabnewseedsLines"/>
         <hbox id="buttonsPanel" classNames="buttons-panel">
-            <button action="viabNewsSeedsLineDataGrid.create" />
-            <button action="viabNewsSeedsLineDataGrid.edit"/>
-            <button action="viabNewsSeedsLineDataGrid.remove"/>
-            <button action="viabNewsSeedsLineDataGrid.excelExport"/>
-            <button action="viabNewsSeedsLineDataGrid.jsonExport"/>
+            <button id="createBtn" action="viabNewsSeedsLineDataGrid.create"/>
+            <button id="editBtn" action="viabNewsSeedsLineDataGrid.edit"/>
+            <button id="removeBtn" action="viabNewsSeedsLineDataGrid.remove"/>
+            <button id="excelExportBtn" action="viabNewsSeedsLineDataGrid.excelExport"/>
+            <button id="jsonExportBtn" action="viabNewsSeedsLineDataGrid.jsonExport"/>
         </hbox>
         <dataGrid id="viabNewsSeedsLineDataGrid" dataContainer="viabNewSeedsLinesDc" width="100%" minHeight="20em">
             <actions>
