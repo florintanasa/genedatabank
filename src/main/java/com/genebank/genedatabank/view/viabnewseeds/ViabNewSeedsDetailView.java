@@ -112,7 +112,7 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
         final User user = (User) currentAuthentication.getUser();
         if (getEditedEntity().getIdVNS() == null) {
             if (getEditedEntity().getId_accenumb().getId_instcode().getInstcode().equals(user.getId_institute().getInstcode())) {
-                long idVnsNumber = sequences.createNextValue(Sequence.withName("Nr" + getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()));
+                long idVnsNumber = sequences.createNextValue(Sequence.withName(getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()));
                 String serialVNS = getEditedEntity().getId_accenumb().getId_instcode().getSerialVNS()+ "-" + idVnsNumber;
                 getEditedEntity().setIdVNS(serialVNS);
             } else {
@@ -121,7 +121,4 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
             }
         }
     }
-    
-    
-
 }
