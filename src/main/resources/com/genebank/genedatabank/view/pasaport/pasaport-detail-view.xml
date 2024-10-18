@@ -333,7 +333,6 @@
                                     <column property="full_name_en"/>
                                     <column property="address"/>
                                     <column property="url"/>
-                                    <column property="alpha3"/>
                                 </columns>
                             </dataGrid>
                             <tooltip text="msg:///tooltip.id_collcodeDetails" manual="true" position="TOP_START"/>
@@ -356,7 +355,6 @@
                                     <column property="full_name_en"/>
                                     <column property="address"/>
                                     <column property="url"/>
-                                    <column property="alpha3"/>
                                 </columns>
                             </dataGrid>
                             <tooltip text="msg:///tooltip.id_bredcodeDetails" manual="true" position="TOP_START"/>
@@ -379,7 +377,6 @@
                                     <column property="full_name_en"/>
                                     <column property="address"/>
                                     <column property="url"/>
-                                    <column property="alpha3"/>
                                 </columns>
                             </dataGrid>
                             <tooltip text="msg:///tooltip.id_duplsiteDetails" manual="true" position="TOP_START"/>
