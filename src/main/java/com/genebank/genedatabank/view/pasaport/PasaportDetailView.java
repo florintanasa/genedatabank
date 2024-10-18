@@ -177,8 +177,9 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
 
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreSave(DataContext.PreSaveEvent event) {
+        final User user = (User) currentAuthentication.getUser();
         // For non-temporally number
-        if (getEditedEntity().getAccenumb() == null && !checkboxTemp.getValue()) {
+        /*if (getEditedEntity().getAccenumb() == null && !checkboxTemp.getValue()) {
             if (getEditedEntity().getId_instcode().getInstcode().equals("ROM007")) {
                 long accNumberSVGB = sequences.createNextValue(Sequence.withName("NrAccenumbSVGB"));
                 getEditedEntity().setAccenumb("SVGB-" + accNumberSVGB);
@@ -191,9 +192,20 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
                 notifications.create("HOPA", error_message_accenumber)
                         .withDuration(5000).show();
             }
+        }*/
+        if (getEditedEntity().getAccenumb() == null && !checkboxTemp.getValue()) {
+            if (getEditedEntity().getId_instcode().getInstcode().equals(user.getId_institute().getInstcode())) {
+                String serialAccenumb = getEditedEntity().getId_instcode().getSerialAccenumb();
+                long accNumber = sequences.createNextValue(Sequence.withName(serialAccenumb));
+                getEditedEntity().setAccenumb(serialAccenumb+"-"+accNumber);
+            } else {
+                String error_message_accenumber = messageBundle.getMessage("error_message_accenumber");
+                notifications.create("HOPA", error_message_accenumber)
+                        .withDuration(5000).show();
+            }
         }
         // For temporally number
-        else if (getEditedEntity().getAccenumb() == null && checkboxTemp.getValue()) {
+        /*else if (getEditedEntity().getAccenumb() == null && checkboxTemp.getValue()) {
             if (getEditedEntity().getId_instcode().getInstcode().equals("ROM007")) {
                 long accNumberSVGB = sequences.createNextValue(Sequence.withName("NrAccenumbTempSVGB"));
                 getEditedEntity().setAccenumb("TSVGB-" + accNumberSVGB);
@@ -204,6 +216,18 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
                 getEditedEntity().setTempnumb("TSVSCA-" + accNumberSVSCA);
             }
             else {
+                String error_message_accenumber = messageBundle.getMessage("error_message_accenumber");
+                notifications.create("HOPA", error_message_accenumber)
+                        .withDuration(5000).show();
+            }
+        }*/
+        else if (getEditedEntity().getAccenumb() == null && checkboxTemp.getValue()) {
+            if (getEditedEntity().getId_instcode().getInstcode().equals(user.getId_institute().getInstcode())) {
+                String serialAccenumbTemp = getEditedEntity().getId_instcode().getSerialAccenumbTemp();
+                long accNumberTemp = sequences.createNextValue(Sequence.withName(serialAccenumbTemp));
+                getEditedEntity().setAccenumb(serialAccenumbTemp+"-"+accNumberTemp);
+                getEditedEntity().setTempnumb(serialAccenumbTemp+"-"+accNumberTemp);
+            } else {
                 String error_message_accenumber = messageBundle.getMessage("error_message_accenumber");
                 notifications.create("HOPA", error_message_accenumber)
                         .withDuration(5000).show();
