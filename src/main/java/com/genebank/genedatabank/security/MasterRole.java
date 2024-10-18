@@ -130,11 +130,11 @@ public interface MasterRole {
     @EntityPolicy(entityClass = DuplicateLine.class, actions = {EntityPolicyAction.CREATE, EntityPolicyAction.READ, EntityPolicyAction.UPDATE})
     void duplicateLine();
 
-    @EntityAttributePolicy(entityClass = ViabNewSeeds.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityAttributePolicy(entityClass = ViabNewSeeds.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     @EntityPolicy(entityClass = ViabNewSeeds.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.UPDATE, EntityPolicyAction.CREATE})
     void viabNewSeeds();
 
-    @EntityAttributePolicy(entityClass = ViabNewSeedsLine.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityAttributePolicy(entityClass = ViabNewSeedsLine.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     @EntityPolicy(entityClass = ViabNewSeedsLine.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.CREATE, EntityPolicyAction.UPDATE})
     void viabNewSeedsLine();
 }
