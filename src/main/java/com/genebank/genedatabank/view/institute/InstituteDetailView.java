@@ -7,6 +7,7 @@ import com.genebank.genedatabank.view.main.MainView;
 
 import com.vaadin.flow.router.Route;
 import io.jmix.core.security.CurrentAuthentication;
+import io.jmix.flowui.component.textfield.JmixPasswordField;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +34,28 @@ public class InstituteDetailView extends StandardDetailView<Institute> {
     private TypedTextField<String> serialVOSField;
     @ViewComponent
     private TypedTextField<String> serialVNSField;
+    @ViewComponent
+    private JmixPasswordField apiKeyGoogleMapsField;
 
     @Subscribe
     public void onInit(final InitEvent event) {
         final User user = (User) currentAuthentication.getUser();
+        // check if user logged is admin if yes set editable some buttons
         if (Objects.equals(user.getUsername(), "admin")) {
+            apiKeyGoogleMapsField.setReadOnly(false);
+            apiKeyGoogleMapsField.setVisible(true);
+
             serialAccenumbField.setReadOnly(false);
+            serialAccenumbField.setVisible(true);
+
             serialAccenumbTempField.setReadOnly(false);
+            serialAccenumbTempField.setVisible(true);
+
             serialVOSField.setReadOnly(false);
+            serialVOSField.setVisible(true);
+
             serialVNSField.setReadOnly(false);
+            serialVNSField.setVisible(true);
         }
     }
-    
 }

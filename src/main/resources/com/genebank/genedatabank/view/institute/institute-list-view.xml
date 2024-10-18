@@ -56,12 +56,15 @@
                 <column property="id_locality" resizable="true" autoWidth="true"/>
                 <column property="id_roadType" resizable="true" autoWidth="true"/>
                 <column property="id_street" resizable="true" autoWidth="true"/>
+                <column property="streetNum" resizable="true" autoWidth="true"/>
                 <column property="address" resizable="true" autoWidth="true"/>
+                <column property="postCode" resizable="true" autoWidth="true"/>
                 <column property="url" resizable="true" autoWidth="true"/>
-                <column property="serialAccenumb" resizable="true" autoWidth="true"/>
-                <column property="serialAccenumbTemp" resizable="true" autoWidth="true"/>
-                <column property="serialVNS" resizable="true" autoWidth="true"/>
-                <column property="serialVOS" resizable="true" autoWidth="true"/>
+                <column property="apiKeyGoogleMaps" resizable="true" autoWidth="true" visible="false"/>
+                <column property="serialAccenumb" resizable="true" autoWidth="true" visible="false"/>
+                <column property="serialAccenumbTemp" resizable="true" autoWidth="true" visible="false"/>
+                <column property="serialVNS" resizable="true" autoWidth="true" visible="false"/>
+                <column property="serialVOS" resizable="true" autoWidth="true" visible="false"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

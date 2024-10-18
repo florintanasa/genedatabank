@@ -114,8 +114,14 @@ public class Institute {
     @ManyToOne(fetch = FetchType.LAZY)
     private Street id_street;
 
+    @Column(name = "STREET_NUM", length = 15)
+    private String streetNum;
+
     @Column(name = "ADDRESS")
     private String address;
+
+    @Column(name = "POST_CODE", length = 15)
+    private String postCode;
 
     @Column(name = "URL", length = 200)
     private String url;
@@ -131,6 +137,9 @@ public class Institute {
 
     @Column(name = "SERIAL_ACCENUMB_TEMP", length = 15)
     private String serialAccenumbTemp;
+
+    @Column(name = "API_KEY_GOOGLE_MAPS")
+    private String apiKeyGoogleMaps;
 
     @JoinTable(name = "PASAPORT_BREEDING_INSTITUTE_LINK",
             joinColumns = @JoinColumn(name = "INSTITUTE_ID", referencedColumnName = "ID"),
@@ -149,6 +158,30 @@ public class Institute {
             inverseJoinColumns = @JoinColumn(name = "PASAPORT_ID", referencedColumnName = "ID"))
     @ManyToMany
     private Set<Pasaport> pasaports_collcode;
+
+    public String getApiKeyGoogleMaps() {
+        return apiKeyGoogleMaps;
+    }
+
+    public void setApiKeyGoogleMaps(String apiKeyGoogleMaps) {
+        this.apiKeyGoogleMaps = apiKeyGoogleMaps;
+    }
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getStreetNum() {
+        return streetNum;
+    }
+
+    public void setStreetNum(String streetNum) {
+        this.streetNum = streetNum;
+    }
 
     public void setId_county(Countysiruta id_county) {
         this.id_county = id_county;

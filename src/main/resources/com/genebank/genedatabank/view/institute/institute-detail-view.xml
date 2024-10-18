@@ -138,12 +138,15 @@
                     <action id="entityOpen" type="entity_open"/>
                 </actions>
             </entityComboBox>
+            <textField id="streetNumField" property="streetNum"/>
             <textField id="addressField" property="address"/>
+            <textField id="postCode" property="postCode"/>
             <textField id="urlField" property="url"/>
-            <textField id="serialAccenumbField" property="serialAccenumb" readOnly="true"/>
-            <textField id="serialAccenumbTempField" property="serialAccenumbTemp" readOnly="true"/>
-            <textField id="serialVOSField" property="serialVOS" readOnly="true"/>
-            <textField id="serialVNSField" property="serialVNS" readOnly="true"/>
+            <passwordField id="apiKeyGoogleMapsField" property="apiKeyGoogleMaps" readOnly="true" clearButtonVisible="false" visible="false"/>
+            <textField id="serialAccenumbField" property="serialAccenumb" readOnly="true" visible="false"/>
+            <textField id="serialAccenumbTempField" property="serialAccenumbTemp" readOnly="true" visible="false"/>
+            <textField id="serialVOSField" property="serialVOS" readOnly="true" visible="false"/>
+            <textField id="serialVNSField" property="serialVNS" readOnly="true" visible="false"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>
