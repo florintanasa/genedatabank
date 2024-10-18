@@ -11,6 +11,7 @@ import com.flowingcode.vaadin.addons.googlemaps.LatLon;
 import com.flowingcode.vaadin.addons.googlemaps.Markers;
 import com.genebank.genedatabank.entity.Localitysiruta;
 
+import com.genebank.genedatabank.entity.User;
 import com.genebank.genedatabank.view.main.MainView;
 
 import com.google.gson.*;
@@ -20,6 +21,7 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
+import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.checkbox.JmixCheckbox;
 import io.jmix.flowui.view.*;
@@ -58,13 +60,16 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
     private LMap map;
     //For GoogleMap addon from  https://github.com/FlowingCode/GoogleMapsAddon
     private GoogleMap gmaps;
-    String apiKey = "";//add your api key from Google Map
+    // add your api key from Google Map in Institute entity, only admin user can do that in field apiKeyGoogleMaps
+    String apiKey;
     //I declared some default static variable (constants) for center and zoom the maps
     private static final double DEFAULT_LATITUDE = 46.009628;
     private  static final double DEFAULT_LONGITUDE = 24.456255;
     private static final int ZOOM_LEVEL = 7;
     //To log some messages
     private static final Logger log = LoggerFactory.getLogger(LocalitysirutaDetailView.class);
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
 
     @Subscribe("checkbox")
     public void onCheckboxClick(final ClickEvent<Checkbox> event) {
@@ -150,6 +155,12 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
         map.addLComponents(markerCenter);
     }
     private void initGoogleMap() {
+        final User user = (User) currentAuthentication.getUser();
+        // get apikey for Google Maps from database
+        if (user.getId_institute().getApiKeyGoogleMaps().isEmpty()) {
+            apiKey = "";
+        } else apiKey = user.getId_institute().getApiKeyGoogleMaps();
+
         gmaps = new GoogleMap(apiKey, null, null);
         gmaps.setMapType(GoogleMap.MapType.ROADMAP);
         gmaps.setCenter(new LatLon(DEFAULT_LATITUDE, DEFAULT_LONGITUDE));
@@ -163,6 +174,12 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
         mapContainer.remove(gmaps);
     }
     private void drawGoogleCenterMarkers() {
+        final User user = (User) currentAuthentication.getUser();
+        // get apikey for Google Maps from database
+        if (user.getId_institute().getApiKeyGoogleMaps().isEmpty()) {
+            apiKey = "";
+        } else apiKey = user.getId_institute().getApiKeyGoogleMaps();
+
         String message_1 = messageBundle.getMessage("center");
         String message_2 = messageBundle.getMessage("move_me");
 

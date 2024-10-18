@@ -93,7 +93,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     // For leaflet with OpenStreetMapMap from https://github.com/xdev-software/vaadin-maps-leaflet-flow
     private LMap map;
     private GoogleMap gmaps;
-    String apiKey = "";//add your api key from Google Map
+    // add your api key from Google Map in Institute entity, only admin user can do that in field apiKeyGoogleMaps
+    String apiKey;
     //I declared some default static variable (constants) for center and zoom the maps
     private static final double DEFAULT_LATITUDE = 46.009628;
     private  static final double DEFAULT_LONGITUDE = 24.456255;
@@ -296,6 +297,12 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         map.addLComponents(markerCenter);
     }
     private void initGoogleMap() {
+        final User user = (User) currentAuthentication.getUser();
+        // get apikey for Google Maps from database
+        if (user.getId_institute().getApiKeyGoogleMaps().isEmpty()) {
+            apiKey = "";
+        } else apiKey = user.getId_institute().getApiKeyGoogleMaps();
+
         gmaps = new GoogleMap(apiKey, null, null);
         gmaps.setMapType(GoogleMap.MapType.ROADMAP);
         gmaps.setCenter(new LatLon(DEFAULT_LATITUDE, DEFAULT_LONGITUDE));
@@ -309,6 +316,12 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         mapContainer.remove(gmaps);
     }
     private void drawGoogleCenterMarkers() {
+        final User user = (User) currentAuthentication.getUser();
+        // get apikey for Google Maps from database
+        if (user.getId_institute().getApiKeyGoogleMaps().isEmpty()) {
+            apiKey = "";
+        } else apiKey = user.getId_institute().getApiKeyGoogleMaps();
+
         String message_1 = messageBundle.getMessage("center");
         String message_2 = messageBundle.getMessage("move_me");
 
