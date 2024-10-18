@@ -45,12 +45,20 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
         event.getEntity().setViableSeeds(0);
     }
 
+    // check some conditions to save
     @Subscribe
     public void onValidation(final ValidationEvent event) {
+        // check if germination faculty is between 0-100
         if (getEditedEntity().getGermFaculty() > 100 || getEditedEntity().getGermFaculty() < 0) {
             String canNotSaveGermFaculty = messageBundle.getMessage("can_not_save_germ_faculty");
             event.getErrors().add(messageBundle.getMessage(canNotSaveGermFaculty));
             notifications.create("HOPA", canNotSaveGermFaculty).withDuration(5000).show();
+        }
+        // check if the date for evaluation is not before the date for germination start
+        if (getEditedEntity().getGermEvalDate().isBefore(getEditedEntity().getGermStartDate()))  {
+            String canNotSaveGermEvalDate = messageBundle.getMessage("can_not_save_germ_eval_date");
+            event.getErrors().add(messageBundle.getMessage(canNotSaveGermEvalDate));
+            notifications.create("HOPA", canNotSaveGermEvalDate).withDuration(5000).show();
         }
     }
     
