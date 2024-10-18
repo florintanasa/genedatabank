@@ -126,16 +126,16 @@ public class Institute {
     @Column(name = "URL", length = 200)
     private String url;
 
-    @Column(name = "SERIAL_VNS", length = 15)
+    @Column(name = "SERIAL_VNS", length = 25)
     private String serialVNS;
 
-    @Column(name = "SERIAL_VOS", length = 15)
+    @Column(name = "SERIAL_VOS", length = 25)
     private String serialVOS;
 
-    @Column(name = "SERIAL_ACCENUMB", length = 15)
+    @Column(name = "SERIAL_ACCENUMB", length = 25)
     private String serialAccenumb;
 
-    @Column(name = "SERIAL_ACCENUMB_TEMP", length = 15)
+    @Column(name = "SERIAL_ACCENUMB_TEMP", length = 25)
     private String serialAccenumbTemp;
 
     @Column(name = "API_KEY_GOOGLE_MAPS")
