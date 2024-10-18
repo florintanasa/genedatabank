@@ -10,6 +10,10 @@ import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -62,21 +66,27 @@ public class ViabNewSeedsLine {
     @ManyToOne(fetch = FetchType.LAZY)
     private ViabNewSeeds viabNewSeeds;
 
+    @Positive(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.seedsNum.validation.Positive}")
     @Column(name = "SEEDS_NUM")
     private Integer seedsNum;
 
     @Column(name = "GERM_START_DATE")
     private LocalDate germStartDate;
 
+    @PositiveOrZero(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.germTime.validation.PositiveOrZero}")
     @Column(name = "GERM_TIME")
     private Integer germTime;
 
     @Column(name = "GERM_EVAL_DATE")
     private LocalDate germEvalDate;
 
+    @PositiveOrZero(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.viableSeeds.validation.PositiveOrZero}")
     @Column(name = "VIABLE_SEEDS")
     private Integer viableSeeds;
 
+    @PositiveOrZero(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.germFaculty.validation.PositiveOrZero}")
+    @Max(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.germFaculty.validation.Max}", value = 100)
+    @Min(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.germFaculty.validation.Min}", value = 0)
     @Column(name = "GERM_FACULTY")
     private Integer germFaculty;
 
