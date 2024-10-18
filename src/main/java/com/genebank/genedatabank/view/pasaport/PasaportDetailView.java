@@ -278,6 +278,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
             notifications.create(message_2).show();
         }
     }
+
     private void addGoogleMapMarker() {
         Pasaport pasaport = getEditedEntity();
 
@@ -290,6 +291,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         }
         else drawGoogleCenterMarkers();
     }
+
     private void addMapMarker() {
         Pasaport pasaport = getEditedEntity();
 
@@ -301,6 +303,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         }
         else drawCenterMarkers();
     }
+
     private void initMap() {
         map = new LMap();
         map.setZoom(ZOOM_LEVEL);
@@ -308,18 +311,22 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         map.setTileLayer(LTileLayer.DEFAULT_OPENSTREETMAP_TILE);
         map.setSizeFull();
     }
+
     private void addMapToContainer() {
         mapContainer.add(map);
     }
+
     private void remMapFromContainer() {
         mapContainer.remove(map);
     }
+
     private void drawCenterMarkers() {
         String message_1 = messageBundle.getMessage("center");
         LMarker markerCenter = new LMarker(DEFAULT_LATITUDE, DEFAULT_LONGITUDE);
         markerCenter.setPopup("<h4>"+message_1+"</h4>");
         map.addLComponents(markerCenter);
     }
+
     private void initGoogleMap() {
         final User user = (User) currentAuthentication.getUser();
         // get apikey for Google Maps from database
@@ -333,12 +340,15 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         gmaps.setZoom(ZOOM_LEVEL-1);//low zoom little for Google Maps
         gmaps.setSizeFull();
     }
+
     private void addGoogleMapToContainer() {
         mapContainer.add(gmaps);
     }
+
     private void remGoogleMapFromContainer() {
         mapContainer.remove(gmaps);
     }
+
     private void drawGoogleCenterMarkers() {
         final User user = (User) currentAuthentication.getUser();
         // get apikey for Google Maps from database
@@ -380,6 +390,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
             }
         });
     }
+
     private int getAltitude(URL url) throws IOException {
        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
@@ -414,6 +425,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
        }
        return (int) altitude;
     }
+
     @Subscribe("probeMap")
     public void addOpenedChangeListener(final Details.OpenedChangeEvent event) {
         if (event.isOpened()) {
@@ -460,8 +472,10 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
 
     @Subscribe("downloadBtn")
     public void onDownloadBtnClick(final ClickEvent<JmixButton> event) {
-        FileRef fileRef = probeImagesDataGrid.getItems().getSelectedItem().getFile();
-        downloader.download(fileRef);
+        if (probeImagesDataGrid.getItems() != null && probeImagesDataGrid.getItems().getSelectedItem() != null) {
+            FileRef fileRef = probeImagesDataGrid.getItems().getSelectedItem().getFile();
+            downloader.download(fileRef);
+        }
     }
 
     @Subscribe("countysirutasComboBox")
