@@ -61,8 +61,6 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
             notifications.create("HOPA", canNotSaveGermEvalDate).withDuration(5000).show();
         }
     }
-    
-    
 
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
