@@ -21,12 +21,13 @@
             <textField id="seedsNumField" property="seedsNum" datatype="int" required="true"
                        requiredMessage="msg://seedsNumField.requiredMessage"/>
             <datePicker id="germStartDateField" property="germStartDate"/>
-            <textField id="germTimeField" property="germTime" datatype="int"/>
-            <datePicker id="germEvalDateField" property="germEvalDate"/>
             <textField id="viableSeedsField" property="viableSeeds" datatype="int" required="true"
                        requiredMessage="msg://viableSeedsField.requiredMessage"/>
+            <datePicker id="germEvalDateField" property="germEvalDate"/>
             <textField id="germFacultyField" property="germFaculty" datatype="int" readOnly="true"/>
-            <textField id="commentsField" property="comments"/>
+            <textField id="germTimeField" property="germTime" datatype="int" readOnly="true"/>
+            <textField id="treatTimeField" property="treatTime" datatype="int"/>
+            <textArea id="commentsField" property="comments"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>

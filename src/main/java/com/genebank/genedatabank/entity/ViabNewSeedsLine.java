@@ -77,6 +77,10 @@ public class ViabNewSeedsLine {
     @Column(name = "GERM_TIME")
     private Integer germTime;
 
+    @PositiveOrZero(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.treatTime.validation.PositiveOrZero}")
+    @Column(name = "TREAT_TIME")
+    private Integer treatTime;
+
     @Column(name = "GERM_EVAL_DATE")
     private LocalDate germEvalDate;
 
@@ -92,6 +96,14 @@ public class ViabNewSeedsLine {
 
     @Column(name = "COMMENTS")
     private String comments;
+
+    public Integer getTreatTime() {
+        return treatTime;
+    }
+
+    public void setTreatTime(Integer treatTime) {
+        this.treatTime = treatTime;
+    }
 
     public Integer getViableSeeds() {
         return viableSeeds;

@@ -80,10 +80,11 @@
                 <column property="viabNewSeeds.id_accenumb.id_taxonomy.species" resizable="true" autoWidth="true"/>
                 <column property="seedsNum" resizable="true" autoWidth="true"/>
                 <column property="germStartDate" resizable="true" autoWidth="true"/>
-                <column property="germTime" resizable="true" autoWidth="true"/>
-                <column property="germEvalDate" resizable="true" autoWidth="true"/>
                 <column property="viableSeeds" resizable="true" autoWidth="true"/>
+                <column property="germEvalDate" resizable="true" autoWidth="true"/>
                 <column property="germFaculty" resizable="true" autoWidth="true"/>
+                <column property="germTime" resizable="true" autoWidth="true"/>
+                <column property="treatTime" resizable="true" autoWidth="true"/>
                 <column property="comments" resizable="true" autoWidth="true"/>
             </columns>
         </dataGrid>
