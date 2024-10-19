@@ -6,14 +6,12 @@ import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.datepicker.TypedDatePicker;
-import io.jmix.flowui.component.formatter.NumberFormatter;
-import io.jmix.flowui.component.textfield.TypedTextField;
+import io.jmix.flowui.component.textfield.JmixIntegerField;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Objects;
 
 
 /**
@@ -26,13 +24,11 @@ import java.util.Objects;
 @EditedEntityContainer("viabNewSeedsLineDc")
 public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsLine> {
     @ViewComponent
-    private TypedTextField<Integer> seedsNumField;
+    private JmixIntegerField seedsNumField;
     @ViewComponent
-    private TypedTextField<Integer> viableSeedsField;
+    private JmixIntegerField viableSeedsField;
     @ViewComponent
-    private TypedTextField<Integer> germFacultyField;
-    @Autowired
-    private NumberFormatter numberFormatter;
+    private JmixIntegerField germFacultyField;
     @Autowired
     private TimeSource timeSource;
     @ViewComponent
@@ -42,26 +38,59 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     @ViewComponent
     private TypedDatePicker<LocalDate> germStartDateField;
     @ViewComponent
-    private TypedTextField<Integer> germTimeField;
+    private JmixIntegerField germTimeField;
     @ViewComponent
     private TypedDatePicker<LocalDate> germEvalDateField;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeedsLine> event) {
-        //set the date with current date
+        //set the Start Germination Date with current date
         event.getEntity().setGermStartDate(timeSource.now().toLocalDate());
-        event.getEntity().setSeedsNum(0);
-        event.getEntity().setViableSeeds(0);
     }
+
+    @Subscribe
+    public void onInit(final InitEvent event) {
+        checkFields();
+    }
+
+    // method to determine what field is necessary to be set required
+    private void checkFields() {
+    // check if numbers of seeds is > 0 so is necessary a Start Germination Date
+    if (!seedsNumField.isEmpty()) {
+        if (seedsNumField.getValue() > 0) {
+            germStartDateField.setRequired(true);
+        }
+    }
+    // check if numbers of seeds is null so is not necessary an Start Germination Date
+    if (seedsNumField.isEmpty()) {
+        germStartDateField.setRequired(false);
+    }
+    // check if numbers of viable seeds is > 0 so is necessary a Evaluation Germination Date to have a date
+    if (!viableSeedsField.isEmpty()) {
+        if (viableSeedsField.getValue() >= 0) {
+            germEvalDateField.setRequired(true);
+        }
+    }
+    // check if numbers of viable seeds is null so no necessary an Evaluation Germination Date
+    if (viableSeedsField.isEmpty()) {
+        germEvalDateField.setRequired(false);
+    }
+    // check if the field for Evaluation Germination Date is not null so is necessary to have a value in Viable seeds
+    if (!germEvalDateField.isEmpty()) {
+        viableSeedsField.setRequired(true);
+    } else viableSeedsField.setRequired(false);
+}
 
     // check some conditions to save
     @Subscribe
     public void onValidation(final ValidationEvent event) {
         // check if germination faculty is between 0-100
-        if (getEditedEntity().getGermFaculty() > 100 || getEditedEntity().getGermFaculty() < 0) {
-            String canNotSaveGermFaculty = messageBundle.getMessage("can_not_save_germ_faculty");
-            event.getErrors().add(messageBundle.getMessage(canNotSaveGermFaculty));
-            notifications.create("HOPA", canNotSaveGermFaculty).withDuration(5000).show();
+        if (getEditedEntity().getGermFaculty() != null) {
+            if (getEditedEntity().getGermFaculty() > 100 || getEditedEntity().getGermFaculty() < 0) {
+                String canNotSaveGermFaculty = messageBundle.getMessage("can_not_save_germ_faculty");
+                event.getErrors().add(messageBundle.getMessage(canNotSaveGermFaculty));
+                notifications.create("HOPA", canNotSaveGermFaculty).withDuration(5000).show();
+            }
         }
         // check if the date for evaluation is not before the date for germination start
         if (getEditedEntity().getGermEvalDate() != null && getEditedEntity().getGermEvalDate().isBefore(getEditedEntity().getGermStartDate()))  {
@@ -87,53 +116,57 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     public void onBeforeShow(final BeforeShowEvent event) {
         //check if value in seeds number field was changed and then calculate viability percentage
         seedsNumField.addValueChangeListener(valueChangeEvent -> {
-            if (!seedsNumField.getValue().isEmpty()) {
+            if (seedsNumField.getValue() != null && viableSeedsField.getValue() != null) {
                 // declared some variables and convert to double to be used for calculate the viability
                 Double valueSeedsNum = Double.valueOf(seedsNumField.getValue());
                 Double valueViableSeedsNum = Double.valueOf(viableSeedsField.getValue());
                 // calculate viability and round to integer
                 double valueGermFaculty = Math.round((valueViableSeedsNum/valueSeedsNum)*100);
                 // display viability
-                germFacultyField.setValue(Objects.requireNonNull(numberFormatter.apply((int) valueGermFaculty)));
-            }
+                germFacultyField.setValue((int) valueGermFaculty);
+            } else germFacultyField.setValue(null);
+            // then check what field is empty and what is written
+            checkFields();
         });
-
         //check if value in viable seeds field was changed and then calculate viability percentage
         viableSeedsField.addValueChangeListener(valueChangeEvent -> {
-            if (!viableSeedsField.getValue().isEmpty()) {
+            if (viableSeedsField.getValue() != null && seedsNumField.getValue() != null) {
                 // declared some variables and convert to double to be used for calculate the viability
                 Double valueSeedsNum = Double.valueOf(seedsNumField.getValue());
                 Double valueViableSeedsNum = Double.valueOf(viableSeedsField.getValue());
                 // calculate viability and round to integer
                 double valueGermFaculty = Math.round((valueViableSeedsNum/valueSeedsNum)*100);
                 // display viability
-                germFacultyField.setValue(Objects.requireNonNull(numberFormatter.apply((int) valueGermFaculty)));
-            }
+                germFacultyField.setValue((int) valueGermFaculty);
+            } else germFacultyField.setValue(null);
+            // then check what field is empty and what is written
+            checkFields();
         });
-
         // check if values in Germination Start Date field is changed
         germStartDateField.addValueChangeListener(valueChangeEvent -> {
-           if (!germStartDateField.isEmpty()) { // if is not empty
+           if (!germStartDateField.isEmpty() && !germEvalDateField.isEmpty()) { // if is not empty
                // I calculate the days as differences
                long germTime = ChronoUnit.DAYS.between(germStartDateField.getValue(),germEvalDateField.getTypedValue());
                // display the value for Germination Time
-               germTimeField.setValue((Objects.requireNonNull(numberFormatter.apply(germTime))));
+               germTimeField.setValue((int) germTime);
            } else {
-               germTimeField.setValue("");
+               germTimeField.setValue(null);
            }
+            // then check what field is empty and what is written
+           checkFields();
         });
-
         // check if values in Germination Evaluation Date field is changed
         germEvalDateField.addValueChangeListener(valueChangeEvent -> {
-            if (!germEvalDateField.isEmpty()) { // if is not empty
+            if (!germEvalDateField.isEmpty() && !germStartDateField.isEmpty()) { // if is not empty
                 // I calculate the days as differences
                 long germTime = ChronoUnit.DAYS.between(germStartDateField.getValue(),germEvalDateField.getTypedValue());
                 // display the value for Germination Time
-                germTimeField.setValue((Objects.requireNonNull(numberFormatter.apply(germTime))));
+                germTimeField.setValue((int) germTime);
             } else {
-                germTimeField.setValue("");
+                germTimeField.setValue(null);
             }
+            // then check what field is empty and what is written
+            checkFields();
         });
     }
-
 }
