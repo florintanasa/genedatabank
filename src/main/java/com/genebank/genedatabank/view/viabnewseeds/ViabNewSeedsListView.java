@@ -2,12 +2,14 @@ package com.genebank.genedatabank.view.viabnewseeds;
 
 import com.genebank.genedatabank.entity.User;
 import com.genebank.genedatabank.entity.ViabNewSeeds;
+import com.genebank.genedatabank.entity.ViabNewSeedsLine;
 import com.genebank.genedatabank.entity.ViabilityStatus;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.grid.ItemClickEvent;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
+import io.jmix.core.entity.KeyValueEntity;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Dialogs;
 import io.jmix.flowui.Notifications;
@@ -22,8 +24,11 @@ import io.jmix.flowui.model.CollectionLoader;
 import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
+import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 
 /**
@@ -103,6 +108,31 @@ public class ViabNewSeedsListView extends StandardListView<ViabNewSeeds> {
                 viabNewSeedsesDataGridMarkAsDone.setEnabled(false);
                 editBtn.setAction(viabNewSeedsesDataGridRead);
             }
+             if (viabNewSeedsesDataGrid.getSingleSelectedItem() != null) {
+                 // calculate for selected item how many items from ViabNewSeedsLine have germFaculty null
+                 long countNullGermFaculty = dataManager
+                         .loadValue("select count(v.viabNewSeeds) from ViabNewSeedsLine v " +
+                                         "where v.viabNewSeeds.id=:id_viabNewSeeds and v.germFaculty is null",Long.class)
+                         .parameter("id_viabNewSeeds", viabNewSeedsesDataGrid.getSingleSelectedItem().getId())
+                         .one();
+             /*
+            // Work also next but is better for the list data
+            List<KeyValueEntity>  countNullGermFaculty = dataManager
+                    .loadValues("select count(v.viabNewSeeds) from ViabNewSeedsLine v where v.viabNewSeeds.id=:id_viabNewSeeds and v.germFaculty is null")
+                    .parameter("id_viabNewSeeds", viabNewSeedsesDataGrid.getSingleSelectedItem().getId())
+                    .store("main")
+                    .properties("count")
+                    .maxResults(1)
+                    .list();
+
+            long count = countNullGermFaculty.get(0).getValue("count");
+              */
+
+                 // if exist minim one I disable button to mark Done the determination
+                 if (countNullGermFaculty > 0) {
+                     viabNewSeedsesDataGridMarkAsDone.setEnabled(false);
+                 }
+             }
         }
     }
 
@@ -117,5 +147,14 @@ public class ViabNewSeedsListView extends StandardListView<ViabNewSeeds> {
     public void onViabNewSeedsesDataGridItemClick(final ItemClickEvent<ViabNewSeeds> event) {
         actionsviabNewSeedsesDataGrid(); // call the method
     }
+/*
+    // method to determine if some test is not done
+    private void checkItemGermFacIsNull() {
+        for (ViabNewSeedsLine line : viabNewSeedsLinesDc.getItems()) {
+            if (line.getGermFaculty() == null) {
 
+            }
+        }
+    }
+*/
 }
