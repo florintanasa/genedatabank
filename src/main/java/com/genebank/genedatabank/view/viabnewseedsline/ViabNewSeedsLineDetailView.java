@@ -5,11 +5,14 @@ import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.component.datepicker.TypedDatePicker;
 import io.jmix.flowui.component.formatter.NumberFormatter;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 
@@ -36,6 +39,12 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;
+    @ViewComponent
+    private TypedDatePicker<LocalDate> germStartDateField;
+    @ViewComponent
+    private TypedTextField<Integer> germTimeField;
+    @ViewComponent
+    private TypedDatePicker<LocalDate> germEvalDateField;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeedsLine> event) {
@@ -65,6 +74,12 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
             String canNotSaveGermStartDate = messageBundle.getMessage("can_not_save_germ_start_date");
             event.getErrors().add(messageBundle.getMessage(canNotSaveGermStartDate));
             notifications.create("HOPA", canNotSaveGermStartDate).withDuration(5000).show();
+        }
+        // check if the date for evaluation germination is in future
+        if (getEditedEntity().getGermEvalDate() != null && getEditedEntity().getGermEvalDate().isAfter(timeSource.now().toLocalDate()))  {
+            String canNotSaveGermEvalDateFuture = messageBundle.getMessage("can_not_save_germ_eval_date_future");
+            event.getErrors().add(messageBundle.getMessage(canNotSaveGermEvalDateFuture));
+            notifications.create("HOPA", canNotSaveGermEvalDateFuture).withDuration(5000).show();
         }
     }
 
@@ -96,6 +111,29 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
             }
         });
 
+        // check if values in Germination Start Date field is changed
+        germStartDateField.addValueChangeListener(valueChangeEvent -> {
+           if (!germStartDateField.isEmpty()) { // if is not empty
+               // I calculate the days as differences
+               long germTime = ChronoUnit.DAYS.between(germStartDateField.getValue(),germEvalDateField.getTypedValue());
+               // display the value for Germination Time
+               germTimeField.setValue((Objects.requireNonNull(numberFormatter.apply(germTime))));
+           } else {
+               germTimeField.setValue("");
+           }
+        });
+
+        // check if values in Germination Evaluation Date field is changed
+        germEvalDateField.addValueChangeListener(valueChangeEvent -> {
+            if (!germEvalDateField.isEmpty()) { // if is not empty
+                // I calculate the days as differences
+                long germTime = ChronoUnit.DAYS.between(germStartDateField.getValue(),germEvalDateField.getTypedValue());
+                // display the value for Germination Time
+                germTimeField.setValue((Objects.requireNonNull(numberFormatter.apply(germTime))));
+            } else {
+                germTimeField.setValue("");
+            }
+        });
     }
 
 }
