@@ -50,7 +50,7 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
     private CurrentAuthentication currentAuthentication;
     @Autowired
     private Sequences sequences;
-    @Autowired
+    @ViewComponent
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;
@@ -97,10 +97,13 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
         yearTestField.setReadOnly(true);
     }
 
+    // method to calculate medium percent viability
     private void calMedViabPercent() {
         double total = 0;
-        for (ViabNewSeedsLine line : viabNewSeedsLinesDc.getItems()){
-         total += (double) line.getGermFaculty() /viabNewSeedsLinesDc.getItems().size();
+        for (ViabNewSeedsLine line : viabNewSeedsLinesDc.getItems()) {
+            if (line.getGermFaculty() != null) {
+                total += (double) line.getGermFaculty() / viabNewSeedsLinesDc.getItems().size();
+            }
         }
         //getEditedEntity().setViabPercent((int)(Math.round(total)));
         viabPercentField.setValue(Objects.requireNonNull(numberFormatter.apply((int) (Math.round(total)))));
