@@ -18,15 +18,15 @@
     </actions>
     <layout>
         <formLayout id="form" dataContainer="viabNewSeedsLineDc">
-            <textField id="seedsNumField" property="seedsNum" datatype="int" required="true"
-                       requiredMessage="msg://seedsNumField.requiredMessage"/>
+            <integerField id="seedsNumField" property="seedsNum" required="true"
+                          requiredMessage="msg://seedsNumField.requiredMessage"/>
             <datePicker id="germStartDateField" property="germStartDate"/>
-            <textField id="viableSeedsField" property="viableSeeds" datatype="int" required="true"
-                       requiredMessage="msg://viableSeedsField.requiredMessage"/>
+            <integerField id="viableSeedsField" property="viableSeeds" required="false"
+                          requiredMessage="msg://viableSeedsField.requiredMessage"/>
             <datePicker id="germEvalDateField" property="germEvalDate"/>
-            <textField id="germFacultyField" property="germFaculty" datatype="int" readOnly="true"/>
-            <textField id="germTimeField" property="germTime" datatype="int" readOnly="true"/>
-            <textField id="treatTimeField" property="treatTime" datatype="int"/>
+            <integerField id="germFacultyField" property="germFaculty" readOnly="true"/>
+            <integerField id="germTimeField" property="germTime" readOnly="true"/>
+            <integerField id="treatTimeField" property="treatTime"/>
             <textArea id="commentsField" property="comments"/>
         </formLayout>
         <hbox id="detailActions">
