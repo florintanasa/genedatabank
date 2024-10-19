@@ -55,10 +55,16 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
             notifications.create("HOPA", canNotSaveGermFaculty).withDuration(5000).show();
         }
         // check if the date for evaluation is not before the date for germination start
-        if (getEditedEntity().getGermEvalDate().isBefore(getEditedEntity().getGermStartDate()))  {
+        if (getEditedEntity().getGermEvalDate() != null && getEditedEntity().getGermEvalDate().isBefore(getEditedEntity().getGermStartDate()))  {
             String canNotSaveGermEvalDate = messageBundle.getMessage("can_not_save_germ_eval_date");
             event.getErrors().add(messageBundle.getMessage(canNotSaveGermEvalDate));
             notifications.create("HOPA", canNotSaveGermEvalDate).withDuration(5000).show();
+        }
+        // check if the date for germination start is in future
+        if (getEditedEntity().getGermStartDate() != null && getEditedEntity().getGermStartDate().isAfter(timeSource.now().toLocalDate()))  {
+            String canNotSaveGermStartDate = messageBundle.getMessage("can_not_save_germ_start_date");
+            event.getErrors().add(messageBundle.getMessage(canNotSaveGermStartDate));
+            notifications.create("HOPA", canNotSaveGermStartDate).withDuration(5000).show();
         }
     }
 
@@ -66,20 +72,30 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     public void onBeforeShow(final BeforeShowEvent event) {
         //check if value in seeds number field was changed and then calculate viability percentage
         seedsNumField.addValueChangeListener(valueChangeEvent -> {
-            Double valueSeedsNum = Double.valueOf(seedsNumField.getValue());
-            Double valueViableSeedsNum = Double.valueOf(viableSeedsField.getValue());
-            double valueGermFaculty = Math.round((valueViableSeedsNum/valueSeedsNum)*100);
-
-            germFacultyField.setValue(Objects.requireNonNull(numberFormatter.apply((int) valueGermFaculty)));
+            if (!seedsNumField.getValue().isEmpty()) {
+                // declared some variables and convert to double to be used for calculate the viability
+                Double valueSeedsNum = Double.valueOf(seedsNumField.getValue());
+                Double valueViableSeedsNum = Double.valueOf(viableSeedsField.getValue());
+                // calculate viability and round to integer
+                double valueGermFaculty = Math.round((valueViableSeedsNum/valueSeedsNum)*100);
+                // display viability
+                germFacultyField.setValue(Objects.requireNonNull(numberFormatter.apply((int) valueGermFaculty)));
+            }
         });
 
+        //check if value in viable seeds field was changed and then calculate viability percentage
         viableSeedsField.addValueChangeListener(valueChangeEvent -> {
-            Double valueSeedsNum = Double.valueOf(seedsNumField.getValue());
-            Double valueViableSeedsNum = Double.valueOf(viableSeedsField.getValue());
-            double valueGermFaculty = Math.round((valueViableSeedsNum/valueSeedsNum)*100);
-
-            germFacultyField.setValue(Objects.requireNonNull(numberFormatter.apply((int) valueGermFaculty)));
+            if (!viableSeedsField.getValue().isEmpty()) {
+                // declared some variables and convert to double to be used for calculate the viability
+                Double valueSeedsNum = Double.valueOf(seedsNumField.getValue());
+                Double valueViableSeedsNum = Double.valueOf(viableSeedsField.getValue());
+                // calculate viability and round to integer
+                double valueGermFaculty = Math.round((valueViableSeedsNum/valueSeedsNum)*100);
+                // display viability
+                germFacultyField.setValue(Objects.requireNonNull(numberFormatter.apply((int) valueGermFaculty)));
+            }
         });
+
     }
 
 }
