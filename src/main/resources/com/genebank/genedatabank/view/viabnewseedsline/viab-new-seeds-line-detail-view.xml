@@ -19,15 +19,31 @@
     <layout>
         <formLayout id="form" dataContainer="viabNewSeedsLineDc">
             <integerField id="seedsNumField" property="seedsNum" required="true"
-                          requiredMessage="msg://seedsNumField.requiredMessage"/>
-            <datePicker id="germStartDateField" property="germStartDate"/>
+                          requiredMessage="msg://seedsNumField.requiredMessage">
+                <tooltip text="msg:///tooltip.seedsNumField" manual="true" position="TOP_START"/>
+            </integerField>
+            <datePicker id="germStartDateField" property="germStartDate">
+                <tooltip text="msg:///tooltip.germStartDateField" manual="true" position="TOP_START"/>
+            </datePicker>
             <integerField id="viableSeedsField" property="viableSeeds" required="false"
-                          requiredMessage="msg://viableSeedsField.requiredMessage"/>
-            <datePicker id="germEvalDateField" property="germEvalDate"/>
-            <integerField id="germFacultyField" property="germFaculty" readOnly="true"/>
-            <integerField id="germTimeField" property="germTime" readOnly="true"/>
-            <integerField id="treatTimeField" property="treatTime"/>
-            <textArea id="commentsField" property="comments"/>
+                          requiredMessage="msg://viableSeedsField.requiredMessage">
+                <tooltip text="msg:///tooltip.viableSeedsField" manual="true" position="TOP_START"/>
+            </integerField>
+            <datePicker id="germEvalDateField" property="germEvalDate">
+                <tooltip text="msg:///tooltip.germEvalDateField" manual="true" position="TOP_START"/>
+            </datePicker>
+            <integerField id="germFacultyField" property="germFaculty" readOnly="true">
+                <tooltip text="msg:///tooltip.germFacultyField" manual="true" position="TOP_START"/>
+            </integerField>
+            <integerField id="germTimeField" property="germTime" readOnly="true">
+                <tooltip text="msg:///tooltip.germTimeField" manual="true" position="TOP_START"/>
+            </integerField>
+            <integerField id="treatTimeField" property="treatTime">
+                <tooltip text="msg:///tooltip.treatTimeField" manual="true" position="TOP_START"/>
+            </integerField>
+            <textArea id="commentsField" property="comments">
+                <tooltip text="msg:///tooltip.commentsViabNewSeedsField" manual="true" position="TOP_START"/>
+            </textArea>
         </formLayout>
         <hbox id="detailActions">
             <button id="saveAndCloseBtn" action="saveAction"/>

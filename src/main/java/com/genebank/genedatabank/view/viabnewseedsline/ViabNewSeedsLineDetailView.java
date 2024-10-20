@@ -2,11 +2,17 @@ package com.genebank.genedatabank.view.viabnewseedsline;
 
 import com.genebank.genedatabank.entity.ViabNewSeedsLine;
 import com.genebank.genedatabank.view.main.MainView;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.datepicker.TypedDatePicker;
+import io.jmix.flowui.component.textarea.JmixTextArea;
 import io.jmix.flowui.component.textfield.JmixIntegerField;
+import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -41,6 +47,12 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     private JmixIntegerField germTimeField;
     @ViewComponent
     private TypedDatePicker<LocalDate> germEvalDateField;
+    @Autowired
+    private UiComponents uiComponents;
+    @ViewComponent
+    private JmixIntegerField treatTimeField;
+    @ViewComponent
+    private JmixTextArea commentsField;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeedsLine> event) {
@@ -50,6 +62,8 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
 
     @Subscribe
     public void onInit(final InitEvent event) {
+        // call some methods
+        initManualTooltip();
         checkFields();
     }
 
@@ -78,7 +92,7 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     // check if the field for Evaluation Germination Date is not null so is necessary to have a value in Viable seeds
     if (!germEvalDateField.isEmpty()) {
         viableSeedsField.setRequired(true);
-    } else viableSeedsField.setRequired(false);
+    } //else viableSeedsField.setRequired(false);
 }
 
     // check some conditions to save
@@ -168,5 +182,61 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
             // then check what field is empty and what is written
             checkFields();
         });
+    }
+
+    // Create Tool Tips for input fields
+    private void initManualTooltip()   {
+        // create button for tooltip help
+        JmixButton hlpBtnSeedsNumField = createHelperButton();
+        JmixButton hlpBtnGermStartDateField = createHelperButton();
+        JmixButton hlpBtnViableSeedsNumField = createHelperButton();
+        JmixButton hlpBtnGermEvalDateField = createHelperButton();
+        JmixButton hlpBtnGermFacultyField = createHelperButton();
+        JmixButton hlpBtnGermTimeField = createHelperButton();
+        JmixButton hlpBtnTreatTimeField = createHelperButton();
+        JmixButton hlpBtnCommentsField = createHelperButton();
+
+        // get tooltips for objects
+        Tooltip tooltipSeedsNumField = seedsNumField.getTooltip();
+        Tooltip tooltipGermStartDateField = germStartDateField.getTooltip();
+        Tooltip tooltipViableSeedsNumField = viableSeedsField.getTooltip();
+        Tooltip tooltipGermEvalDateField = germEvalDateField.getTooltip();
+        Tooltip tooltipGermFacultyField = germFacultyField.getTooltip();
+        Tooltip tooltipGermTimeField = germTimeField.getTooltip();
+        Tooltip tooltipTreatTimeField = treatTimeField.getTooltip();
+        Tooltip tooltipCommentsField = commentsField.getTooltip();
+
+        // create event if click the tooltip button
+        hlpBtnSeedsNumField.addClickListener(buttonClickEvent -> tooltipSeedsNumField.setOpened(!tooltipSeedsNumField.isOpened()));
+        hlpBtnGermStartDateField.addClickListener(buttonClickEvent -> tooltipGermStartDateField.setOpened(!tooltipGermStartDateField.isOpened()));
+        hlpBtnViableSeedsNumField.addClickListener(buttonClickEvent -> tooltipViableSeedsNumField.setOpened(!tooltipViableSeedsNumField.isOpened()));
+        hlpBtnGermEvalDateField.addClickListener(buttonClickEvent -> tooltipGermEvalDateField.setOpened(!tooltipGermEvalDateField.isOpened()));
+        hlpBtnGermFacultyField.addClickListener(buttonClickEvent -> tooltipGermFacultyField.setOpened(!tooltipGermFacultyField.isOpened()));
+        hlpBtnGermTimeField.addClickListener(buttonClickEvent -> tooltipGermTimeField.setOpened(!tooltipGermTimeField.isOpened()));
+        hlpBtnTreatTimeField.addClickListener(buttonClickEvent -> tooltipTreatTimeField.setOpened(!tooltipTreatTimeField.isOpened()));
+        hlpBtnCommentsField.addClickListener(buttonClickEvent -> tooltipCommentsField.setOpened(!tooltipCommentsField.isOpened()));
+
+        // set position for tooltip button
+        seedsNumField.setSuffixComponent(hlpBtnSeedsNumField);
+        germStartDateField.setPrefixComponent(hlpBtnGermStartDateField);
+        viableSeedsField.setSuffixComponent(hlpBtnViableSeedsNumField);
+        germEvalDateField.setPrefixComponent(hlpBtnGermEvalDateField);
+        germFacultyField.setSuffixComponent(hlpBtnGermFacultyField);
+        germTimeField.setSuffixComponent(hlpBtnGermTimeField);
+        treatTimeField.setSuffixComponent(hlpBtnTreatTimeField);
+        commentsField.setSuffixComponent(hlpBtnCommentsField);
+    }
+
+    // method for create a button for tips
+    protected JmixButton createHelperButton() {
+        // create object
+        JmixButton helperButton = uiComponents.create(JmixButton.class);
+        // set the icon for button
+        helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
+        // set the theme for button
+        helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
+
+        // return object
+        return helperButton;
     }
 }
