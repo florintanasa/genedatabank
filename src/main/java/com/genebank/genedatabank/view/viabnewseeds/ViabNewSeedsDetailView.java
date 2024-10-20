@@ -1,20 +1,24 @@
 package com.genebank.genedatabank.view.viabnewseeds;
 
-import com.genebank.genedatabank.entity.User;
-import com.genebank.genedatabank.entity.ViabNewSeeds;
-import com.genebank.genedatabank.entity.ViabNewSeedsLine;
-import com.genebank.genedatabank.entity.ViabilityStatus;
+import com.genebank.genedatabank.entity.*;
 import com.genebank.genedatabank.view.main.MainView;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.UiComponents;
+import io.jmix.flowui.component.combobox.EntityComboBox;
 import io.jmix.flowui.component.formatter.NumberFormatter;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.select.JmixSelect;
 import io.jmix.flowui.component.textfield.TypedTextField;
+import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.model.CollectionPropertyContainer;
 import io.jmix.flowui.model.DataContext;
 import io.jmix.flowui.view.*;
@@ -54,6 +58,12 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;
+    @Autowired
+    private UiComponents uiComponents;
+    @ViewComponent
+    private TypedTextField<String> idVnsField;
+    @ViewComponent
+    private EntityComboBox<Pasaport> id_accenumbField;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeeds> event) {
@@ -69,6 +79,7 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
 
     @Subscribe
     public void onInit(final InitEvent event) {
+        initManualTooltip();
 }
 
     @Subscribe
@@ -123,5 +134,49 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
                 notifications.create("HOPA",error_message).withDuration(5000).show();
             }
         }
+    }
+
+    // Create Tool Tips for input fields
+    private void initManualTooltip()   {
+        // create button for tooltip help
+        JmixButton hlpBtnId_accenumField = createHelperButton();
+        JmixButton hlpBtnIdVnsField = createHelperButton();
+        JmixButton hlpBtnStatusField = createHelperButton();
+        JmixButton hlpBtnYearTestField = createHelperButton();
+        JmixButton hlpBtnViabPercentField = createHelperButton();
+
+        // get tooltips for objects
+        Tooltip tooltipId_accenumbField = id_accenumbField.getTooltip();
+        Tooltip tooltipIdVnsField = idVnsField.getTooltip();
+        Tooltip tooltipStatusField = statusField.getTooltip();
+        Tooltip tooltipYearTestField = yearTestField.getTooltip();
+        Tooltip tooltipViabPercentField = viabPercentField.getTooltip();
+
+        // create event if click the tooltip button
+        hlpBtnId_accenumField.addClickListener(buttonClickEvent -> tooltipId_accenumbField.setOpened(!tooltipId_accenumbField.isOpened()));
+        hlpBtnIdVnsField.addClickListener(buttonClickEvent -> tooltipIdVnsField.setOpened(!tooltipIdVnsField.isOpened()));
+        hlpBtnStatusField.addClickListener(buttonClickEvent -> tooltipStatusField.setOpened(!tooltipStatusField.isOpened()));
+        hlpBtnYearTestField.addClickListener(buttonClickEvent -> tooltipYearTestField.setOpened(!tooltipYearTestField.isOpened()));
+        hlpBtnViabPercentField.addClickListener(buttonClickEvent -> tooltipViabPercentField.setOpened(!tooltipViabPercentField.isOpened()));
+
+        // set position for tooltip button
+        id_accenumbField.setPrefixComponent(hlpBtnId_accenumField);
+        idVnsField.setSuffixComponent(hlpBtnIdVnsField);
+        statusField.setPrefixComponent(hlpBtnStatusField);
+        yearTestField.setSuffixComponent(hlpBtnYearTestField);
+        viabPercentField.setSuffixComponent(hlpBtnViabPercentField);
+    }
+
+    // method for create a button for tips
+    protected JmixButton createHelperButton() {
+        // create object
+        JmixButton helperButton = uiComponents.create(JmixButton.class);
+        // set the icon for button
+        helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
+        // set the theme for button
+        helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
+
+        // return object
+        return helperButton;
     }
 }
