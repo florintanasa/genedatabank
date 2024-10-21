@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://viabOldSeedsDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="viabOldSeedsDc"
+                  class="com.genebank.genedatabank.entity.ViabOldSeeds">
+            <fetchPlan extends="_base">
+                <property name="id_deposit_code" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="viabOldSeedsDl">
+                <query>
+                </query>
+            </loader>
+        </instance>
+        <collection id="pasaportsDc" class="com.genebank.genedatabank.entity.Pasaport">
+            <loader id="pasaportsDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from Pasaport e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="depositsDc" class="com.genebank.genedatabank.entity.Deposit">
+            <loader id="depositsDl" readOnly="true">
+                <query>
+                    <![CDATA[select d from Deposit d]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+        <collection id="viabOldSeedsLinesDc" class="com.genebank.genedatabank.entity.ViabOldSeedsLine">
+            <loader id="viabOldSeedsLinesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ViabOldSeedsLine e]]>
+                </query>
+            </loader>
+            <fetchPlan extends="_base"/>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="viabOldSeedsDc">
+            <entityComboBox id="pasaportsComboBox" metaClass="Pasaport" >
+                <itemsQuery class="com.genebank.genedatabank.entity.Pasaport" escapeValueForLike="true"
+                            searchStringFormat="(?i)%${inputString}%">
+                    <fetchPlan extends="_base"/>
+                    <query>
+                        <![CDATA[select e from Pasaport e where e.accenumb like :searchString escape '\' order by e.accenumb]]>
+                    </query>
+                </itemsQuery>
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
+            <entityComboBox id="depositsComboBox" dataContainer="viabOldSeedsDc" property="id_deposit_code"
+                            required="true">
+                <itemsQuery class="com.genebank.genedatabank.entity.Deposit" escapeValueForLike="true"
+                            searchStringFormat="(?i)%${inputString}%">
+                    <fetchPlan extends="_base"/>
+                    <query>
+                        <![CDATA[select d from Deposit d
+                        where d.deposit_code like :searchString  escape '\']]>
+                    </query>
+                </itemsQuery>
+                <actions>
+                    <action id="entityClear" type="entity_clear"/>
+                    <action id="entityLookup" type="entity_lookup"/>
+                    <action id="entityOpen" type="entity_open"/>
+                </actions>
+            </entityComboBox>
+            <textField id="idVOSField" property="idVOS" readOnly="true"/>
+            <textField id="stockField" property="stock" readOnly="true"/>
+            <textField id="lastYearTestField" property="lastYearTest" readOnly="true"/>
+            <textField id="lastViabTestField" property="lastViabTest" readOnly="true"/>
+            <textField id="yearTestField" property="yearTest" readOnly="true"/>
+            <textField id="viabPercentField" property="viabPercent" readOnly="true"/>
+            <select id="statusField" property="status" readOnly="true"/>
+        </formLayout>
+        <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viaboldseedsLines"/>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="viabOldSeedsLineDataGrid.create"/>
+            <button id="editBtn" action="viabOldSeedsLineDataGrid.edit"/>
+            <button id="removeBtn" action="viabOldSeedsLineDataGrid.remove"/>
+            <button id="excelExportBtn" action="viabOldSeedsLineDataGrid.excelExport"/>
+            <button id="jsonExportBtn" action="viabOldSeedsLineDataGrid.jsonExport"/>
+        </hbox>
+        <dataGrid id="viabOldSeedsLineDataGrid" dataContainer="viabOldSeedsLinesDc" width="100%" minHeight="20em">
+        <actions>
+            <action id="create" type="list_create">
+                <properties>
+                    <property name="openMode" value="DIALOG"/>
+                </properties>
+            </action>
+            <action id="edit" type="list_edit">
+                <properties>
+                    <property name="openMode" value="DIALOG"/>
+                </properties>
+            </action>
+            <action id="remove" type="list_remove"/>
+            <action id="excelExport" type="grdexp_excelExport"/>
+            <action id="jsonExport" type="grdexp_jsonExport"/>
+        </actions>
+        <columns>
+            <column property="seedsNum" resizable="true" autoWidth="true"/>
+            <column property="germStartDate" resizable="true" autoWidth="true"/>
+            <column property="viableSeeds" resizable="true" autoWidth="true"/>
+            <column property="germEvalDate" resizable="true" autoWidth="true"/>
+            <column property="germFaculty" resizable="true" autoWidth="true"/>
+            <column property="germTime" resizable="true" autoWidth="true"/>
+            <column property="treatTime" resizable="true" autoWidth="true"/>
+            <column property="comments" resizable="true" autoWidth="true"/>
+        </columns>
+        </dataGrid>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>

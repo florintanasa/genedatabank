@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://viabOldSeedsListView.title"
+      focusComponent="viabOldSeedsesDataGrid">
+    <data>
+        <collection id="viabOldSeedsesDc"
+                    class="com.genebank.genedatabank.entity.ViabOldSeeds">
+            <fetchPlan extends="_base">
+                <property name="id_deposit_code" fetchPlan="_base">
+                    <property name="id_accenumb" fetchPlan="_base"/>
+                    <property name="id_storage" fetchPlan="_base"/>
+                </property>
+                <property name="viaboldseedsLines" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="viabOldSeedsesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ViabOldSeeds e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="viabOldSeedsesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="viabOldSeedsesDataGrid.create"/>
+            <button id="editBtn" action="viabOldSeedsesDataGrid.edit"/>
+            <button id="excelExportBtn" action="viabOldSeedsesDataGrid.excelExport"/>
+            <button id="jsonExportBtn" action="viabOldSeedsesDataGrid.jsonExport"/>
+            <button id="readBtn" action="viabOldSeedsesDataGrid.read"/>
+            <button id="refreshBtn" action="viabOldSeedsesDataGrid.refresh"/>
+            <button id="removeBtn" action="viabOldSeedsesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="viabOldSeedsesDl"/>
+        </hbox>
+        <dataGrid id="viabOldSeedsesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="viabOldSeedsesDc"
+                  columnReorderingAllowed="true">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="excelExport" type="grdexp_excelExport"/>
+                <action id="jsonExport" type="grdexp_jsonExport"/>
+                <action id="read" type="list_read"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="idVOS"/>
+                <column property="id_deposit_code"/>
+                <column property="stock"/>
+                <column property="lastYearTest"/>
+                <column property="lastViabTest"/>
+                <column property="yearTest"/>
+                <column property="viabPercent"/>
+                <column property="status"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
