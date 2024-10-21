@@ -330,7 +330,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private void initGoogleMap() {
         final User user = (User) currentAuthentication.getUser();
         // get apikey for Google Maps from database
-        if (user.getId_institute().getApiKeyGoogleMaps().isEmpty()) {
+        if (user.getId_institute().getApiKeyGoogleMaps() == null) {
             apiKey = "";
         } else apiKey = user.getId_institute().getApiKeyGoogleMaps();
 
@@ -352,7 +352,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private void drawGoogleCenterMarkers() {
         final User user = (User) currentAuthentication.getUser();
         // get apikey for Google Maps from database
-        if (user.getId_institute().getApiKeyGoogleMaps().isEmpty()) {
+        if (user.getId_institute().getApiKeyGoogleMaps() == null) {
             apiKey = "";
         } else apiKey = user.getId_institute().getApiKeyGoogleMaps();
 
