@@ -13,14 +13,6 @@
                 </query>
             </loader>
         </instance>
-        <collection id="pasaportsDc" class="com.genebank.genedatabank.entity.Pasaport">
-            <loader id="pasaportsDl" readOnly="true">
-                <query>
-                    <![CDATA[select e from Pasaport e]]>
-                </query>
-            </loader>
-            <fetchPlan extends="_base"/>
-        </collection>
         <collection id="depositsDc" class="com.genebank.genedatabank.entity.Deposit">
             <loader id="depositsDl" readOnly="true">
                 <query>
@@ -47,20 +39,6 @@
     </actions>
     <layout>
         <formLayout id="form" dataContainer="viabOldSeedsDc">
-            <entityComboBox id="pasaportsComboBox" metaClass="Pasaport" >
-                <itemsQuery class="com.genebank.genedatabank.entity.Pasaport" escapeValueForLike="true"
-                            searchStringFormat="(?i)%${inputString}%">
-                    <fetchPlan extends="_base"/>
-                    <query>
-                        <![CDATA[select e from Pasaport e where e.accenumb like :searchString escape '\' order by e.accenumb]]>
-                    </query>
-                </itemsQuery>
-                <actions>
-                    <action id="entityClear" type="entity_clear"/>
-                    <action id="entityLookup" type="entity_lookup"/>
-                    <action id="entityOpen" type="entity_open"/>
-                </actions>
-            </entityComboBox>
             <entityComboBox id="depositsComboBox" dataContainer="viabOldSeedsDc" property="id_deposit_code"
                             required="true">
                 <itemsQuery class="com.genebank.genedatabank.entity.Deposit" escapeValueForLike="true"
@@ -68,7 +46,8 @@
                     <fetchPlan extends="_base"/>
                     <query>
                         <![CDATA[select d from Deposit d
-                        where d.deposit_code like :searchString  escape '\']]>
+                        where d.deposit_code like :searchString escape '\'
+                        or d.id_accenumb.accenumb like :searchString escape '\']]>
                     </query>
                 </itemsQuery>
                 <actions>
