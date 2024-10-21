@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      title="msg://viabOldSeedsLineDetailView.title"
+      focusComponent="form">
+    <data>
+        <instance id="viabOldSeedsLineDc"
+                  class="com.genebank.genedatabank.entity.ViabOldSeedsLine">
+            <fetchPlan extends="_base"/>
+            <loader id="viabOldSeedsLineDl"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <actions>
+        <action id="saveAction" type="detail_saveClose"/>
+        <action id="closeAction" type="detail_close"/>
+    </actions>
+    <layout>
+        <formLayout id="form" dataContainer="viabOldSeedsLineDc">
+            <integerField id="seedsNumField" property="seedsNum" required="true"/>
+            <datePicker id="germStartDateField" property="germStartDate"/>
+            <integerField id="viableSeedsField" property="viableSeeds"/>
+            <datePicker id="germEvalDateField" property="germEvalDate"/>
+            <integerField id="germFacultyField" property="germFaculty" readOnly="true"/>
+            <integerField id="germTimeField" property="germTime" readOnly="true"/>
+            <integerField id="treatTimeField" property="treatTime"/>
+            <textArea id="commentsField" property="comments"/>
+        </formLayout>
+        <hbox id="detailActions">
+            <button id="saveAndCloseBtn" action="saveAction"/>
+            <button id="closeBtn" action="closeAction"/>
+        </hbox>
+    </layout>
+</view>
