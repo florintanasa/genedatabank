@@ -63,7 +63,7 @@
                   minHeight="20em"
                   dataContainer="viabNewSeedsLinesDc"
                   columnReorderingAllowed="true"
-                  selectionMode="MULTI">
+        >
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
@@ -71,6 +71,7 @@
                 <action id="jsonExport" type="grdexp_jsonExport"/>
                 <action id="refresh" type="list_refresh"/>
                 <action id="remove" type="list_remove"/>
+                <action id="read" type="list_read"/>
             </actions>
             <columns resizable="true">
                 <column property="viabNewSeeds.idVNS" resizable="true" autoWidth="true"/>
