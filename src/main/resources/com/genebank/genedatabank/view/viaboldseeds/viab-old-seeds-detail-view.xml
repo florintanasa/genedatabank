@@ -8,6 +8,8 @@
             <fetchPlan extends="_base">
                 <property name="id_deposit_code" fetchPlan="_base"/>
             </fetchPlan>
+            <collection id="viabOldSeedsLinesDc" property="viaboldseedsLines">
+            </collection>
             <loader id="viabOldSeedsDl">
                 <query>
                 </query>
@@ -17,14 +19,6 @@
             <loader id="depositsDl" readOnly="true">
                 <query>
                     <![CDATA[select d from Deposit d]]>
-                </query>
-            </loader>
-            <fetchPlan extends="_base"/>
-        </collection>
-        <collection id="viabOldSeedsLinesDc" class="com.genebank.genedatabank.entity.ViabOldSeedsLine">
-            <loader id="viabOldSeedsLinesDl" readOnly="true">
-                <query>
-                    <![CDATA[select e from ViabOldSeedsLine e]]>
                 </query>
             </loader>
             <fetchPlan extends="_base"/>
@@ -47,7 +41,8 @@
                     <query>
                         <![CDATA[select d from Deposit d
                         where d.deposit_code like :searchString escape '\'
-                        or d.id_accenumb.accenumb like :searchString escape '\']]>
+                        or d.id_accenumb.accenumb like :searchString escape '\'
+                        order by d.id_accenumb.createdDate]]>
                     </query>
                 </itemsQuery>
                 <actions>
