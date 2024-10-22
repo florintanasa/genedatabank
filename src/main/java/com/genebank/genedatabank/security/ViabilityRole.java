@@ -13,8 +13,8 @@ import io.jmix.securityflowui.role.annotation.ViewPolicy;
 public interface ViabilityRole {
     String CODE = "viability";
 
-    @MenuPolicy(menuIds = {"Taxonomy.list", "Pasaport.list", "Deposit.list", "Duplicate.list", "DuplicateLine.list", "ViabNewSeeds.list", "Aegisstat.list", "Collsrc.list", "Historic.list", "Georefmeth.list", "Acceconf.list", "Mlsstat.list", "Sampstat.list", "Culturecateg.list", "Curators.list", "Scope_.list", "TypeDocuments.list", "Country.list", "Zonesiruta.list", "Countysiruta.list", "Localitysiruta.list", "Storage.list", "Roadtype.list", "Street.list", "Partners.list", "Institute.list", "ViabNewSeedsLine.list"})
-    @ViewPolicy(viewIds = {"Taxonomy.list", "Pasaport.list", "Deposit.list", "Duplicate.list", "DuplicateLine.list", "ViabNewSeeds.list", "Aegisstat.list", "Collsrc.list", "Historic.list", "Georefmeth.list", "Acceconf.list", "Mlsstat.list", "Sampstat.list", "Culturecateg.list", "Curators.list", "Scope_.list", "TypeDocuments.list", "Country.list", "Zonesiruta.list", "Countysiruta.list", "Localitysiruta.list", "Storage.list", "Roadtype.list", "Street.list", "Partners.list", "Institute.list", "Acceconf.detail", "Aegisstat.detail", "Collsrc.detail", "Country.detail", "Countysiruta.detail", "Culturecateg.detail", "Curators.detail", "Deposit.detail", "Duplicate.detail", "DuplicateLine.detail", "Georefmeth.detail", "Historic.detail", "Institute.detail", "Localitysiruta.detail", "Mlsstat.detail", "Partners.detail", "Pasaport.detail", "Roadtype.detail", "Sampstat.detail", "Scope_.detail", "Storage.detail", "Street.detail", "SysFile.detail", "Taxonomy.detail", "TypeDocuments.detail", "ViabNewSeeds.detail", "ViabNewSeedsLine.detail", "Zonesiruta.detail", "inputDialog", "SysFile.list", "ViabNewSeedsLine.list"})
+    @MenuPolicy(menuIds = {"Taxonomy.list", "Pasaport.list", "Deposit.list", "Duplicate.list", "DuplicateLine.list", "ViabNewSeeds.list", "Aegisstat.list", "Collsrc.list", "Historic.list", "Georefmeth.list", "Acceconf.list", "Mlsstat.list", "Sampstat.list", "Culturecateg.list", "Curators.list", "Scope_.list", "TypeDocuments.list", "Country.list", "Zonesiruta.list", "Countysiruta.list", "Localitysiruta.list", "Storage.list", "Roadtype.list", "Street.list", "Partners.list", "Institute.list", "ViabNewSeedsLine.list", "ViabOldSeeds.list", "ViabOldSeedsLine.list"})
+    @ViewPolicy(viewIds = {"Taxonomy.list", "Pasaport.list", "Deposit.list", "Duplicate.list", "DuplicateLine.list", "ViabNewSeeds.list", "Aegisstat.list", "Collsrc.list", "Historic.list", "Georefmeth.list", "Acceconf.list", "Mlsstat.list", "Sampstat.list", "Culturecateg.list", "Curators.list", "Scope_.list", "TypeDocuments.list", "Country.list", "Zonesiruta.list", "Countysiruta.list", "Localitysiruta.list", "Storage.list", "Roadtype.list", "Street.list", "Partners.list", "Institute.list", "Acceconf.detail", "Aegisstat.detail", "Collsrc.detail", "Country.detail", "Countysiruta.detail", "Culturecateg.detail", "Curators.detail", "Deposit.detail", "Duplicate.detail", "DuplicateLine.detail", "Georefmeth.detail", "Historic.detail", "Institute.detail", "Localitysiruta.detail", "Mlsstat.detail", "Partners.detail", "Pasaport.detail", "Roadtype.detail", "Sampstat.detail", "Scope_.detail", "Storage.detail", "Street.detail", "SysFile.detail", "Taxonomy.detail", "TypeDocuments.detail", "ViabNewSeeds.detail", "ViabNewSeedsLine.detail", "Zonesiruta.detail", "inputDialog", "SysFile.list", "ViabNewSeedsLine.list", "ViabOldSeeds.list", "ViabOldSeedsLine.list", "ViabOldSeeds.detail", "ViabOldSeedsLine.detail"})
     void screens();
 
     @EntityAttributePolicy(entityClass = Acceconf.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
@@ -133,4 +133,12 @@ public interface ViabilityRole {
     @EntityAttributePolicy(entityClass = Zonesiruta.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
     @EntityPolicy(entityClass = Zonesiruta.class, actions = EntityPolicyAction.READ)
     void zonesiruta();
+
+    @EntityAttributePolicy(entityClass = ViabOldSeeds.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityPolicy(entityClass = ViabOldSeeds.class, actions = {EntityPolicyAction.CREATE, EntityPolicyAction.READ, EntityPolicyAction.UPDATE})
+    void viabOldSeeds();
+
+    @EntityAttributePolicy(entityClass = ViabOldSeedsLine.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityPolicy(entityClass = ViabOldSeedsLine.class, actions = {EntityPolicyAction.UPDATE, EntityPolicyAction.READ, EntityPolicyAction.CREATE})
+    void viabOldSeedsLine();
 }
