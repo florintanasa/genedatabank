@@ -28,13 +28,16 @@ public class ViabOldSeedsLineListView extends StandardListView<ViabOldSeedsLine>
     private JmixButton createBtn;
     @ViewComponent
     private JmixButton editBtn;
+    @ViewComponent
+    private JmixButton removeBtn;
 
     @Subscribe
     public void onInit(final InitEvent event) {
         final User user = (User) currentAuthentication.getUser();
         if (!Objects.equals(user.getUsername(), "admin")) {
-            createBtn.setEnabled(false);
-            editBtn.setEnabled(false);
+            createBtn.setVisible(false);
+            editBtn.setVisible(false);
+            removeBtn.setVisible(false);
         }
     }
     
