@@ -11,6 +11,7 @@ import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDelete;
 import io.jmix.core.metamodel.annotation.Composition;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -61,6 +62,7 @@ public class ViabOldSeeds {
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
 
+    @InstanceName
     @Column(name = "ID_VOS", length = 15)
     private String idVOS;
 
