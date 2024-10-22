@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<view xmlns="http://jmix.io/schema/flowui/view"
+      xmlns:c="http://jmix.io/schema/flowui/jpql-condition"
+      title="msg://viabOldSeedsLineListView.title"
+      focusComponent="viabOldSeedsLinesDataGrid">
+    <data>
+        <collection id="viabOldSeedsLinesDc"
+                    class="com.genebank.genedatabank.entity.ViabOldSeedsLine">
+            <fetchPlan extends="_base">
+                <property name="viabOldSeeds" fetchPlan="_base">
+                    <property name="id_deposit_code" fetchPlan="_base">
+                        <property name="id_accenumb" fetchPlan="_base"/>
+                        <property name="id_storage" fetchPlan="_base"/>
+                    </property>
+                </property>
+            </fetchPlan>
+            <loader id="viabOldSeedsLinesDl" readOnly="true">
+                <query>
+                    <![CDATA[select e from ViabOldSeedsLine e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <urlQueryParameters>
+            <genericFilter component="genericFilter"/>
+            <pagination component="pagination"/>
+        </urlQueryParameters>
+    </facets>
+    <actions>
+        <action id="selectAction" type="lookup_select"/>
+        <action id="discardAction" type="lookup_discard"/>
+    </actions>
+    <layout>
+        <genericFilter id="genericFilter"
+                       dataLoader="viabOldSeedsLinesDl">
+            <properties include=".*"/>
+        </genericFilter>
+        <hbox id="buttonsPanel" classNames="buttons-panel">
+            <button id="createBtn" action="viabOldSeedsLinesDataGrid.create"/>
+            <button id="editBtn" action="viabOldSeedsLinesDataGrid.edit"/>
+            <button id="excelExportBtn" action="viabOldSeedsLinesDataGrid.excelExport"/>
+            <button id="excludeBtn" action="viabOldSeedsLinesDataGrid.exclude"/>
+            <button id="jsonExportBtn" action="viabOldSeedsLinesDataGrid.jsonExport"/>
+            <button id="readBtn" action="viabOldSeedsLinesDataGrid.read"/>
+            <button id="refreshBtn" action="viabOldSeedsLinesDataGrid.refresh"/>
+            <button id="removeBtn" action="viabOldSeedsLinesDataGrid.remove"/>
+            <simplePagination id="pagination" dataLoader="viabOldSeedsLinesDl"/>
+        </hbox>
+        <dataGrid id="viabOldSeedsLinesDataGrid"
+                  width="100%"
+                  minHeight="20em"
+                  dataContainer="viabOldSeedsLinesDc"
+                  columnReorderingAllowed="true"
+                  selectionMode="MULTI">
+            <actions>
+                <action id="create" type="list_create"/>
+                <action id="edit" type="list_edit"/>
+                <action id="excelExport" type="grdexp_excelExport"/>
+                <action id="exclude" type="list_exclude"/>
+                <action id="jsonExport" type="grdexp_jsonExport"/>
+                <action id="read" type="list_read"/>
+                <action id="refresh" type="list_refresh"/>
+                <action id="remove" type="list_remove"/>
+            </actions>
+            <columns resizable="true">
+                <column property="viabOldSeeds"/>
+                <column property="seedsNum"/>
+                <column property="germStartDate"/>
+                <column property="germTime"/>
+                <column property="treatTime"/>
+                <column property="germEvalDate"/>
+                <column property="viableSeeds"/>
+                <column property="germFaculty"/>
+                <column property="comments"/>
+            </columns>
+        </dataGrid>
+        <hbox id="lookupActions" visible="false">
+            <button id="selectBtn" action="selectAction"/>
+            <button id="discardBtn" action="discardAction"/>
+        </hbox>
+    </layout>
+</view>
