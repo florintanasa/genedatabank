@@ -28,8 +28,8 @@ public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta>
 }
 ```
 
-To determine the altitude, I used the api and service from [Open Topo Data](https://www.opentopodata.org/) and from [Google elevation api](https://developers.google.com/maps/documentation/elevation/overview). 
-To got the elevation from json response I used [Gson](https://en.wikipedia.org/wiki/Gson) library.
+For determine the altitude, I used the api and service from [Open Topo Data](https://www.opentopodata.org/) and from [Google elevation api](https://developers.google.com/maps/documentation/elevation/overview). 
+For get the elevation from json response I used [Gson](https://en.wikipedia.org/wiki/Gson) library.
 This is possible if not exist data information for latitude and longitude in the Locality screen when using Google Maps, 
 because the marker is draggable in this case.
   
