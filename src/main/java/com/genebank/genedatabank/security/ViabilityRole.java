@@ -134,11 +134,11 @@ public interface ViabilityRole {
     @EntityPolicy(entityClass = Zonesiruta.class, actions = EntityPolicyAction.READ)
     void zonesiruta();
 
-    @EntityAttributePolicy(entityClass = ViabOldSeeds.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
-    @EntityPolicy(entityClass = ViabOldSeeds.class, actions = {EntityPolicyAction.CREATE, EntityPolicyAction.READ, EntityPolicyAction.UPDATE})
+    @EntityAttributePolicy(entityClass = ViabOldSeeds.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
+    @EntityPolicy(entityClass = ViabOldSeeds.class, actions = {EntityPolicyAction.READ, EntityPolicyAction.UPDATE, EntityPolicyAction.CREATE})
     void viabOldSeeds();
 
-    @EntityAttributePolicy(entityClass = ViabOldSeedsLine.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)
+    @EntityAttributePolicy(entityClass = ViabOldSeedsLine.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     @EntityPolicy(entityClass = ViabOldSeedsLine.class, actions = {EntityPolicyAction.UPDATE, EntityPolicyAction.READ, EntityPolicyAction.CREATE})
     void viabOldSeedsLine();
 }
