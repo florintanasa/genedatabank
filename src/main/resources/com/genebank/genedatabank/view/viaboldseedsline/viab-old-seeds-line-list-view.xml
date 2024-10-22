@@ -41,9 +41,7 @@
             <button id="createBtn" action="viabOldSeedsLinesDataGrid.create"/>
             <button id="editBtn" action="viabOldSeedsLinesDataGrid.edit"/>
             <button id="excelExportBtn" action="viabOldSeedsLinesDataGrid.excelExport"/>
-            <button id="excludeBtn" action="viabOldSeedsLinesDataGrid.exclude"/>
             <button id="jsonExportBtn" action="viabOldSeedsLinesDataGrid.jsonExport"/>
-            <button id="readBtn" action="viabOldSeedsLinesDataGrid.read"/>
             <button id="refreshBtn" action="viabOldSeedsLinesDataGrid.refresh"/>
             <button id="removeBtn" action="viabOldSeedsLinesDataGrid.remove"/>
             <simplePagination id="pagination" dataLoader="viabOldSeedsLinesDl"/>
@@ -53,27 +51,26 @@
                   minHeight="20em"
                   dataContainer="viabOldSeedsLinesDc"
                   columnReorderingAllowed="true"
-                  selectionMode="MULTI">
+        >
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
                 <action id="excelExport" type="grdexp_excelExport"/>
-                <action id="exclude" type="list_exclude"/>
                 <action id="jsonExport" type="grdexp_jsonExport"/>
                 <action id="read" type="list_read"/>
                 <action id="refresh" type="list_refresh"/>
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns resizable="true">
-                <column property="viabOldSeeds"/>
-                <column property="seedsNum"/>
-                <column property="germStartDate"/>
-                <column property="germTime"/>
-                <column property="treatTime"/>
-                <column property="germEvalDate"/>
-                <column property="viableSeeds"/>
-                <column property="germFaculty"/>
-                <column property="comments"/>
+                <column property="viabOldSeeds" autoWidth="true"/>
+                <column property="seedsNum" autoWidth="true"/>
+                <column property="germStartDate" autoWidth="true"/>
+                <column property="germTime" autoWidth="true"/>
+                <column property="treatTime" autoWidth="true"/>
+                <column property="germEvalDate" autoWidth="true"/>
+                <column property="viableSeeds" autoWidth="true"/>
+                <column property="germFaculty" autoWidth="true"/>
+                <column property="comments" autoWidth="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
