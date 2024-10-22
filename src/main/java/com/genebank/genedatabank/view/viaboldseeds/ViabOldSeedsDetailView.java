@@ -1,12 +1,31 @@
 package com.genebank.genedatabank.view.viaboldseeds;
 
-import com.genebank.genedatabank.entity.ViabOldSeeds;
+import com.genebank.genedatabank.entity.*;
 import com.genebank.genedatabank.view.main.MainView;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
-import io.jmix.flowui.view.EditedEntityContainer;
-import io.jmix.flowui.view.StandardDetailView;
-import io.jmix.flowui.view.ViewController;
-import io.jmix.flowui.view.ViewDescriptor;
+import io.jmix.core.TimeSource;
+import io.jmix.core.security.CurrentAuthentication;
+import io.jmix.data.Sequence;
+import io.jmix.data.Sequences;
+import io.jmix.flowui.Notifications;
+import io.jmix.flowui.UiComponents;
+import io.jmix.flowui.component.combobox.EntityComboBox;
+import io.jmix.flowui.component.formatter.NumberFormatter;
+import io.jmix.flowui.component.grid.DataGrid;
+import io.jmix.flowui.component.select.JmixSelect;
+import io.jmix.flowui.component.textfield.JmixIntegerField;
+import io.jmix.flowui.component.textfield.TypedTextField;
+import io.jmix.flowui.kit.component.button.JmixButton;
+import io.jmix.flowui.model.CollectionPropertyContainer;
+import io.jmix.flowui.model.DataContext;
+import io.jmix.flowui.model.InstanceContainer;
+import io.jmix.flowui.view.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Objects;
 
 
 /**
@@ -18,4 +37,201 @@ import io.jmix.flowui.view.ViewDescriptor;
 @ViewDescriptor("viab-old-seeds-detail-view.xml")
 @EditedEntityContainer("viabOldSeedsDc")
 public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
+    @Autowired
+    private TimeSource timeSource;
+    @ViewComponent
+    private InstanceContainer<ViabOldSeeds> viabOldSeedsDc;
+    @ViewComponent
+    private CollectionPropertyContainer<ViabOldSeedsLine> viabOldSeedsLinesDc;
+    @ViewComponent
+    private EntityComboBox<Deposit> depositsComboBox;
+    @ViewComponent
+    private JmixIntegerField viabPercentField;
+    @ViewComponent
+    private JmixIntegerField lastViabTestField;
+    @ViewComponent
+    private JmixIntegerField lastYearTestField;
+    @ViewComponent
+    private JmixIntegerField stockField;
+    @Autowired
+    private NumberFormatter numberFormatter;
+    @ViewComponent
+    private DataGrid<ViabOldSeedsLine> viabOldSeedsLineDataGrid;
+    @Autowired
+    private UiComponents uiComponents;
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
+    @Autowired
+    private Sequences sequences;
+    @Autowired
+    private MessageBundle messageBundle;
+    @Autowired
+    private Notifications notifications;
+    @ViewComponent
+    private TypedTextField<String> idVOSField;
+    @ViewComponent
+    private JmixIntegerField yearTestField;
+    @ViewComponent
+    private JmixSelect<Object> statusField;
+
+    @Subscribe
+    public void onInit(final InitEvent event) {
+        // call some methods
+        initManualTooltip();
+        checkUserConnected();
+    }
+
+    // event only for new opening item
+    @Subscribe
+    public void onInitEntity(final InitEntityEvent<ViabOldSeeds> event) {
+        // set default status to In progress
+        event.getEntity().setStatus(ViabilityStatus.IN_PROGRESS);
+        //set the Start Germination Date with current date
+        event.getEntity().setYearTest(timeSource.now().getYear());
+    }
+
+    // event in the view opening process
+    @Subscribe
+    public void onBeforeShow(final BeforeShowEvent event) {
+        // when I add new item run event
+        Objects.requireNonNull(viabOldSeedsLineDataGrid.getItems()).addItemSetChangeListener(itemSetChangeEvent -> {
+            if (viabOldSeedsLineDataGrid.getItems().getItems().isEmpty()) {  // check if not exist items in data grid
+                getEditedEntity().setViabPercent(null); // if not exist set null viability percent because 0 is a value possible
+            } else {
+                calMedViabPercent();  // if exist calculate medium viability percent and display the value
+            }
+        });
+        // when I change item run event
+        viabOldSeedsLineDataGrid.getItems().addStateChangeListener(stateChangeEvent -> {
+            if (viabOldSeedsLineDataGrid.getItems().getItems().isEmpty()) { // check if not exist items in data grid
+                getEditedEntity().setViabPercent(null);// if not exist set null viability percent because 0 is a value possible
+            } else {
+                calMedViabPercent(); // if exist calculate medium viability percent and display the value
+            }
+        });
+
+        //check if is chosen a new deposit code
+        depositsComboBox.addValueChangeListener(valueChangeEvent -> {
+            if (depositsComboBox.getValue() != null) { // check if user choose a deposit code
+                // add values in Viability Old Seeds
+                lastViabTestField.setValue(depositsComboBox.getValue().getPercentage());
+                stockField.setValue(depositsComboBox.getValue().getStock());
+                lastYearTestField.setValue(depositsComboBox.getValue().getYeargerm());
+            }
+        });
+    }
+
+    // method to calculate medium percent viability and display
+    private void calMedViabPercent() {
+        double total = 0;
+        for (ViabOldSeedsLine line : viabOldSeedsLinesDc.getItems()) {
+            if (line.getGermFaculty() != null) { // check what is not null
+                // calculate the sum of viability for all items
+                total += (double) line.getGermFaculty();
+            }
+        }
+        // calculate the medium percent - attention is used all items null or not null
+        int viabPercent = (int) (total / viabOldSeedsLinesDc.getItems().size());
+        // display the value for medium percent calculated
+        getEditedEntity().setViabPercent(viabPercent);
+        //getEditedEntity().setViabPercent((int) Math.round(total / viabOldSeedsLinesDc.getItems().size()));
+        //viabPercentField.setValue(Objects.requireNonNull(numberFormatter.apply((int) Math.round(total / viabOldSeedsLinesDc.getItems().size()))));
+    }
+
+    // before to save we run sequences to create the next serial number for idVOS
+    @Subscribe(target = Target.DATA_CONTEXT)
+    public void onPreSave(final DataContext.PreSaveEvent event) {
+        final User user = (User) currentAuthentication.getUser();
+        if (getEditedEntity().getIdVOS() == null) {
+            if (getEditedEntity().getId_deposit_code().getId_accenumb().getId_instcode().getInstcode()
+                    .equals(user.getId_institute().getInstcode())) {
+                long idVosNumber = sequences.createNextValue(Sequence.withName(getEditedEntity().getId_deposit_code()
+                        .getId_accenumb().getId_instcode().getSerialVOS()));
+                String serialVOS = getEditedEntity().getId_deposit_code()
+                        .getId_accenumb().getId_instcode().getSerialVOS()+"-"+idVosNumber;
+                getEditedEntity().setIdVOS(serialVOS);
+            } else {
+                String error_message = messageBundle.getMessage("error_message_serialVOS");
+                notifications.create("HOPA",error_message).withDuration(5000).show();
+            }
+        }
+    }
+
+    // Create Tool Tips for input fields
+    private void initManualTooltip()   {
+        // create button for tooltip help
+        JmixButton hlpBtnDepositsComboBox = createHlpBtn();
+        JmixButton hlpBtnIdVOSField = createHlpBtn();
+        JmixButton hlpBtnStockField = createHlpBtn();
+        JmixButton hlpBtnLastYearTestField = createHlpBtn();
+        JmixButton hlpBtnLastViabTestField = createHlpBtn();
+        JmixButton hlpBtnYearTestField = createHlpBtn();
+        JmixButton hlpBtnViabPercentField = createHlpBtn();
+        JmixButton hlpBtnStatusField = createHlpBtn();
+
+        // get tool tips for objects
+        Tooltip tooltipDepositsComboBox = depositsComboBox.getTooltip();
+        Tooltip tooltipIdVOSField = idVOSField.getTooltip();
+        Tooltip tooltipStockField = stockField.getTooltip();
+        Tooltip tooltipLastYearTestField = lastYearTestField.getTooltip();
+        Tooltip tooltipLastViabTestField = lastViabTestField.getTooltip();
+        Tooltip tooltipYearTestField = yearTestField.getTooltip();
+        Tooltip tooltipViabPercentField = viabPercentField.getTooltip();
+        Tooltip tooltipStatusField = statusField.getTooltip();
+
+        // create event if click the tool tip button
+        hlpBtnDepositsComboBox.addClickListener(buttonClickEvent ->
+                tooltipDepositsComboBox.setOpened(!tooltipDepositsComboBox.isOpened()));
+        hlpBtnIdVOSField.addClickListener(buttonClickEvent ->
+                tooltipIdVOSField.setOpened(!tooltipIdVOSField.isOpened()));
+        hlpBtnStockField.addClickListener(buttonClickEvent ->
+                tooltipStockField.setOpened(!tooltipStockField.isOpened()));
+        hlpBtnLastYearTestField.addClickListener(buttonClickEvent ->
+                tooltipLastYearTestField.setOpened(!tooltipLastYearTestField.isOpened()));
+        hlpBtnLastViabTestField.addClickListener(buttonClickEvent ->
+                tooltipLastViabTestField.setOpened(!tooltipLastViabTestField.isOpened()));
+        hlpBtnYearTestField.addClickListener(buttonClickEvent ->
+                tooltipYearTestField.setOpened(!tooltipYearTestField.isOpened()));
+        hlpBtnViabPercentField.addClickListener(buttonClickEvent ->
+                tooltipViabPercentField.setOpened(!tooltipViabPercentField.isOpened()));
+        hlpBtnStatusField.addClickListener(buttonClickEvent ->
+                tooltipStatusField.setOpened(!tooltipStatusField.isOpened()));
+
+        // set position for tool tip button in field
+        depositsComboBox.setPrefixComponent(hlpBtnDepositsComboBox);
+        idVOSField.setSuffixComponent(hlpBtnIdVOSField);
+        stockField.setSuffixComponent(hlpBtnStockField);
+        lastYearTestField.setSuffixComponent(hlpBtnLastYearTestField);
+        lastViabTestField.setSuffixComponent(hlpBtnLastViabTestField);
+        yearTestField.setSuffixComponent(hlpBtnYearTestField);
+        viabPercentField.setSuffixComponent(hlpBtnViabPercentField);
+        statusField.setPrefixComponent(hlpBtnStatusField);
+    }
+    
+    // method for create a button for tool tips
+    protected JmixButton createHlpBtn() {
+        // create object
+        JmixButton helperButton = uiComponents.create(JmixButton.class);
+        // set the icon for button
+        helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
+        // set the theme for button
+        helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
+
+        // return object
+        return helperButton;
+    }
+
+    // check the user connected and change fields from read only to be edited
+    private void checkUserConnected() {
+        final User user = (User) currentAuthentication.getUser();
+        if (Objects.equals(user.getUsername(), "admin")) {
+            idVOSField.setReadOnly(false);
+            stockField.setReadOnly(false);
+            lastYearTestField.setReadOnly(false);
+            lastViabTestField.setReadOnly(false);
+            yearTestField.setReadOnly(false);
+            viabPercentField.setReadOnly(false);
+            statusField.setReadOnly(false);
+        }
+    }
 }

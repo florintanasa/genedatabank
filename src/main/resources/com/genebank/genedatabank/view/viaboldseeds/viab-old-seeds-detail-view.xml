@@ -50,14 +50,29 @@
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityOpen" type="entity_open"/>
                 </actions>
+                <tooltip text="msg:///tooltip.depositsComboBox" manual="true" position="TOP_START"/>
             </entityComboBox>
-            <textField id="idVOSField" property="idVOS" readOnly="true"/>
-            <textField id="stockField" property="stock" readOnly="true"/>
-            <textField id="lastYearTestField" property="lastYearTest" readOnly="true"/>
-            <textField id="lastViabTestField" property="lastViabTest" readOnly="true"/>
-            <textField id="yearTestField" property="yearTest" readOnly="true"/>
-            <textField id="viabPercentField" property="viabPercent" readOnly="true"/>
-            <select id="statusField" property="status" readOnly="true"/>
+            <textField id="idVOSField" property="idVOS" readOnly="true">
+                <tooltip text="msg:///tooltip.idVOSField" manual="true" position="TOP_START"/>
+            </textField>
+            <integerField id="stockField" property="stock" readOnly="true">
+                <tooltip text="msg:///tooltip.stockField" manual="true" position="TOP_START"/>
+            </integerField>
+            <integerField id="lastYearTestField" property="lastYearTest" readOnly="true">
+                <tooltip text="msg:///tooltip.lastYearTestField" manual="true" position="TOP_START"/>
+            </integerField>
+            <integerField id="lastViabTestField" property="lastViabTest" readOnly="true">
+                <tooltip text="msg:///tooltip.lastViabTestField" manual="true" position="TOP_START"/>
+            </integerField>
+            <integerField id="yearTestField" property="yearTest" readOnly="true">
+                <tooltip text="msg:///tooltip.yearTestField" manual="true" position="TOP_START"/>
+            </integerField>
+            <integerField id="viabPercentField" property="viabPercent" readOnly="true">
+                <tooltip text="msg:///tooltip.viabPercentField" manual="true" position="TOP_START"/>
+            </integerField>
+            <select id="statusField" property="status" readOnly="true">
+                <tooltip text="msg:///tooltip.statusField" manual="true" position="TOP_START"/>
+            </select>
         </formLayout>
         <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viaboldseedsLines"/>
         <hbox id="buttonsPanel" classNames="buttons-panel">
