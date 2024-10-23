@@ -63,7 +63,7 @@ public class ViabOldSeeds {
     private OffsetDateTime deletedDate;
 
     @InstanceName
-    @Column(name = "ID_VOS", length = 15)
+    @Column(name = "ID_VOS", length = 17)
     private String idVOS;
 
     @JoinColumn(name = "ID_DEPOSIT_CODE_ID")
