@@ -65,7 +65,7 @@ public class ViabNewSeeds {
     private OffsetDateTime deletedDate;
 
     @InstanceName
-    @Column(name = "ID_VNS", nullable = false, length = 15)
+    @Column(name = "ID_VNS", nullable = false, length = 17)
     @NotNull
     private String idVNS;
 
