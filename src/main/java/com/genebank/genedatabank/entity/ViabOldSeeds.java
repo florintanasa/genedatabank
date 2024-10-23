@@ -93,6 +93,28 @@ public class ViabOldSeeds {
     @OneToMany(mappedBy = "viabOldSeeds")
     private List<ViabOldSeedsLine> viaboldseedsLines;
 
+    @Column(name = "OLD_ACCENUMB", length = 15)
+    private String old_accenumb;
+
+    @Column(name = "OLD_DEPOSIT_CODE", length = 15)
+    private String old_deposit_code;
+
+    public String getOld_deposit_code() {
+        return old_deposit_code;
+    }
+
+    public void setOld_deposit_code(String old_deposit_code) {
+        this.old_deposit_code = old_deposit_code;
+    }
+
+    public String getOld_accenumb() {
+        return old_accenumb;
+    }
+
+    public void setOld_accenumb(String old_accenumb) {
+        this.old_accenumb = old_accenumb;
+    }
+
     public List<ViabOldSeedsLine> getViaboldseedsLines() {
         return viaboldseedsLines;
     }
