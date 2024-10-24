@@ -66,6 +66,9 @@ public class ViabNewSeedsLine {
     @ManyToOne(fetch = FetchType.LAZY)
     private ViabNewSeeds viabNewSeeds;
 
+    @Column(name = "GERM_TEST_NUM")
+    private Integer germTestNum;
+
     @Positive(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.seedsNum.validation.Positive}")
     @Column(name = "SEEDS_NUM")
     private Integer seedsNum;
@@ -96,6 +99,14 @@ public class ViabNewSeedsLine {
 
     @Column(name = "COMMENTS")
     private String comments;
+
+    public Integer getGermTestNum() {
+        return germTestNum;
+    }
+
+    public void setGermTestNum(Integer germTestNum) {
+        this.germTestNum = germTestNum;
+    }
 
     public Integer getTreatTime() {
         return treatTime;
