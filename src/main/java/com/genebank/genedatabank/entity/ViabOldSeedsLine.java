@@ -12,10 +12,7 @@ import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -69,6 +66,10 @@ public class ViabOldSeedsLine {
     @ManyToOne(fetch = FetchType.LAZY)
     private ViabOldSeeds viabOldSeeds;
 
+    @NotNull
+    @Column(name = "GERM_TEST_NUM", nullable = false)
+    private Integer germTestNum;
+
     @Positive(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.seedsNum.validation.Positive}")
     @Column(name = "SEEDS_NUM")
     private Integer seedsNum;
@@ -99,6 +100,14 @@ public class ViabOldSeedsLine {
 
     @Column(name = "COMMENTS")
     private String comments;
+
+    public void setGermTestNum(Integer germTestNum) {
+        this.germTestNum = germTestNum;
+    }
+
+    public Integer getGermTestNum() {
+        return germTestNum;
+    }
 
     public String getComments() {
         return comments;

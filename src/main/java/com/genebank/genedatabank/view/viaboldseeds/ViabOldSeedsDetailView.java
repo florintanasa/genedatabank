@@ -63,7 +63,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private CurrentAuthentication currentAuthentication;
     @Autowired
     private Sequences sequences;
-    @Autowired
+    @ViewComponent
     private MessageBundle messageBundle;
     @Autowired
     private Notifications notifications;
@@ -99,6 +99,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
                 getEditedEntity().setViabPercent(null); // if not exist set null viability percent because 0 is a value possible
             } else {
                 calMedViabPercent();  // if exist calculate medium viability percent and display the value
+                calcGermTestNumber(); // if exist calculate the number for test
             }
         });
         // when I change item run event
@@ -107,6 +108,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
                 getEditedEntity().setViabPercent(null);// if not exist set null viability percent because 0 is a value possible
             } else {
                 calMedViabPercent(); // if exist calculate medium viability percent and display the value
+                calcGermTestNumber(); // if exist calculate the number for test
             }
         });
 
@@ -232,6 +234,16 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
             yearTestField.setReadOnly(false);
             viabPercentField.setReadOnly(false);
             statusField.setReadOnly(false);
+        }
+    }
+
+    // method cu calculate test number
+    private void calcGermTestNumber() {
+        for (ViabOldSeedsLine line : viabOldSeedsLinesDc.getItems()) {
+            if ( !viabOldSeedsLinesDc.getItems().isEmpty() && line.getGermTestNum() == null) {
+                int number = viabOldSeedsLinesDc.getItems().indexOf(line)+1;
+                line.setGermTestNum(number);
+            }
         }
     }
 }
