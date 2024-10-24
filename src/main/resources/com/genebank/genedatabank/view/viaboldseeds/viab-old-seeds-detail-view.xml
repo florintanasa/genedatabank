@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <view xmlns="http://jmix.io/schema/flowui/view"
       title="msg://viabOldSeedsDetailView.title"
-      focusComponent="form">
+      focusComponent="formDeposit">
     <data>
         <instance id="viabOldSeedsDc"
                   class="com.genebank.genedatabank.entity.ViabOldSeeds">
@@ -38,8 +38,11 @@
         <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
     </actions>
-    <layout>
-        <formLayout id="form" dataContainer="viabOldSeedsDc">
+    <layout expand="viabOldSeedsHistoryDataGrid" alignItems="STRETCH" padding="false" spacing="false">
+        <vbox id="contentsBox" expand="depositFields" css="overflow: auto">
+        <vbox id="depositFields" classNames="contrast-panel">
+            <h5 text="msg://formDeposit"/>
+        <formLayout id="formDeposit" dataContainer="viabOldSeedsDc">
             <entityComboBox id="depositsComboBox" dataContainer="viabOldSeedsDc" property="id_deposit_code"
                             required="true">
                 <itemsQuery class="com.genebank.genedatabank.entity.Deposit" escapeValueForLike="true"
@@ -56,38 +59,56 @@
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityOpen" type="entity_open"/>
                 </actions>
-                <tooltip text="msg:///tooltip.depositsComboBox" manual="true" position="TOP_START"/>
+                <tooltip text="msg:///tooltip.depositsComboBox"
+                         manual="true" position="TOP_START"/>
             </entityComboBox>
-            <textField id="idVOSField" property="idVOS" readOnly="true">
-                <tooltip text="msg:///tooltip.idVOSField" manual="true" position="TOP_START"/>
-            </textField>
             <integerField id="stockField" property="stock" readOnly="true">
-                <tooltip text="msg:///tooltip.stockField" manual="true" position="TOP_START"/>
+                <tooltip text="msg:///tooltip.stockField"
+                         manual="true" position="TOP_START"/>
             </integerField>
             <integerField id="lastYearTestField" property="lastYearTest" readOnly="true">
-                <tooltip text="msg:///tooltip.lastYearTestField" manual="true" position="TOP_START"/>
+                <tooltip text="msg:///tooltip.lastYearTestField"
+                         manual="true" position="TOP_START"/>
             </integerField>
             <integerField id="lastViabTestField" property="lastViabTest" readOnly="true">
-                <tooltip text="msg:///tooltip.lastViabTestField" manual="true" position="TOP_START"/>
+                <tooltip text="msg:///tooltip.lastViabTestField"
+                         manual="true" position="TOP_START"/>
             </integerField>
-            <integerField id="yearTestField" property="yearTest" readOnly="true">
-                <tooltip text="msg:///tooltip.yearTestField" manual="true" position="TOP_START"/>
-            </integerField>
-            <integerField id="viabPercentField" property="viabPercent" readOnly="true">
-                <tooltip text="msg:///tooltip.viabPercentField" manual="true" position="TOP_START"/>
-            </integerField>
-            <select id="statusField" property="status" readOnly="true">
-                <tooltip text="msg:///tooltip.statusField" manual="true" position="TOP_START"/>
-            </select>
         </formLayout>
-        <vbox>
-            <dataGrid id="viabOldSeedsHistoryDataGrid" dataContainer="viabOldHistoryDc">
+        </vbox>
+            <vbox id="viabilityFields" classNames="contrast-panel">
+                <h5 text="msg://formViability"/>
+                <formLayout id="formViability" dataContainer="viabOldSeedsDc">
+                    <textField id="idVOSField" property="idVOS" readOnly="true">
+                        <tooltip text="msg:///tooltip.idVOSField"
+                                 manual="true" position="TOP_START"/>
+                    </textField>
+                    <integerField id="yearTestField" property="yearTest" readOnly="true">
+                        <tooltip text="msg:///tooltip.yearTestField"
+                                 manual="true" position="TOP_START"/>
+                    </integerField>
+                    <integerField id="viabPercentField" property="viabPercent" readOnly="true">
+                        <tooltip text="msg:///tooltip.viabPercentField"
+                                 manual="true" position="TOP_START"/>
+                    </integerField>
+                    <select id="statusField" property="status" readOnly="true">
+                        <tooltip text="msg:///tooltip.statusField"
+                                 manual="true" position="TOP_START"/>
+                    </select>
+                </formLayout>
+            </vbox>
+        <hbox id="dataGridOldSeedsHistory" classNames="contrast-panel" colspan="2" width="100%">
+            <vbox>
+            <h5 text="msg://formOldSeedsHistory"/>
+            <dataGrid id="viabOldSeedsHistoryDataGrid" dataContainer="viabOldHistoryDc"  height="10em" width="50%" colspan="1">
                 <columns>
                     <column property="yearTest" resizable="true" autoWidth="true"/>
                     <column property="viabPercent" resizable="true" autoWidth="true"/>
                 </columns>
             </dataGrid>
-        </vbox>
+            </vbox>
+        </hbox>
+        <vbox id="dataGridSeedsLines" classNames="contrast-panel" width="100%" maxHeight="10em">
         <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viaboldseedsLines"/>
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="viabOldSeedsLineDataGrid.create"/>
@@ -96,7 +117,7 @@
             <button id="excelExportBtn" action="viabOldSeedsLineDataGrid.excelExport"/>
             <button id="jsonExportBtn" action="viabOldSeedsLineDataGrid.jsonExport"/>
         </hbox>
-        <dataGrid id="viabOldSeedsLineDataGrid" dataContainer="viabOldSeedsLinesDc" width="100%" minHeight="20em">
+        <dataGrid id="viabOldSeedsLineDataGrid" dataContainer="viabOldSeedsLinesDc" width="100%" minHeight="15em">
         <actions>
             <action id="create" type="list_create">
                 <properties>
@@ -124,7 +145,9 @@
             <column property="comments" resizable="true" autoWidth="true"/>
         </columns>
         </dataGrid>
-        <hbox id="detailActions">
+        </vbox>
+        </vbox>
+        <hbox id="detailActions" classNames="px-m py-s bg-contrast-5">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
         </hbox>
