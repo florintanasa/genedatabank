@@ -62,15 +62,24 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns resizable="true">
-                <column property="viabOldSeeds" autoWidth="true"/>
-                <column property="seedsNum" autoWidth="true"/>
-                <column property="germStartDate" autoWidth="true"/>
-                <column property="germTime" autoWidth="true"/>
-                <column property="treatTime" autoWidth="true"/>
-                <column property="germEvalDate" autoWidth="true"/>
-                <column property="viableSeeds" autoWidth="true"/>
-                <column property="germFaculty" autoWidth="true"/>
-                <column property="comments" autoWidth="true"/>
+                <column property="viabOldSeeds.idVOS" autoWidth="true" resizable="true"/>
+                <column property="germTestNum" autoWidth="true" resizable="true"/>
+                <column property="viabOldSeeds.id_deposit_code.id_accenumb.accenumb"
+                        autoWidth="true" resizable="true"/>
+                <column property="viabOldSeeds.id_deposit_code.id_accenumb.accname"
+                        autoWidth="true" resizable="true"/>
+                <column property="viabOldSeeds.id_deposit_code.id_accenumb.id_taxonomy.genus"
+                        autoWidth="true" resizable="true"/>
+                <column property="viabOldSeeds.id_deposit_code.id_accenumb.id_taxonomy.species"
+                        autoWidth="true" resizable="true"/>
+                <column property="seedsNum" autoWidth="true" resizable="true"/>
+                <column property="germStartDate" autoWidth="true" resizable="true"/>
+                <column property="germTime" autoWidth="true" resizable="true"/>
+                <column property="treatTime" autoWidth="true" resizable="true"/>
+                <column property="germEvalDate" autoWidth="true" resizable="true"/>
+                <column property="viableSeeds" autoWidth="true" resizable="true"/>
+                <column property="germFaculty" autoWidth="true" resizable="true"/>
+                <column property="comments" autoWidth="true" resizable="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

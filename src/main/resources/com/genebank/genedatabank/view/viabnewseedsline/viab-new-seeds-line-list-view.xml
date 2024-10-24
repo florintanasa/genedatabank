@@ -75,6 +75,7 @@
             </actions>
             <columns resizable="true">
                 <column property="viabNewSeeds.idVNS" resizable="true" autoWidth="true"/>
+                <column property="germTestNum" resizable="true" autoWidth="true"/>
                 <column property="viabNewSeeds.id_accenumb.accenumb" resizable="true" autoWidth="true"/>
                 <column property="viabNewSeeds.id_accenumb.accname" resizable="true" autoWidth="true"/>
                 <column property="viabNewSeeds.id_accenumb.id_taxonomy.genus" resizable="true" autoWidth="true"/>
