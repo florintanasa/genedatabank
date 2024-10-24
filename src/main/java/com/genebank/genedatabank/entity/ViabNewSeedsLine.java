@@ -10,10 +10,7 @@ import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -66,7 +63,8 @@ public class ViabNewSeedsLine {
     @ManyToOne(fetch = FetchType.LAZY)
     private ViabNewSeeds viabNewSeeds;
 
-    @Column(name = "GERM_TEST_NUM")
+    @NotNull
+    @Column(name = "GERM_TEST_NUM", nullable = false)
     private Integer germTestNum;
 
     @Positive(message = "{msg://com.genebank.genedatabank.entity/ViabNewSeedsLine.seedsNum.validation.Positive}")
