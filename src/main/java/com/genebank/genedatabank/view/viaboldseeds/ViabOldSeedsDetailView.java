@@ -19,9 +19,7 @@ import io.jmix.flowui.component.select.JmixSelect;
 import io.jmix.flowui.component.textfield.JmixIntegerField;
 import io.jmix.flowui.component.textfield.TypedTextField;
 import io.jmix.flowui.kit.component.button.JmixButton;
-import io.jmix.flowui.model.CollectionPropertyContainer;
-import io.jmix.flowui.model.DataContext;
-import io.jmix.flowui.model.InstanceContainer;
+import io.jmix.flowui.model.*;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -73,6 +71,10 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private JmixIntegerField yearTestField;
     @ViewComponent
     private JmixSelect<Object> statusField;
+    @ViewComponent
+    private CollectionLoader<ViabOldSeeds> viabOldHistoryDl;
+    @ViewComponent
+    private CollectionContainer<ViabOldSeeds> viabOldHistoryDc;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -93,6 +95,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     // event in the view opening process
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
+        loadViabOldHistoryDl();
         // when I add new item run event
         Objects.requireNonNull(viabOldSeedsLineDataGrid.getItems()).addItemSetChangeListener(itemSetChangeEvent -> {
             if (viabOldSeedsLineDataGrid.getItems().getItems().isEmpty()) {  // check if not exist items in data grid
@@ -114,6 +117,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
 
         //check if is chosen a new deposit code
         depositsComboBox.addValueChangeListener(valueChangeEvent -> {
+            loadViabOldHistoryDl();
             if (depositsComboBox.getValue() != null) { // check if user choose a deposit code
                 // add values in Viability Old Seeds
                 lastViabTestField.setValue(depositsComboBox.getValue().getPercentage());
@@ -244,6 +248,19 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
                 int number = viabOldSeedsLinesDc.getItems().indexOf(line)+1;
                 line.setGermTestNum(number);
             }
+        }
+    }
+
+    @Subscribe(id = "viabOldSeedsDc", target = Target.DATA_CONTAINER)
+    public void onViabOldSeedsDcItemChange(final InstanceContainer.ItemChangeEvent<ViabOldSeeds> event) {
+        loadViabOldHistoryDl();
+    }
+
+    // method to load old values for viability and year to populate data grid with historic
+    private void loadViabOldHistoryDl() {
+        if (depositsComboBox.getValue() != null) {
+            viabOldHistoryDl.setParameter("deposit_code", depositsComboBox.getValue().getId());
+            viabOldHistoryDl.load();
         }
     }
 }

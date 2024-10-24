@@ -23,6 +23,13 @@
             </loader>
             <fetchPlan extends="_base"/>
         </collection>
+        <collection id="viabOldHistoryDc" class="com.genebank.genedatabank.entity.ViabOldSeeds">
+            <loader id="viabOldHistoryDl" readOnly="true">
+                <query>
+                    <![CDATA[select v from ViabOldSeeds v where v.id_deposit_code.id = :deposit_code]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -46,7 +53,6 @@
                     </query>
                 </itemsQuery>
                 <actions>
-                    <action id="entityClear" type="entity_clear"/>
                     <action id="entityLookup" type="entity_lookup"/>
                     <action id="entityOpen" type="entity_open"/>
                 </actions>
@@ -74,6 +80,14 @@
                 <tooltip text="msg:///tooltip.statusField" manual="true" position="TOP_START"/>
             </select>
         </formLayout>
+        <vbox>
+            <dataGrid id="viabOldSeedsHistoryDataGrid" dataContainer="viabOldHistoryDc">
+                <columns>
+                    <column property="yearTest" resizable="true" autoWidth="true"/>
+                    <column property="viabPercent" resizable="true" autoWidth="true"/>
+                </columns>
+            </dataGrid>
+        </vbox>
         <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viaboldseedsLines"/>
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="viabOldSeedsLineDataGrid.create"/>
