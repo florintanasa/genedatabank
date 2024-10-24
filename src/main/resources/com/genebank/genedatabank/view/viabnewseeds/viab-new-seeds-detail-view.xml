@@ -91,6 +91,7 @@
                 <action id="jsonExport" type="grdexp_jsonExport"/>
             </actions>
             <columns>
+                <column property="germTestNum" resizable="true" autoWidth="true"/>
                 <column property="seedsNum" resizable="true" autoWidth="true"/>
                 <column property="germStartDate" resizable="true" autoWidth="true"/>
                 <column property="viableSeeds" resizable="true" autoWidth="true"/>

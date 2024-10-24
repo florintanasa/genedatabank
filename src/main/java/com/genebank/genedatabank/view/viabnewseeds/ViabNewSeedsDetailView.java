@@ -90,6 +90,7 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
                 getEditedEntity().setViabPercent(null); // if not exist set null viability percent because 0 is a value possible
             } else {
                 calMedViabPercent(); // if exist calculate medium viability percent
+                calcGermTestNumber(); // if exist calculate the number for test
             }
         });
         // when I change item run event
@@ -98,6 +99,7 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
                 getEditedEntity().setViabPercent(null); // if not exist set null viability percent because 0 is a value possible
             } else {
                 calMedViabPercent(); // if exist calculate medium viability percent
+                calcGermTestNumber(); // if exist calculate the number for test
             }
         });
         // set read only field Status
@@ -178,5 +180,15 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
 
         // return object
         return helperButton;
+    }
+
+    // method cu calculate test number
+    private void calcGermTestNumber() {
+        for (ViabNewSeedsLine line : viabNewSeedsLinesDc.getItems()) {
+            if ( !viabNewSeedsLinesDc.getItems().isEmpty() && line.getGermTestNum() == null) {
+                int number = viabNewSeedsLinesDc.getItems().indexOf(line);
+                line.setGermTestNum(number+1);
+            }
+        }
     }
 }
