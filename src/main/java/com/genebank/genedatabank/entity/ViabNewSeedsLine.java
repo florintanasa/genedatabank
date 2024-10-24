@@ -5,10 +5,14 @@
 
 package com.genebank.genedatabank.entity;
 
+import io.jmix.core.MetadataTools;
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.DependsOnProperties;
+import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.core.metamodel.datatype.DatatypeFormatter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -240,5 +244,13 @@ public class ViabNewSeedsLine {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    @InstanceName
+    @DependsOnProperties({"viabNewSeeds", "germTestNum"})
+    public String getInstanceName(MetadataTools metadataTools, DatatypeFormatter datatypeFormatter) {
+        return String.format("%s - %s",
+                metadataTools.format(viabNewSeeds),
+                datatypeFormatter.formatInteger(germTestNum));
     }
 }
