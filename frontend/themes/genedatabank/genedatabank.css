@@ -1,4 +1,29 @@
 /* Define your styles here */
+html {
+    --secondary-base-color: #f4f5f7;
+    background-color: var(--secondary-base-color);
+
+    --lumo-primary-text-color: rgb(103, 191, 208);
+    --lumo-primary-color-50pct: rgba(103, 191, 208, 0.5);
+    --lumo-primary-color-10pct: rgba(103, 191, 208, 0.1);
+    --lumo-primary-color: #67bfd0;
+
+    --vaadin-button-background: var(--lumo-base-color);
+    --vaadin-button-text-color: var(--lumo-body-text-color);
+}
+
+.contrast-panel {
+    background-color: var(--lumo-base-color);
+    border-radius: var(--lumo-border-radius-m);
+    --vaadin-button-background: var(--secondary-base-color);
+}
+
+[theme~="dark"] {
+    --lumo-primary-text-color: rgb(238, 133, 27);
+    --lumo-primary-color-50pct: rgba(238, 133, 27, 0.5);
+    --lumo-primary-color-10pct: rgba(238, 133, 27, 0.1);
+    --lumo-primary-color: hsl(30, 86%, 52%);
+}
 
 .qrcode-image {
     object-fit: contain;
