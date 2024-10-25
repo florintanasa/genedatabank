@@ -100,7 +100,7 @@
         <hbox id="dataGridOldSeedsHistory" classNames="contrast-panel" colspan="2" width="100%">
             <vbox>
             <h5 text="msg://formOldSeedsHistory"/>
-            <dataGrid id="viabOldSeedsHistoryDataGrid" dataContainer="viabOldHistoryDc"  height="10em" width="50%" colspan="1">
+            <dataGrid id="viabOldSeedsHistoryDataGrid" dataContainer="viabOldHistoryDc"  height="10em" width="100%" colspan="1">
                 <columns>
                     <column property="yearTest" resizable="true" autoWidth="true"/>
                     <column property="viabPercent" resizable="true" autoWidth="true"/>
