@@ -38,7 +38,7 @@
         <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
     </actions>
-    <layout expand="viabOldSeedsHistoryDataGrid" alignItems="STRETCH" padding="false" spacing="false">
+    <layout expand="contentsBox" alignItems="STRETCH" padding="false" spacing="false">
         <vbox id="contentsBox" expand="depositFields" css="overflow: auto">
         <vbox id="depositFields" classNames="contrast-panel">
             <h5 text="msg://formDeposit"/>
