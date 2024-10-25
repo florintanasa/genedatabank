@@ -67,6 +67,7 @@ dependencies {
     implementation 'io.jmix.reports:jmix-reports-rest-starter'
     implementation 'io.jmix.audit:jmix-audit-flowui-starter'
     implementation 'io.jmix.audit:jmix-audit-starter'
+    implementation 'io.jmix.charts:jmix-charts-flowui-starter'
 }
 
 test {
