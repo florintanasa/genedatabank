@@ -72,6 +72,7 @@
       "ace-builds": "1.18.0",
       "construct-style-sheets-polyfill": "3.1.0",
       "date-fns": "2.29.3",
+      "echarts": "5.4.3",
       "leaflet": "1.8.0",
       "lit": "3.1.2"
     },
@@ -93,7 +94,7 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "1b9c39106d25aa2beda03463e795e09ff2812a0fb10c87b0356e6658b7127b3c"
+    "hash": "76cf3d10bea921806eab3a9edafe8a59986ff49dcf3182eec8860d1f25d470d7"
   },
   "dependencies": {
     "@flowingcode/google-map": "3.2.4",
@@ -172,6 +173,7 @@
     "ace-builds": "1.18.0",
     "construct-style-sheets-polyfill": "3.1.0",
     "date-fns": "2.29.3",
+    "echarts": "5.4.3",
     "leaflet": "1.8.0",
     "lit": "3.1.2"
   },
@@ -271,6 +273,7 @@
     "@vaadin/side-nav": "$@vaadin/side-nav",
     "@flowingcode/google-map": "$@flowingcode/google-map",
     "@googlemaps/markerclusterer": "$@googlemaps/markerclusterer",
-    "leaflet": "$leaflet"
+    "leaflet": "$leaflet",
+    "echarts": "$echarts"
   }
 }

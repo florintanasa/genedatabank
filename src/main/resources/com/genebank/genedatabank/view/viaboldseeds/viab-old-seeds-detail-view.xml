@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<view xmlns="http://jmix.io/schema/flowui/view"
+<view xmlns="http://jmix.io/schema/flowui/view" xmlns:charts="http://jmix.io/schema/charts/ui"
       title="msg://viabOldSeedsDetailView.title"
       focusComponent="formDeposit">
     <data>
@@ -106,6 +106,32 @@
                     <column property="viabPercent" resizable="true" autoWidth="true"/>
                 </columns>
             </dataGrid>
+            </vbox>
+            <vbox>
+                <h5 text="msg://chartOldSeedsHistoric"/>
+                <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="20em" colspan="2">
+                <charts:tooltip trigger="AXIS">
+                    <charts:axisPointer type="SHADOW"/>
+                </charts:tooltip>
+                    <charts:legend/>
+                    <charts:xAxes>
+                        <charts:xAxis/>
+                    </charts:xAxes>
+                    <charts:yAxes>
+                        <charts:yAxis>
+                            <charts:axisLabel formatter="{value} %"/>
+                        </charts:yAxis>
+                    </charts:yAxes>
+                    <charts:dataSet>
+                        <charts:source dataContainer="viabOldHistoryDc"
+                                       categoryField="yearTest" valueFields="viabPercent"/>
+                    </charts:dataSet>
+                    <charts:series>
+                        <charts:bar name="msg://chartOldSeedsHistoricSeries"/>
+                    </charts:series>
+                </charts:chart>
+
+
             </vbox>
         </hbox>
         <vbox id="dataGridSeedsLines" classNames="contrast-panel" width="100%" maxHeight="10em">
