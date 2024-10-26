@@ -6,6 +6,17 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
+import io.jmix.chartsflowui.component.Chart;
+import io.jmix.chartsflowui.data.ContainerChartItems;
+import io.jmix.chartsflowui.data.item.EntityDataItem;
+import io.jmix.chartsflowui.kit.component.model.Aria;
+import io.jmix.chartsflowui.kit.component.model.DataSet;
+import io.jmix.chartsflowui.kit.component.model.Title;
+import io.jmix.chartsflowui.kit.component.model.axis.AxisLabel;
+import io.jmix.chartsflowui.kit.component.model.axis.XAxis;
+import io.jmix.chartsflowui.kit.component.model.axis.YAxis;
+import io.jmix.chartsflowui.kit.component.model.legend.Legend;
+import io.jmix.chartsflowui.kit.component.model.series.AbstractSeries;
 import io.jmix.core.TimeSource;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.data.Sequence;
@@ -75,6 +86,8 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private CollectionLoader<ViabOldSeeds> viabOldHistoryDl;
     @ViewComponent
     private CollectionContainer<ViabOldSeeds> viabOldHistoryDc;
+    @ViewComponent
+    private Chart chartOldSeedHistoric;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -117,6 +130,17 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
 
         //check if is chosen a new deposit code
         depositsComboBox.addValueChangeListener(valueChangeEvent -> {
+            // create title for chart
+            chartOldSeedHistoric.setTitle(new Title().withText(depositsComboBox.getValue().getDeposit_code()));
+            chartOldSeedHistoric.withXAxis(new XAxis());
+            chartOldSeedHistoric.withYAxis(new YAxis().withAxisLabel(new AxisLabel().withFormatter("{value} %")));
+            chartOldSeedHistoric.setDataSet(new DataSet().withSource(
+                    new DataSet.Source<EntityDataItem>()
+                            .withDataProvider(new ContainerChartItems<>(viabOldHistoryDc))
+                            .withCategoryField("yearTest")
+                            .withValueFields("viabPercent")
+            ));
+            // load new data for deposit code chosen
             loadViabOldHistoryDl();
             if (depositsComboBox.getValue() != null) { // check if user choose a deposit code
                 // add values in Viability Old Seeds
