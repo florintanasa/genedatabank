@@ -26,7 +26,8 @@
         <collection id="viabOldHistoryDc" class="com.genebank.genedatabank.entity.ViabOldSeeds">
             <loader id="viabOldHistoryDl" readOnly="true">
                 <query>
-                    <![CDATA[select v from ViabOldSeeds v where v.id_deposit_code.id = :deposit_code]]>
+                    <![CDATA[select v from ViabOldSeeds v where v.id_deposit_code.id = :deposit_code
+                             order by v.yearTest]]>
                 </query>
             </loader>
         </collection>
@@ -112,7 +113,8 @@
             </vbox>
             <vbox id="chartOldSeedHistoricVbox" classNames="contrast-panel">
                 <h5 text="msg://chartOldSeedsHistoric"/>
-                <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="20em" colspan="2">
+                <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="20em" colspan="2"
+                              colorPalette="TEAL">
                 <charts:tooltip trigger="AXIS">
                     <charts:axisPointer type="SHADOW"/>
                 </charts:tooltip>
