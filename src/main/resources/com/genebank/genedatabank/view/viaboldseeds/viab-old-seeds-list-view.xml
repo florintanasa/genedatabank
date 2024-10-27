@@ -41,9 +41,9 @@
             <button id="editBtn" action="viabOldSeedsesDataGrid.edit"/>
             <button id="excelExportBtn" action="viabOldSeedsesDataGrid.excelExport"/>
             <button id="jsonExportBtn" action="viabOldSeedsesDataGrid.jsonExport"/>
-            <button id="readBtn" action="viabOldSeedsesDataGrid.read"/>
             <button id="refreshBtn" action="viabOldSeedsesDataGrid.refresh"/>
             <button id="removeBtn" action="viabOldSeedsesDataGrid.remove"/>
+            <button id="markAsDoneBtn" action="viabOldSeedsesDataGrid.markAsDone"/>
             <simplePagination id="pagination" dataLoader="viabOldSeedsesDl"/>
         </hbox>
         <dataGrid id="viabOldSeedsesDataGrid"
@@ -59,6 +59,7 @@
                 <action id="read" type="list_read"/>
                 <action id="refresh" type="list_refresh"/>
                 <action id="remove" type="list_remove"/>
+                <action id="markAsDone" type="list_itemTracking" icon="CHECK" text="msg://markAsDone.text"/>
             </actions>
             <columns resizable="true">
                 <column property="idVOS"/>
