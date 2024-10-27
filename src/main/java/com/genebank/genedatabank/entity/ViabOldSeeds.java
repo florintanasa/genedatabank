@@ -70,14 +70,14 @@ public class ViabOldSeeds {
     @ManyToOne(fetch = FetchType.LAZY)
     private Deposit id_deposit_code;
 
-    @Column(name = "STOCK")
-    private Integer stock;
+    @Column(name = "D_STOCK")
+    private Integer dStock;
 
-    @Column(name = "LAST_YEAR_TEST")
-    private Integer lastYearTest;
+    @Column(name = "P_GENUS")
+    private String pGenus;
 
-    @Column(name = "LAST_VIAB_TEST")
-    private Integer lastViabTest;
+    @Column(name = "P_SPECIES")
+    private String pSpecies;
 
     @Column(name = "YEAR_TEST")
     private Integer yearTest;
@@ -98,6 +98,22 @@ public class ViabOldSeeds {
 
     @Column(name = "OLD_DEPOSIT_CODE", length = 15)
     private String old_deposit_code;
+
+    public void setPSpecies(String pSpecies) {
+        this.pSpecies = pSpecies;
+    }
+
+    public String getPSpecies() {
+        return pSpecies;
+    }
+
+    public void setPGenus(String pGenus) {
+        this.pGenus = pGenus;
+    }
+
+    public String getPGenus() {
+        return pGenus;
+    }
 
     public String getOld_deposit_code() {
         return old_deposit_code;
@@ -131,12 +147,12 @@ public class ViabOldSeeds {
         this.status = status == null ? null : status.getId();
     }
 
-    public Integer getStock() {
-        return stock;
+    public Integer getDStock() {
+        return dStock;
     }
 
-    public void setStock(Integer stock) {
-        this.stock = stock;
+    public void setDStock(Integer stock) {
+        this.dStock = stock;
     }
 
     public Integer getViabPercent() {
@@ -153,22 +169,6 @@ public class ViabOldSeeds {
 
     public void setYearTest(Integer yearTest) {
         this.yearTest = yearTest;
-    }
-
-    public Integer getLastViabTest() {
-        return lastViabTest;
-    }
-
-    public void setLastViabTest(Integer lastViabTest) {
-        this.lastViabTest = lastViabTest;
-    }
-
-    public Integer getLastYearTest() {
-        return lastYearTest;
-    }
-
-    public void setLastYearTest(Integer lastYearTest) {
-        this.lastYearTest = lastYearTest;
     }
 
     public Deposit getId_deposit_code() {
