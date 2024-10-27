@@ -64,6 +64,7 @@
             <columns resizable="true">
                 <column property="idVOS"/>
                 <column property="id_deposit_code.id_accenumb.accenumb"/>
+                <column property="pAccenumb"/>
                 <column property="old_accenumb"/>
                 <column property="id_deposit_code"/>
                 <column property="old_deposit_code"/>
