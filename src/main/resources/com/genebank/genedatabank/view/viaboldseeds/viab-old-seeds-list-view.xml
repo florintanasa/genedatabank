@@ -68,9 +68,9 @@
                 <column property="id_deposit_code"/>
                 <column property="old_deposit_code"/>
                 <column property="id_deposit_code.old_deposit_code"/>
-                <column property="stock"/>
-                <column property="lastYearTest"/>
-                <column property="lastViabTest"/>
+                <column property="dStock"/>
+                <column property="pGenus"/>
+                <column property="pSpecies"/>
                 <column property="yearTest"/>
                 <column property="viabPercent"/>
                 <column property="status"/>
