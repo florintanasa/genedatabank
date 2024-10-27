@@ -41,7 +41,7 @@
     </actions>
     <layout expand="contentsVbox" alignItems="STRETCH" padding="false" spacing="false">
         <vbox id="contentsVbox" expand="depositFields" css="overflow: auto" >
-            <hbox id="contentsHbox" colspan="3">
+            <hbox id="contentsHbox" colspan="3" width="100%">
         <vbox id="depositFields" classNames="contrast-panel" colspan="1">
             <h5 text="msg://formDeposit"/>
         <formLayout id="formDeposit" dataContainer="viabOldSeedsDc">
@@ -64,16 +64,8 @@
                 <tooltip text="msg:///tooltip.depositsComboBox"
                          manual="true" position="TOP_START"/>
             </entityComboBox>
-            <integerField id="stockField" property="stock" readOnly="true">
-                <tooltip text="msg:///tooltip.stockField"
-                         manual="true" position="TOP_START"/>
-            </integerField>
-            <integerField id="lastYearTestField" property="lastYearTest" readOnly="true">
-                <tooltip text="msg:///tooltip.lastYearTestField"
-                         manual="true" position="TOP_START"/>
-            </integerField>
-            <integerField id="lastViabTestField" property="lastViabTest" readOnly="true">
-                <tooltip text="msg:///tooltip.lastViabTestField"
+            <integerField id="dStockField" property="dStock" readOnly="true">
+                <tooltip text="msg:///tooltip.dStockField"
                          manual="true" position="TOP_START"/>
             </integerField>
         </formLayout>
@@ -99,6 +91,22 @@
                     </select>
                 </formLayout>
             </vbox>
+                <vbox id="pasaportFields" classNames="contrast-panel" colspan="3">
+                <h5 text="msg://formPasaport"/>
+                    <formLayout id="formPasaport" dataContainer="viabOldSeedsDc">
+                        <textField id="pAccenumbField" property="pAccenumb" readOnly="true">
+                            <tooltip text="msg:///tooltip.pAccenumbField"/>
+                        </textField>
+                        <textField id="pGenusField" property="pGenus" readOnly="true">
+                            <tooltip text="msg:///tooltip.pGenusField"
+                                     manual="true" position="TOP_START"/>
+                        </textField>
+                        <textField id="pSpeciesField" property="pSpecies" readOnly="true">
+                            <tooltip text="msg:///tooltip.pSpeciesField"
+                                     manual="true" position="TOP_START"/>
+                        </textField>
+                    </formLayout>
+                </vbox>
         </hbox>
         <hbox id="dataGridOldSeedsHistory" colspan="2" width="100%">
             <vbox id="gridOldSeedsHistoryVbox" classNames="contrast-panel">
@@ -111,9 +119,9 @@
                 </columns>
             </dataGrid>
             </vbox>
-            <vbox id="chartOldSeedHistoricVbox" classNames="contrast-panel">
+            <vbox id="chartOldSeedHistoricVbox" classNames="contrast-panel" colspan="2">
                 <h5 text="msg://chartOldSeedsHistoric"/>
-                <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="20em" colspan="2"
+                <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="20em"
                               colorPalette="TEAL">
                 <charts:tooltip trigger="AXIS">
                     <charts:axisPointer type="SHADOW"/>
