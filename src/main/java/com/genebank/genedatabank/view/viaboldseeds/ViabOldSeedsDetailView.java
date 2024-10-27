@@ -103,12 +103,19 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         event.getEntity().setStatus(ViabilityStatus.IN_PROGRESS);
         //set the Start Germination Date with current date
         event.getEntity().setYearTest(timeSource.now().getYear());
+        // set read only field status
+        statusField.setReadOnly(true);
+        // set read only Viability percentage field
+        viabPercentField.setReadOnly(true);
     }
 
     // event in the view opening process
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
+        // load new data for deposit code saved
         loadViabOldHistoryDl();
+        // load chart with data for deposit code saved
+        loadChartByCodeDeposit();
         // when I add new item run event
         Objects.requireNonNull(viabOldSeedsLineDataGrid.getItems()).addItemSetChangeListener(itemSetChangeEvent -> {
             if (viabOldSeedsLineDataGrid.getItems().getItems().isEmpty()) {  // check if not exist items in data grid
@@ -130,18 +137,10 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
 
         //check if is chosen a new deposit code
         depositsComboBox.addValueChangeListener(valueChangeEvent -> {
-            // create title for chart
-            chartOldSeedHistoric.setTitle(new Title().withText(depositsComboBox.getValue().getDeposit_code()));
-            chartOldSeedHistoric.withXAxis(new XAxis());
-            chartOldSeedHistoric.withYAxis(new YAxis().withAxisLabel(new AxisLabel().withFormatter("{value} %")));
-            chartOldSeedHistoric.setDataSet(new DataSet().withSource(
-                    new DataSet.Source<EntityDataItem>()
-                            .withDataProvider(new ContainerChartItems<>(viabOldHistoryDc))
-                            .withCategoryField("yearTest")
-                            .withValueFields("viabPercent")
-            ));
             // load new data for deposit code chosen
             loadViabOldHistoryDl();
+            // load chart with data for deposit code chosen
+            loadChartByCodeDeposit();
             if (depositsComboBox.getValue() != null) { // check if user choose a deposit code
                 // add values in Viability Old Seeds
                 lastViabTestField.setValue(depositsComboBox.getValue().getPercentage());
@@ -285,6 +284,25 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         if (depositsComboBox.getValue() != null) {
             viabOldHistoryDl.setParameter("deposit_code", depositsComboBox.getValue().getId());
             viabOldHistoryDl.load();
+        }
+    }
+
+    // method to load chart for code deposit
+    private void loadChartByCodeDeposit(){
+        if (depositsComboBox.getValue() != null) {
+            // create title for chart
+            chartOldSeedHistoric.setTitle(new Title().withText(depositsComboBox.getValue().getDeposit_code()));
+            // create X axis
+            chartOldSeedHistoric.withXAxis(new XAxis());
+            // create Y axis
+            chartOldSeedHistoric.withYAxis(new YAxis().withAxisLabel(new AxisLabel().withFormatter("{value} %")));
+            // create chart source data
+            chartOldSeedHistoric.setDataSet(new DataSet().withSource(
+                    new DataSet.Source<EntityDataItem>()
+                            .withDataProvider(new ContainerChartItems<>(viabOldHistoryDc))
+                            .withCategoryField("yearTest")
+                            .withValueFields("viabPercent")
+            ));
         }
     }
 }
