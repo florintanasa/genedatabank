@@ -9,14 +9,11 @@ import com.vaadin.flow.router.Route;
 import io.jmix.chartsflowui.component.Chart;
 import io.jmix.chartsflowui.data.ContainerChartItems;
 import io.jmix.chartsflowui.data.item.EntityDataItem;
-import io.jmix.chartsflowui.kit.component.model.Aria;
 import io.jmix.chartsflowui.kit.component.model.DataSet;
 import io.jmix.chartsflowui.kit.component.model.Title;
 import io.jmix.chartsflowui.kit.component.model.axis.AxisLabel;
 import io.jmix.chartsflowui.kit.component.model.axis.XAxis;
 import io.jmix.chartsflowui.kit.component.model.axis.YAxis;
-import io.jmix.chartsflowui.kit.component.model.legend.Legend;
-import io.jmix.chartsflowui.kit.component.model.series.AbstractSeries;
 import io.jmix.core.TimeSource;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.data.Sequence;
@@ -57,11 +54,11 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     @ViewComponent
     private JmixIntegerField viabPercentField;
     @ViewComponent
-    private JmixIntegerField lastViabTestField;
+    private TypedTextField<String> pGenusField;
     @ViewComponent
-    private JmixIntegerField lastYearTestField;
+    private TypedTextField<String> pSpeciesField;
     @ViewComponent
-    private JmixIntegerField stockField;
+    private JmixIntegerField dStockField;
     @Autowired
     private NumberFormatter numberFormatter;
     @ViewComponent
@@ -88,6 +85,8 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private CollectionContainer<ViabOldSeeds> viabOldHistoryDc;
     @ViewComponent
     private Chart chartOldSeedHistoric;
+    @ViewComponent
+    private TypedTextField<String> pAccenumbField;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -104,9 +103,9 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         //set the Start Germination Date with current date
         event.getEntity().setYearTest(timeSource.now().getYear());
         // set read only field status
-        statusField.setReadOnly(true);
+        //statusField.setReadOnly(true);
         // set read only Viability percentage field
-        viabPercentField.setReadOnly(true);
+        //viabPercentField.setReadOnly(true);
     }
 
     // event in the view opening process
@@ -143,9 +142,10 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
             loadChartByCodeDeposit();
             if (depositsComboBox.getValue() != null) { // check if user choose a deposit code
                 // add values in Viability Old Seeds
-                lastViabTestField.setValue(depositsComboBox.getValue().getPercentage());
-                stockField.setValue(depositsComboBox.getValue().getStock());
-                lastYearTestField.setValue(depositsComboBox.getValue().getYeargerm());
+                pAccenumbField.setValue(depositsComboBox.getValue().getId_accenumb().getAccenumb());
+                pGenusField.setValue(depositsComboBox.getValue().getId_accenumb().getId_taxonomy().getGenus());
+                dStockField.setValue(depositsComboBox.getValue().getStock());
+                pSpeciesField.setValue(depositsComboBox.getValue().getId_accenumb().getId_taxonomy().getSpecies());
             }
         });
     }
@@ -192,8 +192,9 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         JmixButton hlpBtnDepositsComboBox = createHlpBtn();
         JmixButton hlpBtnIdVOSField = createHlpBtn();
         JmixButton hlpBtnStockField = createHlpBtn();
-        JmixButton hlpBtnLastYearTestField = createHlpBtn();
-        JmixButton hlpBtnLastViabTestField = createHlpBtn();
+        JmixButton hlpBtnAccenumbField = createHlpBtn();
+        JmixButton hlpBtnSpeciesField = createHlpBtn();
+        JmixButton hlpBtnGenusField = createHlpBtn();
         JmixButton hlpBtnYearTestField = createHlpBtn();
         JmixButton hlpBtnViabPercentField = createHlpBtn();
         JmixButton hlpBtnStatusField = createHlpBtn();
@@ -201,9 +202,10 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         // get tool tips for objects
         Tooltip tooltipDepositsComboBox = depositsComboBox.getTooltip();
         Tooltip tooltipIdVOSField = idVOSField.getTooltip();
-        Tooltip tooltipStockField = stockField.getTooltip();
-        Tooltip tooltipLastYearTestField = lastYearTestField.getTooltip();
-        Tooltip tooltipLastViabTestField = lastViabTestField.getTooltip();
+        Tooltip tooltipStockField = dStockField.getTooltip();
+        Tooltip tooltipAccenumbField = pAccenumbField.getTooltip();
+        Tooltip tooltipSpeciesField = pSpeciesField.getTooltip();
+        Tooltip tooltipGenusField = pGenusField.getTooltip();
         Tooltip tooltipYearTestField = yearTestField.getTooltip();
         Tooltip tooltipViabPercentField = viabPercentField.getTooltip();
         Tooltip tooltipStatusField = statusField.getTooltip();
@@ -215,10 +217,12 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
                 tooltipIdVOSField.setOpened(!tooltipIdVOSField.isOpened()));
         hlpBtnStockField.addClickListener(buttonClickEvent ->
                 tooltipStockField.setOpened(!tooltipStockField.isOpened()));
-        hlpBtnLastYearTestField.addClickListener(buttonClickEvent ->
-                tooltipLastYearTestField.setOpened(!tooltipLastYearTestField.isOpened()));
-        hlpBtnLastViabTestField.addClickListener(buttonClickEvent ->
-                tooltipLastViabTestField.setOpened(!tooltipLastViabTestField.isOpened()));
+        hlpBtnAccenumbField.addClickListener(buttonClickEvent ->
+                tooltipAccenumbField.setOpened(!tooltipAccenumbField.isOpened()));
+        hlpBtnSpeciesField.addClickListener(buttonClickEvent ->
+                tooltipSpeciesField.setOpened(!tooltipSpeciesField.isOpened()));
+        hlpBtnGenusField.addClickListener(buttonClickEvent ->
+                tooltipGenusField.setOpened(!tooltipGenusField.isOpened()));
         hlpBtnYearTestField.addClickListener(buttonClickEvent ->
                 tooltipYearTestField.setOpened(!tooltipYearTestField.isOpened()));
         hlpBtnViabPercentField.addClickListener(buttonClickEvent ->
@@ -229,9 +233,10 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         // set position for tool tip button in field
         depositsComboBox.setPrefixComponent(hlpBtnDepositsComboBox);
         idVOSField.setSuffixComponent(hlpBtnIdVOSField);
-        stockField.setSuffixComponent(hlpBtnStockField);
-        lastYearTestField.setSuffixComponent(hlpBtnLastYearTestField);
-        lastViabTestField.setSuffixComponent(hlpBtnLastViabTestField);
+        dStockField.setSuffixComponent(hlpBtnStockField);
+        pAccenumbField.setSuffixComponent(hlpBtnAccenumbField);
+        pSpeciesField.setSuffixComponent(hlpBtnSpeciesField);
+        pGenusField.setSuffixComponent(hlpBtnGenusField);
         yearTestField.setSuffixComponent(hlpBtnYearTestField);
         viabPercentField.setSuffixComponent(hlpBtnViabPercentField);
         statusField.setPrefixComponent(hlpBtnStatusField);
@@ -255,9 +260,10 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         final User user = (User) currentAuthentication.getUser();
         if (Objects.equals(user.getUsername(), "admin")) {
             idVOSField.setReadOnly(false);
-            stockField.setReadOnly(false);
-            lastYearTestField.setReadOnly(false);
-            lastViabTestField.setReadOnly(false);
+            dStockField.setReadOnly(false);
+            pAccenumbField.setReadOnly(false);
+            pSpeciesField.setReadOnly(false);
+            pGenusField.setReadOnly(false);
             yearTestField.setReadOnly(false);
             viabPercentField.setReadOnly(false);
             statusField.setReadOnly(false);
