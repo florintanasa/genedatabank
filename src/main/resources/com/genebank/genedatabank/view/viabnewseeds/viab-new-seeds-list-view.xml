@@ -62,7 +62,7 @@
                   minHeight="20em"
                   dataContainer="viabNewSeedsesDc"
                   columnReorderingAllowed="true"
-        >
+                  multiSort="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
@@ -73,12 +73,15 @@
                 <action id="markAsDone" type="list_itemTracking" icon="CHECK" text="msg://markAsDone1.text"/>
                 <action id="read" type="list_read"/>
             </actions>
-            <columns resizable="true">
-                <column property="idVNS" resizable="true" autoWidth="true"/>
-                <column property="id_accenumb" resizable="true" autoWidth="true"/>
-                <column property="yearTest" resizable="true" autoWidth="true"/>
-                <column property="viabPercent" resizable="true" autoWidth="true"/>
-                <column property="status" resizable="true" autoWidth="true"/>
+            <columns resizable="true" sortable="true">
+                <column property="idVNS" autoWidth="true"/>
+                <column property="id_accenumb" autoWidth="true"/>
+                <column property="pAccname" autoWidth="true"/>
+                <column property="pGenus" autoWidth="true"/>
+                <column property="pSpecies" autoWidth="true"/>
+                <column property="yearTest" autoWidth="true"/>
+                <column property="viabPercent" autoWidth="true"/>
+                <column property="status" autoWidth="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">

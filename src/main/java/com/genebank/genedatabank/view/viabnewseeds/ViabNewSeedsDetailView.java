@@ -64,6 +64,12 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
     private TypedTextField<String> idVnsField;
     @ViewComponent
     private EntityComboBox<Pasaport> id_accenumbField;
+    @ViewComponent
+    private TypedTextField<String> pAccnameField;
+    @ViewComponent
+    private TypedTextField<String> pGenusField;
+    @ViewComponent
+    private TypedTextField<String> pSpeciesField;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeeds> event) {
@@ -102,6 +108,15 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
                 calcGermTestNumber(); // if exist calculate the number for test
             }
         });
+        //check if is chosen a new probe code
+        id_accenumbField.addValueChangeListener(valueChangeEvent -> {
+            if (id_accenumbField.getValue() != null) { // check if user choose a probe code
+                pAccnameField.setValue(id_accenumbField.getValue().getAccname());
+                pGenusField.setValue(id_accenumbField.getValue().getId_taxonomy().getGenus());
+                pSpeciesField.setValue(id_accenumbField.getValue().getId_taxonomy().getSpecies());
+            }
+        });
+
         // set read only field Status
         statusField.setReadOnly(true);
         // set read only Viability percentage field

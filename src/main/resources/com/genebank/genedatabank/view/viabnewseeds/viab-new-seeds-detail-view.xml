@@ -53,6 +53,9 @@
                 </actions>
                 <tooltip text="msg:///tooltip.id_accenumbField" manual="true" position="TOP_START"/>
             </entityComboBox>
+            <textField id="pAccnameField" property="pAccname" readOnly="true"/>
+            <textField id="pGenusField" property="pGenus" readOnly="true"/>
+            <textField id="pSpeciesField" property="pSpecies" readOnly="true"/>
             <textField id="idVnsField" property="idVNS" readOnly="true" visible="true">
                 <tooltip text="msg:///tooltip.idVnsField" manual="true" position="TOP_START"/>
             </textField>
