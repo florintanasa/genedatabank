@@ -133,6 +133,11 @@ public class ViabNewSeedsListView extends StandardListView<ViabNewSeeds> {
                      viabNewSeedsesDataGridMarkAsDone.setEnabled(false);
                  }
              }
+            // check if analysis have some tests, if not have invalidated button to mark Finished
+            if (viabNewSeedsesDataGrid.getSingleSelectedItem() != null
+                    && viabNewSeedsesDataGrid.getSingleSelectedItem().getViabPercent() == null) {
+                viabNewSeedsesDataGridMarkAsDone.setEnabled(false);
+            }
         }
     }
 
