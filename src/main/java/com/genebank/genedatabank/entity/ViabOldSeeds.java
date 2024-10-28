@@ -76,6 +76,9 @@ public class ViabOldSeeds {
     @Column(name = "P_ACCENUMB", length = 15)
     private String pAccenumb;
 
+    @Column(name = "P_ACCNAME", length = 45)
+    private String pAccname;
+
     @Column(name = "P_GENUS")
     private String pGenus;
 
@@ -101,6 +104,14 @@ public class ViabOldSeeds {
 
     @Column(name = "OLD_DEPOSIT_CODE", length = 15)
     private String old_deposit_code;
+
+    public String getPAccname() {
+        return pAccname;
+    }
+
+    public void setPAccname(String pAccname) {
+        this.pAccname = pAccname;
+    }
 
     public String getPAccenumb() {
         return pAccenumb;

@@ -96,7 +96,10 @@
                 <h5 text="msg://formPasaport"/>
                     <formLayout id="formPasaport" dataContainer="viabOldSeedsDc">
                         <textField id="pAccenumbField" property="pAccenumb" readOnly="true">
-                            <tooltip text="msg:///tooltip.pAccenumbField"/>
+                            <tooltip text="msg:///tooltip.pAccenumbField" position="TOP_START" manual="true"/>
+                        </textField>
+                        <textField id="pAccnameField" property="pAccname" readOnly="true">
+                            <tooltip text="msg:///tooltip.pAccenameField" manual="true" position="TOP_START"/>
                         </textField>
                         <textField id="pGenusField" property="pGenus" readOnly="true">
                             <tooltip text="msg:///tooltip.pGenusField"

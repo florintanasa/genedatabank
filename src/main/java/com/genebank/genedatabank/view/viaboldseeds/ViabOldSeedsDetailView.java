@@ -87,6 +87,8 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private Chart chartOldSeedHistoric;
     @ViewComponent
     private TypedTextField<String> pAccenumbField;
+    @ViewComponent
+    private TypedTextField<Object> pAccnameField;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -143,6 +145,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
             if (depositsComboBox.getValue() != null) { // check if user choose a deposit code
                 // add values in Viability Old Seeds
                 pAccenumbField.setValue(depositsComboBox.getValue().getId_accenumb().getAccenumb());
+                pAccnameField.setValue(depositsComboBox.getValue().getId_accenumb().getAccname());
                 pGenusField.setValue(depositsComboBox.getValue().getId_accenumb().getId_taxonomy().getGenus());
                 dStockField.setValue(depositsComboBox.getValue().getStock());
                 pSpeciesField.setValue(depositsComboBox.getValue().getId_accenumb().getId_taxonomy().getSpecies());
@@ -190,6 +193,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private void initManualTooltip()   {
         // create button for tooltip help
         JmixButton hlpBtnDepositsComboBox = createHlpBtn();
+        JmixButton hlpBtnPaccnameField = createHlpBtn();
         JmixButton hlpBtnIdVOSField = createHlpBtn();
         JmixButton hlpBtnStockField = createHlpBtn();
         JmixButton hlpBtnAccenumbField = createHlpBtn();
@@ -201,6 +205,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
 
         // get tool tips for objects
         Tooltip tooltipDepositsComboBox = depositsComboBox.getTooltip();
+        Tooltip tooltipPaccnameField = pAccnameField.getTooltip();
         Tooltip tooltipIdVOSField = idVOSField.getTooltip();
         Tooltip tooltipStockField = dStockField.getTooltip();
         Tooltip tooltipAccenumbField = pAccenumbField.getTooltip();
@@ -213,6 +218,8 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         // create event if click the tool tip button
         hlpBtnDepositsComboBox.addClickListener(buttonClickEvent ->
                 tooltipDepositsComboBox.setOpened(!tooltipDepositsComboBox.isOpened()));
+        hlpBtnPaccnameField.addClickListener(buttonClickEvent ->
+                tooltipPaccnameField.setOpened(!tooltipPaccnameField.isOpened()));
         hlpBtnIdVOSField.addClickListener(buttonClickEvent ->
                 tooltipIdVOSField.setOpened(!tooltipIdVOSField.isOpened()));
         hlpBtnStockField.addClickListener(buttonClickEvent ->
@@ -232,6 +239,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
 
         // set position for tool tip button in field
         depositsComboBox.setPrefixComponent(hlpBtnDepositsComboBox);
+        pAccnameField.setSuffixComponent(hlpBtnPaccnameField);
         idVOSField.setSuffixComponent(hlpBtnIdVOSField);
         dStockField.setSuffixComponent(hlpBtnStockField);
         pAccenumbField.setSuffixComponent(hlpBtnAccenumbField);
@@ -262,6 +270,7 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
             idVOSField.setReadOnly(false);
             dStockField.setReadOnly(false);
             pAccenumbField.setReadOnly(false);
+            pAccnameField.setReadOnly(false);
             pSpeciesField.setReadOnly(false);
             pGenusField.setReadOnly(false);
             yearTestField.setReadOnly(false);
