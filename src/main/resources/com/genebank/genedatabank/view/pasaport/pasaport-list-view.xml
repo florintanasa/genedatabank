@@ -54,51 +54,52 @@
             <button id="editBtn" action="pasaportsDataGrid.edit"/>
             <button id="copyeditBtn" action="pasaportsDataGrid.copyEdit"/>
             <button id="removeBtn" action="pasaportsDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="pasaportsDl"/>
+            <simplePagination id="pagination" dataLoader="pasaportsDl" classNames="ms-auto"/>
+            <gridColumnVisibility dataGrid="pasaportsDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="pasaportsDataGrid"
                   width="100%"
                   minHeight="20em"
                   dataContainer="pasaportsDc"
-                  selectionMode="MULTI" multiSort="true">
+                  selectionMode="MULTI" multiSort="true" columnReorderingAllowed="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
                 <action id="copyEdit" icon="EDIT" text="msg://copyedit" type="list_itemTracking"/>
                 <action id="remove" type="list_remove"/>
             </actions>
-            <columns>
-                <column property="id_instcode" resizable="true"/>
-                <column property="accenumb" resizable="true" filterable="true" autoWidth="true"/>
-                <column property="doi" resizable="true" autoWidth="true"/>
-                <column property="collnumb" resizable="true"/>
-                <column property="collmissid" resizable="true"/>
-                <column property="id_taxonomy" resizable="true"/>
-                <column property="accname" resizable="true" autoWidth="true"/>
-                <column property="acqdate" resizable="true" autoWidth="true"/>
-                <column property="origdate" resizable="true" autoWidth="true"/>
-                <column property="id_country" resizable="true"/>
-                <column property="id_countysiruta" resizable="true" autoWidth="true"/>
-                <column property="id_localitysiruta" resizable="true" autoWidth="true"/>
-                <column property="latitude" resizable="true" autoWidth="true"/>
-                <column property="longitude" resizable="true" autoWidth="true"/>
-                <column property="elevation" resizable="true"/>
-                <column property="id_georefmeth" resizable="true"/>
-                <column property="colldate" resizable="true" autoWidth="true"/>
-                <column property="id_sampstat" resizable="true"/>
-                <column property="ancest" resizable="true"/>
-                <column property="id_collsrc" resizable="true"/>
-                <column property="id_donorcode" resizable="true"/>
-                <column property="donornumb" resizable="true"/>
-                <column property="othernumb" resizable="true"/>
-                <column property="tempnumb" resizable="true"/>
-                <column property="remarks" resizable="true"/>
-                <column property="comments" resizable="true"/>
-                <column property="acceurl" resizable="true"/>
-                <column property="id_acceconf" resizable="true" autoWidth="true"/>
-                <column property="id_mlsstat" resizable="true" autoWidth="true"/>
-                <column property="id_aegisstat" resizable="true" autoWidth="true"/>
-                <column property="id_historic" resizable="true" autoWidth="true"/>
+            <columns resizable="true" sortable="true">
+                <column property="id_instcode"/>
+                <column property="accenumb" filterable="true" autoWidth="true"/>
+                <column property="doi" autoWidth="true"/>
+                <column property="collnumb"/>
+                <column property="collmissid"/>
+                <column property="id_taxonomy"/>
+                <column property="accname" autoWidth="true"/>
+                <column property="acqdate" autoWidth="true"/>
+                <column property="origdate" autoWidth="true"/>
+                <column property="id_country"/>
+                <column property="id_countysiruta" autoWidth="true"/>
+                <column property="id_localitysiruta" autoWidth="true"/>
+                <column property="latitude" autoWidth="true"/>
+                <column property="longitude" autoWidth="true"/>
+                <column property="elevation"/>
+                <column property="id_georefmeth"/>
+                <column property="colldate" autoWidth="true"/>
+                <column property="id_sampstat"/>
+                <column property="ancest"/>
+                <column property="id_collsrc"/>
+                <column property="id_donorcode"/>
+                <column property="donornumb"/>
+                <column property="othernumb"/>
+                <column property="tempnumb"/>
+                <column property="remarks"/>
+                <column property="comments"/>
+                <column property="acceurl"/>
+                <column property="id_acceconf" autoWidth="true"/>
+                <column property="id_mlsstat" autoWidth="true"/>
+                <column property="id_aegisstat" autoWidth="true"/>
+                <column property="id_historic" autoWidth="true"/>
             </columns>
         </dataGrid>
         <hbox id="lookupActions" visible="false">
