@@ -2,7 +2,6 @@ package com.genebank.genedatabank.view.viabnewseeds;
 
 import com.genebank.genedatabank.entity.*;
 import com.genebank.genedatabank.view.main.MainView;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.shared.Tooltip;
@@ -78,9 +77,9 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
         // set default Year test field to actual year
         event.getEntity().setYearTest(timeSource.now().getYear());
         // set read only field status
-        statusField.setReadOnly(true);
+        //statusField.setReadOnly(true);
         // set read only Viability percentage field
-        viabPercentField.setReadOnly(true);
+        //viabPercentField.setReadOnly(true);
     }
 
     @Subscribe
