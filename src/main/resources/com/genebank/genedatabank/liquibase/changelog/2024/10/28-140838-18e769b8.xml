@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="genedatabank">
+        <addColumn tableName="VIAB_NEW_SEEDS">
+            <column name="P_ACCNAME" type="VARCHAR(45)"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="P_ACCNAME" defaultNullValue="''" tableName="VIAB_NEW_SEEDS"/>
+    </changeSet>
+    <changeSet id="2" author="genedatabank">
+        <addColumn tableName="VIAB_NEW_SEEDS">
+            <column name="P_GENUS" type="VARCHAR(255)"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="P_GENUS" defaultNullValue="''" tableName="VIAB_NEW_SEEDS"/>
+    </changeSet>
+    <changeSet id="3" author="genedatabank">
+        <addColumn tableName="VIAB_NEW_SEEDS">
+            <column name="P_SPECIES" type="VARCHAR(255)"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="P_SPECIES" defaultNullValue="''" tableName="VIAB_NEW_SEEDS"/>
+    </changeSet>
+</databaseChangeLog>

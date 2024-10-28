@@ -116,11 +116,17 @@
             <vbox id="chartOldSeedHistoricVbox" classNames="contrast-panel" colspan="2" width="60%">
                 <h5 text="msg://chartOldSeedsHistoric"/>
                 <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="20em"
-                              colorPalette="TEAL">
+                              colorPalette="TEAL" animation="true">
+                    <charts:toolbox>
+                        <charts:features>
+                            <charts:saveAsImage title="msg://saveAsImage.title" type="PNG"/>
+                        </charts:features>
+
+                    </charts:toolbox>
                 <charts:tooltip trigger="AXIS">
                     <charts:axisPointer type="SHADOW"/>
                 </charts:tooltip>
-                    <charts:legend/>
+                    <charts:legend backgroundColor="WHITE"/>
                     <charts:xAxes>
                         <charts:xAxis/>
                     </charts:xAxes>

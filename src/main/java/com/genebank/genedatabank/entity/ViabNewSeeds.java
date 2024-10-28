@@ -74,6 +74,18 @@ public class ViabNewSeeds {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Pasaport id_accenumb;
 
+    @Column(name = "P_ACCNAME", nullable = false, length = 45)
+    @NotNull
+    private String pAccname;
+
+    @Column(name = "P_GENUS", nullable = false)
+    @NotNull
+    private String pGenus;
+
+    @Column(name = "P_SPECIES", nullable = false)
+    @NotNull
+    private String pSpecies;
+
     @Column(name = "STATUS", nullable = false)
     @NotNull
     private String status;
@@ -89,6 +101,30 @@ public class ViabNewSeeds {
 
     @Column(name = "VIAB_PERCENT")
     private Integer viabPercent;
+
+    public String getPSpecies() {
+        return pSpecies;
+    }
+
+    public void setPSpecies(String pSpecies) {
+        this.pSpecies = pSpecies;
+    }
+
+    public String getPGenus() {
+        return pGenus;
+    }
+
+    public void setPGenus(String pGenus) {
+        this.pGenus = pGenus;
+    }
+
+    public String getPAccname() {
+        return pAccname;
+    }
+
+    public void setPAccname(String pAccname) {
+        this.pAccname = pAccname;
+    }
 
     public String getIdVNS() {
         return idVNS;
