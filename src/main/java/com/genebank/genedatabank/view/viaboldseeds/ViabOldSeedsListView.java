@@ -124,15 +124,20 @@ public class ViabOldSeedsListView extends StandardListView<ViabOldSeeds> {
                     long count = countNullGermFaculty.get(0).getValue("count");
               */
 
-                // if exist minim one I disable button to mark Done the determination
+                // if exist minim one I disable button to mark Finished the determination
                 if (countNullGermFaculty > 0) {
                     viabOldSeedsesDataGridMarkAsDone.setEnabled(false);
                 }
             }
+            // check if analysis have some test if not invalidate button to mark Finished
+            if (viabOldSeedsesDataGrid.getSingleSelectedItem() != null
+            && viabOldSeedsesDataGrid.getSingleSelectedItem().getViabPercent() == null) {
+                viabOldSeedsesDataGridMarkAsDone.setEnabled(false);
+            }
         }
     }
 
-    // run event when item in container is changed
+    // run event when an item in container is changed
     @Subscribe(id = "viabOldSeedsesDc", target = Target.DATA_CONTAINER)
     public void onViabOldSeedsesDcItemChange(final InstanceContainer.ItemChangeEvent<ViabOldSeeds> event) {
         actionsviabOldSeedsesDataGrid(); //call the method
