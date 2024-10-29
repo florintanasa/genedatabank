@@ -56,7 +56,8 @@
             <button id="jsonExportBtn" action="viabNewSeedsLinesDataGrid.jsonExport"/>
             <button id="refreshBtn" action="viabNewSeedsLinesDataGrid.refresh"/>
             <button id="removeBtn" action="viabNewSeedsLinesDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="viabNewSeedsLinesDl"/>
+            <simplePagination id="pagination" dataLoader="viabNewSeedsLinesDl" classNames="ms-auto"/>
+            <gridColumnVisibility dataGrid="viabNewSeedsLinesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="viabNewSeedsLinesDataGrid"
                   width="100%"

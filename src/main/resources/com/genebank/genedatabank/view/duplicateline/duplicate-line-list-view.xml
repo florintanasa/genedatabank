@@ -41,7 +41,8 @@
             <button id="jsonExportBtn" action="duplicateLinesDataGrid.jsonExport"/>
             <button id="refreshBtn" action="duplicateLinesDataGrid.refresh"/>
             <button id="removeBtn" action="duplicateLinesDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="duplicateLinesDl"/>
+            <simplePagination id="pagination" dataLoader="duplicateLinesDl" classNames="ms-auto"/>
+            <gridColumnVisibility dataGrid="duplicateLinesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="duplicateLinesDataGrid"
                   width="100%"

@@ -34,7 +34,8 @@
             <button id="createBtn" action="taxonomiesDataGrid.create"/>
             <button id="editBtn" action="taxonomiesDataGrid.edit"/>
             <button id="removeBtn" action="taxonomiesDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="taxonomiesDl"/>
+            <simplePagination id="pagination" dataLoader="taxonomiesDl" classNames="ms-auto"/>
+            <gridColumnVisibility dataGrid="taxonomiesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="taxonomiesDataGrid"
                   width="100%"

@@ -40,7 +40,8 @@
             <button id="printBtn" action="depositsDataGrid.reportPrint" />
             <button id="printBtn75x35" text="Print 75x35" title="Printare eticheta 75x35mm" icon="PRINT"/>
             <button id="printBtn76x50" text="Print 76x50" title="Printare eticheta 76,2x50,8mm" icon="PRINT"/>
-            <simplePagination id="pagination" dataLoader="depositsDl"/>
+            <simplePagination id="pagination" dataLoader="depositsDl" classNames="ms-auto"/>
+            <gridColumnVisibility dataGrid="depositsDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="depositsDataGrid"
                   width="100%"
