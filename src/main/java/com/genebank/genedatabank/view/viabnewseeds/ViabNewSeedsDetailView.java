@@ -70,23 +70,23 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
     @ViewComponent
     private TypedTextField<String> pSpeciesField;
 
+
+    @Subscribe
+    public void onInit(final InitEvent event) {
+        initManualTooltip();
+        checkUserConnected();
+    }
+
+    // event only for new opening item
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeeds> event) {
         // set default status to In progress
         event.getEntity().setStatus(ViabilityStatus.IN_PROGRESS);
         // set default Year test field to actual year
         event.getEntity().setYearTest(timeSource.now().getYear());
-        // set read only field status
-        //statusField.setReadOnly(true);
-        // set read only Viability percentage field
-        //viabPercentField.setReadOnly(true);
     }
 
-    @Subscribe
-    public void onInit(final InitEvent event) {
-        initManualTooltip();
-}
-
+    // event in the view opening process
     @Subscribe
     public void onBeforeShow(final BeforeShowEvent event) {
         // when I add new item run event
@@ -115,13 +115,6 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
                 pSpeciesField.setValue(id_accenumbField.getValue().getId_taxonomy().getSpecies());
             }
         });
-
-        // set read only field Status
-        statusField.setReadOnly(true);
-        // set read only Viability percentage field
-        viabPercentField.setReadOnly(true);
-        // set read only Year test field
-        yearTestField.setReadOnly(true);
     }
 
     // method to calculate medium percent viability
@@ -194,6 +187,27 @@ public class ViabNewSeedsDetailView extends StandardDetailView<ViabNewSeeds> {
 
         // return object
         return helperButton;
+    }
+
+    // check the user connected and change fields from read only to be edited
+    private void checkUserConnected() {
+        final User user = (User) currentAuthentication.getUser();
+        if (Objects.equals(user.getUsername(), "admin")) {
+            // set read only to false to can be edited
+            idVnsField.setReadOnly(false);
+            // set read only to false to can be edited
+            statusField.setReadOnly(false);
+            // set read only to false to can be edited
+            viabPercentField.setReadOnly(false);
+            // set read only to false to can be edited
+            yearTestField.setReadOnly(false);
+            // set read only to false to can be edited
+            pAccnameField.setReadOnly(false);
+            // set read only to false to can be edited
+            pGenusField.setReadOnly(false);
+            // set read only to false to can be edited
+            pSpeciesField.setReadOnly(false);
+        }
     }
 
     // method cu calculate test number
