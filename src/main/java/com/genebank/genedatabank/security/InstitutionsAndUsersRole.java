@@ -22,4 +22,16 @@ public interface InstitutionsAndUsersRole {
 
     @JpqlRowLevelPolicy(entityClass = DuplicateLine.class, where = "{E}.duplicate.id_send_institute = :current_user_id_institute")
     void duplicateLine();
+
+    @JpqlRowLevelPolicy(entityClass = ViabNewSeeds.class, where = "{E}.id_accenumb.id_instcode = :current_user_id_institute")
+    void viabNewSeeds();
+
+    @JpqlRowLevelPolicy(entityClass = ViabOldSeeds.class, where = "{E}.id_deposit_code.id_accenumb.id_instcode = :current_user_id_institute")
+    void viabOldSeeds();
+
+    @JpqlRowLevelPolicy(entityClass = ViabOldSeedsLine.class, where = "{E}.viabOldSeeds.id_deposit_code.id_accenumb.id_instcode = :current_user_id_institute")
+    void viabOldSeedsLine();
+
+    @JpqlRowLevelPolicy(entityClass = ViabNewSeedsLine.class, where = "{E}.viabNewSeeds.id_accenumb.id_instcode = :current_user_id_institute")
+    void viabNewSeedsLine();
 }
