@@ -1,5 +1,6 @@
 package com.genebank.genedatabank.view.viaboldseeds;
 
+import com.genebank.genedatabank.entity.Deposit;
 import com.genebank.genedatabank.entity.User;
 import com.genebank.genedatabank.entity.ViabOldSeeds;
 import com.genebank.genedatabank.entity.ViabilityStatus;
@@ -81,6 +82,15 @@ public class ViabOldSeedsListView extends StandardListView<ViabOldSeeds> {
             dataManager.save(viaOldSeedsTestToMarkAsFinished); // and then save modification in database
             notifications.create(messageBundle.getMessage("viaOldSeedsTestToMarkAsFinished.confirmation")); // alert user
             viabOldSeedsesDl.load(); // finally we load the changes
+            // load deposit data by id
+            Deposit deposit = dataManager.load(Deposit.class)
+                    .id(viabOldSeedsesDataGrid.getSingleSelectedItem().getId_deposit_code().getId()).one();
+            // set Percentage Viability value in Deposit
+            deposit.setPercentage(viabOldSeedsesDataGrid.getSingleSelectedItem().getViabPercent());
+            // set Year germination test value in Deposit
+            deposit.setYeargerm(viabOldSeedsesDataGrid.getSingleSelectedItem().getYearTest());
+            // save modification in Deposit table on database
+            dataManager.save(deposit);
         }
     }
     // method to validate/invalidate actions. change action for edit button to read only by state and user
