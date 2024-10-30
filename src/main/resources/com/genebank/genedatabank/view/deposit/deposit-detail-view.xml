@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <view xmlns="http://jmix.io/schema/flowui/view"
       title="msg://depositDetailView.title"
-      focusComponent="form">
+      focusComponent="formPasaport">
     <data>
         <instance id="depositDc"
                   class="com.genebank.genedatabank.entity.Deposit">
@@ -40,8 +40,11 @@
         <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
     </actions>
-    <layout>
-        <formLayout id="form" dataContainer="depositDc">
+    <layout alignItems="STRETCH" padding="false" spacing="false">
+        <vbox id="contentsVbox" expand="contentsPasaportVbox" css="overflow: auto">
+        <vbox id="contentsPasaportVbox" classNames="contrast-panel" >
+            <h4 text="msg://formPasaport.title"/>
+        <formLayout id="formPasaport" dataContainer="depositDc" >
             <entityComboBox id="pasaportsComboBox" itemsContainer="pasaportsDc" dataContainer="depositDc"
                             property="id_accenumb">
                 <actions>
@@ -51,16 +54,27 @@
                 </actions>
                 <tooltip text="msg:///tooltip.passaportsComboBox" manual="true"/>
             </entityComboBox>
-            <checkbox id="originalCheckBox" property="original"/>
-            <textField id="scopeField" property="scope" pattern="[G,R]">
-                <tooltip text="msg:///tooltip.scopeField" manual="true"/>
-            </textField>
+            <hbox>
+                <checkbox id="originalCheckBox" property="original"
+                          label="msg://com.genebank.genedatabank.entity/Deposit.original" colspan="1"
+                          alignSelf="BASELINE"/>
+                <textField id="scopeField" property="scope" pattern="[G,R]"
+                           label="msg://com.genebank.genedatabank.entity/Deposit.scope" width="100%" colspan="2"
+                           alignSelf="BASELINE">
+                    <tooltip text="msg:///tooltip.scopeField" manual="true"/>
+                </textField>
+            </hbox>
             <textField id="id_taxonomy_genusField" property="id_accenumb.id_taxonomy.genus" readOnly="true">
                 <tooltip text="msg:///tooltip.id_taxonomy_genusField" manual="true"/>
             </textField>
             <textField id="id_taxonomy_speciesField" property="id_accenumb.id_taxonomy.species" readOnly="true">
                 <tooltip text="msg:///tooltip.id_taxonomy_speciesField" manual="true"/>
             </textField>
+        </formLayout>
+        </vbox>
+            <vbox id="contentsDepsotVbox" classNames="contrast-panel">
+                <h4 text="msg://formDeposit.title"/>
+            <formLayout id="formDeposit" dataContainer="depositDc">
             <entityComboBox id="id_storageField" itemsContainer="storagesDc" dataContainer="depositDc"
                             property="id_storage">
                 <actions>
@@ -70,37 +84,50 @@
                 </actions>
                 <tooltip text="msg:///tooltip.id_storageField" manual="true"/>
             </entityComboBox>
-            <textField id="deposit_codeField" property="deposit_code">
-                <tooltip text="msg:///tooltip.deposit_codeField" manual="true"/>
-            </textField>
-            <textField id="old_deposit_codeField" property="old_deposit_code"> </textField>
-            <textField id="yearstorageField" property="yearstorage">
-                <tooltip text="msg:///tooltip.yearstorageField" manual="true"/>
-            </textField>
+                <hbox>
+                    <textField id="deposit_codeField" property="deposit_code" colspan="1"
+                               label="msg://com.genebank.genedatabank.entity/ViabOldSeeds.id_deposit_code" width="100%">
+                        <tooltip text="msg:///tooltip.deposit_codeField" manual="true"/>
+                    </textField>
+                    <textField id="old_deposit_codeField" property="old_deposit_code" colspan="2"
+                               label="msg://com.genebank.genedatabank.entity/ViabOldSeeds.old_deposit_code" width="100%"/>
+                </hbox>
+                <textField id="yearstorageField" property="yearstorage">
+                    <tooltip text="msg:///tooltip.yearstorageField" manual="true"/>
+                </textField>
+                <textField id="stockField" property="stock">
+                    <tooltip text="msg:///tooltip.stockField" manual="true"/>
+                </textField>
+                <textField id="mmbField" property="mmb">
+                    <tooltip text="msg:///tooltip.mmbField" manual="true"/>
+                </textField>
+                <textField id="humidityField" property="humidity">
+                    <tooltip text="msg:///tooltip.humidityField" manual="true"/>
+                </textField>
+            </formLayout>
+            </vbox>
+            <vbox id="contentsViabMultiplyVbox" classNames="contrast-panel">
+                <h4 text="msg://formViabMultiply.title"/>
+                <formLayout id="formViabMultiply" dataContainer="depositDc">
+                    <textField id="yeargermField" property="yeargerm">
+                        <tooltip text="msg:///tooltip.yeargermField" manual="true"/>
+                    </textField>
+                    <textField id="percentageField" property="percentage">
+                        <tooltip text="msg:///tooltip.percentageField" manual="true"/>
+                    </textField>
             <textField id="yearmultiField" property="yearmulti">
                 <tooltip text="msg:///tooltip.yearmultiField" manual="true"/>
             </textField>
             <textField id="multiplyField" property="multiply">
                 <tooltip text="msg:///tooltip.multiplyField" manual="true"/>
             </textField>
-            <textField id="yeargermField" property="yeargerm">
-                <tooltip text="msg:///tooltip.yeargermField" manual="true"/>
-            </textField>
-            <textField id="percentageField" property="percentage">
-                <tooltip text="msg:///tooltip.percentageField" manual="true"/>
-            </textField>
-            <textField id="stockField" property="stock">
-                <tooltip text="msg:///tooltip.stockField" manual="true"/>
-            </textField>
-            <textField id="humidityField" property="humidity">
-                <tooltip text="msg:///tooltip.humidityField" manual="true"/>
-            </textField>
-            <textField id="mmbField" property="mmb">
-                <tooltip text="msg:///tooltip.mmbField" manual="true"/>
-            </textField>
-            <textArea id="commentsField" height="9.5em" property="comments">
-                <tooltip text="msg:///tooltip.commentsField" manual="true"/>
-            </textArea>
+                </formLayout>
+            </vbox>
+            <vbox id="contentsQrCodeVbox"  classNames="contrast-panel">
+                <formLayout id="formQrCode" dataContainer="depositDc">
+                    <textArea id="commentsField" height="4.5em" property="comments">
+                        <tooltip text="msg:///tooltip.commentsField" manual="true"/>
+                    </textArea>
             <details id="detailsQrCode" summaryText="msg://detailsdeposit.title">
                 <image id="imageqrcode"
                        height="350px"
@@ -131,9 +158,10 @@
                 </hbox>
                 <tooltip text="msg:///tooltip.details" manual="true" position="TOP_START"/>
             </details>
-
-        </formLayout>
-        <hbox id="detailActions">
+                </formLayout>
+        </vbox>
+        </vbox>
+        <hbox id="detailActions" classNames="px-m py-s bg-contrast-5">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
         </hbox>
