@@ -18,6 +18,10 @@ html {
     --vaadin-button-background: var(--secondary-base-color);
 }
 
+.form-layout-label-width-10em {
+    --vaadin-form-item-label-width: 10em;
+}
+
 [theme~="dark"] {
     --lumo-primary-text-color: rgb(238, 133, 27);
     --lumo-primary-color-50pct: rgba(238, 133, 27, 0.5);
