@@ -17,7 +17,9 @@
         <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
     </actions>
-    <layout>
+    <layout expand="contentsVbox" alignItems="STRETCH" padding="false" spacing="false">
+        <vbox id="contentsVbox" expand="contentsTaxonomyVbox" css="overflow: auto">
+        <vbox id="contentsTaxonomyVbox" classNames="contrast-panel">
         <formLayout id="form" dataContainer="taxonomyDc">
             <textField id="familyField" property="family">
                 <tooltip text="msg:///tooltip.familyField" manual="true"/>
@@ -50,13 +52,16 @@
                 <tooltip text="msg:///tooltip.refferenceField" manual="true"/>
             </textField>
         </formLayout>
-        <details id="id_culturecategDetails" summaryText="msg://id_culturecategDetails.summaryText" height="100%"
-                 width="100%">
+        </vbox>
+            <vbox id="contentsCultureCategDetailsVbox" classNames="contrast-panel" height="90%">
+        <details id="id_culturecategDetails" summaryText="msg://id_culturecategDetails.summaryText"
+                 width="100%" opened="false">
             <hbox id="buttonsPanel" classNames="buttons-panel">
                 <button action="id_culturecategDataGrid.add"/>
                 <button action="id_culturecategDataGrid.exclude"/>
             </hbox>
-            <dataGrid id="id_culturecategDataGrid" dataContainer="id_culturecategDc" width="100%" minHeight="20em">
+            <dataGrid id="id_culturecategDataGrid" dataContainer="id_culturecategDc"
+                      classNames="contrast-panel" width="100%" maxHeight="15rem">
                 <actions>
                     <action id="add" type="list_add"/>
                     <action id="exclude" type="list_exclude"/>
@@ -67,7 +72,9 @@
             </dataGrid>
             <tooltip text="msg:///tooltip.id_culturecategDetails" manual="true" position="TOP_START"/>
         </details>
-        <hbox id="detailActions">
+            </vbox>
+        </vbox>
+        <hbox id="detailActions" classNames="px-m py-s bg-contrast-5">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
         </hbox>
