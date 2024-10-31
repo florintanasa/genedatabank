@@ -3,9 +3,11 @@ package com.genebank.genedatabank.view.viaboldseeds;
 import com.genebank.genedatabank.entity.*;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 import io.jmix.chartsflowui.component.Chart;
 import io.jmix.chartsflowui.data.ContainerChartItems;
 import io.jmix.chartsflowui.data.item.EntityDataItem;
@@ -21,7 +23,6 @@ import io.jmix.data.Sequences;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.combobox.EntityComboBox;
-import io.jmix.flowui.component.formatter.NumberFormatter;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.select.JmixSelect;
 import io.jmix.flowui.component.textfield.JmixIntegerField;
@@ -46,8 +47,6 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     @Autowired
     private TimeSource timeSource;
     @ViewComponent
-    private InstanceContainer<ViabOldSeeds> viabOldSeedsDc;
-    @ViewComponent
     private CollectionPropertyContainer<ViabOldSeedsLine> viabOldSeedsLinesDc;
     @ViewComponent
     private EntityComboBox<Deposit> depositsComboBox;
@@ -59,8 +58,6 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private TypedTextField<String> pSpeciesField;
     @ViewComponent
     private JmixIntegerField dStockField;
-    @Autowired
-    private NumberFormatter numberFormatter;
     @ViewComponent
     private DataGrid<ViabOldSeedsLine> viabOldSeedsLineDataGrid;
     @Autowired
@@ -89,6 +86,8 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private TypedTextField<String> pAccenumbField;
     @ViewComponent
     private TypedTextField<Object> pAccnameField;
+    @ViewComponent
+    private Div chartAndGrid;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -108,6 +107,19 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         //statusField.setReadOnly(true);
         // set read only Viability percentage field
         //viabPercentField.setReadOnly(true);
+
+    }
+
+    @Subscribe
+    public void onReady(final ReadyEvent event) {
+        // change how components chart and data grid is arranged by the row or by the column depend on screen
+        // for small 1024 screen is order by column and for bigger by row
+        chartAndGrid.addClassNames(
+                LumoUtility.Display.FLEX,
+                LumoUtility.FlexDirection.COLUMN,
+                LumoUtility.FlexDirection.Breakpoint.Large.ROW,
+                LumoUtility.Gap.MEDIUM
+        );
     }
 
     // event in the view opening process
