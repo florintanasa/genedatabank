@@ -131,7 +131,7 @@
             <div id="chartAndGrid" width="100%">
             <vbox id="chartOldSeedHistoricVbox" classNames="contrast-panel" width="100%">
                 <h5 text="msg://chartOldSeedsHistoric"/>
-                <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="20em"
+                <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="18em"
                               colorPalette="TEAL" animation="true">
                     <charts:toolbox>
                         <charts:features>
@@ -162,7 +162,7 @@
             <vbox id="gridOldSeedsHistoryVbox" classNames="contrast-panel" width="100%">
             <h5 text="msg://formOldSeedsHistory"/>
             <dataGrid id="viabOldSeedsHistoryDataGrid" dataContainer="viabOldHistoryDc"
-                      height="100%" minHeight="20em" width="100%">
+                      height="100%" minHeight="18em" width="100%">
                 <columns>
                     <column property="yearTest" resizable="true" autoWidth="true"/>
                     <column property="viabPercent" resizable="true" autoWidth="true"/>
@@ -171,7 +171,7 @@
             </dataGrid>
             </vbox>
             </div>
-        <vbox id="dataGridSeedsLines" classNames="contrast-panel" width="100%" maxHeight="50%">
+        <vbox id="dataGridSeedsLines" classNames="contrast-panel" width="100%">
         <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viaboldseedsLines"/>
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="viabOldSeedsLineDataGrid.create"/>
@@ -180,7 +180,7 @@
             <button id="excelExportBtn" action="viabOldSeedsLineDataGrid.excelExport"/>
             <button id="jsonExportBtn" action="viabOldSeedsLineDataGrid.jsonExport"/>
         </hbox>
-        <dataGrid id="viabOldSeedsLineDataGrid" dataContainer="viabOldSeedsLinesDc" width="100%">
+        <dataGrid id="viabOldSeedsLineDataGrid" dataContainer="viabOldSeedsLinesDc" width="100%" maxHeight="11em">
         <actions>
             <action id="create" type="list_create">
                 <properties>
