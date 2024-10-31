@@ -44,7 +44,9 @@
             <button id="refreshBtn" action="viabOldSeedsesDataGrid.refresh"/>
             <button id="removeBtn" action="viabOldSeedsesDataGrid.remove"/>
             <button id="markAsDoneBtn" action="viabOldSeedsesDataGrid.markAsDone"/>
-            <simplePagination id="pagination" dataLoader="viabOldSeedsesDl"/>
+            <simplePagination id="pagination" dataLoader="viabOldSeedsesDl" classNames="ms-auto"/>
+            <gridColumnVisibility dataGrid="viabOldSeedsesDataGrid" icon="COG" themeNames="icon"/>
+
         </hbox>
         <dataGrid id="viabOldSeedsesDataGrid"
                   width="100%"

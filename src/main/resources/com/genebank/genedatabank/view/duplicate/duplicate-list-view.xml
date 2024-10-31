@@ -43,7 +43,8 @@
             <button id="markAsConfirmedBtn" action="duplicatesDataGrid.markAsConfirmed"/>
             <button id="markAsInDeliveryBtn" action="duplicatesDataGrid.markAsInDelivery"/>
             <button id="markAsDeliveryBtn" action="duplicatesDataGrid.markAsDelivered"/>
-            <simplePagination id="pagination" dataLoader="duplicatesDl"/>
+            <simplePagination id="pagination" dataLoader="duplicatesDl" classNames="ms-auto"/>
+            <gridColumnVisibility dataGrid="duplicatesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="duplicatesDataGrid"
                   width="100%"
