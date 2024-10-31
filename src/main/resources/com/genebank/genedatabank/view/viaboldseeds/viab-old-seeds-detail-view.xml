@@ -128,6 +128,7 @@
                     </formLayout>
                 </vbox>
                 </formLayout>
+            <div id="chartAndGrid" width="100%">
             <vbox id="chartOldSeedHistoricVbox" classNames="contrast-panel" width="100%">
                 <h5 text="msg://chartOldSeedsHistoric"/>
                 <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="20em"
@@ -160,7 +161,8 @@
             </vbox>
             <vbox id="gridOldSeedsHistoryVbox" classNames="contrast-panel" width="100%">
             <h5 text="msg://formOldSeedsHistory"/>
-            <dataGrid id="viabOldSeedsHistoryDataGrid" dataContainer="viabOldHistoryDc"  height="10em" width="100%">
+            <dataGrid id="viabOldSeedsHistoryDataGrid" dataContainer="viabOldHistoryDc"
+                      height="100%" minHeight="20em" width="100%">
                 <columns>
                     <column property="yearTest" resizable="true" autoWidth="true"/>
                     <column property="viabPercent" resizable="true" autoWidth="true"/>
@@ -168,6 +170,7 @@
                 </columns>
             </dataGrid>
             </vbox>
+            </div>
         <vbox id="dataGridSeedsLines" classNames="contrast-panel" width="100%" maxHeight="50%">
         <h4 text="msg://com.genebank.genedatabank.entity/ViabNewSeeds.viaboldseedsLines"/>
         <hbox id="buttonsPanel" classNames="buttons-panel">
