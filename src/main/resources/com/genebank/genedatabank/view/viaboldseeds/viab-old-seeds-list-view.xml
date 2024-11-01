@@ -52,7 +52,7 @@
                   width="100%"
                   minHeight="20em"
                   dataContainer="viabOldSeedsesDc"
-                  columnReorderingAllowed="true">
+                  columnReorderingAllowed="true" multiSort="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
