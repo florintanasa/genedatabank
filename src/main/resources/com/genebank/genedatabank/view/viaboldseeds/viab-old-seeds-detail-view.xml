@@ -128,7 +128,7 @@
                     </formLayout>
                 </vbox>
                 </formLayout>
-            <div id="chartAndGrid" width="100%">
+            <div id="chartAndGrid" width="100%" height="100%">
             <vbox id="chartOldSeedHistoricVbox" classNames="contrast-panel" width="100%">
                 <h5 text="msg://chartOldSeedsHistoric"/>
                 <charts:chart id="chartOldSeedHistoric" width="100%" height="100%" minHeight="18em"
