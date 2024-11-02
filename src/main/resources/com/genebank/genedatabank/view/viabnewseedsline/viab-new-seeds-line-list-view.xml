@@ -64,7 +64,7 @@
                   minHeight="20em"
                   dataContainer="viabNewSeedsLinesDc"
                   columnReorderingAllowed="true"
-        >
+                  multiSort="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
