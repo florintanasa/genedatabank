@@ -51,7 +51,7 @@
                   minHeight="20em"
                   dataContainer="duplicatesDc"
                   columnReorderingAllowed="true"
-                  selectionMode="SINGLE">
+                  selectionMode="SINGLE" multiSort="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
