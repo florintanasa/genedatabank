@@ -140,8 +140,9 @@
         <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
     </actions>
-    <layout>
-        <accordion id="accordionMain" width="100%">
+    <layout alignItems="STRETCH" padding="false" spacing="false" expand="allData">
+        <vbox id="allData" expand="accordionMain" width="100%" css="overflow: auto">
+        <accordion id="accordionMain"  width="100%">
             <accordionPanel id="scrollBoxPanel" summaryText="msg://scrollBoxPanel.summaryText">
                 <scroller id="scrollBox">
                     <formLayout id="form" dataContainer="pasaportDc">
@@ -387,17 +388,17 @@
             <accordionPanel id="commentsImages" summaryText="msg://commentsImages.summaryText" width="100%">
                 <tabSheet id="extendetInformationTabs" width="100%" height="100%">
                     <tab id="descriptionTab" label="msg://descriptionTab.label">
-                        <hbox id="contentTextArea" width="100%" height="100%">
+                        <vbox id="contentTextArea" width="100%" height="100%">
                             <richTextEditor id="commentsField"
                                       height="100%"
                                       width="100%"
                                       dataContainer="pasaportDc"
                                       property="comments"/>
-                        </hbox>
+                        </vbox>
                     </tab>
                     <tab id="probeImages" label="msg://probeImages.label">
                         <vbox id="contentHbox" width="100%" height="100%">
-                            <hbox height="100%0%" width="100%">
+                            <hbox height="100%" width="100%">
                                 <vbox width="100%" height="100%" classNames="bordered-panel">
                                     <hbox id="buttonsPanel4" classNames="buttons-panel">
                                         <button action="probeImagesDataGrid.add"/>
@@ -441,8 +442,9 @@
                 </hbox>
             </accordionPanel>
         </accordion>
-        <vbox id="mapContainer" width="100%" minHeight="380px" enabled="false" visible="false"/>
-        <hbox id="detailActions">
+        <vbox id="mapContainer" width="100%" height="100%" minHeight="380px" enabled="false" visible="false"/>
+        </vbox>
+        <hbox id="detailActions" classNames="px-m py-s bg-contrast-5">
             <button id="saveAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
         </hbox>
