@@ -62,7 +62,8 @@
             <button action="duplicateLinesDataGrid.remove"/>
             <button id="printBtn75x35" text="Print 75x35" title="Printare eticheta 75x35mm" icon="PRINT"/>
         </hbox>
-        <dataGrid id="duplicateLinesDataGrid" dataContainer="duplicateLinesDc" width="100%" minHeight="20em">
+        <dataGrid id="duplicateLinesDataGrid" dataContainer="duplicateLinesDc"
+                  width="100%" minHeight="20em" aggregatable="true" aggregationPosition="TOP">
             <actions>
                 <action id="create" type="list_create">
                     <properties>
@@ -80,7 +81,9 @@
             </actions>
             <columns>
                 <column property="quantity" resizable="true" autoWidth="true"/>
-                <column property="dDepositCode" resizable="true" autoWidth="true"/>
+                <column property="dDepositCode" resizable="true" autoWidth="true">
+                    <aggregation type="COUNT" cellTitle="msg://countDepositCode"/>
+                </column>
                 <column property="dStorage" resizable="true" autoWidth="true"/>
                 <column property="dYearstorage" resizable="true" autoWidth="true"/>
                 <column property="dYearmulti" resizable="true" autoWidth="true"/>
@@ -89,7 +92,9 @@
                 <column property="dPercentage" resizable="true" autoWidth="true"/>
                 <column property="dStock" resizable="true" autoWidth="true"/>
                 <column property="dHumidity" resizable="true" autoWidth="true"/>
-                <column property="dMmb" resizable="true" autoWidth="true"/>
+                <column property="dMmb" resizable="true" autoWidth="true">
+                    <aggregation type="SUM" cellTitle="msg://sumMmb"/>
+                </column>
                 <column property="dOriginal" resizable="true" autoWidth="true"/>
                 <column property="pAccenumb" resizable="true" autoWidth="true"/>
                 <column property="pDoi" resizable="true" autoWidth="true"/>

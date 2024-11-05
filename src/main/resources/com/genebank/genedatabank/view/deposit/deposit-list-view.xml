@@ -47,7 +47,7 @@
                   width="100%"
                   minHeight="20em"
                   dataContainer="depositsDc"
-                  selectionMode="MULTI" multiSort="true">
+                  selectionMode="MULTI" multiSort="true" aggregatable="true" aggregationPosition="TOP">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
@@ -58,7 +58,9 @@
                 <column property="id_accenumb" resizable="true" autoWidth="true" filterable="true"/>
                 <column property="id_accenumb.id_taxonomy.genus" resizable="true" autoWidth="true"/>
                 <column property="id_accenumb.id_taxonomy.species" resizable="true" autoWidth="true"/>
-                <column property="deposit_code" resizable="true" autoWidth="true" filterable="true"/>
+                <column property="deposit_code" resizable="true" autoWidth="true" filterable="true">
+                    <aggregation type="COUNT" cellTitle="msg://countDeposit_code"/>
+                </column>
                 <column property="old_deposit_code" resizable="true" autoWidth="true" filterable="true"/>
                 <column property="id_storage" resizable="true" autoWidth="true"/>
                 <column property="yearstorage" resizable="true" autoWidth="true"/>
@@ -66,7 +68,9 @@
                 <column property="multiply" resizable="true" autoWidth="true"/>
                 <column property="yeargerm" resizable="true" autoWidth="true"/>
                 <column property="percentage" resizable="true" autoWidth="true"/>
-                <column property="stock" resizable="true" autoWidth="true"/>
+                <column property="stock" resizable="true" autoWidth="true">
+                    <aggregation type="SUM" cellTitle="msg://sumStock"/>
+                </column>
                 <column property="humidity" resizable="true" autoWidth="true"/>
                 <column property="mmb" resizable="true" autoWidth="true"/>
                 <column property="original" resizable="true" autoWidth="true"/>
