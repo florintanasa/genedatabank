@@ -160,7 +160,7 @@
                         <textField id="accenumbField" property="accenumb" readOnly="true" visible="true">
                             <tooltip text="msg:///tooltip.accenumbField" manual="true"/>
                         </textField>
-                        <textField id="tempnumbField" property="tempnumb" readOnly="true">
+                        <textField id="tempnumbField" property="tempnumb" readOnly="false">
                             <tooltip text="msg:///tooltip.tempnumbField" manual="true"/>
                         </textField>
                         <textField id="doiField" property="doi">
