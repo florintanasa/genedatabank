@@ -3,10 +3,12 @@ package com.genebank.genedatabank.view.viabnewseedsline;
 import com.genebank.genedatabank.entity.ViabNewSeedsLine;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
+import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.datepicker.TypedDatePicker;
@@ -18,6 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -53,6 +57,8 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     private JmixIntegerField treatTimeField;
     @ViewComponent
     private JmixTextArea commentsField;
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<ViabNewSeedsLine> event) {
@@ -62,6 +68,13 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
 
     @Subscribe
     public void onInit(final InitEvent event) {
+        final Locale locale = currentAuthentication.getLocale();
+        // check if user choose Romanian for display language
+        if (locale.getDisplayLanguage().equals("română")) {
+            // set the date piker in romanian
+            germStartDateField.setI18n(romanianI18nDatePicker());
+            germEvalDateField.setI18n(romanianI18nDatePicker());
+        }
         // call some methods
         initManualTooltip();
         checkFields();
@@ -238,5 +251,35 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
 
         // return object
         return helperButton;
+    }
+
+    // method for create date picker in romanian language
+    protected DatePicker.DatePickerI18n romanianI18nDatePicker() {
+        DatePicker.DatePickerI18n romanianI18n = new DatePicker.DatePickerI18n();
+
+        // set Monday as first day of the week
+        romanianI18n.setFirstDayOfWeek(1);
+        // set the list with the months
+        romanianI18n.setMonthNames(
+                List.of("Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
+                        "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie")
+        );
+        // set the list with long name of week days
+        romanianI18n.setWeekdays(
+                List.of("Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă")
+        );
+        // set the list with short name of week days
+        romanianI18n.setWeekdaysShort(
+                List.of("dum.", "lun.", "mar.", "mie.", "joi", "vin.", "sâm.")
+        );
+        // translate Today
+        romanianI18n.setToday("Astăzi");
+        // translate Cancel
+        romanianI18n.setCancel("Anulare");
+        // set date format
+        romanianI18n.setDateFormat("dd/MM/yyyy");
+
+        // return the date picker for romanian language
+        return romanianI18n;
     }
 }
