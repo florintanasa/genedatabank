@@ -3,9 +3,7 @@ package com.genebank.genedatabank.view.viaboldseeds;
 import com.genebank.genedatabank.entity.*;
 import com.genebank.genedatabank.view.UtilGeneDataBank;
 import com.genebank.genedatabank.view.main.MainView;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.LumoUtility;
@@ -22,7 +20,6 @@ import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.data.Sequence;
 import io.jmix.data.Sequences;
 import io.jmix.flowui.Notifications;
-import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.combobox.EntityComboBox;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.select.JmixSelect;
@@ -61,8 +58,6 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     private JmixIntegerField dStockField;
     @ViewComponent
     private DataGrid<ViabOldSeedsLine> viabOldSeedsLineDataGrid;
-    @Autowired
-    private UiComponents uiComponents;
     @Autowired
     private CurrentAuthentication currentAuthentication;
     @Autowired
@@ -175,11 +170,10 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
                 total += (double) line.getGermFaculty();
             }
         }
-        // calculate the medium percent - attention is used all items null or not null
-        int viabPercent = (int) (total / viabOldSeedsLinesDc.getItems().size());
+        // calculate the medium percent - attention is used all items, null or not null
+        int viabPercent = (int) Math.round(total / viabOldSeedsLinesDc.getItems().size());
         // display the value for medium percent calculated
         getEditedEntity().setViabPercent(viabPercent);
-        //getEditedEntity().setViabPercent((int) Math.round(total / viabOldSeedsLinesDc.getItems().size()));
         //viabPercentField.setValue(Objects.requireNonNull(numberFormatter.apply((int) Math.round(total / viabOldSeedsLinesDc.getItems().size()))));
     }
 
