@@ -1,6 +1,7 @@
 package com.genebank.genedatabank.view.viaboldseeds;
 
 import com.genebank.genedatabank.entity.*;
+import com.genebank.genedatabank.view.UtilGeneDataBank;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
@@ -204,16 +205,16 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
     // Create Tool Tips for input fields
     private void initManualTooltip()   {
         // create button for tooltip help
-        JmixButton hlpBtnDepositsComboBox = createHlpBtn();
-        JmixButton hlpBtnPaccnameField = createHlpBtn();
-        JmixButton hlpBtnIdVOSField = createHlpBtn();
-        JmixButton hlpBtnStockField = createHlpBtn();
-        JmixButton hlpBtnAccenumbField = createHlpBtn();
-        JmixButton hlpBtnSpeciesField = createHlpBtn();
-        JmixButton hlpBtnGenusField = createHlpBtn();
-        JmixButton hlpBtnYearTestField = createHlpBtn();
-        JmixButton hlpBtnViabPercentField = createHlpBtn();
-        JmixButton hlpBtnStatusField = createHlpBtn();
+        JmixButton hlpBtnDepositsComboBox = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnPaccnameField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnIdVOSField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnStockField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnAccenumbField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnSpeciesField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnGenusField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnYearTestField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnViabPercentField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnStatusField = UtilGeneDataBank.createHelperButton();
 
         // get tool tips for objects
         Tooltip tooltipDepositsComboBox = depositsComboBox.getTooltip();
@@ -260,19 +261,6 @@ public class ViabOldSeedsDetailView extends StandardDetailView<ViabOldSeeds> {
         yearTestField.setSuffixComponent(hlpBtnYearTestField);
         viabPercentField.setSuffixComponent(hlpBtnViabPercentField);
         statusField.setPrefixComponent(hlpBtnStatusField);
-    }
-    
-    // method for create a button for tool tips
-    protected JmixButton createHlpBtn() {
-        // create object
-        JmixButton helperButton = uiComponents.create(JmixButton.class);
-        // set the icon for button
-        helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
-        // set the theme for button
-        helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
-
-        // return object
-        return helperButton;
     }
 
     // check the user connected and change fields from read only to be edited
