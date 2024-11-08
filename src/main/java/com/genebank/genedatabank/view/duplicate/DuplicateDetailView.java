@@ -7,6 +7,7 @@ package com.genebank.genedatabank.view.duplicate;
 
 import com.genebank.genedatabank.entity.*;
 import com.genebank.genedatabank.security.OnlyViewRole;
+import com.genebank.genedatabank.view.UtilGeneDataBank;
 import com.genebank.genedatabank.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.router.Route;
@@ -14,6 +15,7 @@ import io.jmix.core.TimeSource;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.component.combobox.EntityComboBox;
+import io.jmix.flowui.component.datepicker.TypedDatePicker;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.component.button.JmixButton;
@@ -25,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
+import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -53,6 +57,20 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
     private Downloader downloader;
     @ViewComponent
     private JmixButton printBtn75x35;
+    @ViewComponent
+    private TypedDatePicker<LocalDate> theDateField;
+    @ViewComponent
+    private TypedDatePicker<LocalDate> sendDateField;
+
+    @Subscribe
+    public void onInit(final InitEvent event) {
+        final Locale locale = currentAuthentication.getLocale();
+        // check if user choose Romanian for display language
+        if (locale.getDisplayLanguage().equals("română")) {
+            theDateField.setI18n(UtilGeneDataBank.romanianI18nDatePicker());
+            sendDateField.setI18n(UtilGeneDataBank.romanianI18nDatePicker());
+        }
+    }
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<Duplicate> event) {
@@ -107,6 +125,4 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
         downloader.download(label.getContent(), label.getDocumentName());
     }
 
-    
-    
 }
