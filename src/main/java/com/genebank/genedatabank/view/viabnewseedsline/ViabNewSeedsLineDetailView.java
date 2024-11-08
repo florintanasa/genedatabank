@@ -1,16 +1,13 @@
 package com.genebank.genedatabank.view.viabnewseedsline;
 
 import com.genebank.genedatabank.entity.ViabNewSeedsLine;
+import com.genebank.genedatabank.view.UtilGeneDataBank;
 import com.genebank.genedatabank.view.main.MainView;
-import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.datepicker.DatePicker;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.TimeSource;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Notifications;
-import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.datepicker.TypedDatePicker;
 import io.jmix.flowui.component.textarea.JmixTextArea;
 import io.jmix.flowui.component.textfield.JmixIntegerField;
@@ -20,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -51,8 +47,6 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     private JmixIntegerField germTimeField;
     @ViewComponent
     private TypedDatePicker<LocalDate> germEvalDateField;
-    @Autowired
-    private UiComponents uiComponents;
     @ViewComponent
     private JmixIntegerField treatTimeField;
     @ViewComponent
@@ -72,8 +66,8 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
         // check if user choose Romanian for display language
         if (locale.getDisplayLanguage().equals("română")) {
             // set the date piker in romanian
-            germStartDateField.setI18n(romanianI18nDatePicker());
-            germEvalDateField.setI18n(romanianI18nDatePicker());
+            germStartDateField.setI18n(UtilGeneDataBank.romanianI18nDatePicker());
+            germEvalDateField.setI18n(UtilGeneDataBank.romanianI18nDatePicker());
         }
         // call some methods
         initManualTooltip();
@@ -103,9 +97,7 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
         germEvalDateField.setRequired(false);
     }
     // check if the field for Evaluation Germination Date is not null so is necessary to have a value in Viable seeds
-    if (!germEvalDateField.isEmpty()) {
-        viableSeedsField.setRequired(true);
-    } //else viableSeedsField.setRequired(false);
+    viableSeedsField.setRequired(!germEvalDateField.isEmpty());
 }
 
     // check some conditions to save
@@ -200,14 +192,14 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
     // Create Tool Tips for input fields
     private void initManualTooltip()   {
         // create button for tooltip help
-        JmixButton hlpBtnSeedsNumField = createHelperButton();
-        JmixButton hlpBtnGermStartDateField = createHelperButton();
-        JmixButton hlpBtnViableSeedsNumField = createHelperButton();
-        JmixButton hlpBtnGermEvalDateField = createHelperButton();
-        JmixButton hlpBtnGermFacultyField = createHelperButton();
-        JmixButton hlpBtnGermTimeField = createHelperButton();
-        JmixButton hlpBtnTreatTimeField = createHelperButton();
-        JmixButton hlpBtnCommentsField = createHelperButton();
+        JmixButton hlpBtnSeedsNumField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnGermStartDateField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnViableSeedsNumField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnGermEvalDateField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnGermFacultyField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnGermTimeField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnTreatTimeField = UtilGeneDataBank.createHelperButton();
+        JmixButton hlpBtnCommentsField = UtilGeneDataBank.createHelperButton();
 
         // get tooltips for objects
         Tooltip tooltipSeedsNumField = seedsNumField.getTooltip();
@@ -220,14 +212,22 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
         Tooltip tooltipCommentsField = commentsField.getTooltip();
 
         // create event if click the tooltip button
-        hlpBtnSeedsNumField.addClickListener(buttonClickEvent -> tooltipSeedsNumField.setOpened(!tooltipSeedsNumField.isOpened()));
-        hlpBtnGermStartDateField.addClickListener(buttonClickEvent -> tooltipGermStartDateField.setOpened(!tooltipGermStartDateField.isOpened()));
-        hlpBtnViableSeedsNumField.addClickListener(buttonClickEvent -> tooltipViableSeedsNumField.setOpened(!tooltipViableSeedsNumField.isOpened()));
-        hlpBtnGermEvalDateField.addClickListener(buttonClickEvent -> tooltipGermEvalDateField.setOpened(!tooltipGermEvalDateField.isOpened()));
-        hlpBtnGermFacultyField.addClickListener(buttonClickEvent -> tooltipGermFacultyField.setOpened(!tooltipGermFacultyField.isOpened()));
-        hlpBtnGermTimeField.addClickListener(buttonClickEvent -> tooltipGermTimeField.setOpened(!tooltipGermTimeField.isOpened()));
-        hlpBtnTreatTimeField.addClickListener(buttonClickEvent -> tooltipTreatTimeField.setOpened(!tooltipTreatTimeField.isOpened()));
-        hlpBtnCommentsField.addClickListener(buttonClickEvent -> tooltipCommentsField.setOpened(!tooltipCommentsField.isOpened()));
+        hlpBtnSeedsNumField.addClickListener(buttonClickEvent ->
+                tooltipSeedsNumField.setOpened(!tooltipSeedsNumField.isOpened()));
+        hlpBtnGermStartDateField.addClickListener(buttonClickEvent ->
+                tooltipGermStartDateField.setOpened(!tooltipGermStartDateField.isOpened()));
+        hlpBtnViableSeedsNumField.addClickListener(buttonClickEvent ->
+                tooltipViableSeedsNumField.setOpened(!tooltipViableSeedsNumField.isOpened()));
+        hlpBtnGermEvalDateField.addClickListener(buttonClickEvent ->
+                tooltipGermEvalDateField.setOpened(!tooltipGermEvalDateField.isOpened()));
+        hlpBtnGermFacultyField.addClickListener(buttonClickEvent ->
+                tooltipGermFacultyField.setOpened(!tooltipGermFacultyField.isOpened()));
+        hlpBtnGermTimeField.addClickListener(buttonClickEvent ->
+                tooltipGermTimeField.setOpened(!tooltipGermTimeField.isOpened()));
+        hlpBtnTreatTimeField.addClickListener(buttonClickEvent ->
+                tooltipTreatTimeField.setOpened(!tooltipTreatTimeField.isOpened()));
+        hlpBtnCommentsField.addClickListener(buttonClickEvent ->
+                tooltipCommentsField.setOpened(!tooltipCommentsField.isOpened()));
 
         // set position for tooltip button
         seedsNumField.setSuffixComponent(hlpBtnSeedsNumField);
@@ -238,48 +238,5 @@ public class ViabNewSeedsLineDetailView extends StandardDetailView<ViabNewSeedsL
         germTimeField.setSuffixComponent(hlpBtnGermTimeField);
         treatTimeField.setSuffixComponent(hlpBtnTreatTimeField);
         commentsField.setSuffixComponent(hlpBtnCommentsField);
-    }
-
-    // method for create a button for tips
-    protected JmixButton createHelperButton() {
-        // create object
-        JmixButton helperButton = uiComponents.create(JmixButton.class);
-        // set the icon for button
-        helperButton.setIcon(VaadinIcon.QUESTION_CIRCLE.create());
-        // set the theme for button
-        helperButton.addThemeVariants(ButtonVariant.LUMO_ICON, ButtonVariant.LUMO_TERTIARY_INLINE);
-
-        // return object
-        return helperButton;
-    }
-
-    // method for create date picker in romanian language
-    protected DatePicker.DatePickerI18n romanianI18nDatePicker() {
-        DatePicker.DatePickerI18n romanianI18n = new DatePicker.DatePickerI18n();
-
-        // set Monday as first day of the week
-        romanianI18n.setFirstDayOfWeek(1);
-        // set the list with the months
-        romanianI18n.setMonthNames(
-                List.of("Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
-                        "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie")
-        );
-        // set the list with long name of week days
-        romanianI18n.setWeekdays(
-                List.of("Duminică", "Luni", "Marți", "Miercuri", "Joi", "Vineri", "Sâmbătă")
-        );
-        // set the list with short name of week days
-        romanianI18n.setWeekdaysShort(
-                List.of("dum.", "lun.", "mar.", "mie.", "joi", "vin.", "sâm.")
-        );
-        // translate Today
-        romanianI18n.setToday("Astăzi");
-        // translate Cancel
-        romanianI18n.setCancel("Anulare");
-        // set date format
-        romanianI18n.setDateFormat("dd/MM/yyyy");
-
-        // return the date picker for romanian language
-        return romanianI18n;
     }
 }
