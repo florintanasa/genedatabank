@@ -175,6 +175,13 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         initManualTooltip();
     }
 
+    @Subscribe
+    public void onInitEntity(final InitEntityEvent<Pasaport> event) {
+        final User user = (User) currentAuthentication.getUser();
+        event.getEntity().setId_instcode(user.getId_institute());
+    }
+    
+
     @Subscribe(target = Target.DATA_CONTEXT)
     public void onPreSave(DataContext.PreSaveEvent event) {
         final User user = (User) currentAuthentication.getUser();

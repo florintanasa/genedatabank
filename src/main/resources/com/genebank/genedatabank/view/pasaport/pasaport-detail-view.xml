@@ -147,7 +147,7 @@
                 <scroller id="scrollBox">
                     <formLayout id="form" dataContainer="pasaportDc">
                         <entityComboBox id="institutesComboBox_1" itemsContainer="institutesDc"
-                                        dataContainer="pasaportDc" property="id_instcode">
+                                        dataContainer="pasaportDc" property="id_instcode" readOnly="true">
                             <actions>
                                 <action id="entityClear" type="entity_clear"/>
                                 <action id="entityLookup" type="entity_lookup"/>
