@@ -6,8 +6,6 @@ import com.genebank.genedatabank.view.main.MainView;
 
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
-import io.jmix.core.MetadataTools;
-import io.jmix.core.UuidProvider;
 import io.jmix.flowui.DialogWindows;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
@@ -31,30 +29,30 @@ public class PasaportListView extends StandardListView<Pasaport> {
     @ViewComponent
     private DataGrid<Pasaport> pasaportsDataGrid;
     @Autowired
-    private MetadataTools metadataTools;
-    @Autowired
     private DialogWindows dialogWindows;
 
     @Subscribe("pasaportsDataGrid.copyEdit")
     public void onPasaportsDataGridCopyEdit(final ActionPerformedEvent event) {
         Pasaport pasaport = pasaportsDataGrid.getSingleSelectedItem();
-        Pasaport pasaportCopy = createCopy(pasaport);
-        pasaportCopy.setAccenumb(null);
-        //pasaportCopy.setId(UuidProvider.createUuid());
-        dialogWindows.detail(pasaportsDataGrid)
-                .withViewClass(PasaportDetailView.class)
-                .newEntity(pasaportCopy)
-                .open();
-        
+
+        if (pasaport != null) {
+            Pasaport pasaportCopy = createCopy(pasaport);
+            dialogWindows.detail(pasaportsDataGrid)
+                    .withViewClass(PasaportDetailView.class)
+                    .newEntity(pasaportCopy)
+                    .open();
+        }
     }
 
     public Pasaport createCopy(Pasaport pasaport) {
-        //Pasaport pasaportCopy = metadataTools.copy(pasaport);
-        //Pasaport pasaportCopy = dataManager.load(Pasaport.class).id(pasaport.getId()).one();
-        //pasaportCopy.setId(UuidProvider.createUuid());
-        //pasaportCopy.setAccenumb(null);
-        //pasaportCopy.setAccname(StringUtils.abbreviate("Copie a " + pasaport.getAccname(),45));
-        //return pasaportCopy;
+        /*
+        Pasaport pasaportCopy = metadataTools.copy(pasaport);
+        Pasaport pasaportCopy = dataManager.load(Pasaport.class).id(pasaport.getId()).one();
+        pasaportCopy.setId(UuidProvider.createUuid());
+        pasaportCopy.setAccenumb(null);
+        pasaportCopy.setAccname(StringUtils.abbreviate("Copie a " + pasaport.getAccname(),45));
+        return pasaportCopy;
+         */
         Pasaport pasaportNew = dataManager.create(Pasaport.class);
         pasaportNew.setAccname(StringUtils.abbreviate("Copie a " + pasaport.getAccname(),45));
         pasaportNew.setAcceurl(pasaport.getAcceurl());
