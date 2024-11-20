@@ -178,7 +178,10 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     @Subscribe
     public void onInitEntity(final InitEntityEvent<Pasaport> event) {
         final User user = (User) currentAuthentication.getUser();
+        //set default Institute to user Institute
         event.getEntity().setId_instcode(user.getId_institute());
+        // set focus to Accession name field
+        accnameField.setAutofocus(true);
     }
     
 
