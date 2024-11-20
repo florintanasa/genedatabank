@@ -33,7 +33,7 @@
         <formLayout id="form" dataContainer="duplicateDc">
 
             <entityComboBox id="id_send_instituteComboBox" itemsContainer="institutesDc" dataContainer="duplicateDc"
-                            property="id_send_institute">
+                            property="id_send_institute" readOnly="true">
                 <actions>
                     <action id="entityClear" type="entity_clear"/>
                     <action id="entityLookup" type="entity_lookup"/>
