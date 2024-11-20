@@ -85,7 +85,7 @@ public class PasaportListView extends StandardListView<Pasaport> {
         pasaportNew.setLongitude(pasaport.getLongitude());
         pasaportNew.setOrigdate(pasaport.getOrigdate());
         pasaportNew.setOthernumb(pasaport.getOthernumb());
-        pasaportNew.setProbeImages(pasaport.getProbeImages());
+        //pasaportNew.setProbeImages(pasaport.getProbeImages());
         pasaportNew.setRemarks(pasaport.getRemarks());
         pasaportNew.setTempnumb(pasaport.getTempnumb());
         return pasaportNew;
