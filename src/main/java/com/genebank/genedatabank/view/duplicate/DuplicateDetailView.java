@@ -74,12 +74,15 @@ public class DuplicateDetailView extends StandardDetailView<Duplicate> {
 
     @Subscribe
     public void onInitEntity(final InitEntityEvent<Duplicate> event) {
+        final User user = (User) currentAuthentication.getUser();
         //set default the Status to Prepared
         event.getEntity().setStatus(DuplicateStatus.PREPARED);
         //set default the date to now
         event.getEntity().setTheDate(timeSource.now().toLocalDate());
         //focus to Duplicate Institute field for choose
         id_duplicate_instituteComboBox.focus();
+        //set default send Insitute with user Institute
+        event.getEntity().setId_send_institute(user.getId_institute());
     }
 
     @Subscribe
