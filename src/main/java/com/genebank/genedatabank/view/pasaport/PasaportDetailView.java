@@ -13,7 +13,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.grid.ItemClickEvent;
@@ -22,7 +21,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.shared.Tooltip;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
-import io.jmix.flowui.data.binding.impl.HtmlContainerReadonlyDataBindingImpl;
 import io.jmix.core.FileRef;
 import io.jmix.core.FileStorage;
 import io.jmix.core.security.CurrentAuthentication;
@@ -171,14 +169,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private JmixDetails id_duplsiteDetails;
     @ViewComponent
     private EntityComboBox<Collsrc> collsrcsComboBox;
-    @Autowired
-    private HtmlContainerReadonlyDataBindingImpl flowui_HtmlContainerDataBinding;
 
-    @Subscribe
-    public void onDetachEvent(final DetachEvent event) {
-        flowui_HtmlContainerDataBinding.unbind(imageProbe);
-        //notifications.create("Unbind").show();
-    }
 
     @Subscribe
     public void onInit(final InitEvent event) {
