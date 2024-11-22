@@ -4,19 +4,11 @@ import com.genebank.genedatabank.entity.Pasaport;
 
 import com.genebank.genedatabank.view.main.MainView;
 
-import com.vaadin.flow.router.QueryParameters;
 import com.vaadin.flow.router.Route;
-import io.jmix.core.DataManager;
-import io.jmix.core.Messages;
-import io.jmix.core.Metadata;
-import io.jmix.flowui.DialogWindows;
-import io.jmix.flowui.Notifications;
 import io.jmix.flowui.ViewNavigators;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.kit.action.ActionPerformedEvent;
 import io.jmix.flowui.view.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,18 +23,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 @LookupComponent("pasaportsDataGrid")
 @DialogMode(width = "64em")
 public class PasaportListView extends StandardListView<Pasaport> {
-    @Autowired
-    protected DataManager dataManager;
     @ViewComponent
     private DataGrid<Pasaport> pasaportsDataGrid;
     @Autowired
-    private DialogWindows dialogWindows;
-    @Autowired
     private ViewNavigators viewNavigators;
-    @Autowired
-    private Messages messages;
-    @Autowired
-    private Notifications notifications;
 
 
     @Subscribe("pasaportsDataGrid.copyEdit")
@@ -50,107 +34,85 @@ public class PasaportListView extends StandardListView<Pasaport> {
         Pasaport pasaport = pasaportsDataGrid.getSingleSelectedItem();
 
         if (pasaport != null) {
-            Pasaport pasaportCopy = createCopy(pasaport);
-            /*
-            dialogWindows.detail(pasaportsDataGrid)
-                    .withViewClass(PasaportDetailView.class)
-                    .newEntity(pasaportCopy)
-                    .open();
-
-             */
-            navigateToEditEntity(pasaport);
+            navigateToCopyAndEditEntity(pasaport);
         }
     }
-
-    public void navigateToEditEntity(Pasaport pasaport) {
-        //String accname = pasaport.getAccname();
+    //method for copy and edit selected item
+    public void navigateToCopyAndEditEntity(Pasaport pasaport) {
         viewNavigators.detailView(pasaportsDataGrid)
                 .withViewClass(PasaportDetailView.class)
                 .newEntity()
                 .withAfterNavigationHandler(afterNavigationEvent -> {
-                    //notifications.create("Warning you are in Edit a Copy").show();
-                    afterNavigationEvent.getView().getEditedEntity().setAccname(StringUtils.abbreviate("Copie a "
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setAccname(StringUtils.abbreviate("Copie a "
                             + pasaport.getAccname(),45));
-                    afterNavigationEvent.getView().getEditedEntity().setAcceurl(pasaport.getAcceurl());
-                    afterNavigationEvent.getView().getEditedEntity().setAcqdate(pasaport.getAcqdate());
-                    afterNavigationEvent.getView().getEditedEntity().setAncest(pasaport.getAncest());
-                    afterNavigationEvent.getView().getEditedEntity().setColldate(pasaport.getColldate());
-                    afterNavigationEvent.getView().getEditedEntity().setCollmissid(pasaport.getCollmissid());
-                    afterNavigationEvent.getView().getEditedEntity().setCollnumb(pasaport.getCollnumb());
-                    afterNavigationEvent.getView().getEditedEntity().setComments(pasaport.getComments());
-                    afterNavigationEvent.getView().getEditedEntity().setDoi(pasaport.getDoi());
-                    afterNavigationEvent.getView().getEditedEntity().setDonornumb(pasaport.getDonornumb());
-                    afterNavigationEvent.getView().getEditedEntity().setElevation(pasaport.getElevation());
-                    afterNavigationEvent.getView().getEditedEntity().setId_acceconf(pasaport.getId_acceconf());
-                    afterNavigationEvent.getView().getEditedEntity().setId_aegisstat(pasaport.getId_aegisstat());
-                    afterNavigationEvent.getView().getEditedEntity().setId_bredcode(pasaport.getId_bredcode());
-                    afterNavigationEvent.getView().getEditedEntity().setId_collsrc(pasaport.getId_collsrc());
-                    afterNavigationEvent.getView().getEditedEntity().setId_country(pasaport.getId_country());
-                    afterNavigationEvent.getView().getEditedEntity().setId_collcode(pasaport.getId_collcode());
-                    afterNavigationEvent.getView().getEditedEntity().setId_countysiruta(pasaport.getId_countysiruta());
-                    afterNavigationEvent.getView().getEditedEntity().setId_donorcode(pasaport.getId_donorcode());
-                    afterNavigationEvent.getView().getEditedEntity().setId_duplsite(pasaport.getId_duplsite());
-                    afterNavigationEvent.getView().getEditedEntity().setId_georefmeth(pasaport.getId_georefmeth());
-                    afterNavigationEvent.getView().getEditedEntity().setId_historic(pasaport.getId_historic());
-                    afterNavigationEvent.getView().getEditedEntity().setId_instcode(pasaport.getId_instcode());
-                    afterNavigationEvent.getView().getEditedEntity().setId_localitysiruta(pasaport.getId_localitysiruta());
-                    afterNavigationEvent.getView().getEditedEntity().setId_mlsstat(pasaport.getId_mlsstat());
-                    afterNavigationEvent.getView().getEditedEntity().setId_sampstat(pasaport.getId_sampstat());
-                    afterNavigationEvent.getView().getEditedEntity().setId_taxonomy(pasaport.getId_taxonomy());
-                    afterNavigationEvent.getView().getEditedEntity().setLatitude(pasaport.getLatitude());
-                    afterNavigationEvent.getView().getEditedEntity().setLongitude(pasaport.getLongitude());
-                    afterNavigationEvent.getView().getEditedEntity().setOrigdate(pasaport.getOrigdate());
-                    afterNavigationEvent.getView().getEditedEntity().setOthernumb(pasaport.getOthernumb());
-                    //afterNavigationEvent.getView().getEditedEntity().setProbeImages(pasaport.getProbeImages());
-                    afterNavigationEvent.getView().getEditedEntity().setRemarks(pasaport.getRemarks());
-                    afterNavigationEvent.getView().getEditedEntity().setTempnumb(pasaport.getTempnumb());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setAcceurl(pasaport.getAcceurl());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setAcqdate(pasaport.getAcqdate());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setAncest(pasaport.getAncest());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setColldate(pasaport.getColldate());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setCollmissid(pasaport.getCollmissid());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setCollnumb(pasaport.getCollnumb());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setComments(pasaport.getComments());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setDoi(pasaport.getDoi());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setDonornumb(pasaport.getDonornumb());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setElevation(pasaport.getElevation());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_acceconf(pasaport.getId_acceconf());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_aegisstat(pasaport.getId_aegisstat());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_bredcode(pasaport.getId_bredcode());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_collsrc(pasaport.getId_collsrc());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_country(pasaport.getId_country());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_collcode(pasaport.getId_collcode());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_countysiruta(pasaport.getId_countysiruta());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_donorcode(pasaport.getId_donorcode());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_duplsite(pasaport.getId_duplsite());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_georefmeth(pasaport.getId_georefmeth());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_historic(pasaport.getId_historic());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_instcode(pasaport.getId_instcode());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_localitysiruta(pasaport.getId_localitysiruta());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_mlsstat(pasaport.getId_mlsstat());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_sampstat(pasaport.getId_sampstat());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setId_taxonomy(pasaport.getId_taxonomy());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setLatitude(pasaport.getLatitude());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setLongitude(pasaport.getLongitude());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setOrigdate(pasaport.getOrigdate());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setOthernumb(pasaport.getOthernumb());
+                    // afterNavigationEvent.getView().getEditedEntity()
+                    // .setProbeImages(pasaport.getProbeImages());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setRemarks(pasaport.getRemarks());
+                    afterNavigationEvent.getView().getEditedEntity()
+                            .setTempnumb(pasaport.getTempnumb());
                 })
                 .navigate();
-    }
-    public Pasaport createCopy(Pasaport pasaport) {
-        /*
-        Pasaport pasaportCopy = metadataTools.copy(pasaport);
-        Pasaport pasaportCopy = dataManager.load(Pasaport.class).id(pasaport.getId()).one();
-        pasaportCopy.setId(UuidProvider.createUuid());
-        pasaportCopy.setAccenumb(null);
-        pasaportCopy.setAccname(StringUtils.abbreviate("Copie a " + pasaport.getAccname(),45));
-        return pasaportCopy;
-         */
-        Pasaport pasaportNew = dataManager.create(Pasaport.class);
-        pasaportNew.setAccname(StringUtils.abbreviate("Copie a " + pasaport.getAccname(),45));
-        pasaportNew.setAcceurl(pasaport.getAcceurl());
-        pasaportNew.setAcqdate(pasaport.getAcqdate());
-        pasaportNew.setAncest(pasaport.getAncest());
-        pasaportNew.setColldate(pasaport.getColldate());
-        pasaportNew.setCollmissid(pasaport.getCollmissid());
-        pasaportNew.setCollnumb(pasaport.getCollnumb());
-        pasaportNew.setComments(pasaport.getComments());
-        pasaportNew.setDoi(pasaport.getDoi());
-        pasaportNew.setDonornumb(pasaport.getDonornumb());
-        pasaportNew.setElevation(pasaport.getElevation());
-        pasaportNew.setId_acceconf(pasaport.getId_acceconf());
-        pasaportNew.setId_aegisstat(pasaport.getId_aegisstat());
-        pasaportNew.setId_bredcode(pasaport.getId_bredcode());
-        pasaportNew.setId_collsrc(pasaport.getId_collsrc());
-        pasaportNew.setId_country(pasaport.getId_country());
-        pasaportNew.setId_collcode(pasaport.getId_collcode());
-        pasaportNew.setId_countysiruta(pasaport.getId_countysiruta());
-        pasaportNew.setId_donorcode(pasaport.getId_donorcode());
-        pasaportNew.setId_duplsite(pasaport.getId_duplsite());
-        pasaportNew.setId_georefmeth(pasaport.getId_georefmeth());
-        pasaportNew.setId_historic(pasaport.getId_historic());
-        pasaportNew.setId_instcode(pasaport.getId_instcode());
-        pasaportNew.setId_localitysiruta(pasaport.getId_localitysiruta());
-        pasaportNew.setId_mlsstat(pasaport.getId_mlsstat());
-        pasaportNew.setId_sampstat(pasaport.getId_sampstat());
-        pasaportNew.setId_taxonomy(pasaport.getId_taxonomy());
-        pasaportNew.setLatitude(pasaport.getLatitude());
-        pasaportNew.setLongitude(pasaport.getLongitude());
-        pasaportNew.setOrigdate(pasaport.getOrigdate());
-        pasaportNew.setOthernumb(pasaport.getOthernumb());
-        //pasaportNew.setProbeImages(pasaport.getProbeImages());
-        pasaportNew.setRemarks(pasaport.getRemarks());
-        pasaportNew.setTempnumb(pasaport.getTempnumb());
-        return pasaportNew;
     }
 }
