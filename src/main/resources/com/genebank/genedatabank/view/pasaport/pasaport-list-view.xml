@@ -52,8 +52,8 @@
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="pasaportsDataGrid.create"/>
             <button id="editBtn" action="pasaportsDataGrid.edit"/>
-            <button id="copyeditBtn" action="pasaportsDataGrid.copyEdit"/>
-            <button id="copymodifBtn" action="pasaportsDataGrid.copyEditModif"/>
+            <button id="copyeditBtn" action="pasaportsDataGrid.copyEdit" enabled="false"/>
+            <button id="copymodifyBtn" action="pasaportsDataGrid.copyEditModify"/>
             <button id="removeBtn" action="pasaportsDataGrid.remove"/>
             <simplePagination id="pagination" dataLoader="pasaportsDl" classNames="ms-auto"/>
             <gridColumnVisibility dataGrid="pasaportsDataGrid" icon="COG" themeNames="icon"/>
@@ -66,8 +66,8 @@
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
-                <action id="copyEdit" icon="EDIT" text="msg://copyedit" type="list_itemTracking"/>
-                <action id="copyEditModif" icon="vaadin:paste" text="msg://copymodif" type="list_itemTracking"/>
+                <action id="copyEdit" icon="EDIT" text="msg://copyedit" type="list_itemTracking" enabled="false"/>
+                <action id="copyEditModify" icon="vaadin:paste" text="msg://copymodif" type="list_itemTracking"/>
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns resizable="true" sortable="true">

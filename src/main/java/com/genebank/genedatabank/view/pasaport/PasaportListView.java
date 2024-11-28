@@ -2,12 +2,15 @@ package com.genebank.genedatabank.view.pasaport;
 
 import com.genebank.genedatabank.entity.Pasaport;
 
+import com.genebank.genedatabank.entity.User;
 import com.genebank.genedatabank.view.main.MainView;
 
 import com.google.common.base.Strings;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
+import io.jmix.core.NoResultException;
+import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Dialogs;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.ViewNavigators;
@@ -21,6 +24,8 @@ import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.view.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Objects;
 
 
 /**
@@ -43,8 +48,22 @@ public class PasaportListView extends StandardListView<Pasaport> {
     private Notifications notifications;
     @Autowired
     private DataManager dataManager;
+    @ViewComponent
+    private MessageBundle messageBundle;
+    @Autowired
+    private CurrentAuthentication currentAuthentication;
+    @ViewComponent
+    private JmixButton copyeditBtn;
 
-
+    @Subscribe
+    public void onBeforeShow(final BeforeShowEvent event) {
+        // assign copy and edit function only to users admin and cezar
+        final User user = (User) currentAuthentication.getUser();
+        if (Objects.equals(user.getUsername(), "cezar") || Objects.equals(user.getUsername(), "admin")) {
+            copyeditBtn.setEnabled(true);
+        }
+    }
+    
     @Subscribe("pasaportsDataGrid.copyEdit")
     public void onPasaportsDataGridCopyEdit(final ActionPerformedEvent event) {
         Pasaport pasaport = pasaportsDataGrid.getSingleSelectedItem();
@@ -133,113 +152,136 @@ public class PasaportListView extends StandardListView<Pasaport> {
     }
 
     //method for copy and modify with selected item other entity
-    public void navigateToCopyAndModifyEntity(Pasaport pasaport, Pasaport pasaport2) {
+    public void navigateToCopyAndModifyEntity(Pasaport copyPasaport, Pasaport modifyPasaport) {
         viewNavigators.detailView(pasaportsDataGrid)
                 .withViewClass(PasaportDetailView.class)
-                .editEntity(pasaport2)
+                .editEntity(modifyPasaport)
                 .withAfterNavigationHandler(afterNavigationEvent -> {
                     afterNavigationEvent.getView().getEditedEntity()
                             .setAccname(StringUtils.abbreviate("Copie a "
-                                    + pasaport.getAccname(),45));
+                                    + copyPasaport.getAccname(),45));
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setAcceurl(pasaport.getAcceurl());
+                            .setAcceurl(copyPasaport.getAcceurl());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setAcqdate(pasaport.getAcqdate());
+                            .setAcqdate(copyPasaport.getAcqdate());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setAncest(pasaport.getAncest());
+                            .setAncest(copyPasaport.getAncest());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setColldate(pasaport.getColldate());
+                            .setColldate(copyPasaport.getColldate());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setCollmissid(pasaport.getCollmissid());
+                            .setCollmissid(copyPasaport.getCollmissid());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setCollnumb(pasaport.getCollnumb());
+                            .setCollnumb(copyPasaport.getCollnumb());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setComments(pasaport.getComments());
+                            .setComments(copyPasaport.getComments());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setDoi(pasaport.getDoi());
+                            .setDoi(copyPasaport.getDoi());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setDonornumb(pasaport.getDonornumb());
+                            .setDonornumb(copyPasaport.getDonornumb());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setElevation(pasaport.getElevation());
+                            .setElevation(copyPasaport.getElevation());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_acceconf(pasaport.getId_acceconf());
+                            .setId_acceconf(copyPasaport.getId_acceconf());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_aegisstat(pasaport.getId_aegisstat());
+                            .setId_aegisstat(copyPasaport.getId_aegisstat());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_bredcode(pasaport.getId_bredcode());
+                            .setId_bredcode(copyPasaport.getId_bredcode());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_collsrc(pasaport.getId_collsrc());
+                            .setId_collsrc(copyPasaport.getId_collsrc());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_country(pasaport.getId_country());
+                            .setId_country(copyPasaport.getId_country());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_collcode(pasaport.getId_collcode());
+                            .setId_collcode(copyPasaport.getId_collcode());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_countysiruta(pasaport.getId_countysiruta());
+                            .setId_countysiruta(copyPasaport.getId_countysiruta());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_donorcode(pasaport.getId_donorcode());
+                            .setId_donorcode(copyPasaport.getId_donorcode());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_duplsite(pasaport.getId_duplsite());
+                            .setId_duplsite(copyPasaport.getId_duplsite());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_georefmeth(pasaport.getId_georefmeth());
+                            .setId_georefmeth(copyPasaport.getId_georefmeth());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_historic(pasaport.getId_historic());
+                            .setId_historic(copyPasaport.getId_historic());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_instcode(pasaport.getId_instcode());
+                            .setId_instcode(copyPasaport.getId_instcode());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_localitysiruta(pasaport.getId_localitysiruta());
+                            .setId_localitysiruta(copyPasaport.getId_localitysiruta());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_mlsstat(pasaport.getId_mlsstat());
+                            .setId_mlsstat(copyPasaport.getId_mlsstat());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_sampstat(pasaport.getId_sampstat());
+                            .setId_sampstat(copyPasaport.getId_sampstat());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setId_taxonomy(pasaport.getId_taxonomy());
+                            .setId_taxonomy(copyPasaport.getId_taxonomy());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setLatitude(pasaport.getLatitude());
+                            .setLatitude(copyPasaport.getLatitude());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setLongitude(pasaport.getLongitude());
+                            .setLongitude(copyPasaport.getLongitude());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setOrigdate(pasaport.getOrigdate());
+                            .setOrigdate(copyPasaport.getOrigdate());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setOthernumb(pasaport.getOthernumb());
+                            .setOthernumb(copyPasaport.getOthernumb());
                     // afterNavigationEvent.getView().getEditedEntity()
-                    // .setProbeImages(pasaport.getProbeImages());
+                    // .setProbeImages(copyPasaport.getProbeImages());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setRemarks(pasaport.getRemarks());
+                            .setRemarks(copyPasaport.getRemarks());
                     afterNavigationEvent.getView().getEditedEntity()
-                            .setTempnumb(pasaport.getTempnumb());
+                            .setTempnumb(copyPasaport.getTempnumb());
                 })
                 .navigate();
     }
 
-    @Subscribe(id = "copymodifBtn", subject = "clickListener")
-    public void onCopymodifBtnClick(final ClickEvent<JmixButton> event) {
+    @Subscribe(id = "copymodifyBtn", subject = "clickListener")
+    public void onCopymodifyBtnClick(final ClickEvent<JmixButton> event) {
+        String msgHeader = messageBundle.getMessage("msgHeaderInputDialogPasaport");
+        String msgLabel = messageBundle.getMessage("msgLabelInputDialogPasaport");
+        String msgValidation = messageBundle.getMessage("msgValidationInputDialogPasaport");
+        String msgNoResult = messageBundle.getMessage("msgNoResultInputDialogPasaport");
+        // create a Dialog with parameter input to search Accession number
         dialogs.createInputDialog(this)
-                .withHeader("Modifică proba")
+                .withHeader(msgHeader)
                 .withParameters(InputParameter.stringParameter("accenumber")
-                        .withLabel("Nr. de intrare")
+                        .withLabel(msgLabel)
                 )
                 .withValidator(validationContext -> {
                     String accenumber = validationContext.getValue("accenumber");
                     if (Strings.isNullOrEmpty(accenumber)) {
-                        return ValidationErrors.of("Nu ați specificat numărul de intrare!");
+                        return ValidationErrors.of(msgValidation);
                     }
                     return ValidationErrors.none();
                 })
                 .withActions(DialogActions.OK_CANCEL)
                 .withCloseListener(inputDialogCloseEvent -> {
                     if (inputDialogCloseEvent.closedWith(DialogOutcome.OK)) {
-                        //to do some actions
+                        // create parameter used in query
                         String accenumber = inputDialogCloseEvent.getValue("accenumber");
-                        //notifications.create("Salut").withDuration(5000).show();
-                        Pasaport pasaport = pasaportsDataGrid.getSingleSelectedItem();
-                        Pasaport pasaport2 = dataManager.load(Pasaport.class)
-                                        .query("select p from Pasaport p " +
-                                                "where p.accenumb = :accenum")
-                                .parameter("accenum", accenumber)
-                                .one();
-                        //notifications.create(pasaport2.getDoi()).withDuration(5000).show();
-                        if (pasaport != null) {
-                            navigateToCopyAndModifyEntity(pasaport, pasaport2);
+                        try {
+                            // create pasaport object with entities selected from data grid
+                            Pasaport copyPasaport = pasaportsDataGrid.getSingleSelectedItem();
+                            // create pasaport object with entities query by parameter input - Accesion number
+                            Pasaport modifyPasaport = dataManager.load(Pasaport.class)
+                                    .query("select p from Pasaport p " +
+                                            "where p.accenumb = :accenum and p.accname is null and p.acceurl is null " +
+                                            "and p.acqdate is null and p.ancest is null and p.colldate is null " +
+                                            "and p.collmissid is null and p.collnumb is null and p.comments is null " +
+                                            "and p.doi is null and p.donornumb is null and p.elevation is null " +
+                                            "and p.id_acceconf is null and p.id_aegisstat is null " +
+                                            "and p.id_collsrc is null and p.id_country is null " +
+                                            "and p.id_countysiruta is null and p.id_donorcode is null " +
+                                            "and p.id_georefmeth is null and p.id_historic is null " +
+                                            "and p.latitude is null and p.longitude is null and p.remarks is null " +
+                                            "and p.tempnumb is null")
+                                    .parameter("accenum", accenumber)
+                                    .one();
+                            // if the result for query is not null
+                            if (copyPasaport != null) {
+                                // call the method
+                                navigateToCopyAndModifyEntity(copyPasaport, modifyPasaport);
+                            }
+                        } catch (NoResultException e) {
+                            if (e.getMessage() == null) { // if result of query return null
+                                // notify user because query return null
+                                notifications.create(msgNoResult).withDuration(6000).show();
+                            }
                         }
                     }
                 })
