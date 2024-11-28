@@ -23,7 +23,7 @@ import java.util.Objects;
 @ViewController("Institute.list")
 @ViewDescriptor("institute-list-view.xml")
 @LookupComponent("institutesDataGrid")
-@DialogMode(width = "64em")
+@DialogMode(width = "100%")
 public class InstituteListView extends StandardListView<Institute> {
     @Autowired
     private CurrentAuthentication currentAuthentication;

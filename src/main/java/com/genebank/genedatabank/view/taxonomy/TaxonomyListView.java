@@ -16,6 +16,6 @@ import io.jmix.flowui.view.*;
 @ViewController("Taxonomy.list")
 @ViewDescriptor("taxonomy-list-view.xml")
 @LookupComponent("taxonomiesDataGrid")
-@DialogMode(width = "76em")
+@DialogMode(width = "100%")
 public class TaxonomyListView extends StandardListView<Taxonomy> {
 }
