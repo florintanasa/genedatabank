@@ -77,12 +77,12 @@
                 <column property="collnumb"/>
                 <column property="collmissid"/>
                 <column property="id_taxonomy"/>
-                <column property="accname" autoWidth="true"/>
+                <column property="accname" width="20em"/>
                 <column property="acqdate" autoWidth="true"/>
                 <column property="origdate" autoWidth="true"/>
-                <column property="id_country"/>
-                <column property="id_countysiruta" autoWidth="true"/>
-                <column property="id_localitysiruta" autoWidth="true"/>
+                <column property="id_country" width="15em"/>
+                <column property="id_countysiruta" width="15em"/>
+                <column property="id_localitysiruta" width="20em"/>
                 <column property="latitude" autoWidth="true"/>
                 <column property="longitude" autoWidth="true"/>
                 <column property="elevation"/>

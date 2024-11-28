@@ -6,7 +6,13 @@
     <data readOnly="true">
         <collection id="institutesDc"
                     class="com.genebank.genedatabank.entity.Institute">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="id_country" fetchPlan="_base"/>
+                <property name="id_county" fetchPlan="_base"/>
+                <property name="id_locality" fetchPlan="_base"/>
+                <property name="id_roadType" fetchPlan="_base"/>
+                <property name="id_street" fetchPlan="_base"/>
+            </fetchPlan>
             <loader id="institutesDl">
                 <query>
                     <![CDATA[select e from Institute e]]>
@@ -50,16 +56,16 @@
                 <column property="instcode" resizable="true" autoWidth="true"/>
                 <column property="acronym" resizable="true" autoWidth="true"/>
                 <column property="full_name_ro" resizable="true" autoWidth="true"/>
-                <column property="full_name_en" resizable="true" autoWidth="true"/>
-                <column property="id_country" resizable="true" autoWidth="true"/>
-                <column property="id_county" resizable="true" autoWidth="true"/>
-                <column property="id_locality" resizable="true" autoWidth="true"/>
-                <column property="id_roadType" resizable="true" autoWidth="true"/>
-                <column property="id_street" resizable="true" autoWidth="true"/>
-                <column property="streetNum" resizable="true" autoWidth="true"/>
+                <column property="full_name_en" resizable="true" width="15em"/>
+                <column property="id_country" resizable="true" width="15em"/>
+                <column property="id_county" resizable="true" width="15em"/>
+                <column property="id_locality" resizable="true" width="15em"/>
+                <column property="id_roadType" resizable="true" width="10em"/>
+                <column property="id_street" resizable="true" width="15em"/>
+                <column property="streetNum" resizable="true" width="8em"/>
                 <column property="address" resizable="true" autoWidth="true"/>
-                <column property="postCode" resizable="true" autoWidth="true"/>
-                <column property="url" resizable="true" autoWidth="true"/>
+                <column property="postCode" resizable="true" width="10em"/>
+                <column property="url" resizable="true" width="20em"/>
                 <column property="apiKeyGoogleMaps" resizable="true" autoWidth="true" visible="false"/>
                 <column property="serialAccenumb" resizable="true" autoWidth="true" visible="false"/>
                 <column property="serialAccenumbTemp" resizable="true" autoWidth="true" visible="false"/>

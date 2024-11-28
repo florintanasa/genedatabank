@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="taxonomiesDl">
                 <query>
-                    <![CDATA[select e from Taxonomy e]]>
+                    <![CDATA[select e from Taxonomy e order by e.createdDate asc]]>
                 </query>
             </loader>
         </collection>
@@ -54,7 +54,7 @@
                 <column property="spauthor" resizable="true" autoWidth="true"/>
                 <column property="subtaxa" resizable="true" filterable="true" width="20em"/>
                 <column property="subauthor" resizable="true" autoWidth="true"/>
-                <column property="syn_taxono" resizable="true"/>
+                <column property="syn_taxono" resizable="true" width="20em"/>
                 <column property="cropnume" resizable="true" filterable="true" autoWidth="true"/>
                 <column property="cropname" resizable="true"/>
                 <column property="refference" resizable="true" autoWidth="true"/>
