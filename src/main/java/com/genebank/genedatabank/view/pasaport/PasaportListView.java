@@ -241,6 +241,8 @@ public class PasaportListView extends StandardListView<Pasaport> {
                 .withHeader(msgHeader)
                 .withParameters(InputParameter.stringParameter("accenumber")
                         .withLabel(msgLabel)
+                        .withDefaultValue(Objects.requireNonNull(pasaportsDataGrid.getSingleSelectedItem())
+                                .getId_instcode().getSerialAccenumb() + "-")
                 )
                 .withValidator(validationContext -> {
                     String accenumber = validationContext.getValue("accenumber");
