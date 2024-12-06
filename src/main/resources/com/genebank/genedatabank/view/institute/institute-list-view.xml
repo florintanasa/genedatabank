@@ -26,6 +26,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -40,13 +41,16 @@
             <button id="createBtn" action="institutesDataGrid.create"/>
             <button id="editBtn" action="institutesDataGrid.edit"/>
             <button id="removeBtn" action="institutesDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="institutesDl"/>
+            <simplePagination id="pagination" dataLoader="institutesDl" classNames="ms-auto"
+                              itemsPerPageDefaultValue="20" itemsPerPageVisible="true"/>
+            <gridColumnVisibility id="gridColumnVisibility" dataGrid="institutesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="institutesDataGrid"
                   width="100%"
                   minHeight="20em"
                   dataContainer="institutesDc"
-                  selectionMode="MULTI">
+                  selectionMode="MULTI"
+                  columnReorderingAllowed="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
