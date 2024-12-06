@@ -24,6 +24,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -38,12 +39,15 @@
             <button id="createBtn" action="localitysirutasDataGrid.create"/>
             <button id="editBtn" action="localitysirutasDataGrid.edit"/>
             <button id="removeBtn" action="localitysirutasDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="localitysirutasDl"/>
+            <simplePagination id="pagination" dataLoader="localitysirutasDl" classNames="ms-auto"
+                              itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
+            <gridColumnVisibility id="gridColumnVisibility" dataGrid="localitysirutasDataGrid"
+                                  icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="localitysirutasDataGrid"
                   width="100%"
                   minHeight="20em"
-                  dataContainer="localitysirutasDc">
+                  dataContainer="localitysirutasDc" columnReorderingAllowed="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
