@@ -39,6 +39,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -55,7 +56,8 @@
             <button id="copyeditBtn" action="pasaportsDataGrid.copyEdit" enabled="false"/>
             <button id="copymodifyBtn" action="pasaportsDataGrid.copyEditModify"/>
             <button id="removeBtn" action="pasaportsDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="pasaportsDl" classNames="ms-auto"/>
+            <simplePagination id="pagination" dataLoader="pasaportsDl" classNames="ms-auto"
+            itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
             <gridColumnVisibility dataGrid="pasaportsDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="pasaportsDataGrid"
