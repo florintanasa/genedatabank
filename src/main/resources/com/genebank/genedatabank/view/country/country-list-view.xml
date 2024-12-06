@@ -20,6 +20,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -36,13 +37,15 @@
             <button id="removeBtn" action="countriesDataGrid.remove"/>
             <button id="excelExportBtn" action="countriesDataGrid.excelExport"/>
             <button id="jsonExportBtn" action="countriesDataGrid.jsonExport"/>
-            <simplePagination id="pagination" dataLoader="countriesDl"/>
+            <simplePagination id="pagination" dataLoader="countriesDl" classNames="ms-auto"
+                              itemsPerPageDefaultValue="20" itemsPerPageVisible="true"/>
+            <gridColumnVisibility id="gridColumnVisibility" dataGrid="countriesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="countriesDataGrid"
                   width="100%"
                   minHeight="20em"
                   dataContainer="countriesDc"
-                  selectionMode="MULTI">
+                  selectionMode="MULTI" columnReorderingAllowed="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
