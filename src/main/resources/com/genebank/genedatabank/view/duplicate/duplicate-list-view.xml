@@ -22,6 +22,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -43,7 +44,8 @@
             <button id="markAsConfirmedBtn" action="duplicatesDataGrid.markAsConfirmed"/>
             <button id="markAsInDeliveryBtn" action="duplicatesDataGrid.markAsInDelivery"/>
             <button id="markAsDeliveryBtn" action="duplicatesDataGrid.markAsDelivered"/>
-            <simplePagination id="pagination" dataLoader="duplicatesDl" classNames="ms-auto"/>
+            <simplePagination id="pagination" dataLoader="duplicatesDl" classNames="ms-auto"
+                              itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
             <gridColumnVisibility dataGrid="duplicatesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="duplicatesDataGrid"
