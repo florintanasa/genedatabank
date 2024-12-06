@@ -20,6 +20,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -34,7 +35,8 @@
             <button id="createBtn" action="roadtypesDataGrid.create"/>
             <button id="editBtn" action="roadtypesDataGrid.edit"/>
             <button id="removeBtn" action="roadtypesDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="roadtypesDl"/>
+            <simplePagination id="pagination" dataLoader="roadtypesDl"
+                              itemsPerPageDefaultValue="20" itemsPerPageVisible="true"/>
         </hbox>
         <dataGrid id="roadtypesDataGrid"
                   width="100%"
