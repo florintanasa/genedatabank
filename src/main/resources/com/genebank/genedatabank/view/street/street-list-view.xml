@@ -20,6 +20,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -34,7 +35,8 @@
             <button id="createBtn" action="streetsDataGrid.create"/>
             <button id="editBtn" action="streetsDataGrid.edit"/>
             <button id="removeBtn" action="streetsDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="streetsDl"/>
+            <simplePagination id="pagination" dataLoader="streetsDl"
+                              itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
         </hbox>
         <dataGrid id="streetsDataGrid"
                   width="100%"
