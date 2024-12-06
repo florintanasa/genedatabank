@@ -29,6 +29,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -43,13 +44,16 @@
             <button id="createBtn" action="partnersesDataGrid.create"/>
             <button id="editBtn" action="partnersesDataGrid.edit"/>
             <button id="removeBtn" action="partnersesDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="partnersesDl"/>
+            <simplePagination id="pagination" dataLoader="partnersesDl" classNames="ms-auto"
+                              itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
+            <gridColumnVisibility id="gridColumnVisibility" dataGrid="partnersesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="partnersesDataGrid"
                   width="100%"
                   minHeight="20em"
                   dataContainer="partnersesDc"
-                  selectionMode="MULTI">
+                  selectionMode="MULTI"
+                  columnReorderingAllowed="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
