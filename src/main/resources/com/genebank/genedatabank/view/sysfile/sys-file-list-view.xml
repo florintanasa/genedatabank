@@ -20,6 +20,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -34,13 +35,15 @@
             <button id="createBtn" action="sysFilesDataGrid.create"/>
             <button id="editBtn" action="sysFilesDataGrid.edit"/>
             <button id="removeBtn" action="sysFilesDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="sysFilesDl"/>
+            <simplePagination id="pagination" dataLoader="sysFilesDl" classNames="ms-auto"
+                              itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
+            <gridColumnVisibility dataGrid="sysFilesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="sysFilesDataGrid"
                   width="100%"
                   minHeight="20em"
                   dataContainer="sysFilesDc"
-                  selectionMode="MULTI" multiSort="true">
+                  selectionMode="MULTI" multiSort="true" columnReorderingAllowed="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
