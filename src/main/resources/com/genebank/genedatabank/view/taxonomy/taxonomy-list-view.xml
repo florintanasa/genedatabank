@@ -37,7 +37,7 @@
             <button id="removeBtn" action="taxonomiesDataGrid.remove"/>
             <simplePagination id="pagination" dataLoader="taxonomiesDl" classNames="ms-auto"
                               itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
-            <gridColumnVisibility dataGrid="taxonomiesDataGrid" icon="COG" themeNames="icon"/>
+            <gridColumnVisibility id="gridColumnVisibility" dataGrid="taxonomiesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="taxonomiesDataGrid"
                   width="100%"

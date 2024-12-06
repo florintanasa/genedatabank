@@ -37,7 +37,7 @@
             <button id="removeBtn" action="sysFilesDataGrid.remove"/>
             <simplePagination id="pagination" dataLoader="sysFilesDl" classNames="ms-auto"
                               itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
-            <gridColumnVisibility dataGrid="sysFilesDataGrid" icon="COG" themeNames="icon"/>
+            <gridColumnVisibility id="gridColumnVisibility" dataGrid="sysFilesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="sysFilesDataGrid"
                   width="100%"
