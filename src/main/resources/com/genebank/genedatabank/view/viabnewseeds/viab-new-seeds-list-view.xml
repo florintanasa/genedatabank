@@ -37,6 +37,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -55,7 +56,8 @@
             <button id="refreshBtn" action="viabNewSeedsesDataGrid.refresh"/>
             <button id="removeBtn" action="viabNewSeedsesDataGrid.remove"/>
             <button id="markAsDoneBtm" action="viabNewSeedsesDataGrid.markAsDone"/>
-            <simplePagination id="pagination" dataLoader="viabNewSeedsesDl" classNames="ms-auto"/>
+            <simplePagination id="pagination" dataLoader="viabNewSeedsesDl" classNames="ms-auto"
+                              itemsPerPageDefaultValue="20" itemsPerPageVisible="true"/>
             <gridColumnVisibility dataGrid="viabNewSeedsesDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="viabNewSeedsesDataGrid"
