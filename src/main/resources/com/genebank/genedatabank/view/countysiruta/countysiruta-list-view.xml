@@ -20,6 +20,7 @@
             <genericFilter component="genericFilter"/>
             <pagination component="pagination"/>
         </urlQueryParameters>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="selectAction" type="lookup_select"/>
@@ -34,12 +35,15 @@
             <button id="createBtn" action="countysirutasDataGrid.create"/>
             <button id="editBtn" action="countysirutasDataGrid.edit"/>
             <button id="removeBtn" action="countysirutasDataGrid.remove"/>
-            <simplePagination id="pagination" dataLoader="countysirutasDl"/>
+            <simplePagination id="pagination" dataLoader="countysirutasDl" classNames="ms-auto"
+                              itemsPerPageDefaultValue="20" itemsPerPageVisible="true"/>
+            <gridColumnVisibility id="gridColumnVisibility"
+                                  dataGrid="countysirutasDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="countysirutasDataGrid"
                   width="100%"
                   minHeight="20em"
-                  dataContainer="countysirutasDc">
+                  dataContainer="countysirutasDc" columnReorderingAllowed="true">
             <actions>
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
