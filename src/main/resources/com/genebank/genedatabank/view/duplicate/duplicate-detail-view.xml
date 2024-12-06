@@ -24,6 +24,7 @@
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
+        <settings id="settings" auto="true"/>
     </facets>
     <actions>
         <action id="saveAction" type="detail_saveClose"/>
@@ -62,7 +63,7 @@
             <button action="duplicateLinesDataGrid.remove"/>
             <button id="printBtn75x35" text="Print 75x35" title="Printare eticheta 75x35mm" icon="PRINT"/>
         </hbox>
-        <dataGrid id="duplicateLinesDataGrid" dataContainer="duplicateLinesDc"
+        <dataGrid id="duplicateLinesDataGrid" dataContainer="duplicateLinesDc" columnReorderingAllowed="true"
                   width="100%" minHeight="20em" aggregatable="true" aggregationPosition="TOP">
             <actions>
                 <action id="create" type="list_create">
