@@ -7,6 +7,8 @@ import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 import io.jmix.core.FileRef;
@@ -14,6 +16,7 @@ import io.jmix.core.FileStorage;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.grid.DataGrid;
+import io.jmix.flowui.component.gridcolumnvisibility.JmixGridColumnVisibility;
 import io.jmix.flowui.download.Downloader;
 import io.jmix.flowui.kit.component.button.JmixButton;
 import io.jmix.flowui.view.*;
@@ -55,6 +58,10 @@ public class DepositListView extends StandardListView<Deposit> {
     private JmixButton printBtn76x50;
     @Autowired
     private CurrentAuthentication currentAuthentication;
+    @ViewComponent
+    private HorizontalLayout buttonsPanel;
+    @ViewComponent
+    private MessageBundle messageBundle;
 
     @Subscribe
     public void onInit(final InitEvent event) {
@@ -83,10 +90,39 @@ public class DepositListView extends StandardListView<Deposit> {
         //Setting the width of the created column.
         qrcodeColumn.setFlexGrow(0);
         qrcodeColumn.setWidth("100px");
+        // Set the key for QR column
+        qrcodeColumn.setKey("qrcode");
         //Setting the header of the created column
         qrcodeColumn.setHeader("QR");
         //Setting the position of the created column.
         depositsDataGrid.setColumnPosition(qrcodeColumn, 0);
+        // Added grid visibility button with menu items
+        JmixGridColumnVisibility jmixGridColumnVisibility = uiComponents.create(JmixGridColumnVisibility.class);
+        jmixGridColumnVisibility.setGrid(depositsDataGrid);
+        jmixGridColumnVisibility.setIcon(VaadinIcon.COG.create());
+        jmixGridColumnVisibility.setThemeName("icon");
+        jmixGridColumnVisibility.addMenuItem("qrcode", "QR");
+        jmixGridColumnVisibility.addMenuItem("id_accenumb");
+        jmixGridColumnVisibility.addMenuItem("id_accenumb.id_taxonomy.genus");
+        jmixGridColumnVisibility.addMenuItem("id_accenumb.id_taxonomy.species");
+        jmixGridColumnVisibility.addMenuItem("deposit_code",
+                messageBundle.getMessage("menuItem.deposit_code"));
+        jmixGridColumnVisibility.addMenuItem("old_deposit_code");
+        jmixGridColumnVisibility.addMenuItem("id_storage");
+        jmixGridColumnVisibility.addMenuItem("yearstorage");
+        jmixGridColumnVisibility.addMenuItem("yearmulti");
+        jmixGridColumnVisibility.addMenuItem("multiply");
+        jmixGridColumnVisibility.addMenuItem("yeargerm");
+        jmixGridColumnVisibility.addMenuItem("percentage");
+        jmixGridColumnVisibility.addMenuItem("stock",
+                messageBundle.getMessage("menuItem.stock"));
+        jmixGridColumnVisibility.addMenuItem("humidity");
+        jmixGridColumnVisibility.addMenuItem("mmb");
+        jmixGridColumnVisibility.addMenuItem("original");
+        jmixGridColumnVisibility.addMenuItem("scope");
+        jmixGridColumnVisibility.addMenuItem("comments");
+        // add component to hbox
+        buttonsPanel.add(jmixGridColumnVisibility);
     }
 
     @Subscribe

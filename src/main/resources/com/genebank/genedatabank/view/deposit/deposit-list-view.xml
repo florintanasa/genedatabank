@@ -43,7 +43,11 @@
             <button id="printBtn76x50" text="Print 76x50" title="Printare eticheta 76,2x50,8mm" icon="PRINT"/>
             <simplePagination id="pagination" dataLoader="depositsDl" classNames="ms-auto"
                               itemsPerPageDefaultValue="20" itemsPerPageVisible="true"/>
-            <gridColumnVisibility dataGrid="depositsDataGrid" icon="COG" themeNames="icon"/>
+<!--            <gridColumnVisibility dataGrid="depositsDataGrid" icon="COG" themeNames="icon">
+                <menuItem refColumn="qrcode" text="msg://menuItem.QR"/>
+                <menuItem refColumn="deposit_code" text="msg://menuItem.deposit_code"/>
+                <menuItem refColumn="stock" text="msg://menuItem.stock"/>
+            </gridColumnVisibility>-->
         </hbox>
         <dataGrid id="depositsDataGrid"
                   width="100%"
