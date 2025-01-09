@@ -58,7 +58,7 @@
                 <checkbox id="originalCheckBox" property="original"
                           label="msg://com.genebank.genedatabank.entity/Deposit.original" colspan="1"
                           alignSelf="BASELINE"/>
-                <textField id="scopeField" property="scope" pattern="[G,R]"
+                <textField id="scopeField" property="scope" pattern="[G,R,M]"
                            label="msg://com.genebank.genedatabank.entity/Deposit.scope" width="100%" colspan="2"
                            alignSelf="BASELINE">
                     <tooltip text="msg:///tooltip.scopeField" manual="true"/>
