@@ -23,6 +23,7 @@ import io.jmix.flowui.view.*;
 import io.jmix.reports.entity.ReportOutputType;
 import io.jmix.reports.runner.ReportRunner;
 import io.jmix.reports.yarg.reporting.ReportOutputDocument;
+import io.jmix.reportsflowui.action.RunListEntityReportAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -144,19 +145,21 @@ public class DepositListView extends StandardListView<Deposit> {
                 printBtn75x35.setEnabled(true);
                 printBtn76x50.setEnabled(true);
             } else if (depositsDataGrid.getSelectedItems().size() >= 2) {
-                printBtn.setEnabled(false);
+                printBtn.setEnabled(true);
                 printBtn75x35.setEnabled(false);
                 printBtn76x50.setEnabled(false);
             }
         });
     }
-    
+
+    // method to get user member roles name
     private String getRoleNames(Authentication authentication) {
         return authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining());
     }
 
+    // method to print report with label on 75mmx35mm labels roll
     @Subscribe("printBtn75x35")
     public void onPrintBtn75x35(ClickEvent<JmixButton> event) {
         ReportOutputDocument label = reportRunner.byReportCode("Labels")
@@ -168,6 +171,7 @@ public class DepositListView extends StandardListView<Deposit> {
 
     }
 
+    // method to print report with label on 76mmx50mm labels roll
     @Subscribe("printBtn76x50")
     public void onPrintBtn76x50(ClickEvent<JmixButton> event) {
         ReportOutputDocument label = reportRunner.byReportCode("Labels")
@@ -177,6 +181,17 @@ public class DepositListView extends StandardListView<Deposit> {
                 .run();
         downloader.download(label.getContent(), label.getDocumentName());
 
+    }
+
+    // method to print report on A4 paper with list of labels
+    @Subscribe(id = "printBtn", subject = "clickListener")
+    public void onPrintBtnClick(final ClickEvent<JmixButton> event) {
+        ReportOutputDocument label = reportRunner.byReportCode("Lista")
+                .addParam("entities", depositsDataGrid.getSelectedItems())
+                .withTemplateCode("Lista_etichete")
+                .withOutputType(ReportOutputType.PDF)
+                .run();
+        downloader.download(label.getContent(), label.getDocumentName());
     }
 
 }
