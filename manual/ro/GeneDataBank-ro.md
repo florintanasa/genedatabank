@@ -59,9 +59,108 @@ După copiere, se impune să schimbăm proprietarul fișierului binar pentru uti
 sudo chown genedatabank:genedatabank /opt/genedatabank/genedatabank-0.2.0-SNAPSHOT.jar
 ```
 
+### Pornirea serviciului GeneDataBank cu ajutorul unui manager de servicii  
 
+În acest scop vom folosi *_systemd_* pentru care vom realiza un fișier de configurare:  
+```bash
+sudo nano /etc/systemd/system/genedatabank.service
+```  
+În care vom introduce următorul conținut:  
+```text
+[Unit]
+Description=GeneDataBank java server application
+# depend by network and postgres
+Wants=network-online.target postgresql.service
+# start after network  and postgres service start
+After=network-online.target postgresql.service
 
-**De continuat**
+[Service]
+# run as user genedatabank (need to exist before)
+User=genedatabank
+# from group genedatabank (need to exist before)
+Group=genedatabank
+# restart always
+Restart=always
+# activation state
+Type=simple
+# working directory for user (in this case the home is /opt/genedatabank)
+WorkingDirectory=/opt/genedatabank/
+# execute command to start the application
+ExecStart=/usr/lib/jvm/java-17-openjdk-amd64/bin/java \
+    -Xmx3072m -server -XX:+UseShenandoahGC -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/tmp/heapdump.bin -jar \
+    /opt/genedatabank/genedatabank.jar \
+    --spring.profiles.active=production \
+    --server.port=8090
+# send stdout to syslog
+StandardOutput=syslog
+# send stderr to syslog
+StandardError=syslog
+# identifier for syslog
+SyslogIdentifier=genedatabank
+
+[Install]
+WantedBy=multi-user.target
+```
+Instalăm pachetul **rsyslog**, dacă nu este instalat în sistem:  
+```bash
+ sudo apt install rsyslog
+```
+Pornirea serviciului va deschide portul 8090 pentru acces, iar serviciul va fi monitorizat de către **_syslog_**
+într-un fișier **genedatabank.log** în directorul **/var/log**.  
+Pentru acestea vom informa **syslog** 
+```bash
+sudo nano /etc/rsyslog.d/genedatabank.conf
+```  
+În care se va edita următorul conținut:  
+```text
+if $programname == 'genedatabank' then /var/log/genedatabank.log
+& stop
+```
+apoi vom crea fișierul pentru log-uri:  
+```bash
+sudo touch /var/log/genedatabank.log
+```
+după care schimbăm proprietarul și grupul fișierului creat anterior:  
+```bash
+sudo chown syslog:adm /var/log/genedatabank.log
+```
+Pentru ca **syslog** să știe de noul fișier va trebui să repornim serviciul:  
+```bash
+sudo systemctl restart rsyslog
+```
+Pentru a nu modifica la fiecare update fișierul de configurare **genedatabank.service** de pornire a serviciului vom 
+realiza o legătură simbolică la fișierul **genedatabank-0.2.0-SNAPSHOT.jar** numită **genedatabank.jar**:  
+```bash
+sudo -u genedatabank ln -sf /opt/genedatabank/genedatabank-0.2.0-SNAPSHOT.jar /opt/genedatabank/genedatabank.jar
+```
+> **ATENȚIE!**  
+> 
+> Pentru a continua, va trebui să existe instalat și pornit serviciul bazei de date PostgreSQL, în care a fost creat  
+> un utilizator **svgenebank** cu parola **geneit** și care va fi proprietarul bazei de date **genedatabank**  
+> 
+> ```postgresql
+> create role svgenebank with login createdb password 'geneit';
+> create database genedatabank owner svgenebank;
+> ```
+> Modificarea utilizatorului, parolei și a bazei de date se face în fișierul **src/main/resources/application.properties** 
+
+În final vom putea porni serviciul folosind comanda:  
+```bash
+sudo systemctl start genedatabank.service
+```
+După care vom putea verifica folosind comanda:  
+```bash
+systemctl status genedatabank.service
+```
+pentru a vedea dacă a pornit corect, iar pentru a vedea un log mai extins folosim:  
+```text
+sudo tail -F /var/log/genedatabank.log
+```
+> **ATENȚIE**
+> Pentru listarea de rapoarte, etichete, etc va trebui să existe instalat în sistem **Libreoffice** și configurată 
+> calea, consultați fișierul **src/main/resources/application.properties**
+> 
+**De continuat (calea către codurile QR și calea către imaginile urcate în server)**
 
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
