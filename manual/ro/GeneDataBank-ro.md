@@ -2,41 +2,45 @@
 
 ## Compilarea din surse în sistemul de operare Linux
 
-Pentru instalarea aplicației din surse este necesar a realiza, într-un terminal din sistemul nostru sau printr-o conexiune la distanță, următorii pași:  
+Pentru instalarea aplicației din surse, într-un terminal din sistemul nostru sau printr-o 
+conexiune la distanță, este necesară parcurgerea următorilor pași:  
 
-* realizăm un director denumit **git** și ne schimbăm directorul de lucru în el:  
+* realizarea unui director denumit **git** și schimbarea căii de lucru în el:  
 
 ```bash
 mkdir ~/git & cd ~/git
 ```
   
-* clonăm sursele aferente aplicație, din https://github.com/florintanasa/genedatabank, în sistemul nostru:  
+* clonarea surselor aferente aplicație, din https://github.com/florintanasa/genedatabank, în sistem:  
 ```bash
 git clone https://github.com/florintanasa/genedatabank
 ```
   
-* după clonare ne mutăm în directorul nou creat:  
+* mutarea în directorul nou creat:  
 ```bash
 cd genedatabank
 ```
   
-* compilăm și realizăm fișierul binar pentru aplicația noastră:  
+* compilarea și realizarea fișierul binar:  
 ```bash
 ./gradlew -Pvaadin.productionMode=true bootJar
 ```
   
-* fișierul binar (la momentul scrierii acestui manual este versiunea 0.2.0 a lui genedatabank) va fi realizat în directorul **build/libs**:  
+* fișierul binar (la momentul scrierii acestui manual este versiunea 0.2.0 a lui genedatabank) va fi realizat în 
+directorul **build/libs**:  
 ```bash
 ls build/libs/
 genedatabank-0.2.0-SNAPSHOT.jar
 ```  
-
-Este bine, pentru siguranța sistemului, ca aplicația noastră să fie rulată de către un utilizator creat numai în acest scop și care nu are drept de logare și de acces la consolă. Acestea vor fi prezentate în următorul punct.
+Pentru siguranța sistemului este recomandat ca aplicația să fie rulată de către un utilizator creat numai în acest scop,
+neavând drept de logare și de acces la consolă.  
+Acestea vor fi prezentate în următorul punct.
 
 ### Instalarea aplicației în sistemul de operare Linux
   
-Pentru instalare va fi necesar să avem acces deplin la sistem, ca utilizator **root** ori utilizatorul nostru să poată folosi comanda **sudo**. Continuăm cu realizarea unui utilizator **genedatabank** cu directorul **_home_** în **/opt/genedatabank**:  
-
+Pentru instalare este necesar accesul deplin la sistem ca utilizator **root** ori utilizatorul nostru să poată 
+folosi comanda **sudo**. În continuare, este realizat (configurat) un utilizator cu denumirea  **genedatabank** cu 
+directorul **_home_** în **/opt/genedatabank**:
 ```bash
 sudo useradd -r -m -U -d /opt/genedatabank -s /bin/false genedatabank
 ```
@@ -47,25 +51,27 @@ Comanda de mai sus reprezintă:
 * **-U** va crea grupul denumit **genedatabank**;
 * **-m** va crea directorul **_home_** dacă nu există;
 * **-d** va seta directorul **_home_** în **/opt/genedatabank**;
-* **-s** va seta ca consolare de logare nimic **/bin/false**, îl va scoate automat afară;  
+* **-s** va seta ca și consolă de logare nimic **/bin/false**, utilizatorul va fi scos automat afară;  
 
-După rularea comenzii de mai sus putem copia aplicația noastră în directorul **_home_** al utilizatorului nostru creat pentru acest scop:  
+După rularea comenzii de mai sus se poate copia aplicația noastră în directorul **_home_** al utilizatorului creat 
+pentru acest scop:  
 ```bash
 sudo cp ~/git/genedatabank/build/libs/genedatabank-0.2.0-SNAPSHOT.jar /opt/genedatabank/
 ```
 
-După copiere, se impune să schimbăm proprietarul fișierului binar pentru utilizatorul și grupul **genedatabank** nou creat, ce va rula aplicația:  
+După copiere, se impune schimbarea proprietarul fișierului binar pentru utilizatorul și grupul **genedatabank** nou 
+creat, care va rula aplicația:  
 ```bash
 sudo chown genedatabank:genedatabank /opt/genedatabank/genedatabank-0.2.0-SNAPSHOT.jar
 ```
 
 ### Pornirea serviciului GeneDataBank cu ajutorul unui manager de servicii  
 
-În acest scop vom folosi *_systemd_* pentru care vom realiza un fișier de configurare:  
+În acest scop folosim *_systemd_* și pentru care realizăm un fișier de configurare:  
 ```bash
 sudo nano /etc/systemd/system/genedatabank.service
 ```  
-În care vom introduce următorul conținut:  
+În care introduce următorul conținut:  
 ```text
 [Unit]
 Description=GeneDataBank java server application
@@ -107,20 +113,20 @@ Instalăm pachetul **rsyslog**, dacă nu este instalat în sistem:
 ```
 Pornirea serviciului va deschide portul 8090 pentru acces, iar serviciul va fi monitorizat de către **_syslog_**
 într-un fișier **genedatabank.log** în directorul **/var/log**.  
-Pentru acestea vom informa **syslog** 
+Pentru acestea informăm **syslog** prin crearea unui fișier de configurare:  
 ```bash
 sudo nano /etc/rsyslog.d/genedatabank.conf
 ```  
-În care se va edita următorul conținut:  
+În care edităm următorul conținut:  
 ```text
 if $programname == 'genedatabank' then /var/log/genedatabank.log
 & stop
 ```
-apoi vom crea fișierul pentru log-uri:  
+după care se realizează fișierul pentru log-uri:  
 ```bash
 sudo touch /var/log/genedatabank.log
 ```
-după care schimbăm proprietarul și grupul fișierului creat anterior:  
+în continuare se va schimba proprietarul și grupul fișierului creat anterior:  
 ```bash
 sudo chown syslog:adm /var/log/genedatabank.log
 ```
@@ -128,8 +134,8 @@ Pentru ca **syslog** să știe de noul fișier va trebui să repornim serviciul:
 ```bash
 sudo systemctl restart rsyslog
 ```
-Pentru a nu modifica la fiecare update fișierul de configurare **genedatabank.service** de pornire a serviciului vom 
-realiza o legătură simbolică la fișierul **genedatabank-0.2.0-SNAPSHOT.jar** numită **genedatabank.jar**:  
+Pentru a nu modifica la fiecare update fișierul de configurare **genedatabank.service** de pornire a serviciului se va 
+realiza o legătură simbolică la fișierul **genedatabank-0.2.0-SNAPSHOT.jar** denumită **genedatabank.jar**:  
 ```bash
 sudo -u genedatabank ln -sf /opt/genedatabank/genedatabank-0.2.0-SNAPSHOT.jar /opt/genedatabank/genedatabank.jar
 ```
@@ -144,11 +150,11 @@ sudo -u genedatabank ln -sf /opt/genedatabank/genedatabank-0.2.0-SNAPSHOT.jar /o
 > ```
 > Modificarea utilizatorului, parolei și a bazei de date se face în fișierul **src/main/resources/application.properties** 
 
-În final vom putea porni serviciul folosind comanda:  
+În final, putem porni serviciul folosind comanda:  
 ```bash
 sudo systemctl start genedatabank.service
 ```
-După care vom putea verifica folosind comanda:  
+După care se va verifica folosind comanda:  
 ```bash
 systemctl status genedatabank.service
 ```
