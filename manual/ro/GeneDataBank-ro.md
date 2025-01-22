@@ -156,6 +156,11 @@ pentru a vedea dacă a pornit corect, iar pentru a vedea un log mai extins folos
 ```text
 sudo tail -F /var/log/genedatabank.log
 ```
+
+Pentru ca servicul să pornească automat, la pornirea calculatorului/serverului, folosim comanda:  
+```bash
+sudo systemctl enable genedatabank.service
+```
 > **ATENȚIE**
 > Pentru listarea de rapoarte, etichete, etc va trebui să existe instalat în sistem **Libreoffice** și configurată 
 > calea, consultați fișierul **src/main/resources/application.properties**
