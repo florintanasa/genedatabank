@@ -21,12 +21,7 @@ and for Google Maps I used [Google Maps Addon to Vaadin](https://vaadin.com/dire
 > Is need to add your api key, in the class **LocalitysirutaDetailView**, 
 > from Google Maps if you wish to have the maps without watermark and with full options. 
   
-```java
-public class LocalitysirutaDetailView extends StandardDetailView<Localitysiruta> {
-    //...
-    String apiKey = "";//add your api key from Google Map
-}
-```
+![Api key for Google MAps](img/api_chei_record.png)
 
 For determine the altitude, I used the api and service from [Open Topo Data](https://www.opentopodata.org/) and from [Google elevation api](https://developers.google.com/maps/documentation/elevation/overview). 
 For get the elevation from json response I used [Gson](https://en.wikipedia.org/wiki/Gson) library.
