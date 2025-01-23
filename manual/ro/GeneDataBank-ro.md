@@ -167,11 +167,95 @@ Pentru ca serviciul să pornească automat, la pornirea calculatorului/serverulu
 ```bash
 sudo systemctl enable genedatabank.service
 ```
-> **ATENȚIE**
+> **INFO**  
+> 
+> La prima pornire a serviciului se va popula baza de date cu structura necesară și cu o parte din datele necesare. 
+
+
+> **ATENȚIE**  
+> 
 > Pentru listarea de rapoarte, etichete, etc va trebui să existe instalat în sistem **Libreoffice** și configurată 
-> calea, consultați fișierul **src/main/resources/application.properties**
+> calea către program, consultați fișierul **src/main/resources/application.properties**
 > 
 **De continuat (calea către codurile QR și calea către imaginile urcate în server)**
+
+# Prima utilizare
+Conectarea la server se realizează cu un browser web (de exemplu: chrome sau firefox) ca și client, folosind în bara de 
+adrese IP-ul unde a fost pornit serviciul **genedatabank** și respectiv portul utilizat de acesta, în acest caz **8090**
+, de exemplu http://localhost:8090/login, iar pentru autentificare inițială se va completa câmpurile pentru Utilizator 
+**admin** și Parola **admin**:   
+![Prima pornire](images/Prima_pornire_1.png)  
+urmând a fi schimbată după logare din meniul _Aplicații_->_Utilizatori_  
+completarea sau modificarea informațiilor, aferente unui utilizator existent, în acest caz **admin**, se realizează din
+accesarea meniului _Aplicații_->_Utilizatori_ 
+![Modificare info admin 1](images/Prima_pornire_2.png)  
+după care se va deschide o nouă pagină a utilizatorului **admin** unde vom putea completa/modifica unele informații:  
+![Modificare info admin 2](images/Prima_pornire_3.png)  
+în acest caz am definit zona de timp.
+>**INFO**
+> 
+> Pentru utilizatorul **admin** este de preferat de a nu-l înregistra într-o Instituție deoarece vizualizarea unor 
+> informații vor fi accesibile pentru un anumit utilizator numai pentru acelea înregistrate de utilizatorii arondați
+> unei anumite Instituție
+
+Modificarea parolei unui utilizator se realizează din meniul _Aplicații_->_Utilizatori_->_Adițional_->_Schimbare parolă_:  
+![Modificare parolă admin](images/Prima_pornire_4.png)  
+
+## Definirea unor parametrii unici aferenți fiecărei Instituției ce utilizează baza de date  
+
+La prima utilizare va trebui definit constantelor (seriilor) aferente fiecărei Instituție ce dorește a utiliza baza de date. 
+Definirea acestora se va realiza din meniul _Setări_->_Administrative_->_Instituții_->_Adaugă_ sau _Modifică_, 
+în imaginea de mai jos are loc vizualizarea unei Instituții existente ce are datele de identificare complete:  
+![Vizualizarea seriilor 1](images/Prima_pornire_5.png)
+> **ATENȚIE**
+> 
+> Unele câmpuri vor trebui să fie unice, ca de exemplu: **Cod**, **Serial pentru nr. de intrare**, **Serial pentru nr. 
+> temporar de intrare**, **Serial VOS**, **Serial VNS**
+> 
+Câmpurile de mai sus reprezintă:  
+
+* **Cod** - este codul aferent fiecărui Institut înregistrat la FAO;
+* **Serial pentru nr. de intrare** - reprezintă seria codului unic acordat probelor aferente unui Institut;
+* **Serial pentru nr. temporar de intrare** - reprezintă seria codului unic al probelor temporare aferente unui Institut;
+* **Serial VOS** - reprezintă seria codului al determinării viabilității la semințele existente în depozit (Viability Old Seeds)
+* **Serial VNS** - reprezintă seria codului al determinării viabilității la semințele noi intrate în Institut (Viability New Seeds)
+
+![Vizualizarea seriilor 2](images/Prima_pornire_6.png)
+
+> **INFO**
+> 
+> Câmpurile **Cheia api pentru Google Maps**, **Serial pentru nr. de intrare**, **Serial pentru nr.
+> temporar de intrare**, **Serial VOS**, **Serial VNS** pot fi vizualizate și modificate numai de către utilizatorul
+> **admin**, în plus, pentru o protecție la vizualizări accidentale de date sensibile, precum cheia api la Google Maps 
+> acest câmp a fost mascat.  
+> **Utilizatorii vor putea folosi numai cheia aferentă Instituției în care este arondat.**
+> Utilizatorul **admin** _nu va putea folosi hărțile de la Google Maps_, deoarece nu este arondat unei instituții, în schimb
+> va putea utiliza hărțile de la OpenStreetMaps, acestea fiind define a fi folosite implicit.
+
+![Vizualizare cheie api Google MAps](images/Prima_pornire_7.png)
+
+# Adăugarea unui utilizator
+În vederea operării aplicației se vor putea înregistra **utilizatori** unici. Introducerea unui utilizator nou se 
+realizează din meniul _Aplicații_->_Utilizatori_->_Adaugă:  
+
+![Adăugare utilizator 1](images/Adaugare_utilizator_1.png)
+  
+Exemplu unui adăugării utilizator în imaginea de mai jos:  
+
+![Adăugare utilizator 2](images/Adaugare_utilizator_2.png)
+
+După ce apasă butonul **OK** utilizatorul va fi salvat și va apărea în listă:  
+
+![Adăugare utilizator 3](images/Adaugare_utilizator_3.png)  
+
+# Atribuirea rolurilor unui utilizator
+
+Politica de acces la informații: meniuri, formulare, butoane, câmpuri etc. se realizează cu ajutorul rolurilor definite
+prin cod sau prin configurarea unor roluri în baza de date.  
+Pentru a atribui roluri se va apăsa butonul _Afișare asignări roluri_, din meniul _Aplicații_->Utilizatori_:  
+
+![Asignări roluri 1](images/Asignari_roluri_1.png)
+
 
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
