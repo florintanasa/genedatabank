@@ -18,7 +18,7 @@ and for Google Maps I used [Google Maps Addon to Vaadin](https://vaadin.com/dire
   
 
 > **Warning**  
-> Is need to add your api key, in the class **LocalitysirutaDetailView**, 
+> Is need to add your api key, in the Institute from _Settings_->_Administrations_->_Institutes_ menu, 
 > from Google Maps if you wish to have the maps without watermark and with full options. 
   
 ![Api key for Google MAps](img/api_chei_record.png)
