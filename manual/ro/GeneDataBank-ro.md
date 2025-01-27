@@ -176,8 +176,44 @@ sudo systemctl enable genedatabank.service
 > 
 > Pentru listarea de rapoarte, etichete, etc va trebui să existe instalat în sistem **Libreoffice** și configurată 
 > calea către program, consultați fișierul **src/main/resources/application.properties**
+>  
+
+Pentru a lista fișierele din directorul **_home_**, al utilizatorului **_genedatabank_**, se va rula comnanda:
+```bash
+sudo -u genedatabank ls -lah /opt/genedatabank/
+```
+iar rezultat comenzii va fi de forma:
+
+```txt
+total 207M
+drwxr-x--- 1 genedatabank genedatabank  256 ian 27 09:01 .
+drwxr-xr-x 1 root         root          140 ian 23 10:22 ..
+-rw-r--r-- 1 genedatabank genedatabank  220 mar 31  2024 .bash_logout
+-rw-r--r-- 1 genedatabank genedatabank 3,7K mar 31  2024 .bashrc
+drwxr-xr-x 1 genedatabank genedatabank  156 ian  8 07:29 .config
+-rw-r--r-- 1 genedatabank genedatabank 4,0K sep 29  2022 .face
+lrwxrwxrwx 1 genedatabank genedatabank   23 nov 25 19:15 .face.icon -> /opt/genedatabank/.face
+-rw-r--r-- 1 genedatabank genedatabank 207M ian 22 13:16 genedatabank-0.2.0-SNAPSHOT.jar
+lrwxrwxrwx 1 genedatabank genedatabank   49 ian 22 14:43 genedatabank.jar -> /opt/genedatabank/genedatabank-0.2.0-SNAPSHOT.jar
+-rw-r--r-- 1 genedatabank genedatabank  140 nov 27  2021 .inputrc
+drwxr-xr-x 1 genedatabank genedatabank    8 ian 22 14:48 .jmix
+-rw-r--r-- 1 genedatabank genedatabank 1,7K apr  2  2024 .mkshrc
+-rw-r--r-- 1 genedatabank genedatabank  807 mar 31  2024 .profile
+-rw------- 1 genedatabank genedatabank   96 ian 27 09:01 .xauthr0OB0p
+
+```
+
+> **INFO**
 > 
-**De continuat (calea către codurile QR și calea către imaginile urcate în server)**
+> În directorul **/opt/genedatabank/.jmix/work/filestorage** vor fi salvate fișierele încărcate în aplicație. În 
+> baza de date vor fi salvate numai referințele generate în câmpul ID, care este cheie primară și este de tip UID. 
+> Codul QR este generat în directorul **/opt/genedatabank/qrCodeImage**, directorul este creat automat, dacă nu există, 
+> la prima generare de cod QR. Important de știut că în momentul în care este încărcat în aplicație fișierul cu imaginea
+> codului QR va fi șters din acest director, practic va fi mutat în **/opt/genedatabank/.jmix/work/filestorage**.
+> În directorul **/opt/genedatabank/.jmix/work/filestorage** informația (fișierele) sunt ținute în directoare pe ani, 
+> luni și zile, de exemplu un fișier urcat în data de _25.01.2025_, va fi regăsit în locația: 
+> **/opt/genedatabank/.jmix/work/filestorage/2025/01/25**
+
 
 # Prima utilizare
 Conectarea la server se realizează cu un browser web (de exemplu: chrome sau firefox) ca și client, folosind în bara de 
@@ -252,10 +288,100 @@ După ce apasă butonul **OK** utilizatorul va fi salvat și va apărea în list
 
 Politica de acces la informații: meniuri, formulare, butoane, câmpuri etc. se realizează cu ajutorul rolurilor definite
 prin cod sau prin configurarea unor roluri în baza de date.  
-Pentru a atribui roluri se va apăsa butonul _Afișare asignări roluri_, din meniul _Aplicații_->Utilizatori_:  
+Pentru a atribui roluri se selectează utilizatorul dorit și se apăsa butonul _Afișare asignări roluri_, din meniul 
+_Aplicații_->Utilizatori_:  
 
 ![Asignări roluri 1](images/Asignari_roluri_1.png)
 
+Se va deschide o nouă pagină denumită **Atribuiri roluri pentru _Prenume Nume [utilizator]_ de unde putem atribui roluri 
+pentru:
+* **Permisiuni resursă**
+  * drept de logare; 
+  * acces la meniuri;
+  * acces pentru introducere;
+  * acces pentru vizualizare;
+  * acces pentru ștergere;
+  * etc.
+* **Permisiuni nivel de rând**
+  * acces la informațiile ce conține anumite informații
+    * de exemplu la Probele care sunt declarate confidențiale;
+  * etc.
+
+De exemplu, prin apăsarea butonului **Permisiuni resursă** se va deschide o nouă fereastră, de unde se alege rolurile 
+care sunt atribuite utilizatorului, ca în imaginea de mai jos:  
+
+![Asignări roluri resursă](images/Asignari_roluri_2.png)
+
+iar, prin apăsarea butonului **Permisiuni nivel de rând** se va deschide o altă fereastră, de unde se alege rolurile care
+sunt atribuite utilizatorului, de exemplu **Institution and users** este rolul ce permite utilizatorului de a vedea 
+numai înregistrările aferente **Institutului** din care face parte.
+
+![Asignări roluri nivel de rând](images/Asignari_roluri_3.png)
+
+În final pagina utilizatorului va cuprinde listele cu rolurile atribuite acestuia, ca în imaginea următoare:  
+
+![Asignări roluri final](images/Asignari_roluri_4.png)
+
+Listă ce va fi salvată prin apăsarea butonului **OK**.
+
+# Pașaport
+
+În meniul **Pașaport** se înregistrează probele ce vor intra în **Institut** spre păstrare, multiplicare, cercetare etc.  
+O probă poate fi înregistrată cu număr temporar sau cu număr definitiv. Numerele sunt generate automat de către baza de 
+date în sens crescător și sunt formate din :
+* Pentru numerele definitive: **Serial pentru nr. de intrare** - **nr. de ordine**, de exemplu SVGB-1;
+* Pentru numerele definitive: **Serial pentru nr. temporar de intrare** - **nr. de ordine**, de exemplu TSVGB-1;
+
+seriile au fost atribuite anterior, la pasul **Definirea unor parametrii unici aferenți fiecărei Instituției ce utilizează
+baza de date**.  
+După accesul în aplicație, la adresei unde se află aplicația **GeneDataBank**, se deschide o pagină, ca mai jos:
+
+![Accesare aplicație](images/Pasaport_1.png)
+
+## Accesarea paginii Pașaport
+
+Pagina **Pașaport** poate fi vizualizată din meniul _Aplicații_->_Pașaport_:
+
+![Accesare pașaport](images/Pasaport_2.png)
+
+## Introducerea unei probe
+
+Pentru introducerea unei probe se vor urma următorii pași:  
+
+* Se apasă butonul **Adaugă**:  
+
+![Adăugare pașaport](images/Pasaport_3.png)
+
+* Se va deschide o pagină cu câmpurile necesare a fi introduse:
+![Adăugare pașaport - câmpuri](images/Pasaport_4.png)
+în care sunt următoarele câmpuri:
+
+  * **Institutul păstrător** - Reprezintă **Institutul** care va păstra proba. Se completează automat, deoarece este 
+același cu **Institutul** din care face parte **utilizatorul**. Institutul păstrător este introdus, dacă acesta nu 
+există, prin accesarea meniului _Setări_->_Administrative_->_Instituții_. Prin interogări se poate obține codul 
+**INSTCODE** din descriptorii EURISCO;
+  * **Număr de intrare temporar** - Este o căsuță de marcare, pentru cazul în care este bifată se va genera un număr de
+intrare temporar. În cazul în care se dorește a introduce o probă cu număr definitiv nu se va bifa. După salvare, dacă proba a fost marcată 
+ca fiind definitivă, căsuța va fi invalidată (nu se mai poate schimba starea), iar dacă proba a fost marcată temporară, 
+căsuța va rămâne validă (se poate modifica starea). 
+  * **Număr intrare** - Este numărul intrare definitiv atribuit probei și reprezintă câmpul **ACCENUMB** din 
+descriptorii EURISCO;
+  * **Număr temporar** - Este numărul intrare definitiv atribuit probei. Acesta va fi completat automat, cu numărul 
+probei temporare, în momentul în care se scoate bifa de la **Număr de intrare temporar**. Astfel se va păstra și numărul
+temporar al probei;
+  * **PUID/DOI** - Identificator unic persistent (PUID) / Identificator digital de obiecte (DOI). Orice identificator 
+persistent, unic, atribuit probei, astfel încât să poată fi referit fără ambiguitate la nivel global și informațiile 
+asociate cu acesta sunt recoltate prin mijloace automate. Raportați câte un PUID pentru fiecare probă. 
+Secretariatul Tratatului Internațional privind Resursele Fitogenetice pentru Alimentație și Agricultură (PGRFA) 
+facilitează atribuirea unui identificator unic persistent (PUID), sub forma unui DOI (Identificator Digital de Obiecte),
+către PGRFA la nivel de probă (http://www.planttreaty.org/doi). Băncile de gene care nu aplică un PUID adevărat 
+aderărilor lor ar trebui să utilizeze și să solicite destinatarilor să utilizeze concatenarea descriptorilor INSTCODE 
+(codul institutului), ACCENUMB (numărul de intrare )și GENUS (genul probei) ca identificator unic la nivel global, 
+similar în cele mai multe privințe cu PUID ori de câte ori fac schimb de informații despre probe cu terți (de exemplu: 
+ROM007:SVGB-20205:ZEA).
+  * 
+
+ 
 
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
