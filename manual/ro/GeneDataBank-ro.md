@@ -71,7 +71,7 @@ sudo chown genedatabank:genedatabank /opt/genedatabank/genedatabank-0.2.0-SNAPSH
 ```bash
 sudo nano /etc/systemd/system/genedatabank.service
 ```  
-În care introduce următorul conținut:  
+În care se introduce următorul conținut:  
 ```text
 [Unit]
 Description=GeneDataBank java server application
@@ -434,8 +434,59 @@ cunoscută. Reprezintă câmpul **GEOREFMETH** din descriptorii EURISCO;
   * **Statutul biologic** - Schema de codificare propusă poate fi utilizată la 3 niveluri diferite de detaliere. Se 
 alege din lista derulantă. Pentru Altele (Completați în REMARCĂ). Reprezintă câmpul **SAMPSTAT** din descriptorii 
 EURISCO;
-  * 
- 
+  * **Datele ancestrale** - Informații despre pedigriu sau altă descriere a informațiilor ancestrale (de exemplu, soiul 
+parental, în cazul în care de mutant sau selecție). De exemplu, un pedigree „Hanna/7*Atlas//Turk/8*Atlas” sau o 
+descriere „mutație” găsit în Hanna”, „selecție din Irene” sau „cruce care implică printre altele pe Hanna și Irene”.
+Reprezintă câmpul **ANCEST** din descriptorii EURISCO;
+  * **Sursa de achiziție** - Se alege din listă. Pentru Altele (Elaborați în câmpul REMARCĂ). Reprezintă câmpul 
+**COLLSRC** din descriptorii EURISCO;
+  * **Numărul probei dat de donator** - Este identificatorul atribuit unei probe de către donator. Respectă standardul 
+ACCNUMB. Reprezintă câmpul **DONORNUMB** din descriptorii EURISCO;
+  * **Institutul donor** - Reprezintă institutului donator. Reprezintă câmpul **DONORCODE** și/sau **DONORNAME** din 
+descriptorii EURISCO;
+  * **Alte numere** - Reprezintă alte numere asociate cu proba. Orice alți identificatori despre care se știe că există 
+în alte colecții pentru această aderare. Utilizați următorul format: INSTCODE:ACCENUMB; INSTCODE:identificator;... 
+INSTCODE și identificatorul sunt separate prin două puncte fără spațiu. Perechile de INSTCODE și identificator sunt 
+separate prin punct și virgulă fără spațiu. Când institutul nu este cunoscut, identificatorul trebuie precedat de două 
+puncte. Reprezintă câmpul **OTHERNUMB** din descriptorii EURISCO;
+  * **Remarcă** - Câmpul este folosit pentru a adăuga note sau pentru a elabora descriptori cu valoarea 99 sau 999 (= 
+Altele). Se completează cu numele câmpului la care se referă și două puncte (:) fără spațiu (de exemplu, 
+COLLSRC:rivieră). Remărcile distincte care se referă la câmpuri diferite sunt separate prin punct și virgulă fără 
+spațiu. Reprezintă câmpul **REMARKS** din descriptorii EURISCO;
+  * **URL** - Adresa URL. URL care leagă la date suplimentare despre accesiune, fie în banca de gene păstrătoare, fie 
+din altă sursă. Exemplu: http://gbis.ipk-gatersleben.de/gbis_i/detail.jsf?akzessionId=31805 . Reprezintă câmpul 
+**ACCEURL** din descriptorii EURISCO;
+  * **Confidențial** - Statutul confidențialității al probei. Se alege din listă. Proba poate fi confidențială, în 
+funcție de condițiile donatorului sau alte criterii. 
+  * **Statut MLS** - Statutul unei probe în ceea ce privește Sistemul Multilateral (MLS) al Tratatului internațional 
+privind resursele genetice vegetale pentru alimentație și agricultură. Se alege din listă, lăsați necompletat dacă 
+starea nu este cunoscută. Reprezintă câmpul **MLSSTAT** din descriptorii EURISCO;
+  * **Status AEGIS** - Statutul codificat al unei probe în ceea ce privește un Sistem Integrat European de Bancă de Gene 
+(AEGIS). Furnizează informațiile dacă proba este conservată pentru AEGIS. Se alege din listă, lăsați necompletat dacă 
+starea nu este cunoscută. Țările din Regiunea Europeană lucrează pentru a stabili un sistem rațional de cooperare 
+regională în conservarea și utilizarea durabilă a resurselor genetice vegetale pentru alimentație și agricultură (PGFRA)
+în Europa. Acesta se numește Sistemul Integrat European, sau pe scurt AEGIS, care a înființat pentru prima dată o 
+Colecție Europeană, care funcționează ca o bancă de gene virtuală (europeană). Probele din Colecția Europeană (probele 
+europene) sunt menținute în conformitate cu standardele de calitate convenite și vor fi disponibile gratuit în 
+conformitate cu termenii și condițiile stabilite în Tratatul internațional privind Resursele Fitogenetice pentru 
+Alimentație și Agricultură (Tratatul). Procedând astfel, țările speră să raționalizeze sistemul actual de conservare și 
+utilizare durabilă în Europa și să-și îmbunătățească eficiența atât la nivel colectiv, cât și la nivel individual. 
+Noul sistem va permite băncilor de gene individuale să se bazeze pe munca întreprinsă de alte bănci de gene, fără a fi 
+nevoie să creeze duplicate singure. Reprezintă câmpul **AEGISSTAT** din descriptorii EURISCO;
+  * **Istoric** - Probă activă/eliminată. Se alege din listă. Acest indicator indică dacă o probă nu mai este menținută 
+activ de către instituția care o deține. În acest caz, datele istorice ar putea oferi totuși informații valoroase. 
+Lăsați necompletat dacă starea nu este cunoscută. Reprezintă câmpul **HISTORIC** din descriptorii EURISCO;
+  * **Institutul de colectare** - Reprezintă institutul care colectează eșantionul. Dacă institutul deținător a colectat 
+materialul, institutului de colectare (COLLCODE) trebuie să fie același cu codul institutului deținător (păstrător) 
+(INSTCODE). Urmează standardul INSTCODE. Se alege din listă și se poate crea o listă pentru cazul in care au participat 
+mai multe Institute în campania de colectare și nu se poate identifica exact care a fost cel care a cules proba. 
+Reprezintă câmpul **COLLCODE** din descriptorii EURISCO;
+  * **Comentarii și imagini** - Se pot adăuga descrieri ale probei sau comentarii ce sunt pertinente. Iar în tabul 
+**Imagini probă** se pot încărca imagini ale probei în cauză;
+  * **Locația originei probei pe hartă** - Indică pe hartă locația asigurată de câmpurile Longitudine și Latitudine. În 
+cazul introducerilor probelor care nu au câmpurile Longitudine și Latitudine completate să se determine pe hartă, 
+numai în cazul în care se alega ca furnizor al hărții Google Maps, se determină automat și altitudinea (elevația);
+
 
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
