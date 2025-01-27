@@ -374,11 +374,11 @@ persistent, unic, atribuit probei, astfel încât să poată fi referit fără a
 asociate cu acesta sunt recoltate prin mijloace automate. Raportați câte un PUID pentru fiecare probă. 
 Secretariatul Tratatului Internațional privind Resursele Fitogenetice pentru Alimentație și Agricultură (PGRFA) 
 facilitează atribuirea unui identificator unic persistent (PUID), sub forma unui DOI (Identificator Digital de Obiecte),
-către PGRFA la nivel de probă (http://www.planttreaty.org/doi). Băncile de gene care nu aplică un PUID adevărat 
-aderărilor lor ar trebui să utilizeze și să solicite destinatarilor să utilizeze concatenarea descriptorilor INSTCODE 
-(codul institutului), ACCENUMB (numărul de intrare )și GENUS (genul probei) ca identificator unic la nivel global, 
-similar în cele mai multe privințe cu PUID ori de câte ori fac schimb de informații despre probe cu terți (de exemplu: 
-ROM007:SVGB-20205:ZEA).
+către PGRFA la nivel de probă (https://www.fao.org/plant-treaty/areas-of-work/global-information-system/doi/en/). 
+Băncile de gene care nu aplică un PUID adevărat aderărilor lor ar trebui să utilizeze și să solicite destinatarilor să 
+utilizeze concatenarea descriptorilor INSTCODE (codul institutului), ACCENUMB (numărul de intrare) și GENUS 
+(genul probei) ca identificator unic la nivel global, similar în cele mai multe privințe cu PUID ori de câte ori fac 
+schimb de informații despre probe cu terți (de exemplu:ROM007:SVGB-20205:ZEA).
   * 
 
  
