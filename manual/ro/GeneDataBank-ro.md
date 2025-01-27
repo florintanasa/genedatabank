@@ -379,8 +379,62 @@ Băncile de gene care nu aplică un PUID adevărat aderărilor lor ar trebui să
 utilizeze concatenarea descriptorilor INSTCODE (codul institutului), ACCENUMB (numărul de intrare) și GENUS 
 (genul probei) ca identificator unic la nivel global, similar în cele mai multe privințe cu PUID ori de câte ori fac 
 schimb de informații despre probe cu terți (de exemplu:ROM007:SVGB-20205:ZEA).
+  * **Număr colectare** - Numărul de colectare. Identificatorul original alocat de colector(ii) eșantionului, compus în 
+mod normal din numele sau inițialele colector(ilor) urmate de un număr (de exemplu: "DS0032"). Acest identificator este 
+esențial pentru identificarea duplicatelor deținute în diferite colecții. Reprezintă câmpul **COLLNUMB** din 
+descriptorii EURISCO;
+  * **Taxonomia** - Gen-Specia-Autorul speciei-Subtaxa-Autorul subspeciei-Denumirea comună a culturii;
+    * **Gen**: nume de gen pentru taxon. Este necesară litera majusculă inițială. Reprezintă câmpul **GENUS** din
+      descriptorii EURISCO;
+    * **Specie**: porțiune de epitet specifică a numelui științific cu litere mici. Este permisă doar următoarea 
+abreviere:"sp.". Reprezintă câmpul **SPECIES** din descriptorii EURISCO;
+    * **Autor**: autoritate specie. Furnizați autoritatea pentru numele speciei. Reprezintă câmpul **SPAUTHOR** din 
+descriptorii EURISCO;
+    * **Subtaxa**: subtaxonul poate fi folosit pentru a stoca orice identificator taxonomic suplimentar. Sunt permise 
+următoarele abrevieri: "subsp." (pentru subspecie); "convar." (pentru convarietate); "var." (pentru varietate); 
+"f." (pentru formă); "Grup" (pentru "grup de cultivare"). Reprezintă câmpul **SUBTAXA** din descriptorii EURISCO;
+    * **Subtauthor**: autoritate subtaxon. Furnizați autoritatea subtaxonă la cel mai detaliat nivel taxonomic. 
+Reprezintă câmpul **SUBTAUTHOR** din descriptorii EURISCO;;
+    * **Denumirea comună a culturii**: Denumirea comună a culturii. Exemplu: "orz de malț", "porumb sticlos", 
+"gălbenele". Reprezintă câmpul **CROPNAME** din descriptorii EURISCO;
+  * **Identificatorul colectării** - Identificatorul misiunii de colectare utilizat de Institutul de colectare 
+(de exemplu: "DÂMBROCA-01", "CJ001"). Reprezintă câmpul **COLLMISSID** din descriptorii EURISCO;
+  * **Denumire probă** - Numele probei, fie o denumire înregistrată, fie o altă denumire dată materialului primit, alta 
+decât numărul de acces al donatorului sau numărul de colectare. Prima literă este mare. Numele multiple sunt separate 
+prin punct și virgulă fără spațiu. Exemplu: Nume probă: Elena;Suceava23. Reprezintă câmpul **ACCENAME** din descriptorii
+EURISCO;
+  * **Data originii** - Data cea mai veche a probei, care se cunoaște în format [AAAALLZZ]. Datele lipsă (LL sau ZZ) 
+trebuie indicate cu cratime [--] sau "00" [dublu zero];
+  * **Țara** - Țara de origine. Se alege din lista derulantă țara, în cazul în care lipsește sau apari modificări 
+acestea se pot realiza și cu ajutorul meniului _Setări_->_Țări_ și se va completa obligatoriu Codul ISO 3166-1 din 3 
+litere al țării în care a fost colectată inițial proba (de exemplu: populație locală, rudă sălbatică, varietatea 
+fermierului), ameliorată sau selectată (linii de ameliorare, organisme modificate genetic, populații segregate, hibrizi, 
+cultivare moderne etc.). Reprezintă câmpul **ORIGCTY** din descriptorii EURISCO;
+  * **Județul** - Reprezintă județul din care provine proba, în cazul României sau ceva asemănător pentru alte țări.
+Reprezintă o parte din câmpul **COLLSITE** din descriptorii EURISCO. Acesta este un câmp compus din cel puțin Județ+Cod 
+SIRUTA+Localitate;
+  * **Localitatea** - Reprezintă locația de colectare. Informații despre locație sub nivelul țării/județului care 
+descrie locul în care a fost colectată proba. eprezintă o parte din câmpul **COLLSITE** din descriptorii EURISCO. 
+Acesta este un câmp compus din cel puțin Județ+Cod SIRUTA+Localitate;
+  * **Latitudine** - Reprezintă latitudinea locației de colectare (format zecimal). Latitudinea exprimată în grade 
+zecimale. Valorile pozitive sunt la nord de Ecuator; valorile negative sunt la sud de Ecuator (de exemplu -44,6975). 
+Se introduc datele in standardul GPS respectiv WGS 84. Reprezintă câmpul **DECLATITUDE** din descriptorii EURISCO;
+  * **Longitudine** - Reprezintă Longitudinea locului de colectare (Format zecimal). Longitudine exprimată în grade 
+zecimale. Valorile pozitive sunt la est de Meridianul Greenwich; valorile negative sunt la vest de Meridianul Greenwich 
+(de exemplu, +120,9123). Se introduc datele in standardul GPS respectiv WGS 84. Reprezintă câmpul **DECLONGITUDE** din 
+descriptorii EURISCO;
+  * **Altitudine** - Reprezintă altitudinea locului de colectare. Altitudinea locului de colectare este exprimată în 
+metri [m], deasupra nivelului mării. Sunt permise valori negative. Reprezintă câmpul **ELEVATION** din descriptorii 
+EURISCO;
+  * **Metoda de georeferință** - Reprezintă metoda de georeferențiere utilizată (GPS, determinată cu ajutorul hărții, 
+determinată din articole sau estimată folosind software). Lăsați necompletat dacă metoda de georeferențiere nu este 
+cunoscută. Reprezintă câmpul **GEOREFMETH** din descriptorii EURISCO;
+  * **Data colectării probei** - Reprezintă data efectivă de colectăre a probei, în format [AAAALLZZ]. Datele lipsă (LL sau ZZ)
+    trebuie indicate cu cratime [--] sau "00" [dublu zero]. Reprezintă câmpul **COLLDATE** din descriptorii EURISCO;
+  * **Statutul biologic** - Schema de codificare propusă poate fi utilizată la 3 niveluri diferite de detaliere. Se 
+alege din lista derulantă. Pentru Altele (Completați în REMARCĂ). Reprezintă câmpul **SAMPSTAT** din descriptorii 
+EURISCO;
   * 
-
  
 
 # Viabilitate semințe noi
