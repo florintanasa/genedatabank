@@ -507,6 +507,8 @@ realizează modificări. După apăsarea butonului **OK** datele vor apărea lis
 Se observă că proba a primit un număr definitiv, în cazul de față **SVGB-1**. Pentru cazul în care se dorește 
 modificarea unei probe se selectează respectiva probă și se apasă butonul **Modifică**:  
 ![Pașaport - modificare probă selectată](images/Pasaport_7.png)
+
+### Adăugarea imaginilor aferente probei
 De exemplu dacă dorim să adăugăm imagini ale probei respective, după deschiderea formularului de introducere/modificare
 /vizualizare, care este un panel de tip acordeon cu 3 sub-panel-uri (Date Biologice, Comentarii și imagini, Locația 
 originei probei pe hartă), se alege **Comentarii și imagini**, apoi se dă click pe tabul **Imagini probă**, iar în final 
@@ -541,6 +543,45 @@ salvat în **filestorage**):
 ![Pașaport - adăugarea imaginii pasul 7](images/Pasaport_14.png)
 În urma selectării vom putea salva imaginea la **Imagini probă** prin apăsarea butonului **Selectează**:  
 ![Pașaport - adăugarea imaginii pasul 8](images/Pasaport_15.png)
+Pentru cazurile în care sunt mai multe imagini de încărcat se repetă pașii anteriori:  
+![Pașaport - adăugarea imaginii pasul 9](images/Pasaport_16.png)
+Pentru salvarea modificările se va apăsa butonul **OK**:  
+![Pașaport - adăugarea imaginii pasul 10](images/Pasaport_17.png)
+
+### Vizualizarea/Determinarea software a locației de origine a probei
+În sub-panelul **Locația de origine probei pe hartă** putem vizualiza locația de origine a probei, determinată prin 
+coordonatele Latitudine și Longitudine introduse anterior în sub-panelul **Date Biologice**:  
+![Pașaport - vizualizare locație origine probă 1](images/Pasaport_18.png)
+În imaginea de mai sus este harta de la OpenStreetMap în care putem realiza zoom din tastele **+** și **-** din colțul 
+din stângă-sus al imaginii:
+![Pașaport - vizualizare locație origine probă 2](images/Pasaport_19.png)
+Dacă s-a introdus o cheie api pentru Google Maps atunci se pot încarcă hărțile puse la dispoziție de Google, prin 
+bifarea căsuței de dialog **Schimbă furnizorul hărții**:
+![Pașaport - vizualizare locație origine probă 3](images/Pasaport_20.png)
+Un exemplu pentru **Hartă-Teren** în ecran complet:  
+![Pașaport - vizualizare locație origine probă 3](images/Pasaport_21.png)
+Pentru cazurile în care determinarea locației de origine a probei se realizează prin metoda **Determinare software**, 
+la momentul adăugării sau mai târziu prin modificare se va avea grijă să nu existe date în câmpurile **Latitudine** și 
+**Longitudine** iar furnizorul hărții să fie Google, pentru astfel de cazuri punctul de interes va fi plasat în centrul 
+hărții și va fi de culoare portocalie, ca în imaginea de mai jos:
+![Pașaport - vizualizare locație origine probă 4](images/Pasaport_22.png)
+În acest moment putem prinde cu mouse-ul, apăsând click stânga pe indicatorul de poziție și prin tragere se va muta în 
+locația de origine a probei:  
+![Pașaport - determinare software a locației 1](images/Pasaport_23.png)
+Se observă că punctul de indicare a locației a fost mutat în apropiere de localitatea Suceava. Acum datele reprezentând 
+**Latitudinea**, **Longitudinea** și **Altitudinea** au fost completate automat în sub-panelul **Date Biologice**:  
+![Pașaport - determinare software a locației 2](images/Pasaport_24.png)
+Pentru determinarea altitudinii a fost folosit serviciul Open Topo Data, pentru cazurile în care se dorește și pentru 
+determinarea **Altitudinii** servicul de la Google se va bifa căsuța de dialog **Schimbă furnizorul elevației**:  
+![Pașaport - determinare software a locației 3](images/Pasaport_25.png)
+
+> **ATENȚIE**
+> 
+> Serviciile furnizate de Google sunt contra cost, implică achiziția unei chei api care probabil va costa (depinde de nr.
+> de solicitări/interogări la serviciul Google Maps ), deoarece se contorizează fiecare interogare (afișare, mutare etc. 
+> a indicatorului). Este de preferat a se folosi la **Estimarea software**, ori când harta de la OpenStreetMap nu este 
+> tocmai cea mai bună soluție în acel moment.
+> 
 
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
