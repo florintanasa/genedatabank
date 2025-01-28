@@ -487,6 +487,27 @@ Reprezintă câmpul **COLLCODE** din descriptorii EURISCO;
 cazul introducerilor probelor care nu au câmpurile Longitudine și Latitudine completate să se determine pe hartă, 
 numai în cazul în care se alega ca furnizor al hărții Google Maps, se determină automat și altitudinea (elevația);
 
+## Exemplu introducere probă temporară
+În imaginea de mai jos se prezintă introducerea unei probe temporare. Probele temporare sunt de regulă acele probe
+culese în campaniile de colectare și care pentru a intra definitv în colecția pe scurtă și/sau de lungă durată trebuie
+sa urmeze un parcurs de validare specific Băncilor de Gene:
+
+## Exemplu introducere probă definitivă
+În cele ce urmează se prezintă introducerea unei probe definite. Probele definitive sunt probele temporare care au trecut
+testele de validare ori care sunt date spre păstrare sau custodie ori au fost donate de către un alt Institut.
+### Probă donată
+ Exemplul următor prezintă introducerea în Bancă a unei probe donate, de către un alt Institut:  
+![Pașaport - introducere probă donată](images/Pasaport_5.png)
+După cum se observă, căsuța de dialog pentru **Număr de intrare temporar** nu este bifată, deoarece se dorește a 
+introduce o probă care va fi înregistrată cu un număr definitiv. În formularul **Pașaport** au fost introduse datele 
+aferente probei puse la dispoziție de către Institutul donor. Pentru salvarea datelor introduse se apasă butonul **OK**, în cazul în care nu se 
+dorește salvarea datelor se apasă butonul **Anulare**, aceleași butoane sunt folosite și pentru cazul în care se 
+realizează modificări. După apăsarea butonului **OK** datele vor apărea lista din ecranul **Pașaport**:  
+![Pașaport - vizualizare în listă probă donată](images/Pasaport_6.png)
+Se observă că proba a primit un număr definitiv, în cazul de față **SVGB-1**. Pentru cazul în care se dorește 
+modificarea unei probe se selectează respectiva probă și se apasă butonul **Modifică**.
+
+
 
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
