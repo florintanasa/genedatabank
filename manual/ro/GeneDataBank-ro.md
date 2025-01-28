@@ -505,9 +505,42 @@ dorește salvarea datelor se apasă butonul **Anulare**, aceleași butoane sunt 
 realizează modificări. După apăsarea butonului **OK** datele vor apărea lista din ecranul **Pașaport**:  
 ![Pașaport - vizualizare în listă probă donată](images/Pasaport_6.png)
 Se observă că proba a primit un număr definitiv, în cazul de față **SVGB-1**. Pentru cazul în care se dorește 
-modificarea unei probe se selectează respectiva probă și se apasă butonul **Modifică**.
+modificarea unei probe se selectează respectiva probă și se apasă butonul **Modifică**:  
+![Pașaport - modificare probă selectată](images/Pasaport_7.png)
+De exemplu dacă dorim să adăugăm imagini ale probei respective, după deschiderea formularului de introducere/modificare
+/vizualizare, care este un panel de tip acordeon cu 3 sub-panel-uri (Date Biologice, Comentarii și imagini, Locația 
+originei probei pe hartă), se alege **Comentarii și imagini**, apoi se dă click pe tabul **Imagini probă**, iar în final 
+se apasă butonul adaugă:  
+![Pașaport - adăugare imagini pasul 1](images/Pasaport_8.png)
+După acestă acțiune se va deschide o nouă fereastră numită **Fișiere sistem** la care se va apăsa butonul **Adăugare**
+pentru a introduce în tabela **Fișiere sistem** fișierul dorit cât și unele informații aferente acestuia:  
+![Pașaport - adăugare imagini pasul 2](images/Pasaport_9.png)
+Fișierele pot fi introduse în baza de date și prin meniul _Aplicații_->_Fișiere sistem_, caz în care acestea vor fi 
+selectate din ecranul anterior. După apăsarea din nou a butonului **Adaugă** se va deschide formularul de încărcare a 
+fișierului imagine și a informațiilor aferente acestuia:  
+![Pașaport - adăugarea imaginii pasul 3](images/Pasaport_10.png)
+După care pentru încărcare imaginii apăsăm butonul **Încărcare** iar ca urmare se va deschide o fereastră de dialog în 
+vederea selectării fișierului dorit: 
+![Pașaport - adăugarea imaginii pasul 4](images/Pasaport_11.png)
+După confirmarea selecției (depinde de fiecare sistem de operare, imaginea de mai jos este preluată din Linux, unde 
+KDE-Plasma este desktop manager) și urcată într-o locație temporară pe server iar formularul **Fișiere sistem** va fi 
+completat automat cu următoarele date:  
 
+* **Denumire** - Reprezintă denumirea fișierului. De preferat este ca fișierele să aibă o denumire în legătură cu proba, 
+în acest caz **Denumirea** este aceeași cu partea numerică a **Numărului de intrare**;
+* **Extensie** - Reprezintă extensia fișierului încărcat;
+* **Mărime** - Reprezintă mărimea fișierului încărcat;
 
+Pentru **Data realizării** s-a optat a se introduce manual, direct în formatul specific al limbii utilizate, în acest caz 
+ZZ/LL/AAAA sau se poate alege în format grafic din fereastra de dialog:  
+![Pașaport - adăugarea imaginii pasul 5](images/Pasaport_12.png)
+Pentru salvare în server se va apăsa butonul **OK**:  
+![Pașaport - adăugarea imaginii pasul 6](images/Pasaport_13.png)
+După salvarea în **Fișiere sistem** vom selecta imaginea dorită (se observă calea și numele fișierului sub care a fost 
+salvat în **filestorage**):  
+![Pașaport - adăugarea imaginii pasul 7](images/Pasaport_14.png)
+În urma selectării vom putea salva imaginea la **Imagini probă** prin apăsarea butonului **Selectează**:  
+![Pașaport - adăugarea imaginii pasul 8](images/Pasaport_15.png)
 
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
