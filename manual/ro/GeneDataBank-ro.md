@@ -603,14 +603,14 @@ Iar ca urmare se va deschide o pagină nouă cu formularul de introducere în ca
 fi introduse. Necompletarea acestora va face imposibilă salvarea în baza de date:
 ![Depozit - introducere probă formular 1](images/Depozit_2.png)
 Semnificația câmpurilor din formular este următoarea pentru:
-* **Informații din Pașaport**;
+* **Informații din Pașaport**
   * **Număr intrare** - Reprezintă numărul de intrare al probei și se alege din listă. Lista reprezintă datele din 
 **Pașaport**;
   * **Originală** - Este o căsuța de dialog și arată că proba reprezintă este cea originală;
   * **Scop** - Reprezintă scopul pentru care proba aflată în recipient va fi utilizată:
     * **G** - În scop de germinație;
     * **R** - În scop de reînmulțire;
-    * **M** - În scop de multiplicare;
+    * **M** - În scop de multiplicare.
   * **Genul** - Reprezintă Genul din care face parte proba aleasă - **Număr intrare**. Câmpul se completează automat;
   * **Specia** - Reprezintă Specia din care face parte proba aleasă - **Număr intrare**. Câmpul se completează automat;
 * **Informații pentru depozitare**
@@ -622,10 +622,64 @@ următoarele tipuri de depozite:
     * **Colecția _in vitro_**;
     * **Colecția de semințe**
     * **Colecția ADN**;
-    * **Cryo-colecția**;
+    * **Cryo-colecția**.
     * **Altceva** - se va elabora și la **Comentarii**
-  * **Cod depozit** - Reprezintă codul de depozitare a recipientului sau codul recipientului:
-    * Pentru **Colecția pe termen scurt** - 
+  * **Cod depozit** - Reprezintă codul de depozitare a recipientului sau codul recipientului în care se află proba. În 
+  funcție de **Tipul de depozit** ales câmpul va fi completat cu ultimul recipient +1 adăugat anterior (exp. CR1A01a2 
+  pentru ultimul introdus CR1A01a1). Nu pot exista două coduri la fel:
+    * Pentru **Colecția pe termen mediu** - De exemplu CR1A01a1 decodificat reprezintă:
+      * **CR1** - este **Camera de refrigerare nr. 1**;
+      * **A** - este rastelul din **CR1** (poate fi A,B,C,D);
+      * **01** - este numărul rândului din rastelul **A**
+      * **a** - este coloana din rastelul **A** (poate fi a,b,c,d,f,g,h,i,j). În final **CR1A01a** este eticheta cutiei 
+      din **CR1**;
+      * **1** - reprezintă numărul plicului din cutia **CR1A01a**.
+  * **Depozit cod vechi** - Reprezintă codul vechi al recipientului în care s-a aflat proba. Pentru **Depozitul pe termen
+  lung** (-20<sup>o</sup>C). Pentru probele deja aflate în **Depozit** va coincide acest câmp cu câmpul **Cod depozit**;
+  * **Data depozitării** - Reprezintă data intrării într-unul din depozite al probei.Datele lipsă (ZZ sau LL) trebuie 
+  indicate cu cratime sau „00” [dublu zero].
+  * **Stoc** - Reprezintă numărul de semințe dintr-un recipient;
+  * **Masa a 1000 de semințe [g]** - Reprezintă masa a 1000 de semințe, în grame;
+  * **Umiditatea [%]** - Reprezintă conținutul de umiditate relativă la depozitare. Acceptă numere reale (exp. 5,6);
+* **Informații Viabilitate - Multiplicare**
+  * **Ultimul an al germinației** - Reprezintă anul ultimului test de germinației. Număr întreg (exp. 2020);
+  * **Procentul germinației [%]** - Reprezintă procentul de germinație înregistrat la ultimul test. Număr întreg (exp. 98).
+  * **Ultimul an al multiplicării** - Reprezintă Anul ultimei multiplicări. Număr întreg (exp. 2020);
+  * **Nr. multiplicări** - Reprezintă numărul total de multiplicări. Număr întreg (exp.5);
+* **Comentarii** - Pentru cazul când se alege la **Tipul de depozit Altceva**, ori când se consideră important a se
+introduce și alte informații;
+* **Codul QR** - În acest sub-panel se generează, încarcă, vizualizează ori șterge codul **QR** ce se imprimă odată cu 
+eticheta.
+
+Pentru generarea codului **QR** se realizează următorii pași:  
+1. Se apasă butonul **QR**, după care se va primi un mesaj de succes în ceea ce privește generarea codului **QR** sau un 
+mesaj de eroare. Posibile erori fiind lipsa tuturor informațiilor obligatorii. Codul **QR** conține următoare date:
+    * **Numărul de intrare** - din Pașaport - este obligatoriu;
+    * **Cod depozit** - din Depozit - este obligatoriu, deoarece nu se poate salva în **Depozit**;
+    * **Gen** - din Taxonomie - este obligatoriu;
+    * **Specia** - din Taxonomie - este obligatoriu;
+    * **Subtaxa** - din Taxonomie - este obligatoriu;
+    * **Denumire probă** - din Pașaport - este obligatoriu;
+    * **Țara** - din Pașaport;
+    * **Județul** - din Pașaport;
+    * **Localitatea** - din Pașaport;
+    * **Satutul biologic - codul** - este obligatoriu;
+   ![Depozit - introducere probă formular 2](images/Depozit_3.png)
+2. Se apasă butonul **Încarcă QR**, se va deschide o căsuță de dialog pentru alegerea fișierului generat iar după 
+afișarea codului se va apăsa butonul **OK** pentru salvarea înregistrării in baza de date:
+   ![Depozit - introducere probă formular 3](images/Depozit_4.png)
+
+> **ATENȚIE**
+>
+> Aplicația va crea automat directorul qrCodeImage în locația /opt/genedatabank, în acestă locație numai utilizatorul 
+> **genedatabank** are drepturi de scriere și vizualizare. Va fi necesar de a mapa printr-un protocol de rețea (Samba 
+> sau NFS) acest director către utilizatorii ce folosesc aplicația.
+
+După salvare înregistrarea va apărea în listă:
+![Depozit - listă](images/Depozit_5.png)
+Lista are prevazut în capul tabelului două câmpuri unde sunt afișate următoarele informații **Stocul** afișat în pagină 
+și numărul de recipiente. Informațiile sunt utile în special când se folosesc filtrele.
+
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
 
