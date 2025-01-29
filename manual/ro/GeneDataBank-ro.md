@@ -332,7 +332,7 @@ date în sens crescător și sunt formate din :
 * Pentru numerele definitive: **Serial pentru nr. de intrare** - **nr. de ordine**, de exemplu SVGB-1;
 * Pentru numerele definitive: **Serial pentru nr. temporar de intrare** - **nr. de ordine**, de exemplu TSVGB-1;
 
-seriile au fost atribuite anterior, la pasul **Definirea unor parametrii unici aferenți fiecărei Instituției ce utilizează
+Seriile au fost atribuite anterior, la pasul **Definirea unor parametrii unici aferenți fiecărei Instituției ce utilizează
 baza de date**.  
 După accesul în aplicație, la adresei unde se află aplicația **GeneDataBank**, se deschide o pagină, ca mai jos:
 
@@ -483,14 +483,9 @@ mai multe Institute în campania de colectare și nu se poate identifica exact c
 Reprezintă câmpul **COLLCODE** din descriptorii EURISCO;
   * **Comentarii și imagini** - Se pot adăuga descrieri ale probei sau comentarii ce sunt pertinente. Iar în tabul 
 **Imagini probă** se pot încărca imagini ale probei în cauză;
-  * **Locația originei probei pe hartă** - Indică pe hartă locația asigurată de câmpurile Longitudine și Latitudine. În 
+  * **Locația de origine probei pe hartă** - Indică pe hartă locația asigurată de câmpurile Longitudine și Latitudine. În 
 cazul introducerilor probelor care nu au câmpurile Longitudine și Latitudine completate să se determine pe hartă, 
 numai în cazul în care se alega ca furnizor al hărții Google Maps, se determină automat și altitudinea (elevația);
-
-## Exemplu introducere probă temporară
-În imaginea de mai jos se prezintă introducerea unei probe temporare. Probele temporare sunt de regulă acele probe
-culese în campaniile de colectare și care pentru a intra definitv în colecția pe scurtă și/sau de lungă durată trebuie
-sa urmeze un parcurs de validare specific Băncilor de Gene:
 
 ## Exemplu introducere probă definitivă
 În cele ce urmează se prezintă introducerea unei probe definite. Probele definitive sunt probele temporare care au trecut
@@ -560,7 +555,7 @@ bifarea căsuței de dialog **Schimbă furnizorul hărții**:
 ![Pașaport - vizualizare locație origine probă 3](images/Pasaport_20.png)
 Un exemplu pentru **Hartă-Teren** în ecran complet:  
 ![Pașaport - vizualizare locație origine probă 3](images/Pasaport_21.png)
-Pentru cazurile în care determinarea locației de origine a probei se realizează prin metoda **Determinare software**, 
+Pentru cazurile în care determinarea locației de origine a probei se realizează prin metoda **Estimată cu software**, 
 la momentul adăugării sau mai târziu prin modificare se va avea grijă să nu existe date în câmpurile **Latitudine** și 
 **Longitudine** iar furnizorul hărții să fie Google, pentru astfel de cazuri punctul de interes va fi plasat în centrul 
 hărții și va fi de culoare portocalie, ca în imaginea de mai jos:
@@ -581,8 +576,56 @@ determinarea **Altitudinii** servicul de la Google se va bifa căsuța de dialog
 > de solicitări/interogări la serviciul Google Maps ), deoarece se contorizează fiecare interogare (afișare, mutare etc. 
 > a indicatorului). Este de preferat a se folosi la **Estimarea software**, ori când harta de la OpenStreetMap nu este 
 > tocmai cea mai bună soluție în acel moment.
-> 
+>
 
+## Exemplu introducere probă temporară
+În imaginea de mai jos se prezintă introducerea unei probe temporare. Probele temporare sunt de regulă acele probe
+culese în campaniile de colectare și care pentru a intra definitv în colecția pe scurtă și/sau de lungă durată trebuie
+sa urmeze un parcurs de validare specific Băncilor de Gene:
+![Pașaport - introducere probă temporară 1](images/Pasaport_26.png)
+Pentru ca o probă să primească **Număr de intrare temporar** este obligatoriu, ca încă de la început, să fie bifată 
+căsuța de dialog **Număr de intrare temporar**. Dacă nu va fi marcată se va considera că se introduce o probă definitivă 
+și ca urmare nu se mai putea modifica starea acesteia deoarece va deveni invalidă. După salvare proba temporară va fi
+vizibilă în listă:
+![Pașaport - introducere probă temporară 2](images/Pasaport_27.png)
+> **ATENȚIE**  
+> 
+> O probă înregistrată definitivă nu va mai putea fi reînregistrată temporară. De exemplu proba înregistrată cu **Număr 
+> intrare** definitiv **SVGB-1** are căsuța de dialog pentru **Număr de intrare temporar** invalidată:
+>
+![Pașaport - introducere probă temporară 3](images/Pasaport_28.png)
+
+# Introducerea în Depozit
+Introducerea în **Depozit** a probelor, împreună cu datele aferente acestora (stoc, locație etc.), se realizează prin 
+accesarea meniului _Aplicații_->_Depozit_ apăsând butonul **Adaugă**:
+![Depozit - introducere probă](images/Depozit_1.png)
+Iar ca urmare se va deschide o pagină nouă cu formularul de introducere în care o parte din câmpuri sunt obligatoriu a 
+fi introduse. Necompletarea acestora va face imposibilă salvarea în baza de date:
+![Depozit - introducere probă formular 1](images/Depozit_2.png)
+Semnificația câmpurilor din formular este următoarea pentru:
+* **Informații din Pașaport**;
+  * **Număr intrare** - Reprezintă numărul de intrare al probei și se alege din listă. Lista reprezintă datele din 
+**Pașaport**;
+  * **Originală** - Este o căsuța de dialog și arată că proba reprezintă este cea originală;
+  * **Scop** - Reprezintă scopul pentru care proba aflată în recipient va fi utilizată:
+    * **G** - În scop de germinație;
+    * **R** - În scop de reînmulțire;
+    * **M** - În scop de multiplicare;
+  * **Genul** - Reprezintă Genul din care face parte proba aleasă - **Număr intrare**. Câmpul se completează automat;
+  * **Specia** - Reprezintă Specia din care face parte proba aleasă - **Număr intrare**. Câmpul se completează automat;
+* **Informații pentru depozitare**
+  * **Tip depozit** - Reprezintă o listă cu tipul de depozit în care se va păstra proba în colecție. Sunt definite 
+următoarele tipuri de depozite:
+    * **Colecția pe termen scurt**;
+    * **Colecția pe termen mediu**;
+    * **Colecția pe termen lung**;
+    * **Colecția _in vitro_**;
+    * **Colecția de semințe**
+    * **Colecția ADN**;
+    * **Cryo-colecția**;
+    * **Altceva** - se va elabora și la **Comentarii**
+  * **Cod depozit** - Reprezintă codul de depozitare a recipientului sau codul recipientului:
+    * Pentru **Colecția pe termen scurt** - 
 # Viabilitate semințe noi
 Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
 
