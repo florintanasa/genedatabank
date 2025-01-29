@@ -8,6 +8,7 @@ import com.genebank.genedatabank.security.OnlyViewRole;
 import com.genebank.genedatabank.view.main.MainView;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -56,10 +57,7 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -316,8 +314,12 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
                 theDir.mkdirs();
             }
 
+            // for QR code using UTF-8
+            Hashtable<EncodeHintType, String> hash = new Hashtable<>();
+            hash.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+
             //encode the data in format QR_CODE with width 500 and height 500
-            BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500);
+            BitMatrix matrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, 500, 500, hash);
 
             //Write the matrix in the path
             MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(getQrCodeImageFileMap().get("fileWithPath")));
