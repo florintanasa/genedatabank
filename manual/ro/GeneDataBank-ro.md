@@ -526,22 +526,31 @@ modificarea unei probe se selectează respectiva probă și se apasă butonul **
   
 ![Pașaport - modificare probă selectată](images/Pasaport_7.png)
 
-### Adăugarea imaginilor aferente probei
+### Adăugarea imaginilor aferente probei  
+
 De exemplu dacă dorim să adăugăm imagini ale probei respective, după deschiderea formularului de introducere/modificare
 /vizualizare, care este un panel de tip acordeon cu 3 sub-panel-uri (Date Biologice, Comentarii și imagini, Locația 
 originei probei pe hartă), se alege **Comentarii și imagini**, apoi se dă click pe tabul **Imagini probă**, iar în final 
 se apasă butonul adaugă:  
-![Pașaport - adăugare imagini pasul 1](images/Pasaport_8.png)
+  
+![Pașaport - adăugare imagini pasul 1](images/Pasaport_8.png)  
+  
 După acestă acțiune se va deschide o nouă fereastră numită **Fișiere sistem** la care se va apăsa butonul **Adăugare**
 pentru a introduce în tabela **Fișiere sistem** fișierul dorit cât și unele informații aferente acestuia:  
-![Pașaport - adăugare imagini pasul 2](images/Pasaport_9.png)
+  
+![Pașaport - adăugare imagini pasul 2](images/Pasaport_9.png)  
+  
 Fișierele pot fi introduse în baza de date și prin meniul _Aplicații_->_Fișiere sistem_, caz în care acestea vor fi 
 selectate din ecranul anterior. După apăsarea din nou a butonului **Adaugă** se va deschide formularul de încărcare a 
 fișierului imagine și a informațiilor aferente acestuia:  
-![Pașaport - adăugarea imaginii pasul 3](images/Pasaport_10.png)
+  
+![Pașaport - adăugarea imaginii pasul 3](images/Pasaport_10.png)  
+
 După care pentru încărcare imaginii apăsăm butonul **Încărcare** iar ca urmare se va deschide o fereastră de dialog în 
-vederea selectării fișierului dorit: 
-![Pașaport - adăugarea imaginii pasul 4](images/Pasaport_11.png)
+vederea selectării fișierului dorit:  
+
+![Pașaport - adăugarea imaginii pasul 4](images/Pasaport_11.png)  
+
 După confirmarea selecției (depinde de fiecare sistem de operare, imaginea de mai jos este preluată din Linux, unde 
 KDE-Plasma este desktop manager) și urcată într-o locație temporară pe server iar formularul **Fișiere sistem** va fi 
 completat automat cu următoarele date:  
@@ -551,66 +560,98 @@ completat automat cu următoarele date:
 * **Extensie** - Reprezintă extensia fișierului încărcat;
 * **Mărime** - Reprezintă mărimea fișierului încărcat;
 
-Pentru **Data realizării** s-a optat a se introduce manual, direct în formatul specific al limbii utilizate, în acest caz 
+Pentru **Data realizării** s-a optat pentru introducerea manuală, direct în formatul specific al limbii utilizate, în acest caz 
 ZZ/LL/AAAA sau se poate alege în format grafic din fereastra de dialog:  
-![Pașaport - adăugarea imaginii pasul 5](images/Pasaport_12.png)
-Pentru salvare în server se va apăsa butonul **OK**:  
-![Pașaport - adăugarea imaginii pasul 6](images/Pasaport_13.png)
-După salvarea în **Fișiere sistem** vom selecta imaginea dorită (se observă calea și numele fișierului sub care a fost 
-salvat în **filestorage**):  
-![Pașaport - adăugarea imaginii pasul 7](images/Pasaport_14.png)
-În urma selectării vom putea salva imaginea la **Imagini probă** prin apăsarea butonului **Selectează**:  
-![Pașaport - adăugarea imaginii pasul 8](images/Pasaport_15.png)
-Pentru cazurile în care sunt mai multe imagini de încărcat se repetă pașii anteriori:  
-![Pașaport - adăugarea imaginii pasul 9](images/Pasaport_16.png)
-Pentru salvarea modificările se va apăsa butonul **OK**:  
-![Pașaport - adăugarea imaginii pasul 10](images/Pasaport_17.png)
+  
+![Pașaport - adăugarea imaginii pasul 5](images/Pasaport_12.png)  
 
-### Vizualizarea/Determinarea software a locației de origine a probei
+Pentru salvare în server se va apăsa butonul **OK**:  
+
+![Pașaport - adăugarea imaginii pasul 6](images/Pasaport_13.png)  
+
+După salvarea în **Fișiere sistem** se va selecta imaginea dorită (se observă calea și numele fișierului sub care a fost 
+salvat în **filestorage**):  
+  
+![Pașaport - adăugarea imaginii pasul 7](images/Pasaport_14.png)  
+
+În urma selectării, imaginea va fi salvată la **Imagini probă** prin apăsarea butonului **Selectează**:  
+  
+![Pașaport - adăugarea imaginii pasul 8](images/Pasaport_15.png)  
+
+Pentru cazurile în care sunt mai multe imagini de încărcat se repetă pașii anteriori:  
+  
+![Pașaport - adăugarea imaginii pasul 9](images/Pasaport_16.png)  
+
+Pentru salvarea modificărilor se va apăsa butonul **OK**:  
+
+![Pașaport - adăugarea imaginii pasul 10](images/Pasaport_17.png)  
+
+### Vizualizarea/Determinarea software a locației de origine a probei  
+
 În sub-panelul **Locația de origine probei pe hartă** putem vizualiza locația de origine a probei, determinată prin 
 coordonatele Latitudine și Longitudine introduse anterior în sub-panelul **Date Biologice**:  
-![Pașaport - vizualizare locație origine probă 1](images/Pasaport_18.png)
+  
+![Pașaport - vizualizare locație origine probă 1](images/Pasaport_18.png)  
+
 În imaginea de mai sus este harta de la OpenStreetMap în care putem realiza zoom din tastele **+** și **-** din colțul 
-din stângă-sus al imaginii:
-![Pașaport - vizualizare locație origine probă 2](images/Pasaport_19.png)
+din stângă-sus al imaginii:  
+
+![Pașaport - vizualizare locație origine probă 2](images/Pasaport_19.png)  
+
 Dacă s-a introdus o cheie api pentru Google Maps atunci se pot încarcă hărțile puse la dispoziție de Google, prin 
-bifarea căsuței de dialog **Schimbă furnizorul hărții**:
-![Pașaport - vizualizare locație origine probă 3](images/Pasaport_20.png)
+bifarea căsuței de dialog **Schimbă furnizorul hărții**:  
+
+![Pașaport - vizualizare locație origine probă 3](images/Pasaport_20.png)  
+  
 Un exemplu pentru **Hartă-Teren** în ecran complet:  
-![Pașaport - vizualizare locație origine probă 3](images/Pasaport_21.png)
+  
+![Pașaport - vizualizare locație origine probă 3](images/Pasaport_21.png)  
+
 Pentru cazurile în care determinarea locației de origine a probei se realizează prin metoda **Estimată cu software**, 
 la momentul adăugării sau mai târziu prin modificare se va avea grijă să nu existe date în câmpurile **Latitudine** și 
 **Longitudine** iar furnizorul hărții să fie Google, pentru astfel de cazuri punctul de interes va fi plasat în centrul 
-hărții și va fi de culoare portocalie, ca în imaginea de mai jos:
-![Pașaport - vizualizare locație origine probă 4](images/Pasaport_22.png)
+hărții și va fi de culoare portocalie, ca în imaginea de mai jos:  
+
+![Pașaport - vizualizare locație origine probă 4](images/Pasaport_22.png)  
+
 În acest moment putem prinde cu mouse-ul, apăsând click stânga pe indicatorul de poziție și prin tragere se va muta în 
 locația de origine a probei:  
-![Pașaport - determinare software a locației 1](images/Pasaport_23.png)
+  
+![Pașaport - determinare software a locației 1](images/Pasaport_23.png)  
+
 Se observă că punctul de indicare a locației a fost mutat în apropiere de localitatea Suceava. Acum datele reprezentând 
 **Latitudinea**, **Longitudinea** și **Altitudinea** au fost completate automat în sub-panelul **Date Biologice**:  
-![Pașaport - determinare software a locației 2](images/Pasaport_24.png)
+  
+![Pașaport - determinare software a locației 2](images/Pasaport_24.png)  
+
 Pentru determinarea altitudinii a fost folosit serviciul Open Topo Data, pentru cazurile în care se dorește și pentru 
 determinarea **Altitudinii** servicul de la Google se va bifa căsuța de dialog **Schimbă furnizorul elevației**:  
+  
 ![Pașaport - determinare software a locației 3](images/Pasaport_25.png)
-
+  
 > **ATENȚIE**
 > 
 > Serviciile furnizate de Google sunt contra cost, implică achiziția unei chei api care probabil va costa (depinde de nr.
-> de solicitări/interogări la serviciul Google Maps ), deoarece se contorizează fiecare interogare (afișare, mutare etc. 
+> de solicitări/interogări la serviciul Google Maps), deoarece se contorizează fiecare interogare (afișare, mutare etc. 
 > a indicatorului). Este de preferat a se folosi la **Estimarea software**, ori când harta de la OpenStreetMap nu este 
 > tocmai cea mai bună soluție în acel moment.
 >
 
-## Exemplu introducere probă temporară
+## Exemplu introducere probă temporară  
+
 În imaginea de mai jos se prezintă introducerea unei probe temporare. Probele temporare sunt de regulă acele probe
 culese în campaniile de colectare și care pentru a intra definitv în colecția pe scurtă și/sau de lungă durată trebuie
-sa urmeze un parcurs de validare specific Băncilor de Gene:
-![Pașaport - introducere probă temporară 1](images/Pasaport_26.png)
+sa urmeze un parcurs de validare specific Băncilor de Gene:  
+
+![Pașaport - introducere probă temporară 1](images/Pasaport_26.png)  
+
 Pentru ca o probă să primească **Număr de intrare temporar** este obligatoriu, ca încă de la început, să fie bifată 
-căsuța de dialog **Număr de intrare temporar**. Dacă nu va fi marcată se va considera că se introduce o probă definitivă 
+căsuța de dialog **Număr de intrare temporar**. Dacă nu va fi marcată se consideră că este introdusă o probă definitivă 
 și ca urmare nu se mai putea modifica starea acesteia deoarece va deveni invalidă. După salvare proba temporară va fi
-vizibilă în listă:
-![Pașaport - introducere probă temporară 2](images/Pasaport_27.png)
+vizibilă în listă:  
+
+![Pașaport - introducere probă temporară 2](images/Pasaport_27.png)  
+  
 > **ATENȚIE**  
 > 
 > O probă înregistrată definitivă nu va mai putea fi reînregistrată temporară. De exemplu proba înregistrată cu **Număr 
@@ -618,13 +659,18 @@ vizibilă în listă:
 >
 ![Pașaport - introducere probă temporară 3](images/Pasaport_28.png)
 
-# Introducerea în Depozit
+# Introducerea în Depozit  
+
 Introducerea în **Depozit** a probelor, împreună cu datele aferente acestora (stoc, locație etc.), se realizează prin 
-accesarea meniului _Aplicații_->_Depozit_ apăsând butonul **Adaugă**:
-![Depozit - introducere probă](images/Depozit_1.png)
-Iar ca urmare se va deschide o pagină nouă cu formularul de introducere în care o parte din câmpuri sunt obligatoriu a 
-fi introduse. Necompletarea acestora va face imposibilă salvarea în baza de date:
-![Depozit - introducere probă formular 1](images/Depozit_2.png)
+accesarea meniului _Aplicații_->_Depozit_ apăsând butonul **Adaugă**:  
+
+![Depozit - introducere probă](images/Depozit_1.png)  
+
+Ca urmare se va deschide o pagină nouă cu formularul de introducere în care o parte din câmpuri sunt obligatoriu a 
+fi introduse. Necompletarea acestora va face imposibilă salvarea în baza de date:  
+
+![Depozit - introducere probă formular 1](images/Depozit_2.png)  
+
 Semnificația câmpurilor din formular este următoarea pentru:
 * **Informații din Pașaport**
   * **Număr intrare** - Reprezintă numărul de intrare al probei și se alege din listă. Lista reprezintă datele din 
@@ -687,26 +733,35 @@ mesaj de eroare. Posibile erori fiind lipsa tuturor informațiilor obligatorii. 
     * **Județul** - din Pașaport;
     * **Localitatea** - din Pașaport;
     * **Satutul biologic - codul** - este obligatoriu;
-   ![Depozit - introducere probă formular 2](images/Depozit_3.png)
-2. Se apasă butonul **Încarcă QR**, se va deschide o căsuță de dialog pentru alegerea fișierului generat iar după 
-afișarea codului se va apăsa butonul **OK** pentru salvarea înregistrării in baza de date:
-   ![Depozit - introducere probă formular 3](images/Depozit_4.png)
 
+  
+   ![Depozit - introducere probă formular 2](images/Depozit_3.png)  
+  
+2. Se apasă butonul **Încarcă QR**, se va deschide o căsuță de dialog pentru alegerea fișierului generat iar după 
+afișarea codului se va apăsa butonul **OK** pentru salvarea înregistrării in baza de date:  
+  
+  
+   ![Depozit - introducere probă formular 3](images/Depozit_4.png)  
+  
 > **ATENȚIE**
 >
 > Aplicația va crea automat directorul qrCodeImage în locația /opt/genedatabank, în acestă locație numai utilizatorul 
 > **genedatabank** are drepturi de scriere și vizualizare. Va fi necesar de a mapa printr-un protocol de rețea (Samba 
 > sau NFS) acest director către utilizatorii ce folosesc aplicația.
 
-După salvare înregistrarea va apărea în listă:
-![Depozit - listă](images/Depozit_5.png)
+După salvare înregistrarea va apărea în listă:  
+  
+![Depozit - listă](images/Depozit_5.png)  
+
 Lista are prevazut în capul tabelului două câmpuri unde sunt afișate următoarele informații **Stocul** afișat în pagină 
 și numărul de recipiente. Informațiile sunt utile în special când se folosesc filtrele.
 
-# Viabilitate semințe noi
-Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).
+# Viabilitate semințe noi  
 
-## Înregistrarea unei analize
+Formularul este utilizat pentru vizualizarea și înregistrarea analizelor și testelor de viabilitate (germinare).  
+
+## Înregistrarea unei analize  
+
 Pentru înregistrarea unei noi analize se alege meniul **Viabilitate semințe noi** ca în figura de mai jos:  
 
 ![Viabilitate semințe noi](images/Viabilitate_1.jpg)
@@ -715,47 +770,61 @@ După alegerea meniului se va deschide următorul ecran:
 
 ![Viabilitate semințe noi listă](images/Viabilitate_2.jpg)
 
-Aici vom putea vizualiza, modifica și adăuga noi analize aferente unei noi probe sau eșantion fie el cu număr temporar sau nu.
+Aici se pot vizualiza, modifica și adăuga, analizele aferente unor noi probe sau eșantioane, cu număr temporar sau 
+definitiv.  
 
-### Adăugarea unei analize
-Pentru a adăuga o nouă analiză se apasă butonul **Adaugă**, evidențiat în figura de mai jos:  
+### Adăugarea unei analize  
 
-![Viabilitate semințe noi - **Adăugă**](images/Viabilitate_3.jpg)
+Pentru a adăuga o nouă analiză se apasă butonul **Adaugă**, evidențiat în figura de mai jos:
+  
+![Viabilitate semințe noi - **Adăugă**](images/Viabilitate_3.jpg)  
 
-moment în care se va deschide un nou ecran, prin care suntem informați, că este necesar alegerea probei de analizat după **Nr. de intrare**, câmpul fiind obligatoriu, ca în figura de mai jos: 
+După care se va deschide un nou ecran, prin care **utilizatorul** este informat asupra necesității alegerii probei de 
+analizat, după **Nr. de intrare**, câmpul fiind obligatoriu, ca în figura de mai jos: 
 
 ![Viabilitate semințe noi - **Alegere Nr. de intrare**](images/Viabilitate_4.jpg)
 
-Celelalte câmpuri sunt de tip **numai citire**, deoarece vor fi completate automat, ca urmare a acțiunilor viitoare, ale utilizatorului conectat. De exemplu s-a ales proba cu numărul de intrare SVGB-1, pentru care dorim să realizăm analiza de viabilitate (germinație):
+Celelalte câmpuri sunt de tip **numai citire**, deoarece vor fi completate automat, ca urmare a acțiunilor viitoare, ale 
+utilizatorului conectat. De exemplu s-a ales proba cu numărul de intrare SVGB-1, pentru care se realizează analiza de 
+viabilitate (germinație):
 
 ![Viabilitate semințe noi - **Nr. de intrare ales**](images/Viabilitate_5.jpg)
 
-În cadrul fiecărei analize, aferentă unui **Nr. de intrare**, se vor adăuga teste, cu ajutorul butonului **Adaugă**, evidențiat mai jos:  
+În cadrul fiecărei analize corespunzătoare unui **Nr. de intrare**, se vor adăuga teste, cu ajutorul butonului 
+**Adaugă**, evidențiat mai jos:  
 
 ![Viabilitate semințe noi - **Adăugare teste noi**](images/Viabilitate_6.jpg)
 
-moment în care se va deschide un nou ecran, ca în imaginea de mai jos:  
+Moment în care va fi deschis un nou ecran, ca în imaginea de mai jos:  
 
 ![Viabilitate semințe noi - **Adăugare test nou**](images/Viabilitate_7.png)
 
-după cum se observă câmpul cu **Nr. de semințe testate** este obligatoriu. Câmpul acceptă numai numere întregi pozitive (mai mari ca zero). Câmpul **Data punerii la germinat** este obligatoriu și el, este de tip dată și se completează automat cu data curentă.
+După cum se observă, câmpul cu **Nr. de semințe testate** este obligatoriu, acesta acceptând numai numere întregi 
+pozitive (mai mari ca zero). Câmpul **Data punerii la germinat** este de asemenea obligatoriu, fiind de tip dată, fiind 
+completat automat ci data curentă.
 
-Pentru exemplu de față considerăm că la testare au fost puse la germinat 50 de semințe în dată 08/10/2024, iar **Data evaluării germinației** a fost 18/10/2024, ecranul nostru va fi completat ca mai jos:
+Pentru exemplificare, dacă au fost puse la germinat 50 de semințe în dată 08/10/2024, iar **Data evaluării germinației** 
+a fost 18/10/2024, ecranul va fi completat ca mai jos:
 
 ![Viabilitate semințe noi - **Adăugare test nou** - completare câmpuri](images/Viabilitate_8.png)
 
-Observăm că o parte din câmpuri sunt de tip **numai citire** și au fost completate automat:  
+Se observă că o parte din câmpuri, de tip **numai citire**, sunt completate automat:  
 
 * **Viabilitate [%]** - reprezintă calculul în procente al viabilității, raportat la nr. de semințe puse la germinat;
-*  **Durata germinației [zile]** - reprezintă durata de timp, între data punerii la germinat și data analizei germinației;
+* **Durata germinației [zile]** - reprezintă durata de timp, între data punerii la germinat și data analizei germinației;
 
-Câmpul **Durata tratamentului [zile]**, este de tip întreg pozitiv și se completează cu numărul de zile aferente unui eventual tratament, iar la câmpul **Observații** se poate detalia cu ceea ce considerăm necesar, ca de exemplu nr. și tipul de tratamente (fizice - pre-răcire, chimice - tratarea cu anumite substanței, etc.), câmpul este nelimitat la nr. de caractere.  
+Câmpul **Durata tratamentului [zile]**, este de tip întreg pozitiv și se completează cu numărul de zile aferente unui 
+eventual tratament, iar la câmpul **Observații** se poate detalia cu ceea ce considerăm necesar, ca de exemplu nr. și 
+tipul de tratamente (fizice - pre-răcire, chimice - tratarea cu anumite substanței, etc.), câmpul este nelimitat la nr. 
+de caractere.  
 
-Pentru adăugare, se apasă butonul **OK**, iar testul nostru va fi adăugat în lista aferentă probei, cu **Nr. de intrare** SVGB-1.
+Pentru adăugare, se apasă butonul **OK**, iar testul nostru va fi adăugat în lista aferentă probei, cu **Nr. de intrare** 
+SVGB-1.
 
 ![Viabilitate semințe noi - **Adăugare test nou** - ađăugare în listă](images/Viabilitate_9.jpg)
 
-Pentru salvarea efectivă a testului, la analiza probei cu **Nr. de intrare** SVGB-1, va trebui să apăsăm butonul **OK**, ca mai jos:  
+Pentru salvarea efectivă a testului, la analiza probei cu **Nr. de intrare** SVGB-1, va trebui să apăsăm butonul **OK**, 
+ca mai jos:  
 
 ![Viabilitate semințe noi - **Adăugare test nou** - salvare la analiză](images/Viabilitate_10.jpg)
 
@@ -767,48 +836,60 @@ Câmpurile aferente unei analize sunt:
   
 * **Nr. analizei** - format din serie și număr, se completează și se indexează automat;
 * **Număr de intrare** - reprezintă numărul de intrare aferent probei (eșantionului) supus determinării viabilității;
-* **Anul testării** - reprezintă anul în care proba a fost supusă determinării viabilității, se completează automat cu anul curent; 
-* **Viabilitatea medie [%]** - reprezintă viabilitatea medie, în [%], pentru calcul se utilizează toate testele din lista aferentă analizei;
+* **Anul testării** - reprezintă anul în care proba a fost supusă determinării viabilității, se completează automat cu 
+anul curent; 
+* **Viabilitatea medie [%]** - reprezintă viabilitatea medie, în [%], pentru calcul se utilizează toate testele din 
+lista aferentă analizei;
 * **Stare** - reprezintă starea în care se află analiza **În lucru** sau **Finalizat**; 
 
 > **Atenție**
-  >
-> **Viabilitatea medie [%]** ține cont de toate testele din cadrul analizei. În cazul în care există un test aflat în desfășurare acesta va influență valoarea viabilității deoarece se consideră viabilitatea minimă posibilă **0** și este luat în calcul, ca în figura de mai jos:
+>
+> **Viabilitatea medie [%]** ține cont de toate testele din cadrul analizei. În cazul în care există un test aflat în 
+> desfășurare acesta va influență valoarea viabilității deoarece se consideră viabilitatea minimă posibilă **0** și este 
+> luat în calcul, ca în figura de mai jos:
 
 ![Viabilitate semințe noi - **Adăugare test nou** - parțial](images/Viabilitate_12.jpg)
 
 După cum se observă introducerea parțială a unui nou test va influența calculul valorii medii a viabilității.  
 
-Pentru protecție butonul **Finalizare** este invalidat dacă există cel puțin un test, aferent unei analize, pentru care nu s-a calculat viabilitatea, ca în figura de mai jos:  
+Pentru protecție butonul **Finalizare** este invalidat dacă există cel puțin un test, aferent unei analize, pentru care 
+nu s-a calculat viabilitatea, ca în figura de mai jos:  
 
 ![Viabilitate semințe noi - **Adăugare analiză** - cu test parțial](images/Viabilitate_13.jpg)
 
 ### Finalizarea unei analize
 
-Pentru a finaliza o analiză, va trebui să avem toate testele din cadrul ei complete, astfel la testul de mai sus va fi necesar a completa cu evaluare germinației, apăsând butonul **Modifică** și vom intra în lista cu teste, unde vom alege testul nostru parțial, urmând a fi completat, ca în figura de mai jos: 
+Pentru a finaliza o analiză, este necesar ca toate testele din cadrul ei să fie complete. Astfel, testul de mai sus se va 
+completa cu evaluare germinației, apăsând butonul **Modifică**, se intră în lista cu teste de unde se alege testul 
+parțial, urmând a fi completat, ca în figura de mai jos: 
 
 ![Viabilitate semințe noi - **Adăugare analiză** - cu teste completate](images/Viabilitate_14.jpg)
 
-După cum se observă, se realizează iarăși calcul viabilității medii, dar de această dată folosind și contribuția viabilității testului/repetiției 2.
+După cum se observă, se realizează din nou calcul viabilității medii, dar de această dată folosind și contribuția 
+viabilității testului/repetiției 2.
 
-La o analiză, se pot realiza câte teste sau repetiții se consideră a fi necesare, la calcularea viabilității medii se va ține cont de toate.
+La o analiză, se pot realiza câte teste sau repetiții se consideră a fi necesare, la calcularea viabilității medii 
+ținându-se cont de toate.
 
-Cu toate testele finalizate, programul va activa butonul **Finalizare**, ca în figura de mai jos:  
+După încheierea (finalizarea) testelor, programul va activa butonul **Finalizare**, ca în figura de mai jos:  
 
 ![Viabilitate semințe noi - **Adăugare analiză** - activare buton **Finalizare**](images/Viabilitate_15.jpg)
 
 > **Atenție** 
-> Un utilizator nu poate **Finaliza** analiza **În lucru**, chiar dacă este completă al altui utilizator și nici nu o poate modifică. În schimb este posibilă vizualizarea.  
+> Un utilizator nu poate **Finaliza** analiza **În lucru**, chiar dacă este completă, pentru un alt utilizator și nici 
+> nu o poate modifică. În schimb este posibilă vizualizarea.  
 
 ![Viabilitate semințe noi - **Adăugare analiză** - inactivare buton **Finalizare** și activare **Modificare**](images/Viabilitate_16.jpg)
 
-în cazul de mai sus, analiza **ROM007_VNS-9** aparține altui utilizator.  
+În cazul de mai sus, analiza **ROM007_VNS-9** aparține altui utilizator.  
 
-După apăsarea butonului **Finalizare**, se va schimba automat **Starea** în **Finalizat** , ca în imaginea de mai jos:  
+După apăsarea butonului **Finalizare**, se va schimba automat **Starea** în **Finalizat**, ca în imaginea de mai jos:  
 
 ![Viabilitate semințe noi - **Adăugare analiză** - avertizare](images/Viabilitate_17.png)
 
- inițial, vom fi avertizați că marcăm ca **Finalizat** analiza, iar dacă suntem de acord și apăsăm butonul **OK**  atunci analiza va fi marcată ca și **Finalizat**, iar analiza nu va mai putea fi modificată, dar va putea fi vizualizată, ca în imaginea de mai jos:  
+La marcarea ca Finalizat a unei analize apare un mesaj de avertizare. După exprimarea acordului si apăsarea butonului OK, 
+analiza se va marca sub forma Finalizat, după care nu mai este permisă modificarea acesteia, ci doar vizualizarea, ca în 
+imaginea de mai jos:  
 
 ![Viabilitate semințe noi - **Adăugare analiză** - marcată **Finalizat**](images/Viabilitate_18.jpg)
 
