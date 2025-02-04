@@ -317,18 +317,18 @@ pentru:
   * acces pentru ștergere;
   * etc.
 * **Permisiuni nivel de rând**
-  * acces la informațiile ce conține anumite informații
-    * de exemplu la Probele care sunt declarate confidențiale;
+  * acces la informațiile ce conține anumite informații, de exemplu:
+    * vizualizarea numai a probelor din Pașaport care sunt declarate neconfidențiale;
   * etc.
 
-De exemplu, prin apăsarea butonului **Permisiuni resursă** se va deschide o nouă fereastră, de unde se alege rolurile 
-care sunt atribuite utilizatorului, ca în imaginea de mai jos:  
+De exemplu, prin apăsarea butonului **Permisiuni resursă** se va deschide o nouă fereastră, de unde se aleg rolurile 
+care sunt atribuite **utilizatorului**, ca în imaginea de mai jos:  
 
 ![Asignări roluri resursă](images/Asignari_roluri_2.png)
 
-iar, prin apăsarea butonului **Permisiuni nivel de rând** se va deschide o altă fereastră, de unde se alege rolurile care
-sunt atribuite utilizatorului, de exemplu **Institution and users** este rolul ce permite utilizatorului de a vedea 
-numai înregistrările aferente **Institutului** din care face parte.
+Prin apăsarea butonului **Permisiuni nivel de rând** se va deschide o altă fereastră, de unde se aleg rolurile atribuite 
+**utilizatorului**. De exemplu **Institution and users** este rolul ce permite utilizatorului vizualizarea înregistrărilor 
+aferente doar **Institutului** din care face parte.
 
 ![Asignări roluri nivel de rând](images/Asignari_roluri_3.png)
 
@@ -342,13 +342,13 @@ Listă ce va fi salvată prin apăsarea butonului **OK**.
 
 În meniul **Pașaport** se înregistrează probele ce vor intra în **Institut** spre păstrare, multiplicare, cercetare etc.  
 O probă poate fi înregistrată cu număr temporar sau cu număr definitiv. Numerele sunt generate automat de către baza de 
-date în sens crescător și sunt formate din :
-* Pentru numerele definitive: **Serial pentru nr. de intrare** - **nr. de ordine**, de exemplu SVGB-1;
-* Pentru numerele definitive: **Serial pentru nr. temporar de intrare** - **nr. de ordine**, de exemplu TSVGB-1;
+date în sens crescător, fiind formate din :
+* **Serial pentru nr. de intrare** - **nr. de ordine**, de exemplu SVGB-1;
+* **Serial pentru nr. temporar de intrare** - **nr. de ordine**, de exemplu TSVGB-1;
 
 Seriile au fost atribuite anterior, la pasul **Definirea unor parametrii unici aferenți fiecărei Instituției ce utilizează
 baza de date**.  
-După accesul în aplicație, la adresei unde se află aplicația **GeneDataBank**, se deschide o pagină, ca mai jos:
+După accesul în aplicație, la adresele unde se află aplicația **GeneDataBank**, se deschide o pagină, ca mai jos:
 
 ![Accesare aplicație](images/Pasaport_1.png)
 
@@ -360,26 +360,28 @@ Pagina **Pașaport** poate fi vizualizată din meniul _Aplicații_->_Pașaport_:
 
 ## Introducerea unei probe
 
-Pentru introducerea unei probe se vor urma următorii pași:  
+Pentru introducerea unei probe este necesar parcurgerea următorilor pași:  
 
 * Se apasă butonul **Adaugă**:  
 
 ![Adăugare pașaport](images/Pasaport_3.png)
 
 * Se va deschide o pagină cu câmpurile necesare a fi introduse:
+
 ![Adăugare pașaport - câmpuri](images/Pasaport_4.png)
-în care sunt următoarele câmpuri:
+  
+În care sunt următoarele câmpuri:
 
   * **Institutul păstrător** - Reprezintă **Institutul** care va păstra proba. Se completează automat, deoarece este 
 același cu **Institutul** din care face parte **utilizatorul**. Institutul păstrător este introdus, dacă acesta nu 
 există, prin accesarea meniului _Setări_->_Administrative_->_Instituții_. Prin interogări se poate obține codul 
 **INSTCODE** din descriptorii EURISCO;
-  * **Număr de intrare temporar** - Este o căsuță de marcare, pentru cazul în care este bifată se va genera un număr de
-intrare temporar. În cazul în care se dorește a introduce o probă cu număr definitiv nu se va bifa. După salvare, dacă proba a fost marcată 
-ca fiind definitivă, căsuța va fi invalidată (nu se mai poate schimba starea), iar dacă proba a fost marcată temporară, 
+  * **Număr de intrare temporar** - Este o căsuță de dialog. În cazul în care este bifată se va genera un număr de
+intrare temporar. În cazul introducerii unei probe cu număr definitiv nu se va bifa. După salvare, dacă proba a fost 
+marcată ca fiind definitivă, căsuța va fi invalidată (nu se mai poate schimba starea), iar dacă proba a fost marcată temporară, 
 căsuța va rămâne validă (se poate modifica starea). 
-  * **Număr intrare** - Este numărul intrare definitiv atribuit probei și reprezintă câmpul **ACCENUMB** din 
-descriptorii EURISCO;
+  * **Număr intrare** - Este numărul de intrare definitiv atribuit probei și reprezintă **ACCENUMB** din descriptorii 
+EURISCO;
   * **Număr temporar** - Este numărul intrare definitiv atribuit probei. Acesta va fi completat automat, cu numărul 
 probei temporare, în momentul în care se scoate bifa de la **Număr de intrare temporar**. Astfel se va păstra și numărul
 temporar al probei;
@@ -419,29 +421,27 @@ prin punct și virgulă fără spațiu. Exemplu: Nume probă: Elena;Suceava23. R
 EURISCO;
   * **Data originii** - Data cea mai veche a probei, care se cunoaște în format [AAAALLZZ]. Datele lipsă (LL sau ZZ) 
 trebuie indicate cu cratime [--] sau "00" [dublu zero];
-  * **Țara** - Țara de origine. Se alege din lista derulantă țara, în cazul în care lipsește sau apari modificări 
-acestea se pot realiza și cu ajutorul meniului _Setări_->_Țări_ și se va completa obligatoriu Codul ISO 3166-1 din 3 
-litere al țării în care a fost colectată inițial proba (de exemplu: populație locală, rudă sălbatică, varietatea 
+  * **Țara** - Se alege din lista derulantă țara de origine a probei. Atunci când această informație lipsește sau apari 
+modificări acestea se pot realiza și cu ajutorul meniului _Setări_->_Țări_ și se va completa obligatoriu Codul ISO 3166-1 din 3 
+litere al țării din care a fost colectată inițial proba (de exemplu: populație locală, rudă sălbatică, varietatea 
 fermierului), ameliorată sau selectată (linii de ameliorare, organisme modificate genetic, populații segregate, hibrizi, 
 cultivare moderne etc.). Reprezintă câmpul **ORIGCTY** din descriptorii EURISCO;
   * **Județul** - Reprezintă județul din care provine proba, în cazul României sau ceva asemănător pentru alte țări.
 Reprezintă o parte din câmpul **COLLSITE** din descriptorii EURISCO. Acesta este un câmp compus din cel puțin Județ+Cod 
 SIRUTA+Localitate;
   * **Localitatea** - Reprezintă locația de colectare. Informații despre locație sub nivelul țării/județului care 
-descrie locul în care a fost colectată proba. eprezintă o parte din câmpul **COLLSITE** din descriptorii EURISCO. 
+descrie locul în care a fost colectată proba. Reprezintă o parte din câmpul **COLLSITE** din descriptorii EURISCO. 
 Acesta este un câmp compus din cel puțin Județ+Cod SIRUTA+Localitate;
-  * **Latitudine** - Reprezintă latitudinea locației de colectare (format zecimal). Latitudinea exprimată în grade 
-zecimale. Valorile pozitive sunt la nord de Ecuator; valorile negative sunt la sud de Ecuator (de exemplu -44,6975). 
-Se introduc datele in standardul GPS respectiv WGS 84. Reprezintă câmpul **DECLATITUDE** din descriptorii EURISCO;
-  * **Longitudine** - Reprezintă Longitudinea locului de colectare (Format zecimal). Longitudine exprimată în grade 
-zecimale. Valorile pozitive sunt la est de Meridianul Greenwich; valorile negative sunt la vest de Meridianul Greenwich 
-(de exemplu, +120,9123). Se introduc datele in standardul GPS respectiv WGS 84. Reprezintă câmpul **DECLONGITUDE** din 
-descriptorii EURISCO;
-  * **Altitudine** - Reprezintă altitudinea locului de colectare. Altitudinea locului de colectare este exprimată în 
-metri [m], deasupra nivelului mării. Sunt permise valori negative. Reprezintă câmpul **ELEVATION** din descriptorii 
-EURISCO;
+  * **Latitudine** - Reprezintă latitudinea locației de colectare, exprimată în grade zecimale. Valorile pozitive sunt 
+la nord de Ecuator; valorile negative sunt la sud de Ecuator (de exemplu -44,6975). Se introduc datele in standardul GPS 
+respectiv WGS 84. Reprezintă câmpul **DECLATITUDE** din descriptorii EURISCO;
+  * **Longitudine** - Reprezintă Longitudinea locului de colectare, exprimată în grade zecimale. Valorile pozitive sunt 
+la est de Meridianul Greenwich; valorile negative sunt la vest de Meridianul Greenwich (de exemplu, +120,9123). Se 
+introduc datele in standardul GPS respectiv WGS 84. Reprezintă câmpul **DECLONGITUDE** din descriptorii EURISCO;
+  * **Altitudine** - Reprezintă altitudinea locului de colectare, exprimată în  metri [m], deasupra nivelului mării. 
+Sunt permise valori negative. Reprezintă câmpul **ELEVATION** din descriptorii EURISCO;
   * **Metoda de georeferință** - Reprezintă metoda de georeferențiere utilizată (GPS, determinată cu ajutorul hărții, 
-determinată din articole sau estimată folosind software). Lăsați necompletat dacă metoda de georeferențiere nu este 
+determinată din articole sau estimată folosind software). Se lasă necompletat dacă metoda de georeferențiere nu este 
 cunoscută. Reprezintă câmpul **GEOREFMETH** din descriptorii EURISCO;
   * **Data colectării probei** - Reprezintă data efectivă de colectăre a probei, în format [AAAALLZZ]. Datele lipsă (LL sau ZZ)
     trebuie indicate cu cratime [--] sau "00" [dublu zero]. Reprezintă câmpul **COLLDATE** din descriptorii EURISCO;
@@ -456,7 +456,7 @@ Reprezintă câmpul **ANCEST** din descriptorii EURISCO;
 **COLLSRC** din descriptorii EURISCO;
   * **Numărul probei dat de donator** - Este identificatorul atribuit unei probe de către donator. Respectă standardul 
 ACCNUMB. Reprezintă câmpul **DONORNUMB** din descriptorii EURISCO;
-  * **Institutul donor** - Reprezintă institutului donator. Reprezintă câmpul **DONORCODE** și/sau **DONORNAME** din 
+  * **Institutul donor** - Se alege institutul donator. Reprezintă câmpul **DONORCODE** și/sau **DONORNAME** din 
 descriptorii EURISCO;
   * **Alte numere** - Reprezintă alte numere asociate cu proba. Orice alți identificatori despre care se știe că există 
 în alte colecții pentru această aderare. Utilizați următorul format: INSTCODE:ACCENUMB; INSTCODE:identificator;... 
@@ -467,27 +467,27 @@ puncte. Reprezintă câmpul **OTHERNUMB** din descriptorii EURISCO;
 Altele). Se completează cu numele câmpului la care se referă și două puncte (:) fără spațiu (de exemplu, 
 COLLSRC:rivieră). Remărcile distincte care se referă la câmpuri diferite sunt separate prin punct și virgulă fără 
 spațiu. Reprezintă câmpul **REMARKS** din descriptorii EURISCO;
-  * **URL** - Adresa URL. URL care leagă la date suplimentare despre accesiune, fie în banca de gene păstrătoare, fie 
-din altă sursă. Exemplu: http://gbis.ipk-gatersleben.de/gbis_i/detail.jsf?akzessionId=31805 . Reprezintă câmpul 
-**ACCEURL** din descriptorii EURISCO;
+  * **URL** - Adresa URL la datele suplimentare despre accesiune, fie în banca de gene păstrătoare, fie la altă sursă. 
+Exemplu: http://gbis.ipk-gatersleben.de/gbis_i/detail.jsf?akzessionId=31805 . Reprezintă **ACCEURL** din descriptorii 
+EURISCO;
   * **Confidențial** - Statutul confidențialității al probei. Se alege din listă. Proba poate fi confidențială, în 
 funcție de condițiile donatorului sau alte criterii. 
   * **Statut MLS** - Statutul unei probe în ceea ce privește Sistemul Multilateral (MLS) al Tratatului internațional 
-privind resursele genetice vegetale pentru alimentație și agricultură. Se alege din listă, lăsați necompletat dacă 
+privind resursele genetice vegetale pentru alimentație și agricultură. Se alege din listă sau se lăsă necompletat dacă 
 starea nu este cunoscută. Reprezintă câmpul **MLSSTAT** din descriptorii EURISCO;
   * **Status AEGIS** - Statutul codificat al unei probe în ceea ce privește un Sistem Integrat European de Bancă de Gene 
-(AEGIS). Furnizează informațiile dacă proba este conservată pentru AEGIS. Se alege din listă, lăsați necompletat dacă 
+(AEGIS). Furnizează informațiile dacă proba este conservată pentru AEGIS. Se alege din listă sau se lasă necompletat dacă 
 starea nu este cunoscută. Țările din Regiunea Europeană lucrează pentru a stabili un sistem rațional de cooperare 
 regională în conservarea și utilizarea durabilă a resurselor genetice vegetale pentru alimentație și agricultură (PGFRA)
 în Europa. Acesta se numește Sistemul Integrat European, sau pe scurt AEGIS, care a înființat pentru prima dată o 
-Colecție Europeană, care funcționează ca o bancă de gene virtuală (europeană). Probele din Colecția Europeană (probele 
+Colecție Europeană, ce funcționează ca o bancă de gene virtuală (europeană). Probele din Colecția Europeană (probele 
 europene) sunt menținute în conformitate cu standardele de calitate convenite și vor fi disponibile gratuit în 
 conformitate cu termenii și condițiile stabilite în Tratatul internațional privind Resursele Fitogenetice pentru 
 Alimentație și Agricultură (Tratatul). Procedând astfel, țările speră să raționalizeze sistemul actual de conservare și 
 utilizare durabilă în Europa și să-și îmbunătățească eficiența atât la nivel colectiv, cât și la nivel individual. 
 Noul sistem va permite băncilor de gene individuale să se bazeze pe munca întreprinsă de alte bănci de gene, fără a fi 
 nevoie să creeze duplicate singure. Reprezintă câmpul **AEGISSTAT** din descriptorii EURISCO;
-  * **Istoric** - Probă activă/eliminată. Se alege din listă. Acest indicator indică dacă o probă nu mai este menținută 
+  * **Istoric** - Probă activă/eliminată. Se alege din listă. Acest indicator arată dacă o probă nu mai este menținută 
 activ de către instituția care o deține. În acest caz, datele istorice ar putea oferi totuși informații valoroase. 
 Lăsați necompletat dacă starea nu este cunoscută. Reprezintă câmpul **HISTORIC** din descriptorii EURISCO;
   * **Institutul de colectare** - Reprezintă institutul care colectează eșantionul. Dacă institutul deținător a colectat 
@@ -495,26 +495,35 @@ materialul, institutului de colectare (COLLCODE) trebuie să fie același cu cod
 (INSTCODE). Urmează standardul INSTCODE. Se alege din listă și se poate crea o listă pentru cazul in care au participat 
 mai multe Institute în campania de colectare și nu se poate identifica exact care a fost cel care a cules proba. 
 Reprezintă câmpul **COLLCODE** din descriptorii EURISCO;
-  * **Comentarii și imagini** - Se pot adăuga descrieri ale probei sau comentarii ce sunt pertinente. Iar în tabul 
+  * **Comentarii și imagini** - Se pot adăuga descrieri ale probei sau comentarii ce sunt pertinente, iar în tabul 
 **Imagini probă** se pot încărca imagini ale probei în cauză;
   * **Locația de origine probei pe hartă** - Indică pe hartă locația asigurată de câmpurile Longitudine și Latitudine. În 
 cazul introducerilor probelor care nu au câmpurile Longitudine și Latitudine completate să se determine pe hartă, 
 numai în cazul în care se alega ca furnizor al hărții Google Maps, se determină automat și altitudinea (elevația);
 
-## Exemplu introducere probă definitivă
-În cele ce urmează se prezintă introducerea unei probe definite. Probele definitive sunt probele temporare care au trecut
-testele de validare ori care sunt date spre păstrare sau custodie ori au fost donate de către un alt Institut.
-### Probă donată
+## Exemplu introducere probă definitivă  
+
+În cele ce urmează se prezintă introducerea unei probe definitive. Acestea sunt: probele temporare care au trecut
+testele de validare, probele date spre păstrare sau custodie ori care au fost donate de către un alt **Institut**.  
+
+### Probă donată  
+
  Exemplul următor prezintă introducerea în Bancă a unei probe donate, de către un alt Institut:  
-![Pașaport - introducere probă donată](images/Pasaport_5.png)
-După cum se observă, căsuța de dialog pentru **Număr de intrare temporar** nu este bifată, deoarece se dorește a 
-introduce o probă care va fi înregistrată cu un număr definitiv. În formularul **Pașaport** au fost introduse datele 
-aferente probei puse la dispoziție de către Institutul donor. Pentru salvarea datelor introduse se apasă butonul **OK**, în cazul în care nu se 
-dorește salvarea datelor se apasă butonul **Anulare**, aceleași butoane sunt folosite și pentru cazul în care se 
-realizează modificări. După apăsarea butonului **OK** datele vor apărea lista din ecranul **Pașaport**:  
-![Pașaport - vizualizare în listă probă donată](images/Pasaport_6.png)
+
+![Pașaport - introducere probă donată](images/Pasaport_5.png)  
+
+După cum se observă, căsuța de dialog pentru **Număr de intrare temporar** nu este bifată, deoarece se dorește 
+introducerea unei probe care va fi înregistrată cu un număr definitiv. În formularul **Pașaport** au fost introduse 
+datele aferente probei puse la dispoziție de către Institutul donor. Pentru salvarea datelor introduse se apasă butonul 
+**OK**, în cazul în care nu se dorește salvarea datelor se apasă butonul **Anulare**, aceleași butoane fiind folosite și 
+pentru cazul în care se realizează modificări. După apăsarea butonului **OK** datele vor apărea în lista din ecranul 
+**Pașaport**:  
+  
+![Pașaport - vizualizare în listă probă donată](images/Pasaport_6.png)  
+  
 Se observă că proba a primit un număr definitiv, în cazul de față **SVGB-1**. Pentru cazul în care se dorește 
 modificarea unei probe se selectează respectiva probă și se apasă butonul **Modifică**:  
+  
 ![Pașaport - modificare probă selectată](images/Pasaport_7.png)
 
 ### Adăugarea imaginilor aferente probei
