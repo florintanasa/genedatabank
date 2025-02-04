@@ -2,7 +2,7 @@
 
 ## Compilarea din surse în sistemul de operare Linux
 
-Pentru instalarea aplicației din surse, într-un terminal din sistemul nostru sau printr-o 
+Pentru instalarea aplicației din surse, într-un terminal din sistem sau printr-o 
 conexiune la distanță, este necesară parcurgerea următorilor pași:  
 
 * realizarea unui director denumit **git** și schimbarea căii de lucru în el:  
@@ -67,7 +67,7 @@ sudo chown genedatabank:genedatabank /opt/genedatabank/genedatabank-0.2.0-SNAPSH
 
 ### Pornirea serviciului GeneDataBank cu ajutorul unui manager de servicii  
 
-În acest scop folosim *_systemd_* și pentru care realizăm un fișier de configurare:  
+În acest scop este folosit *_systemd_* pentru care se realizează un fișier de configurare:  
 ```bash
 sudo nano /etc/systemd/system/genedatabank.service
 ```  
@@ -107,7 +107,7 @@ SyslogIdentifier=genedatabank
 [Install]
 WantedBy=multi-user.target
 ```
-Instalăm pachetul **rsyslog**, dacă nu este instalat în sistem:  
+Se instalează pachetul **rsyslog**, dacă nu există în sistem:  
 ```bash
  sudo apt install rsyslog
 ```
@@ -126,11 +126,11 @@ după care se realizează fișierul pentru log-uri:
 ```bash
 sudo touch /var/log/genedatabank.log
 ```
-în continuare se va schimba proprietarul și grupul fișierului creat anterior:  
+Se va schimba proprietarul și grupul fișierului creat anterior:  
 ```bash
 sudo chown syslog:adm /var/log/genedatabank.log
 ```
-Pentru ca **syslog** să știe de noul fișier va trebui să repornim serviciul:  
+Pentru ca **syslog** să știe de noul fișier va trebui efectuată repornirea serviciului:  
 ```bash
 sudo systemctl restart rsyslog
 ```
@@ -154,16 +154,16 @@ sudo -u genedatabank ln -sf /opt/genedatabank/genedatabank-0.2.0-SNAPSHOT.jar /o
 ```bash
 sudo systemctl start genedatabank.service
 ```
-După care se va verifica folosind comanda:  
+După care se va verifică folosind comanda:  
 ```bash
 systemctl status genedatabank.service
 ```
-pentru a vedea dacă a pornit corect, iar pentru a vedea un log mai extins folosim:  
+Iar pentru a vedea un log mai extins folosim comanda:  
 ```text
 sudo tail -F /var/log/genedatabank.log
 ```
 
-Pentru ca serviciul să pornească automat, la pornirea calculatorului/serverului, folosim comanda:  
+Dacă se vrea ca serviciul să pornească automat, la pornirea calculatorului/serverului, folosim comanda:  
 ```bash
 sudo systemctl enable genedatabank.service
 ```
@@ -178,11 +178,11 @@ sudo systemctl enable genedatabank.service
 > calea către program, consultați fișierul **src/main/resources/application.properties**
 >  
 
-Pentru a lista fișierele din directorul **_home_**, al utilizatorului **_genedatabank_**, se va rula comnanda:
+Pentru a lista fișierele din directorul **_home_**, al utilizatorului **_genedatabank_**, se va rula comanda:
 ```bash
 sudo -u genedatabank ls -lah /opt/genedatabank/
 ```
-iar rezultat comenzii va fi de forma:
+Rezultat comenzii va fi de forma:
 
 ```txt
 total 207M
@@ -216,45 +216,58 @@ drwxr-xr-x 1 genedatabank genedatabank    8 ian 22 14:48 .jmix
 
 
 # Prima utilizare
+
 Conectarea la server se realizează cu un browser web (de exemplu: chrome sau firefox) ca și client, folosind în bara de 
 adrese IP-ul unde a fost pornit serviciul **genedatabank** și respectiv portul utilizat de acesta, în acest caz **8090**
-, de exemplu http://localhost:8090/login, iar pentru autentificare inițială se va completa câmpurile pentru Utilizator 
-**admin** și Parola **admin**:   
+, de exemplu http://localhost:8090/login, iar pentru autentificare inițială se vor completa câmpurile pentru Utilizator 
+**admin** și Parola **admin**:  
+  
 ![Prima pornire](images/Prima_pornire_1.png)  
-urmând a fi schimbată după logare din meniul _Aplicații_->_Utilizatori_  
-completarea sau modificarea informațiilor, aferente unui utilizator existent, în acest caz **admin**, se realizează din
+  
+Urmând a fi schimbată după logare din meniul _Aplicații_->_Utilizatori_  
+Completarea sau modificarea informațiilor, aferente unui utilizator existent, în acest caz **admin**, se realizează din
 accesarea meniului _Aplicații_->_Utilizatori_ 
+  
 ![Modificare info admin 1](images/Prima_pornire_2.png)  
-după care se va deschide o nouă pagină a utilizatorului **admin** unde vom putea completa/modifica unele informații:  
+  
+După care se va deschide o nouă pagină a utilizatorului **admin** unde se vor completa/modifica unele informații:  
+  
 ![Modificare info admin 2](images/Prima_pornire_3.png)  
-în acest caz am definit zona de timp.
+  
+În acest caz a fost definită zona de timp.  
+
 >**INFO**
 > 
-> Pentru utilizatorul **admin** este de preferat de a nu-l înregistra într-o Instituție deoarece vizualizarea unor 
-> informații vor fi accesibile pentru un anumit utilizator numai pentru acelea înregistrate de utilizatorii arondați
-> unei anumite Instituție
+> Pentru utilizatorul **admin** este de preferat de a nu fi înregistrat într-o **Instituție** deoarece vizualizarea unor 
+> informații vor fi accesibile pentru un utilizator numai pentru acelea înregistrate de utilizatorii arondați
+> unei anumite **Instituții**.
 
-Modificarea parolei unui utilizator se realizează din meniul _Aplicații_->_Utilizatori_->_Adițional_->_Schimbare parolă_:  
+Modificarea parolei unui utilizator se realizează din meniul _Aplicații_->_Utilizatori_->_Adițional_->_Schimbare parolă_: 
+  
 ![Modificare parolă admin](images/Prima_pornire_4.png)  
-
+  
 ## Definirea unor parametrii unici aferenți fiecărei Instituției ce utilizează baza de date  
 
-La prima utilizare va trebui definit constantelor (seriilor) aferente fiecărei Instituție ce dorește a utiliza baza de date. 
-Definirea acestora se va realiza din meniul _Setări_->_Administrative_->_Instituții_->_Adaugă_ sau _Modifică_, 
-în imaginea de mai jos are loc vizualizarea unei Instituții existente ce are datele de identificare complete:  
-![Vizualizarea seriilor 1](images/Prima_pornire_5.png)
+La prima utilizare vor trebui definite constantele (seriilor) aferente fiecărei Instituții ce dorește a utilizarea bazei 
+de date. Definirea acestora se va realiza din meniul _Setări_->_Administrative_->_Instituții_->_Adaugă_ sau _Modifică_. 
+În imaginea de mai jos, are loc vizualizarea unei **Instituții** existente ce are datele de identificare complete:  
+  
+![Vizualizarea seriilor 1](images/Prima_pornire_5.png)  
+  
 > **ATENȚIE**
 > 
-> Unele câmpuri vor trebui să fie unice, ca de exemplu: **Cod**, **Serial pentru nr. de intrare**, **Serial pentru nr. 
+> Unele câmpuri trebuie să fie unice, ca de exemplu: **Cod**, **Serial pentru nr. de intrare**, **Serial pentru nr. 
 > temporar de intrare**, **Serial VOS**, **Serial VNS**
-> 
+  
 Câmpurile de mai sus reprezintă:  
 
 * **Cod** - este codul aferent fiecărui Institut înregistrat la FAO;
 * **Serial pentru nr. de intrare** - reprezintă seria codului unic acordat probelor aferente unui Institut;
 * **Serial pentru nr. temporar de intrare** - reprezintă seria codului unic al probelor temporare aferente unui Institut;
-* **Serial VOS** - reprezintă seria codului al determinării viabilității la semințele existente în depozit (Viability Old Seeds)
-* **Serial VNS** - reprezintă seria codului al determinării viabilității la semințele noi intrate în Institut (Viability New Seeds)
+* **Serial VOS** - reprezintă seria codului al determinării viabilității la semințele existente în depozit (Viability Old 
+Seeds);
+* **Serial VNS** - reprezintă seria codului al determinării viabilității la semințele noi intrate în Institut (Viability 
+New Seeds);
 
 ![Vizualizarea seriilor 2](images/Prima_pornire_6.png)
 
@@ -262,25 +275,26 @@ Câmpurile de mai sus reprezintă:
 > 
 > Câmpurile **Cheia api pentru Google Maps**, **Serial pentru nr. de intrare**, **Serial pentru nr.
 > temporar de intrare**, **Serial VOS**, **Serial VNS** pot fi vizualizate și modificate numai de către utilizatorul
-> **admin**, în plus, pentru o protecție la vizualizări accidentale de date sensibile, precum cheia api la Google Maps 
+> **admin**. În plus, pentru o protecție la vizualizări accidentale de date sensibile, precum cheia api la Google Maps 
 > acest câmp a fost mascat.  
 > **Utilizatorii vor putea folosi numai cheia aferentă Instituției în care este arondat.**
 > Utilizatorul **admin** _nu va putea folosi hărțile de la Google Maps_, deoarece nu este arondat unei instituții, în schimb
-> va putea utiliza hărțile de la OpenStreetMaps, acestea fiind define a fi folosite implicit.
+> va putea utiliza hărțile de la OpenStreetMaps, acestea fiind definite pentru folosirea implicită.
 
 ![Vizualizare cheie api Google MAps](images/Prima_pornire_7.png)
 
-# Adăugarea unui utilizator
+# Adăugarea unui utilizator  
+
 În vederea operării aplicației se vor putea înregistra **utilizatori** unici. Introducerea unui utilizator nou se 
 realizează din meniul _Aplicații_->_Utilizatori_->_Adaugă:  
 
 ![Adăugare utilizator 1](images/Adaugare_utilizator_1.png)
   
-Exemplu unui adăugării utilizator în imaginea de mai jos:  
+Exemplu pentru adăugarea unui utilizator se prezintă în imaginea de mai jos:  
 
 ![Adăugare utilizator 2](images/Adaugare_utilizator_2.png)
 
-După ce apasă butonul **OK** utilizatorul va fi salvat și va apărea în listă:  
+După apăsarea butonului **OK**, utilizatorul va fi salvat și va apărea în listă:  
 
 ![Adăugare utilizator 3](images/Adaugare_utilizator_3.png)  
 
