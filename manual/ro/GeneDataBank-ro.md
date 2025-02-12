@@ -752,3 +752,72 @@ Din meniul _DeneDataBank->Viabilitate semințe noi teste_ putem parcurge sau con
 Din acest ecran putem modifica/vizualiza sau exporta (în format excel sau json) testele realizate:  
 
 ![Viabilitate semințe noi teste - **Vizualizare/Modificare/Export**](images/Viabilitate_20.png)
+
+# Viabilitate semințe existente în depozit 
+
+Testarea germinației semințelor aflate în depozit este o componentă importantă și se realizează la diverse intervale de timp.
+
+## Adăugarea unei analize de viabilitate
+
+Accesul la ecranul pentru realizarea adăugării unei analize se realizează cu ajutorul meniului _GeneDataBank->Viabilitate semințe depozit_:  
+  
+![Viabilitate semințe existente](images/Viabilitate_21.png)
+  
+Deoarece, testele sunt realizate la semințele din depozitul pe termen mediu, este indicat a realiza un filtru pe acest tip de depozit, pentru a lucra mai lesne:  
+
+![Viabilitate semințe existente - **Vizualizare cu filtru activ** ](images/Viabilitate_22.png)
+  
+Pentru introducerea unei analize se va apăsa butonul **Adaugă**:  
+
+![Viabilitate semințe existente - **Adăugare analiză**](images/Viabilitate_23.png)  
+  
+Ca urmare se va deschide o pagină denumită **Viabilitate semințe din depozit** în care va trebui să introducem/alegem **Codul de depozit** (cod de recipient) din care sunt prelevate semințele în vederea analizării. Căutarea codului de depozit se poate realiza după **Numărul de intrare** caz în care în lista derulantă se va fi afișa toate recipientele aferente unui **Număr de intrare**, în exemplul de mai jos s-a căutat recipentele aferente **Numărului de intrare** (probei) **SVGB-380** :  
+
+ ![Viabilitate semințe existente - **Căutare cod depozit**](images/Viabilitate_24.png)  
+
+Dupa cum se poate observa lista afișează indicativul **Codului de depozit** (recipient) și un număr, după cratimă, care reprezintă stocul din recipient în acel moment. În cele ce urmează se consideră că se dorește realizarea analizei **Codului de depozit** având indicativ **CR1A01b2** și ca urmare se selectează: 
+
+ ![Viabilitate semințe existente - **Selecție cod depozit**](images/Viabilitate_25.png)  
+
+După selectare o parte din câmpuri sunt automat completate preluate din **Pașaport**, **Depozit** și din **Viabilitate** (din istoric). În vederea adăugării testelor de germinație se apasă butonul **Adaugă**, iar ca urmare se va deschide o pagină modulară numită **Viabilitate semințe din depozit - test**:  
+
+![Viabilitate semințe existente - **Adăugare test 1**](images/Viabilitate_26.png) 
+
+După completarea cu datele aferente testului de germinație acesta va fi salvat apăsând butonul **OK**.  
+
+Pentru cea de a doua repetiție se va proceda la fel, în final analiza va avea două teste (repetiții) de germinație pentru care se va calcula viabilitatea medie:  
+
+![Viabilitate semințe existente - **Adăugare test 2 și salvare**](images/Viabilitate_27.png)
+
+Salvarea analizei se realizează prin apăsarea butonului **OK** iar analiza va fi disponibilă la sfârșitul listei:  
+
+![Viabilitate semințe existente - **Vizualizare listă**](images/Viabilitate_28.png)  
+
+> **ATENȚIE**  
+ >
+> Din acest moment și până la finalizare analizei mai poate fi modificate/adăugate testele/teste. Regulile sunt aceleași ca la **Viabilitate semințe noi**.
+
+## Finalizarea unui test de viabilitate la semințele din depozit  
+
+După ce se consideră că analiza a luat sfârșit va fi nenecesar să se apese butonul **Finalizați?**. Acțiune ce va indica finalizarea analizei, blocarea modificării și actualizarea în depozit a informațiilor cu privire la rezultatul analizei de germinație și anul realizării acesteia.  
+Dacă verificăm datele actuale, înainte de finalizare, a germinației anterioare și a anului în care a fost realizată:  
+
+![Viabilitate semințe existente - **Verificare în Depozit**](images/Viabilitate_29.png)  
+
+Se va constata ca la **Codul de depozit** cu indicativul **CR1A01b2** ultimul test de germinație a avut loc în anul **2020** și s-a obținut la analiza germinației procentul mediu de **90%**.  
+  
+După ce apăsăm butonul **Finalizați?** se va deschide o fereastră de dialog prin care se va solicita confirmarea acțiunii:  
+
+![Viabilitate semințe existente - **Finalizare**](images/Viabilitate_30.png)  
+
+După confirmarea acțiunii analiza nu va mai putea fi modificată în schimb va putea fi vizualizată (citită) iar butonul **Finalizați?** va fi inactivat:  
+
+![Viabilitate semințe existente - **Analiza după finalizare**](images/Viabilitate_31.png)  
+
+ În **Depozit** la **Codul de depozit** cu indicativul **CR1A01b2** se va constata că datele au fost actualizate la acțiunea **Finalizare**:  
+
+![Viabilitate semințe existente - **Actualizare în Depozit**](images/Viabilitate_32.png) 
+
+Analiza va putea fi numai vizualizată iar rezultatul analizei va fi disponibil și grafic împreună cu istoricul analizelor:  
+
+![Viabilitate semințe existente - **Vizualizare analiză**](images/Viabilitate_33.png) 
