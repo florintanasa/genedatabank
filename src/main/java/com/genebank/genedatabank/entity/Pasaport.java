@@ -101,7 +101,7 @@ public class Pasaport {
     @NotNull
     private String accenumb;
 
-    @Column(name = "DOI", length = 15)
+    @Column(name = "DOI", length = 35)
     private String doi;
 
     @Column(name = "COLLNUMB", length = 10)
@@ -180,13 +180,13 @@ public class Pasaport {
     @ManyToOne(fetch = FetchType.LAZY)
     private Institute id_donorcode;
 
-    @Column(name = "DONORNUMB", length = 20)
+    @Column(name = "DONORNUMB", length = 30)
     private String donornumb;
 
-    @Column(name = "OTHERNUMB", length = 20)
+    @Column(name = "OTHERNUMB", length = 30)
     private String othernumb;
 
-    @Column(name = "TEMPNUMB", length = 9)
+    @Column(name = "TEMPNUMB", length = 10)
     private String tempnumb;
 
     @JoinTable(name = "PASAPORT_DUPLICATES_INSTITUTE_LINK",
@@ -204,6 +204,9 @@ public class Pasaport {
 
     @Column(name = "ACCEURL")
     private String acceurl;
+
+    @Column(name = "DONORURL")
+    private String donorurl;
 
     @JoinColumn(name = "ID_ACCECONF_ID")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -226,6 +229,14 @@ public class Pasaport {
             inverseJoinColumns = @JoinColumn(name = "SYS_FILE_ID", referencedColumnName = "ID"))
     @ManyToMany
     private List<SysFile> probeImages;
+
+    public String getDonorurl() {
+        return donorurl;
+    }
+
+    public void setDonorurl(String donorurl) {
+        this.donorurl = donorurl;
+    }
 
     public void setProbeImages(List<SysFile> probeImages) {
         this.probeImages = probeImages;
