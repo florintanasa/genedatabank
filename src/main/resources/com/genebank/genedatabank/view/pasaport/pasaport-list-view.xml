@@ -57,7 +57,7 @@
             <button id="copymodifyBtn" action="pasaportsDataGrid.copyEditModify"/>
             <button id="removeBtn" action="pasaportsDataGrid.remove"/>
             <simplePagination id="pagination" dataLoader="pasaportsDl" classNames="ms-auto"
-            itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
+                              itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
             <gridColumnVisibility dataGrid="pasaportsDataGrid" icon="COG" themeNames="icon"/>
         </hbox>
         <dataGrid id="pasaportsDataGrid"
@@ -100,6 +100,7 @@
                 <column property="remarks"/>
                 <column property="comments"/>
                 <column property="acceurl"/>
+                <column property="donorurl"/>
                 <column property="id_acceconf" autoWidth="true"/>
                 <column property="id_mlsstat" autoWidth="true"/>
                 <column property="id_aegisstat" autoWidth="true"/>
