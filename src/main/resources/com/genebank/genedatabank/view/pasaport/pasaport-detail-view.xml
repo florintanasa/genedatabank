@@ -142,307 +142,317 @@
     </actions>
     <layout alignItems="STRETCH" padding="false" spacing="false" expand="allData">
         <vbox id="allData" expand="accordionMain" width="100%" css="overflow: auto">
-        <accordion id="accordionMain"  width="100%">
-            <accordionPanel id="scrollBoxPanel" summaryText="msg://scrollBoxPanel.summaryText">
-                <scroller id="scrollBox">
-                    <formLayout id="form" dataContainer="pasaportDc">
-                        <entityComboBox id="institutesComboBox_1" itemsContainer="institutesDc"
-                                        dataContainer="pasaportDc" property="id_instcode" readOnly="true">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg://tooltip.text"
-                                     manual="true"/>
-                        </entityComboBox>
-                        <checkbox id="checkboxTemp" label="msg://checkboxTemp.label" value="false"/>
-                        <textField id="accenumbField" property="accenumb" readOnly="true" visible="true">
-                            <tooltip text="msg:///tooltip.accenumbField" manual="true"/>
-                        </textField>
-                        <textField id="tempnumbField" property="tempnumb" readOnly="false">
-                            <tooltip text="msg:///tooltip.tempnumbField" manual="true"/>
-                        </textField>
-                        <textField id="doiField" property="doi">
-                            <tooltip text="msg:///tooltip.doiField" manual="true"/>
-                        </textField>
-                        <textField id="collnumbField" property="collnumb">
-                            <tooltip text="msg:///tooltip.collnumbField" manual="true"/>
-                        </textField>
-                        <entityComboBox id="taxonomiesComboBox" itemsContainer="taxonomiesDc" dataContainer="pasaportDc"
-                                        property="id_taxonomy">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.taxonomiesComboBox" manual="true"/>
-                        </entityComboBox>
-                        <textField id="collmissidField" property="collmissid">
-                            <tooltip text="msg:///tooltip.collmissidField" manual="true"/>
-                        </textField>
-                        <textField id="accnameField" property="accname">
-                            <tooltip text="msg:///tooltip.accnameField" manual="true"/>
-                        </textField>
-                        <textField id="origdateField" property="origdate">
-                            <tooltip text="msg:///tooltip.origdateField" manual="true"/>
-                        </textField>
-                        <textField id="acqdateField" property="acqdate">
-                            <tooltip text="msg:///tooltip.acqdateField" manual="true"/>
-                        </textField>
-                        <entityComboBox id="countriesComboBox" itemsContainer="countriesDc" dataContainer="pasaportDc"
-                                        property="id_country">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.countriesComboBox" manual="true"/>
-                        </entityComboBox>
-                        <entityComboBox id="countysirutasComboBox" itemsContainer="countysirutasDc"
-                                        dataContainer="pasaportDc" property="id_countysiruta">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.countysirutasComboBox" manual="true"/>
-                        </entityComboBox>
-                        <entityComboBox id="localitysirutasComboBox" itemsContainer="localitysirutasDc"
-                                        dataContainer="pasaportDc" property="id_localitysiruta">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.localitysirutasComboBox" manual="true"/>
-                        </entityComboBox>
-                        <textField id="latitudeField" property="latitude">
-                            <tooltip text="msg:///tooltip.latitudeField" manual="true"/>
-                        </textField>
-                        <textField id="longitudeField" property="longitude">
-                            <tooltip text="msg:///tooltip.longitudeField" manual="true"/>
-                        </textField>
-                        <textField id="elevationField" property="elevation">
-                            <tooltip text="msg:///tooltip.elevationField" manual="true"/>
-                        </textField>
-                        <entityComboBox id="georefmethsComboBox" itemsContainer="georefmethsDc"
-                                        dataContainer="pasaportDc" property="id_georefmeth">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.georefmethsComboBox" manual="true"/>
-                        </entityComboBox>
-                        <textField id="colldateField" property="colldate">
-                            <tooltip text="msg://tooltip.colldateField" manual="true"/>
-                        </textField>
-                        <entityComboBox id="sampstatsComboBox" itemsContainer="sampstatsDc" dataContainer="pasaportDc"
-                                        property="id_sampstat">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.sampstatComboBox" manual="true"/>
-                        </entityComboBox>
-                        <textField id="ancestField" property="ancest">
-                            <tooltip text="msg:///tooltip.ancesField" manual="true"/>
-                        </textField>
-                        <entityComboBox id="collsrcsComboBox" itemsContainer="collsrcsDc" dataContainer="pasaportDc"
-                                        property="id_collsrc">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.collsrcsComboBox" manual="true"/>
-                        </entityComboBox>
-                        <textField id="donornumbField" property="donornumb">
-                            <tooltip text="msg:///tooltip.donornumbField" manual="true"/>
-                        </textField>
-                        <entityComboBox id="institutesComboBox" itemsContainer="institutesDc" dataContainer="pasaportDc"
-                                        property="id_donorcode">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.institutesComboBox" manual="true"/>
-                        </entityComboBox>
-                        <textField id="othernumbField" property="othernumb">
-                            <tooltip text="msg:///tooltip.othernumbField" manual="true"/>
-                        </textField>
-                        <textField id="remarksField" property="remarks">
-                            <tooltip text="msg:///tooltip.remarksField" manual="true"/>
-                        </textField>
-                        <textField id="acceurlField" property="acceurl">
-                            <tooltip text="msg:///tooltip.acceurlField" manual="true"/>
-                        </textField>
-                        <entityComboBox id="acceconfsComboBox" itemsContainer="acceconfsDc" dataContainer="pasaportDc"
-                                        property="id_acceconf">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.acceconfComboBox" manual="true"/>
-                        </entityComboBox>
-                        <entityComboBox id="mlsstatsComboBox" itemsContainer="mlsstatsDc" dataContainer="pasaportDc"
-                                        property="id_mlsstat">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.mlsstatsComboBox" manual="true"/>
-                        </entityComboBox>
-                        <entityComboBox id="aegisstatsComboBox" itemsContainer="aegisstatsDc" dataContainer="pasaportDc"
-                                        property="id_aegisstat">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.aegisstatsComboBox" manual="true"/>
-                        </entityComboBox>
-                        <entityComboBox id="historicsComboBox" itemsContainer="historicsDc" dataContainer="pasaportDc"
-                                        property="id_historic">
-                            <actions>
-                                <action id="entityClear" type="entity_clear"/>
-                                <action id="entityLookup" type="entity_lookup"/>
-                                <action id="entityOpen" type="entity_open"/>
-                            </actions>
-                            <tooltip text="msg:///tooltip.historicsComboBox" manual="true"/>
-                        </entityComboBox>
-                        <details id="id_collcodeDetails" summaryText="msg://id_collcodeDetails.summaryText">
-                            <hbox id="buttonsPanel" classNames="buttons-panel">
-                                <button action="id_collcodeDataGrid.add"/>
-                                <button action="id_collcodeDataGrid.exclude"/>
-                            </hbox>
-                            <dataGrid id="id_collcodeDataGrid" dataContainer="id_collcodeDc" width="100%"
-                                      minHeight="20em">
+            <accordion id="accordionMain" width="100%">
+                <accordionPanel id="scrollBoxPanel" summaryText="msg://scrollBoxPanel.summaryText">
+                    <scroller id="scrollBox">
+                        <formLayout id="form" dataContainer="pasaportDc">
+                            <entityComboBox id="institutesComboBox_1" itemsContainer="institutesDc"
+                                            dataContainer="pasaportDc" property="id_instcode" readOnly="true">
                                 <actions>
-                                    <action id="add" type="list_add"/>
-                                    <action id="exclude" type="list_exclude"/>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
                                 </actions>
-                                <columns>
-                                    <column property="full_name_ro"/>
-                                    <column property="instcode"/>
-                                    <column property="acronym"/>
-                                    <column property="full_name_en"/>
-                                    <column property="address"/>
-                                    <column property="url"/>
-                                </columns>
-                            </dataGrid>
-                            <tooltip text="msg:///tooltip.id_collcodeDetails" manual="true" position="TOP_START"/>
-                        </details>
-                        <details id="id_bredcodeDetails" summaryText="msg://id_bredcodeDetails.summaryText">
-                            <hbox id="buttonsPanel2" classNames="buttons-panel">
-                                <button action="id_bredcodeDataGrid.add"/>
-                                <button action="id_bredcodeDataGrid.exclude"/>
-                            </hbox>
-                            <dataGrid id="id_bredcodeDataGrid" dataContainer="id_bredcodeDc" width="100%"
-                                      minWidth="20em">
+                                <tooltip text="msg://tooltip.text"
+                                         manual="true"/>
+                            </entityComboBox>
+                            <checkbox id="checkboxTemp" label="msg://checkboxTemp.label" value="false"/>
+                            <textField id="accenumbField" property="accenumb" readOnly="true" visible="true">
+                                <tooltip text="msg:///tooltip.accenumbField" manual="true"/>
+                            </textField>
+                            <textField id="tempnumbField" property="tempnumb" readOnly="false">
+                                <tooltip text="msg:///tooltip.tempnumbField" manual="true"/>
+                            </textField>
+                            <textField id="doiField" property="doi">
+                                <tooltip text="msg:///tooltip.doiField" manual="true"/>
+                            </textField>
+                            <textField id="collnumbField" property="collnumb">
+                                <tooltip text="msg:///tooltip.collnumbField" manual="true"/>
+                            </textField>
+                            <entityComboBox id="taxonomiesComboBox" itemsContainer="taxonomiesDc"
+                                            dataContainer="pasaportDc"
+                                            property="id_taxonomy">
                                 <actions>
-                                    <action id="add" type="list_add"/>
-                                    <action id="exclude" type="list_exclude"/>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
                                 </actions>
-                                <columns>
-                                    <column property="full_name_ro"/>
-                                    <column property="instcode"/>
-                                    <column property="acronym"/>
-                                    <column property="full_name_en"/>
-                                    <column property="address"/>
-                                    <column property="url"/>
-                                </columns>
-                            </dataGrid>
-                            <tooltip text="msg:///tooltip.id_bredcodeDetails" manual="true" position="TOP_START"/>
-                        </details>
-                        <details id="id_duplsiteDetails" summaryText="msg://id_duplsiteDetails.summaryText">
-                            <hbox id="buttonsPanel1" classNames="buttons-panel">
-                                <button action="id_duplsiteDataGrid.add"/>
-                                <button action="id_duplsiteDataGrid.exclude"/>
-                            </hbox>
-                            <dataGrid id="id_duplsiteDataGrid" dataContainer="id_duplsiteDc" width="100%"
-                                      minHeight="20em">
+                                <tooltip text="msg:///tooltip.taxonomiesComboBox" manual="true"/>
+                            </entityComboBox>
+                            <textField id="collmissidField" property="collmissid">
+                                <tooltip text="msg:///tooltip.collmissidField" manual="true"/>
+                            </textField>
+                            <textField id="accnameField" property="accname">
+                                <tooltip text="msg:///tooltip.accnameField" manual="true"/>
+                            </textField>
+                            <textField id="origdateField" property="origdate">
+                                <tooltip text="msg:///tooltip.origdateField" manual="true"/>
+                            </textField>
+                            <textField id="acqdateField" property="acqdate">
+                                <tooltip text="msg:///tooltip.acqdateField" manual="true"/>
+                            </textField>
+                            <entityComboBox id="countriesComboBox" itemsContainer="countriesDc"
+                                            dataContainer="pasaportDc"
+                                            property="id_country">
                                 <actions>
-                                    <action id="add" type="list_add"/>
-                                    <action id="exclude" type="list_exclude"/>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
                                 </actions>
-                                <columns>
-                                    <column property="full_name_ro"/>
-                                    <column property="instcode"/>
-                                    <column property="acronym"/>
-                                    <column property="full_name_en"/>
-                                    <column property="address"/>
-                                    <column property="url"/>
-                                </columns>
-                            </dataGrid>
-                            <tooltip text="msg:///tooltip.id_duplsiteDetails" manual="true" position="TOP_START"/>
-                        </details>
-                    </formLayout>
-                </scroller>
-            </accordionPanel>
-            <accordionPanel id="commentsImages" summaryText="msg://commentsImages.summaryText" width="100%">
-                <tabSheet id="extendetInformationTabs" width="100%" height="100%">
-                    <tab id="descriptionTab" label="msg://descriptionTab.label">
-                        <vbox id="contentTextArea" width="100%" height="100%">
-                            <richTextEditor id="commentsField"
-                                      height="100%"
-                                      width="100%"
-                                      dataContainer="pasaportDc"
-                                      property="comments"/>
-                        </vbox>
-                    </tab>
-                    <tab id="probeImages" label="msg://probeImages.label">
-                        <vbox id="contentHbox" width="100%" height="100%">
-                            <hbox height="100%" width="100%">
-                                <vbox width="100%" height="100%" classNames="bordered-panel">
-                                    <hbox id="buttonsPanel4" classNames="buttons-panel">
-                                        <button action="probeImagesDataGrid.add"/>
-                                        <button action="probeImagesDataGrid.edit"/>
-                                        <button action="probeImagesDataGrid.exclude"/>
-                                        <button id="downloadBtn" icon="DOWNLOAD"/>
-                                    </hbox>
-                                    <dataGrid id="probeImagesDataGrid" dataContainer="probeImagesDc" width="100%">
-                                        <actions>
-                                            <action id="add" type="list_add"/>
-                                            <action id="exclude" type="list_exclude"/>
-                                            <action id="edit" type="list_edit"/>
-                                        </actions>
-                                        <columns>
-                                            <column property="name"/>
-                                            <column property="extension"/>
-                                            <column property="size"/>
-                                            <column property="createDate"/>
-                                        </columns>
-                                    </dataGrid>
-                                </vbox>
-                                <vbox id="probeImageWrapperLayout"
-                                      width="100%" height="100%">
-                                    <image id="imageProbe" dataContainer="probeImagesDc"
-                                           property="file" maxWidth="85%" maxHeight="85%"
-                                           themeNames="scale-down" text="Preview"/>
-                                </vbox>
-                            </hbox>
-                        </vbox>
-                    </tab>
-                </tabSheet>
-            </accordionPanel>
-            <accordionPanel id="probeMap" summaryText="msg://probeMap.summaryText">
-                <hbox id="optCheckBox">
-                    <checkbox id="checkboxMap"
-                              label="msg://checkboxMap.label"
-                              property="active" value="false"/>
-                    <checkbox id="checkboxElevation"
-                              label="msg://checkboxElevation.label"
-                              property="active" value="false"/>
-                </hbox>
-            </accordionPanel>
-        </accordion>
-        <vbox id="mapContainer" width="100%" height="100%" minHeight="380px" enabled="false" visible="false"/>
+                                <tooltip text="msg:///tooltip.countriesComboBox" manual="true"/>
+                            </entityComboBox>
+                            <entityComboBox id="countysirutasComboBox" itemsContainer="countysirutasDc"
+                                            dataContainer="pasaportDc" property="id_countysiruta">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.countysirutasComboBox" manual="true"/>
+                            </entityComboBox>
+                            <entityComboBox id="localitysirutasComboBox" itemsContainer="localitysirutasDc"
+                                            dataContainer="pasaportDc" property="id_localitysiruta">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.localitysirutasComboBox" manual="true"/>
+                            </entityComboBox>
+                            <textField id="latitudeField" property="latitude">
+                                <tooltip text="msg:///tooltip.latitudeField" manual="true"/>
+                            </textField>
+                            <textField id="longitudeField" property="longitude">
+                                <tooltip text="msg:///tooltip.longitudeField" manual="true"/>
+                            </textField>
+                            <textField id="elevationField" property="elevation">
+                                <tooltip text="msg:///tooltip.elevationField" manual="true"/>
+                            </textField>
+                            <entityComboBox id="georefmethsComboBox" itemsContainer="georefmethsDc"
+                                            dataContainer="pasaportDc" property="id_georefmeth">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.georefmethsComboBox" manual="true"/>
+                            </entityComboBox>
+                            <textField id="colldateField" property="colldate">
+                                <tooltip text="msg://tooltip.colldateField" manual="true"/>
+                            </textField>
+                            <entityComboBox id="sampstatsComboBox" itemsContainer="sampstatsDc"
+                                            dataContainer="pasaportDc"
+                                            property="id_sampstat">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.sampstatComboBox" manual="true"/>
+                            </entityComboBox>
+                            <textField id="ancestField" property="ancest">
+                                <tooltip text="msg:///tooltip.ancesField" manual="true"/>
+                            </textField>
+                            <entityComboBox id="collsrcsComboBox" itemsContainer="collsrcsDc" dataContainer="pasaportDc"
+                                            property="id_collsrc">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.collsrcsComboBox" manual="true"/>
+                            </entityComboBox>
+                            <textField id="donornumbField" property="donornumb">
+                                <tooltip text="msg:///tooltip.donornumbField" manual="true"/>
+                            </textField>
+                            <entityComboBox id="institutesComboBox" itemsContainer="institutesDc"
+                                            dataContainer="pasaportDc"
+                                            property="id_donorcode">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.institutesComboBox" manual="true"/>
+                            </entityComboBox>
+                            <textField id="othernumbField" property="othernumb">
+                                <tooltip text="msg:///tooltip.othernumbField" manual="true"/>
+                            </textField>
+                            <textField id="remarksField" property="remarks">
+                                <tooltip text="msg:///tooltip.remarksField" manual="true"/>
+                            </textField>
+                            <textField id="acceurlField" property="acceurl">
+                                <tooltip text="msg:///tooltip.acceurlField" manual="true"/>
+                            </textField>
+                            <textField id="donorurlField" property="donorurl">
+                                <tooltip text="msg://tooltip.donorurlField" manual="true"/>
+                            </textField>
+                            <entityComboBox id="acceconfsComboBox" itemsContainer="acceconfsDc"
+                                            dataContainer="pasaportDc"
+                                            property="id_acceconf">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.acceconfComboBox" manual="true"/>
+                            </entityComboBox>
+                            <entityComboBox id="mlsstatsComboBox" itemsContainer="mlsstatsDc" dataContainer="pasaportDc"
+                                            property="id_mlsstat">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.mlsstatsComboBox" manual="true"/>
+                            </entityComboBox>
+                            <entityComboBox id="aegisstatsComboBox" itemsContainer="aegisstatsDc"
+                                            dataContainer="pasaportDc"
+                                            property="id_aegisstat">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.aegisstatsComboBox" manual="true"/>
+                            </entityComboBox>
+                            <entityComboBox id="historicsComboBox" itemsContainer="historicsDc"
+                                            dataContainer="pasaportDc"
+                                            property="id_historic">
+                                <actions>
+                                    <action id="entityClear" type="entity_clear"/>
+                                    <action id="entityLookup" type="entity_lookup"/>
+                                    <action id="entityOpen" type="entity_open"/>
+                                </actions>
+                                <tooltip text="msg:///tooltip.historicsComboBox" manual="true"/>
+                            </entityComboBox>
+                            <details id="id_collcodeDetails" summaryText="msg://id_collcodeDetails.summaryText">
+                                <hbox id="buttonsPanel" classNames="buttons-panel">
+                                    <button action="id_collcodeDataGrid.add"/>
+                                    <button action="id_collcodeDataGrid.exclude"/>
+                                </hbox>
+                                <dataGrid id="id_collcodeDataGrid" dataContainer="id_collcodeDc" width="100%"
+                                          minHeight="20em">
+                                    <actions>
+                                        <action id="add" type="list_add"/>
+                                        <action id="exclude" type="list_exclude"/>
+                                    </actions>
+                                    <columns>
+                                        <column property="full_name_ro"/>
+                                        <column property="instcode"/>
+                                        <column property="acronym"/>
+                                        <column property="full_name_en"/>
+                                        <column property="address"/>
+                                        <column property="url"/>
+                                    </columns>
+                                </dataGrid>
+                                <tooltip text="msg:///tooltip.id_collcodeDetails" manual="true" position="TOP_START"/>
+                            </details>
+                            <details id="id_bredcodeDetails" summaryText="msg://id_bredcodeDetails.summaryText">
+                                <hbox id="buttonsPanel2" classNames="buttons-panel">
+                                    <button action="id_bredcodeDataGrid.add"/>
+                                    <button action="id_bredcodeDataGrid.exclude"/>
+                                </hbox>
+                                <dataGrid id="id_bredcodeDataGrid" dataContainer="id_bredcodeDc" width="100%"
+                                          minWidth="20em">
+                                    <actions>
+                                        <action id="add" type="list_add"/>
+                                        <action id="exclude" type="list_exclude"/>
+                                    </actions>
+                                    <columns>
+                                        <column property="full_name_ro"/>
+                                        <column property="instcode"/>
+                                        <column property="acronym"/>
+                                        <column property="full_name_en"/>
+                                        <column property="address"/>
+                                        <column property="url"/>
+                                    </columns>
+                                </dataGrid>
+                                <tooltip text="msg:///tooltip.id_bredcodeDetails" manual="true" position="TOP_START"/>
+                            </details>
+                            <details id="id_duplsiteDetails" summaryText="msg://id_duplsiteDetails.summaryText">
+                                <hbox id="buttonsPanel1" classNames="buttons-panel">
+                                    <button action="id_duplsiteDataGrid.add"/>
+                                    <button action="id_duplsiteDataGrid.exclude"/>
+                                </hbox>
+                                <dataGrid id="id_duplsiteDataGrid" dataContainer="id_duplsiteDc" width="100%"
+                                          minHeight="20em">
+                                    <actions>
+                                        <action id="add" type="list_add"/>
+                                        <action id="exclude" type="list_exclude"/>
+                                    </actions>
+                                    <columns>
+                                        <column property="full_name_ro"/>
+                                        <column property="instcode"/>
+                                        <column property="acronym"/>
+                                        <column property="full_name_en"/>
+                                        <column property="address"/>
+                                        <column property="url"/>
+                                    </columns>
+                                </dataGrid>
+                                <tooltip text="msg:///tooltip.id_duplsiteDetails" manual="true" position="TOP_START"/>
+                            </details>
+                        </formLayout>
+                    </scroller>
+                </accordionPanel>
+                <accordionPanel id="commentsImages" summaryText="msg://commentsImages.summaryText" width="100%">
+                    <tabSheet id="extendetInformationTabs" width="100%" height="100%">
+                        <tab id="descriptionTab" label="msg://descriptionTab.label">
+                            <vbox id="contentTextArea" width="100%" height="100%">
+                                <richTextEditor id="commentsField"
+                                                height="100%"
+                                                width="100%"
+                                                dataContainer="pasaportDc"
+                                                property="comments"/>
+                            </vbox>
+                        </tab>
+                        <tab id="probeImages" label="msg://probeImages.label">
+                            <vbox id="contentHbox" width="100%" height="100%">
+                                <hbox height="100%" width="100%">
+                                    <vbox width="100%" height="100%" classNames="bordered-panel">
+                                        <hbox id="buttonsPanel4" classNames="buttons-panel">
+                                            <button action="probeImagesDataGrid.add"/>
+                                            <button action="probeImagesDataGrid.edit"/>
+                                            <button action="probeImagesDataGrid.exclude"/>
+                                            <button id="downloadBtn" icon="DOWNLOAD"/>
+                                        </hbox>
+                                        <dataGrid id="probeImagesDataGrid" dataContainer="probeImagesDc" width="100%">
+                                            <actions>
+                                                <action id="add" type="list_add"/>
+                                                <action id="exclude" type="list_exclude"/>
+                                                <action id="edit" type="list_edit"/>
+                                            </actions>
+                                            <columns>
+                                                <column property="name"/>
+                                                <column property="extension"/>
+                                                <column property="size"/>
+                                                <column property="createDate"/>
+                                            </columns>
+                                        </dataGrid>
+                                    </vbox>
+                                    <vbox id="probeImageWrapperLayout"
+                                          width="100%" height="100%">
+                                        <image id="imageProbe" dataContainer="probeImagesDc"
+                                               property="file" maxWidth="85%" maxHeight="85%"
+                                               themeNames="scale-down" text="Preview"/>
+                                    </vbox>
+                                </hbox>
+                            </vbox>
+                        </tab>
+                    </tabSheet>
+                </accordionPanel>
+                <accordionPanel id="probeMap" summaryText="msg://probeMap.summaryText">
+                    <hbox id="optCheckBox">
+                        <checkbox id="checkboxMap"
+                                  label="msg://checkboxMap.label"
+                                  property="active" value="false"/>
+                        <checkbox id="checkboxElevation"
+                                  label="msg://checkboxElevation.label"
+                                  property="active" value="false"/>
+                    </hbox>
+                </accordionPanel>
+            </accordion>
+            <vbox id="mapContainer" width="100%" height="100%" minHeight="380px" enabled="false" visible="false"/>
         </vbox>
         <hbox id="detailActions" classNames="px-m py-s bg-contrast-5">
             <button id="saveAndCloseBtn" action="saveAction"/>
