@@ -169,6 +169,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private JmixDetails id_duplsiteDetails;
     @ViewComponent
     private EntityComboBox<Collsrc> collsrcsComboBox;
+    @ViewComponent
+    private TypedTextField<String> donorurlField;
 
 
     @Subscribe
@@ -550,6 +552,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         JmixButton helperButtonOthernumbField = createHelperButton();
         JmixButton helperButtonRemarksField = createHelperButton();
         JmixButton helperButtonAcceurlField = createHelperButton();
+        JmixButton helperButtonDonorurlField = createHelperButton();
         JmixButton helperButtonAcceconfsComboBox = createHelperButton();
         JmixButton helperButtonMlsstatsComboBox = createHelperButton();
         JmixButton helperButtonAegisstatsComboBox = createHelperButton();
@@ -584,6 +587,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         Tooltip tooltipOthernumbField = othernumbField.getTooltip();
         Tooltip tooltipRemarksField = remarksField.getTooltip();
         Tooltip tooltipAcceurlField = acceurlField.getTooltip();
+        Tooltip tooltipDonorurlField = donorurlField.getTooltip();
         Tooltip tooltipAcceconfsComboBox = acceconfsComboBox.getTooltip();
         Tooltip tooltipMlsstatsComboBox = mlsstatsComboBox.getTooltip();
         Tooltip tooltipAegisstatsComboBox = aegisstatsComboBox.getTooltip();
@@ -619,6 +623,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         helperButtonOthernumbField.addClickListener(e -> tooltipOthernumbField.setOpened(!tooltipOthernumbField.isOpened()));
         helperButtonRemarksField.addClickListener(e -> tooltipRemarksField.setOpened(!tooltipRemarksField.isOpened()));
         helperButtonAcceurlField.addClickListener(e -> tooltipAcceurlField.setOpened(!tooltipAcceurlField.isOpened()));
+        helperButtonDonorurlField.addClickListener( e -> tooltipDonorurlField.setOpened(!tooltipDonorurlField.isOpened()));
         helperButtonAcceconfsComboBox.addClickListener(e -> tooltipAcceconfsComboBox.setOpened(!tooltipAcceconfsComboBox.isOpened()));
         helperButtonMlsstatsComboBox.addClickListener(e -> tooltipMlsstatsComboBox.setOpened(!tooltipMlsstatsComboBox.isOpened()));
         helperButtonAegisstatsComboBox.addClickListener(e -> tooltipAegisstatsComboBox.setOpened(!tooltipAegisstatsComboBox.isOpened()));
@@ -654,6 +659,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         othernumbField.setSuffixComponent(helperButtonOthernumbField);
         remarksField.setSuffixComponent(helperButtonRemarksField);
         acceurlField.setSuffixComponent(helperButtonAcceurlField);
+        donorurlField.setSuffixComponent(helperButtonDonorurlField);
         acceconfsComboBox.setPrefixComponent(helperButtonAcceconfsComboBox);
         mlsstatsComboBox.setPrefixComponent(helperButtonMlsstatsComboBox);
         aegisstatsComboBox.setPrefixComponent(helperButtonAegisstatsComboBox);
