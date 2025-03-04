@@ -73,12 +73,21 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns resizable="true" sortable="true">
+                <column property="doi" autoWidth="true"/>
                 <column property="id_instcode"/>
                 <column property="accenumb" filterable="true" autoWidth="true"/>
-                <column property="doi" autoWidth="true"/>
                 <column property="collnumb"/>
                 <column property="collmissid"/>
-                <column property="id_taxonomy"/>
+                <column property="id_taxonomy.family"/>
+                <column property="id_taxonomy.genus"/>
+                <column property="id_taxonomy.species"/>
+                <column property="id_taxonomy.spauthor"/>
+                <column property="id_taxonomy.subtaxa"/>
+                <column property="id_taxonomy.subauthor"/>
+                <column property="id_taxonomy.cropname"/>
+                <column property="id_taxonomy.cropnume"/>
+                <column property="id_taxonomy.syn_taxono"/>
+<!--                <column property="id_taxonomy"/>-->
                 <column property="accname" width="20em"/>
                 <column property="acqdate" autoWidth="true"/>
                 <column property="origdate" autoWidth="true"/>
