@@ -13,6 +13,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.details.Details;
 import com.vaadin.flow.component.grid.ItemClickEvent;
@@ -171,6 +172,8 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
     private EntityComboBox<Collsrc> collsrcsComboBox;
     @ViewComponent
     private TypedTextField<String> donorurlField;
+    @ViewComponent
+    private TypedTextField<String> collsiteField;
 
 
     @Subscribe
@@ -560,6 +563,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         JmixButton helperButtonId_collcodeDetails = createHelperButton();
         JmixButton helperButtonId_bredcodeDetails = createHelperButton();
         JmixButton helperButtonId_duplsiteDetails = createHelperButton();
+        JmixButton helperButtonCollsiteField = createHelperButton();
 
         Tooltip tooltipDoiField = doiField.getTooltip();
         Tooltip tooltipInstitutesComboBox_1 = institutesComboBox_1.getTooltip();
@@ -595,6 +599,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         Tooltip tooltipId_collcodeDetails = id_collcodeDetails.getTooltip();
         Tooltip tooltipId_bredcodeDetails = id_bredcodeDetails.getTooltip();
         Tooltip tooltipId_duplsiteDetails = id_duplsiteDetails.getTooltip();
+        Tooltip tooltipCollsiteField = collsiteField.getTooltip();
 
 
         helperButtonDoiField.addClickListener(e -> tooltipDoiField.setOpened(!tooltipDoiField.isOpened()));
@@ -631,6 +636,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         helperButtonId_collcodeDetails.addClickListener(e -> tooltipId_collcodeDetails.setOpened(!tooltipId_collcodeDetails.isOpened()));
         helperButtonId_bredcodeDetails.addClickListener(e -> tooltipId_bredcodeDetails.setOpened(!tooltipId_bredcodeDetails.isOpened()));
         helperButtonId_duplsiteDetails.addClickListener(e -> tooltipId_duplsiteDetails.setOpened(!tooltipId_duplsiteDetails.isOpened()));
+        helperButtonCollsiteField.addClickListener(e -> tooltipCollsiteField.setOpened(!tooltipCollsiteField.isOpened()));
 
 
         doiField.setSuffixComponent(helperButtonDoiField);
@@ -667,6 +673,7 @@ public class PasaportDetailView extends StandardDetailView<Pasaport> {
         id_collcodeDetails.addComponentAsFirst(helperButtonId_collcodeDetails);
         id_bredcodeDetails.addComponentAsFirst(helperButtonId_bredcodeDetails);
         id_duplsiteDetails.addComponentAsFirst(helperButtonId_duplsiteDetails);
+        collsiteField.setSuffixComponent(helperButtonCollsiteField);
 
     }
 

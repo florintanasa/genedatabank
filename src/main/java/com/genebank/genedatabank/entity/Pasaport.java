@@ -141,6 +141,9 @@ public class Pasaport {
     @ManyToOne(fetch = FetchType.LAZY)
     private Localitysiruta id_localitysiruta;
 
+    @Column(name = "COLLSITE")
+    private String collsite;
+
     @PropertyDatatype("geocoordinate")
     @Column(name = "LATITUDE")
     private Double latitude;
@@ -580,5 +583,13 @@ public class Pasaport {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getCollsite() {
+        return collsite;
+    }
+
+    public void setCollsite(String collsite) {
+        this.collsite = collsite;
     }
 }

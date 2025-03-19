@@ -219,6 +219,9 @@
                                 </actions>
                                 <tooltip text="msg:///tooltip.localitysirutasComboBox" manual="true"/>
                             </entityComboBox>
+                            <textField id="collsiteField" property="collsite">
+                                <tooltip text="msg://tooltip.collsiteField" manual="true"/>
+                            </textField>
                             <textField id="latitudeField" property="latitude">
                                 <tooltip text="msg:///tooltip.latitudeField" manual="true"/>
                             </textField>
