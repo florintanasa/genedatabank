@@ -1,10 +1,18 @@
 # GeneDataBank
-GeneDataBank is a genetic plant software database (Work is in progress).
+GeneDataBank is a genetic plant software database (Work is in progress).  
+  
+The application is currently used by researchers at the Suceava Gene Bank.  
+  
+How can be compiled, installed and used is written in [Manual in ro](manual/ro/GeneDataBank-ro.md) where, at this 
+moment, exist only manual in romanian, but commands is in english :).  
+  
+Application have 2 languages for interface: romanian and english.  
   
 For this project I used:  
-OS - [Debian GNU/LINUX](https://www.debian.org/)  
-Intellij IDEA CE from [JET BRAINS](https://www.jetbrains.com/idea/) with Java 17 from [Amazon Corretto](https://aws.amazon.com/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)  
-Framework Jmix 2.0 from [JMIX](https://www.jmix.io//)  
+OS [Linux](https://www.kernel.org/) with distributions [Debian GNU/LINUX](https://www.debian.org/) or [Ubuntu](https://ubuntu.com/).  
+
+Intellij IDEA CE and Ultimate from [JET BRAINS](https://www.jetbrains.com/idea/) with Java 17 from [Amazon Corretto](https://aws.amazon.com/corretto/?filtered-posts.sort-by=item.additionalFields.createdDate&filtered-posts.sort-order=desc)  
+Framework Jmix 2.0 from [JMIX](https://www.jmix.io//) with Studio (paid version) or without Studio (free version).
 
 For the map I used OpenStreetMap, [leaflet addon to Vaadin](https://vaadin.com/directory/component/leafletmap-for-vaadin) , XDEV SOFTWARE working on this at [GITHUB](https://github.com/xdev-software/vaadin-maps-leaflet-flow) 
 and made a great work  
