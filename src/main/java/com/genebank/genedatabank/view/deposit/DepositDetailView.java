@@ -31,6 +31,7 @@ import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.Dialogs;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.UiComponents;
+import io.jmix.flowui.component.checkbox.JmixCheckbox;
 import io.jmix.flowui.component.combobox.EntityComboBox;
 import io.jmix.flowui.component.details.JmixDetails;
 import io.jmix.flowui.component.image.JmixImage;
@@ -129,10 +130,14 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
     private CurrentAuthentication currentAuthentication;
     @Autowired
     private Dialogs dialogs;
+    @ViewComponent
+    private JmixCheckbox originalCheckBox;
 
     @Subscribe
     public void onInit(final InitEvent event) {
         initManualTooltip();
+        originalCheckBox.setRequired(false);
+
     }
 
     @Subscribe
