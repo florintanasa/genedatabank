@@ -5,7 +5,9 @@
     <data>
         <instance id="curatorsDc"
                   class="com.genebank.genedatabank.entity.Curators">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="id_user" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -18,6 +20,12 @@
     </actions>
     <layout>
         <formLayout id="form" dataContainer="curatorsDc">
+            <entityPicker id="id_userField" property="id_user">
+                <actions>
+                    <action id="entityLookupAction" type="entity_lookup"/>
+                    <action id="entityClearAction" type="entity_clear"/>
+                </actions>
+            </entityPicker>
             <textField id="curator_nameField" property="curator_name"/>
             <datePicker id="date_startField" property="date_start"/>
             <datePicker id="date_stopField" property="date_stop"/>

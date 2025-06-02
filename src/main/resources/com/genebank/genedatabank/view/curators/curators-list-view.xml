@@ -6,7 +6,9 @@
     <data readOnly="true">
         <collection id="curatorsesDc"
                     class="com.genebank.genedatabank.entity.Curators">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="id_user" fetchPlan="_base"/>
+            </fetchPlan>
             <loader id="curatorsesDl">
                 <query>
                     <![CDATA[select e from Curators e]]>
@@ -47,6 +49,7 @@
                 <action id="remove" type="list_remove"/>
             </actions>
             <columns>
+                <column property="id_user"/>
                 <column property="curator_name" resizable="true"/>
                 <column property="date_start" resizable="true"/>
                 <column property="date_stop" resizable="true"/>

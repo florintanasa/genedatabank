@@ -22,7 +22,9 @@ import java.util.Date;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "CURATORS")
+@Table(name = "CURATORS", indexes = {
+        @Index(name = "IDX_CURATORS_ID_USER", columnList = "ID_USER_ID")
+})
 @Entity
 public class Curators {
     @JmixGeneratedValue
@@ -58,6 +60,10 @@ public class Curators {
     @Column(name = "DELETED_DATE")
     private OffsetDateTime deletedDate;
 
+    @JoinColumn(name = "ID_USER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User id_user;
+
     @InstanceName
     @Column(name = "CURATOR_NAME", nullable = false, length = 50)
     @NotNull
@@ -75,6 +81,14 @@ public class Curators {
     @Column(name = "ACTIVE", nullable = false)
     @NotNull
     private Boolean active = false;
+
+    public User getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(User id_user) {
+        this.id_user = id_user;
+    }
 
     public Boolean getActive() {
         return active;
