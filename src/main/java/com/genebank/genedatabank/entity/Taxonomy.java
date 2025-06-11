@@ -84,13 +84,13 @@ public class Taxonomy {
     @Column(name = "SPECIES", length = 90)
     private String species;
 
-    @Column(name = "SPAUTHOR", length = 30)
+    @Column(name = "SPAUTHOR", length = 50)
     private String spauthor;
 
     @Column(name = "SUBTAXA", length = 55)
     private String subtaxa;
 
-    @Column(name = "SUBAUTHOR", length = 30)
+    @Column(name = "SUBAUTHOR", length = 50)
     private String subauthor;
 
     @Column(name = "SYN_TAXONO")
