@@ -258,8 +258,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
         if (getEditedEntity().getId_accenumb() == null
                 || getEditedEntity().getId_accenumb().getId_taxonomy() == null
                 || getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() == null
-                || getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() == null
-                || getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa() == null
+//                || getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() == null
+//                || getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa() == null
                 || getEditedEntity().getId_accenumb().getAccname() == null
                 || getEditedEntity().getId_accenumb().getId_sampstat() == null) {
             Html htmlMessage = new Html(messageBundle.getMessage("htmlMessageNullDataQrCode"));
@@ -268,8 +268,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
                     .withContent(htmlMessage)
                     .open();
         } else if (getEditedEntity().getId_accenumb().getId_taxonomy().getGenus().isBlank()
-                || getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies().isBlank()
-                || getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa().isBlank()
+//                || getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies().isBlank()
+//                || getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa().isBlank()
                 || getEditedEntity().getId_accenumb().getAccname().trim().isBlank()) {
             Html htmlMessage = new Html(messageBundle.getMessage("htmlMessageBlankDataQrCode"));
             dialogs.createMessageDialog()
@@ -282,18 +282,26 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
             String Country;
             String County;
             String Locality;
+            String Species;
+            String Subtaxa;
 
             // for next fields we accept to be null or blank
             // but in this case we complete with NA (Not Allocated)
             if (getEditedEntity().getId_accenumb().getId_country() == null) {
-                Country = "NA";
+                Country = "";
             } else Country = getEditedEntity().getId_accenumb().getId_country().getName();
             if (getEditedEntity().getId_accenumb().getId_countysiruta() == null ) {
-                County = "NA";
+                County = "";
             } else  County = getEditedEntity().getId_accenumb().getId_countysiruta().getName();
             if (getEditedEntity().getId_accenumb().getId_localitysiruta() == null ) {
-                Locality = "NA";
+                Locality = "";
             } else Locality = getEditedEntity().getId_accenumb().getId_localitysiruta().getName();
+            if (getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() == null) {
+                Species = "";
+            } else Species = getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies();
+            if (getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa() == null) {
+                Subtaxa = "";
+            } else Subtaxa = getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa();
 
             // I got the current date and time
             DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -304,8 +312,8 @@ public class DepositDetailView extends StandardDetailView<Deposit> {
             String data = getEditedEntity().getId_accenumb().getAccenumb() + "|"
                 + getEditedEntity().getDeposit_code() + "|"
                 + getEditedEntity().getId_accenumb().getId_taxonomy().getGenus() + "|"
-                + getEditedEntity().getId_accenumb().getId_taxonomy().getSpecies() + "|"
-                + getEditedEntity().getId_accenumb().getId_taxonomy().getSubtaxa() + "|"
+                + Species + "|"
+                + Subtaxa + "|"
                 + getEditedEntity().getId_accenumb().getAccname() + "|"
                 + Country + "|"
                 + County + "|"
