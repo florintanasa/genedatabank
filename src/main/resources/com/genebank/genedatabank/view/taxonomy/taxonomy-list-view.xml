@@ -35,6 +35,8 @@
             <button id="createBtn" action="taxonomiesDataGrid.create"/>
             <button id="editBtn" action="taxonomiesDataGrid.edit"/>
             <button id="removeBtn" action="taxonomiesDataGrid.remove"/>
+            <button id="excelExportBtn" action="taxonomiesDataGrid.excelExport"/>
+            <button id="jsonExportBtn" action="taxonomiesDataGrid.jsonExport"/>
             <simplePagination id="pagination" dataLoader="taxonomiesDl" classNames="ms-auto"
                               itemsPerPageVisible="true" itemsPerPageDefaultValue="20"/>
             <gridColumnVisibility id="gridColumnVisibility" dataGrid="taxonomiesDataGrid" icon="COG" themeNames="icon"/>
@@ -48,6 +50,8 @@
                 <action id="create" type="list_create"/>
                 <action id="edit" type="list_edit"/>
                 <action id="remove" type="list_remove"/>
+                <action id="excelExport" type="grdexp_excelExport"/>
+                <action id="jsonExport" type="grdexp_jsonExport"/>
             </actions>
             <columns>
                 <column property="family" resizable="true" autoWidth="true"/>
